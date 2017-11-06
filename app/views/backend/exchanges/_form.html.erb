@@ -1,0 +1,12 @@
+<%= render 'layouts/errors' %>
+
+<%= form_for [:backend, @exchange] do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit 'submit' %>
+
+  <%= link_to "Listing", backend_exchanges_path %>
+
+<% end %>

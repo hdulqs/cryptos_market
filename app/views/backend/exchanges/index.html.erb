@@ -1,0 +1,16 @@
+<%= link_to "New Exchange", new_backend_exchange_path, class: "btn btn-success" %>
+<hr/>
+
+<ul>
+
+  <% @exchanges.each do |exchange| %>
+
+    <li>
+      <%= exchange.inspect %>
+      <%= link_to "show", backend_exchange_path(exchange), class: "btn btn-info" %>
+    </li>
+    <hr/>
+
+  <% end %>
+
+</ul>
