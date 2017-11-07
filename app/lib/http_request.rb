@@ -10,7 +10,7 @@ class HttpRequest
     @auth_header = auth_header
   end
 
-  def get path, payload
+  def get path
     return RestClient.get(
       "#{@host + path}",
       {

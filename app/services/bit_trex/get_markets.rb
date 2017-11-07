@@ -5,7 +5,7 @@ class BitTrex::GetMarkets
 
   def call
     request = HttpRequest.new('https://bittrex.com', '')
-    response = request.get('/api/v1.1/public/getmarkets', '')
+    response = request.get('/api/v1.1/public/getmarkets')
     json_res = JSON.parse(response)
     exchange = Exchange.find_by(name: 'bittrex')
     json_res["result"].each do |pair|
@@ -21,6 +21,7 @@ class BitTrex::GetMarkets
         exchange.pairs << pair
       end
     end
+    return json_res["result"].count
   end
 
 end

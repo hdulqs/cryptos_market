@@ -7,6 +7,9 @@ class CreateAssets < ActiveRecord::Migration[5.1]
       t.decimal :tx_fee # decimal might not be enough ..?
       t.boolean :is_active, default: true
       t.string :coin_type
+      t.boolean :is_disabled, default: false
+      t.boolean :is_delisted, default: false
+      t.boolean :is_frozen, default: false
       t.timestamps
     end
   end
