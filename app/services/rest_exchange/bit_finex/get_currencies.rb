@@ -15,13 +15,7 @@ class RestExchange::BitFinex::GetCurrencies < RestExchange::BitFinex::Base
       unless existing_asset
         asset = Asset.new(
           name: currency[0..2],
-          iso_4217: currency[0..2].upcase#,
-          #min_confirmation: currency.last["minConf"],
-          #tx_fee: currency.last["txFee"],
-          #is_active: currency.last["IsActive"],
-          #is_disabled: currency.last["disabled"],
-          #is_delisted: currency.last["delisted"],
-          #is_frozen: currency.last["frozen"]
+          iso_4217: currency[0..2].upcase
         )
         @exchange.assets << asset
       end
@@ -32,13 +26,7 @@ class RestExchange::BitFinex::GetCurrencies < RestExchange::BitFinex::Base
       unless existing_asset
         asset = Asset.new(
           name: currency[3..5],
-          iso_4217: currency[3..5].upcase#,
-          #min_confirmation: currency.last["minConf"],
-          #tx_fee: currency.last["txFee"],
-          #is_active: currency.last["IsActive"],
-          #is_disabled: currency.last["disabled"],
-          #is_delisted: currency.last["delisted"],
-          #is_frozen: currency.last["frozen"]
+          iso_4217: currency[3..5].upcase
         )
         @exchange.assets << asset
       end

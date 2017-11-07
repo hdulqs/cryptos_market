@@ -29,8 +29,4 @@ class Normalizer::Asset
     @exchange.assets << asset
   end
 
-  def map_asset asset_payload, value
-    asset_payload[@hash_map["#{value}"]]
-  end
-
 end
