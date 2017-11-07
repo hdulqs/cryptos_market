@@ -11,8 +11,7 @@ gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'pg'
-gem 'pry'
-gem 'pry-rails'
+
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'rest-client'
 # Use Puma as the app server
@@ -41,6 +40,16 @@ gem 'jquery-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', "~> 4.0"
 end
 
 group :development do

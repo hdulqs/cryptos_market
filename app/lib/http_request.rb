@@ -5,7 +5,7 @@ require 'rest-client'
 
 class HttpRequest
 
-  def initialize host, auth_header
+  def initialize host, auth_header = ''
     @host = host
     @auth_header = auth_header
   end

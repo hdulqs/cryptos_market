@@ -1,12 +1,12 @@
-class Poloniex::GetTradeHistory
+class RestExchange::Poloniex::GetTradeHistory < RestExchange::Poloniex::Base
 
   def initialize currency_pair
+    super()
     @currency_pair = currency_pair
   end
 
   def call
-    exchange = Exchange.find_by(name: 'poloniex')
-    pair = exchange.pairs.find_by(name: @currency_pair)
+    pair = @exchange.pairs.find_by(name: @currency_pair)
     raise "pair could not be found" unless pair
     request = HttpRequest.new('https://poloniex.com', '')
     # Returns the past 200 trades for a given market, or up to 50,000 trades between a range specified in UNIX timestamps

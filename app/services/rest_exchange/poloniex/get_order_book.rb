@@ -1,12 +1,12 @@
-class Poloniex::GetOrderBook
+class RestExchange::Poloniex::GetOrderBook < RestExchange::Poloniex::Base
 
   def initialize currency_pair
+    super()
     @currency_pair = currency_pair
   end
 
   def call
-    exchange = Exchange.find_by(name: 'poloniex')
-    pair = exchange.pairs.find_by(name: @currency_pair)
+    pair = @exchange.pairs.find_by(name: @currency_pair)
     raise "pair could not be found" unless pair
     request = HttpRequest.new('https://poloniex.com', '')
     response = request.get("/public?command=returnOrderBook&currencyPair=#{@currency_pair.split("-").join("_")}&depth=10") # depth defines maximum number of asks / bids. Default vaule is 10.

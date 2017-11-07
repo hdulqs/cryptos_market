@@ -1,16 +1,17 @@
-class Bitfinex::GetCurrencies
+class RestExchange::BitFinex::GetCurrencies < RestExchange::BitFinex::Base
 
   def initialize
+    super()
+    @path = '/v1/symbols'
   end
 
   def call
-    request = HttpRequest.new('https://api.bitfinex.com', '')
-    response = request.get('/v1/symbols')
+    request = HttpRequest.new(@base_url)
+    response = request.get(@path)
     json_res = JSON.parse(response)
-    exchange = Exchange.find_by(name: 'bitfinex')
 
     json_res.each do |currency|
-      existing_asset = exchange.assets.find_by(iso_4217: currency[0..2].upcase)
+      existing_asset = @exchange.assets.find_by(iso_4217: currency[0..2].upcase)
       unless existing_asset
         asset = Asset.new(
           name: currency[0..2],
@@ -22,12 +23,12 @@ class Bitfinex::GetCurrencies
           #is_delisted: currency.last["delisted"],
           #is_frozen: currency.last["frozen"]
         )
-        exchange.assets << asset
+        @exchange.assets << asset
       end
     end
 
     json_res.each do |currency|
-      existing_asset = exchange.assets.find_by(iso_4217: currency[3..5].upcase)
+      existing_asset = @exchange.assets.find_by(iso_4217: currency[3..5].upcase)
       unless existing_asset
         asset = Asset.new(
           name: currency[3..5],
@@ -39,11 +40,11 @@ class Bitfinex::GetCurrencies
           #is_delisted: currency.last["delisted"],
           #is_frozen: currency.last["frozen"]
         )
-        exchange.assets << asset
+        @exchange.assets << asset
       end
     end
 
-    return exchange.assets.count
+    return @exchange.assets.count
   end
 
 end

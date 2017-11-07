@@ -1,16 +1,18 @@
-class BitTrex::GetTradeHistory
+class RestExchange::BitTrex::GetTradeHistory < RestExchange::BitTrex::Base
 
   def initialize currency_pair
+    super()
     @currency_pair = currency_pair
+    @pair = @exchange.pairs.find_by(name: @currency_pair)
+    raise "pair could not be found" unless @pair
+    @path = "/api/v1.1/public/getmarkethistory?market=#{@currency_pair}"
   end
 
   def call
-    exchange = Exchange.find_by(name: 'bittrex')
-    pair = exchange.pairs.find_by(name: @currency_pair)
-    raise "pair could not be found" unless pair
-    request = HttpRequest.new('https://bittrex.com', '')
-    response = request.get("/api/v1.1/public/getmarkethistory?market=#{@currency_pair}")
+    request = HttpRequest.new(@base_url)
+    response = request.get(@path)
     json_res = JSON.parse(response)
+
     events = json_res["result"]
     events.each do |event|
       trade_history = TradeHistory.create!(
@@ -19,7 +21,7 @@ class BitTrex::GetTradeHistory
         price: event["Price"],
         total: event["Total"],
         fill_type: event["FillType"],
-        pair_id: pair.id
+        pair_id: @pair.id
       )
     end
   end

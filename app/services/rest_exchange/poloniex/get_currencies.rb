@@ -1,15 +1,17 @@
-class Poloniex::GetCurrencies
+class RestExchange::Poloniex::GetCurrencies < RestExchange::Poloniex::Base
 
   def initialize
+    super()
+    @path = '/public?command=returnCurrencies'
   end
 
   def call
-    request = HttpRequest.new('https://poloniex.com', '')
-    response = request.get('/public?command=returnCurrencies')
+    request = HttpRequest.new(@base_url)
+    response = request.get(@path)
     json_res = JSON.parse(response)
-    exchange = Exchange.find_by(name: 'poloniex')
+    
     json_res.each do |currency|
-      existing_asset = exchange.assets.find_by(iso_4217: currency.first)
+      existing_asset = @exchange.assets.find_by(iso_4217: currency.first)
       unless existing_asset
         asset = Asset.new(
           name: currency.last["name"],
@@ -21,7 +23,7 @@ class Poloniex::GetCurrencies
           is_delisted: currency.last["delisted"],
           is_frozen: currency.last["frozen"]
         )
-        exchange.assets << asset
+        @exchange.assets << asset
       end
     end
     return json_res.count
