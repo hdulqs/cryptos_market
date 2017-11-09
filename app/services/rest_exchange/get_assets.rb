@@ -50,6 +50,8 @@ class RestExchange::GetAssets < RestExchange::Base
     elsif @exchange.name == 'bitfinex'
       # Bitfiniex does not have an endpoint to get Currencies so we get them through pairs...
       bitfinex_transform(response_payload)
+    elsif @exchange.name == 'kraken'
+      response_payload["result"].map{|k,v| v["name"] = k ; v}
     else
       response_payload
     end

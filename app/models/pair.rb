@@ -10,6 +10,10 @@ class Pair < ApplicationRecord
     RestExchange::GetOrderBook.new(self).call
   end
 
+  def get_trade_history
+    RestExchange::GetTradeHistory.new(self).call
+  end
+
   def get_ticker
     if exchange.has_ticker_endpoint
       RestExchange::GetTicker.new(self).call

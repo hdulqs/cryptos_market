@@ -33,6 +33,8 @@ class RestExchange::GetOrderBook < RestExchange::Base
       order_book_payload
     elsif @currency_pair.exchange.name == 'bittrex'
       order_book_payload
+    elsif @currency_pair.exchange.name == 'kraken'
+      order_book_payload['result'][order_book_payload['result'].keys.first]
     else
       order_book_payload
     end
