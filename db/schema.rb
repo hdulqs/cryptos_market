@@ -30,13 +30,15 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.string "iso_4217"
     t.integer "min_confirmation"
     t.decimal "tx_fee"
-    t.boolean "is_active", default: true
+    t.boolean "is_active"
     t.string "coin_type"
-    t.boolean "is_disabled", default: false
-    t.boolean "is_delisted", default: false
-    t.boolean "is_frozen", default: false
+    t.boolean "is_disabled"
+    t.boolean "is_delisted"
+    t.boolean "is_frozen"
+    t.bigint "exchange_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["exchange_id"], name: "index_assets_on_exchange_id"
   end
 
   create_table "exchange_pairs", force: :cascade do |t|
@@ -51,17 +53,41 @@ ActiveRecord::Schema.define(version: 20171106201436) do
 
   create_table "exchanges", force: :cascade do |t|
     t.string "name"
+    t.string "base_url"
+    t.string "get_assets_path"
+    t.string "get_pairs_path"
+    t.string "get_order_book_path"
+    t.string "get_tickers_path"
+    t.string "get_ticker_path"
+    t.string "get_trade_history_path"
+    t.boolean "has_assets_endpoint"
+    t.boolean "has_ticker_endpoint"
+    t.boolean "has_tickers_endpoint"
+    t.jsonb "asset_data_map", default: "{}", null: false
+    t.jsonb "pair_data_map", default: "{}", null: false
+    t.jsonb "order_book_data_map", default: "{}", null: false
+    t.jsonb "tickers_data_map", default: "{}", null: false
+    t.jsonb "ticker_data_map", default: "{}", null: false
+    t.jsonb "trade_history_data_map", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["asset_data_map"], name: "index_exchanges_on_asset_data_map", using: :gin
+    t.index ["order_book_data_map"], name: "index_exchanges_on_order_book_data_map", using: :gin
+    t.index ["pair_data_map"], name: "index_exchanges_on_pair_data_map", using: :gin
+    t.index ["ticker_data_map"], name: "index_exchanges_on_ticker_data_map", using: :gin
+    t.index ["tickers_data_map"], name: "index_exchanges_on_tickers_data_map", using: :gin
+    t.index ["trade_history_data_map"], name: "index_exchanges_on_trade_history_data_map", using: :gin
   end
 
   create_table "order_books", force: :cascade do |t|
     t.jsonb "asks", default: "{}", null: false
     t.jsonb "bids", default: "{}", null: false
-    t.boolean "is_frozen", default: false
+    t.boolean "is_frozen"
     t.bigint "pair_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["asks"], name: "index_order_books_on_asks", using: :gin
+    t.index ["bids"], name: "index_order_books_on_bids", using: :gin
     t.index ["pair_id"], name: "index_order_books_on_pair_id"
   end
 
@@ -70,10 +96,12 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.string "quote_currency"
     t.string "base_currency"
     t.decimal "min_trade_size"
-    t.boolean "is_active", default: true
-    t.boolean "is_frozen", default: false
+    t.boolean "is_active"
+    t.boolean "is_frozen"
+    t.bigint "exchange_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["exchange_id"], name: "index_pairs_on_exchange_id"
   end
 
   create_table "quotations", force: :cascade do |t|
@@ -112,9 +140,11 @@ ActiveRecord::Schema.define(version: 20171106201436) do
 
   add_foreign_key "asset_exchanges", "assets"
   add_foreign_key "asset_exchanges", "exchanges"
+  add_foreign_key "assets", "exchanges"
   add_foreign_key "exchange_pairs", "exchanges"
   add_foreign_key "exchange_pairs", "pairs"
   add_foreign_key "order_books", "pairs"
+  add_foreign_key "pairs", "exchanges"
   add_foreign_key "quotations", "asset_exchanges"
   add_foreign_key "tickers", "pairs"
   add_foreign_key "trade_histories", "pairs"
