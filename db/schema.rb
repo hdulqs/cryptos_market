@@ -35,10 +35,12 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.boolean "is_disabled"
     t.boolean "is_delisted"
     t.boolean "is_frozen"
+    t.jsonb "original_payload", default: "{}"
     t.bigint "exchange_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exchange_id"], name: "index_assets_on_exchange_id"
+    t.index ["original_payload"], name: "index_assets_on_original_payload", using: :gin
   end
 
   create_table "exchange_pairs", force: :cascade do |t|
@@ -84,10 +86,12 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.jsonb "bids", default: "{}", null: false
     t.boolean "is_frozen"
     t.bigint "pair_id"
+    t.jsonb "original_payload", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asks"], name: "index_order_books_on_asks", using: :gin
     t.index ["bids"], name: "index_order_books_on_bids", using: :gin
+    t.index ["original_payload"], name: "index_order_books_on_original_payload", using: :gin
     t.index ["pair_id"], name: "index_order_books_on_pair_id"
   end
 
@@ -98,10 +102,12 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.decimal "min_trade_size"
     t.boolean "is_active"
     t.boolean "is_frozen"
+    t.jsonb "original_payload", default: "{}", null: false
     t.bigint "exchange_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exchange_id"], name: "index_pairs_on_exchange_id"
+    t.index ["original_payload"], name: "index_pairs_on_original_payload", using: :gin
   end
 
   create_table "quotations", force: :cascade do |t|
@@ -120,9 +126,11 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.decimal "base_volume"
     t.decimal "quote_volume"
     t.decimal "percent_change"
+    t.jsonb "original_payload", default: "{}", null: false
     t.bigint "pair_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["original_payload"], name: "index_tickers_on_original_payload", using: :gin
     t.index ["pair_id"], name: "index_tickers_on_pair_id"
   end
 
@@ -132,9 +140,12 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.decimal "amount"
     t.decimal "price"
     t.decimal "total"
+    t.decimal "event_timestamp"
     t.string "fill_type"
+    t.jsonb "original_payload", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["original_payload"], name: "index_trade_histories_on_original_payload", using: :gin
     t.index ["pair_id"], name: "index_trade_histories_on_pair_id"
   end
 

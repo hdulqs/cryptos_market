@@ -21,6 +21,7 @@ class RestExchange::GetAssets < RestExchange::Base
           is_disabled: asset_payload[mapping[:is_disabled]],
           is_delisted: asset_payload[mapping[:is_delisted]],
           is_frozen: asset_payload[mapping[:is_frozen]],
+          original_payload: asset_payload[:original_payload],
           exchange_id: @exchange.id
         )
         @exchange.assets << asset

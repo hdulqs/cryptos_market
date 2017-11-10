@@ -12,6 +12,7 @@ class RestExchange::GetOrderBook < RestExchange::Base
       bids: std_order_book[mapping[:bids]],
       asks: std_order_book[mapping[:asks]],
       is_frozen: std_order_book[mapping[:is_frozen]],
+      original_payload: std_order_book[:original_payload],
       pair_id: @currency_pair.id
     )
     return order_book
@@ -27,16 +28,26 @@ class RestExchange::GetOrderBook < RestExchange::Base
   end
 
   def normalized_order_book order_book_payload
-    if @currency_pair.exchange.name == 'bittrex'
-      order_book_payload['result']
+    if @currency_pair.exchange.name == 'poloniex'
+      order_book = order_book_payload['result'].with_indifferent_access
+      order_book[:original_payload] = order_book_payload
+      order_book.with_indifferent_access
     elsif @currency_pair.exchange.name == 'bitfinex'
-      order_book_payload
+      order_book = order_book_payload.with_indifferent_access
+      order_book[:original_payload] = order_book_payload
+      order_book.with_indifferent_access
     elsif @currency_pair.exchange.name == 'bittrex'
-      order_book_payload
+      order_book = order_book_payload.with_indifferent_access
+      order_book[:original_payload] = order_book_payload
+      order_book.with_indifferent_access
     elsif @currency_pair.exchange.name == 'kraken'
-      order_book_payload['result'][order_book_payload['result'].keys.first]
+      order_book = order_book_payload['result'][order_book_payload['result'].keys.first].with_indifferent_access
+      order_book[:original_payload] = order_book_payload
+      order_book.with_indifferent_access
     else
-      order_book_payload
+      order_book = order_book_payload.with_indifferent_access
+      order_book[:original_payload] = order_book_payload
+      order_book.with_indifferent_access
     end
   end
 

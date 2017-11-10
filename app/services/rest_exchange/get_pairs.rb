@@ -18,6 +18,7 @@ class RestExchange::GetPairs < RestExchange::Base
           min_trade_size: pair_payload[mapping[:min_trade_size]],
           is_active: pair_payload[mapping[:is_active]],
           is_frozen: pair_payload[mapping[:is_frozen]],
+          original_payload: pair_payload[:original_payload],
           exchange_id: @exchange.id
         )
         @exchange.pairs << pair
@@ -36,18 +37,21 @@ class RestExchange::GetPairs < RestExchange::Base
     # We must return an Array of Hash
     if @exchange.name == 'poloniex'
       response_payload.map do |pair|
-        { name: pair.first, base_currency: pair.first.split("_").first, quote_currency: pair.first.split("_").last, is_frozen: pair.last["isFrozen"] }.with_indifferent_access
+        { name: pair.first, base_currency: pair.first.split("_").first, quote_currency: pair.first.split("_").last, is_frozen: pair.last["isFrozen"], original_payload: pair }.with_indifferent_access
       end
     elsif @exchange.name == 'bittrex'
-      response_payload['result']
+      response_payload['result'].map do |pair|
+        pair[:original_payload] = pair.with_indifferent_access
+        pair.with_indifferent_access
+      end
     elsif @exchange.name == 'bitfinex'
       response_payload.map do |pair|
-        { name: pair['pair'], base_currency: pair["pair"][0..2].upcase, quote_currency: pair["pair"][3..5].upcase, minimum_order_size: pair["minimum_order_size"] }.with_indifferent_access
+        { name: pair['pair'], base_currency: pair["pair"][0..2].upcase, quote_currency: pair["pair"][3..5].upcase, minimum_order_size: pair["minimum_order_size"], original_payload: pair }.with_indifferent_access
       end
     elsif @exchange.name == 'kraken'
       #binding.pry
       response_payload["result"].map do |k,v|
-        { name: k, base_currency: v['altname'][0..2], quote_currency: v['altname'][3..5] }.with_indifferent_access
+        { name: k, base_currency: v['altname'][0..2], quote_currency: v['altname'][3..5], original_payload: {key: k, value: v} }.with_indifferent_access
       end
     else
       response_payload

@@ -28,6 +28,7 @@ class RestExchange::GetTickers < RestExchange::Base
           base_volume: ticker[mapping[:base_volume]],
           quote_volume: ticker[mapping[:quote_volume]],
           percent_change: ticker[mapping[:percent_change]],
+          original_payload: {key: key, ticker: ticker},
           pair_id: existing_pair.id
         )
       end
