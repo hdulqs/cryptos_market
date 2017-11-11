@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171106201436) do
+ActiveRecord::Schema.define(version: 20171111150305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
 
   create_table "assets", force: :cascade do |t|
     t.string "name"
@@ -100,6 +117,16 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.index ["original_payload"], name: "index_pairs_on_original_payload", using: :gin
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.bigint "market_id"
+    t.jsonb "pairs", default: "{}", null: false
+    t.decimal "spread"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["market_id"], name: "index_reports_on_market_id"
+    t.index ["pairs"], name: "index_reports_on_pairs", using: :gin
+  end
+
   create_table "tickers", force: :cascade do |t|
     t.decimal "bid"
     t.decimal "ask"
@@ -139,6 +166,7 @@ ActiveRecord::Schema.define(version: 20171106201436) do
   add_foreign_key "order_books", "pairs"
   add_foreign_key "pairs", "exchanges"
   add_foreign_key "pairs", "markets"
+  add_foreign_key "reports", "markets"
   add_foreign_key "tickers", "pairs"
   add_foreign_key "trade_histories", "pairs"
 end

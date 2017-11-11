@@ -1,0 +1,22 @@
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Base Currency</th>
+      <th>Quote Currency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><%= @market.id %></th>
+      <td><%= @market.name %></td>
+      <td><%= @market.base_currency %></td>
+      <td><%= @market.quote_currency %></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<%= link_to 'Show Pairs', backend_market_pairs_path(@market), class: 'btn btn-info' %>

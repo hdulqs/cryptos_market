@@ -1,0 +1,31 @@
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Bid</th>
+      <th>Ask</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>timestamp</th>
+      <th>volume</th>
+      <th>Base volume</th>
+      <th>Quote volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tickers.each do |ticker| %>
+      <tr>
+        <th scope="row"><%= ticker.id %></th>
+        <td><%= ticker.bid %></td>
+        <td><%= ticker.ask %></td>
+        <td><%= ticker.high %></td>
+        <td><%= ticker.low %></td>
+        <td><%= ticker.timestamp %></td>
+        <td><%= ticker.volume %></td>
+        <td><%= ticker.base_volume %></td>
+        <td><%= ticker.quote_volume %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -12,7 +12,9 @@ gem 'rails', '~> 5.1.4'
 #gem 'sqlite3'
 gem 'pg'
 
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'devise'
+
+gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'rest-client'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

@@ -275,6 +275,11 @@ puts("Retrieved #{kraken_pairs_count} Kraken Currency Pairs")
 puts ""
 puts ""
 puts "#{Exchange.count} Exchanges Created"
+puts ""
+puts ""
+puts "Cleaning Kraken Pairs..."
+Cleaner.kraken
+
 
 
 bitstamp = Exchange.create!(
@@ -459,8 +464,8 @@ hibtc = Exchange.create!(
     ask: "ask",
     bid: "bid",
     last: "last",
-    base_volume: "",
-    volume: "volume",
+    base_volume: "volume",
+    volume: "",
     quote_volume: "volumeQuote",
     percent_change: "",
     high: "high",

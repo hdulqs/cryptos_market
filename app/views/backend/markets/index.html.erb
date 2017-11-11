@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Base Currency</th>
+      <th>Quote Currency</th>
+      <th>Reports</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @markets.each do |m| %>
+      <tr>
+        <th scope="row"><%= m.id %></th>
+        <td><%= m.name %></td>
+        <td><%= m.base_currency %></td>
+        <td><%= m.quote_currency %></td>
+        <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-success' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

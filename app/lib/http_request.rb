@@ -11,14 +11,25 @@ class HttpRequest
   end
 
   def get path
-    return RestClient.get(
-      "#{@host + path}",
-      {
-        authorization: @auth_header,
-        content_type: :json,
-        accept: :json
-      }
-    )
+    begin
+      return RestClient.get(
+        "#{@host + path}",
+        {
+          authorization: @auth_header,
+          content_type: :json,
+          accept: :json
+        }
+      )
+    rescue RestClient::ExceptionWithResponse => e
+      puts "Request Failing at #{@host + path}"
+      raise e
+    rescue RestClient::RequestFailed => e
+      puts "Request Failing at #{@host + path}"
+      raise e
+    rescue Exception => e
+      puts "Request Failing at #{@host + path}"
+      raise e
+    end
   end
 
   def post path, payload
