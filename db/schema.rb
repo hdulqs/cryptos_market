@@ -15,16 +15,6 @@ ActiveRecord::Schema.define(version: 20171106201436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "asset_exchanges", force: :cascade do |t|
-    t.bigint "asset_id"
-    t.bigint "exchange_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["asset_id", "exchange_id"], name: "index_asset_exchanges_on_asset_id_and_exchange_id", unique: true
-    t.index ["asset_id"], name: "index_asset_exchanges_on_asset_id"
-    t.index ["exchange_id"], name: "index_asset_exchanges_on_exchange_id"
-  end
-
   create_table "assets", force: :cascade do |t|
     t.string "name"
     t.string "iso_4217"
@@ -41,16 +31,6 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.datetime "updated_at", null: false
     t.index ["exchange_id"], name: "index_assets_on_exchange_id"
     t.index ["original_payload"], name: "index_assets_on_original_payload", using: :gin
-  end
-
-  create_table "exchange_pairs", force: :cascade do |t|
-    t.bigint "exchange_id"
-    t.bigint "pair_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["exchange_id"], name: "index_exchange_pairs_on_exchange_id"
-    t.index ["pair_id", "exchange_id"], name: "index_exchange_pairs_on_pair_id_and_exchange_id", unique: true
-    t.index ["pair_id"], name: "index_exchange_pairs_on_pair_id"
   end
 
   create_table "exchanges", force: :cascade do |t|
@@ -81,6 +61,14 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.index ["trade_history_data_map"], name: "index_exchanges_on_trade_history_data_map", using: :gin
   end
 
+  create_table "markets", force: :cascade do |t|
+    t.string "name"
+    t.string "base_currency"
+    t.string "quote_currency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "order_books", force: :cascade do |t|
     t.jsonb "asks", default: "{}", null: false
     t.jsonb "bids", default: "{}", null: false
@@ -104,24 +92,22 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.boolean "is_frozen"
     t.jsonb "original_payload", default: "{}", null: false
     t.bigint "exchange_id"
+    t.bigint "market_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exchange_id"], name: "index_pairs_on_exchange_id"
+    t.index ["market_id"], name: "index_pairs_on_market_id"
     t.index ["original_payload"], name: "index_pairs_on_original_payload", using: :gin
   end
 
-  create_table "quotations", force: :cascade do |t|
-    t.decimal "price"
-    t.bigint "asset_exchange_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["asset_exchange_id"], name: "index_quotations_on_asset_exchange_id"
-  end
-
   create_table "tickers", force: :cascade do |t|
-    t.string "bid"
-    t.string "ask"
-    t.string "last"
+    t.decimal "bid"
+    t.decimal "ask"
+    t.decimal "last"
+    t.decimal "high"
+    t.decimal "low"
+    t.decimal "timestamp"
+    t.string "market_symbol"
     t.decimal "volume"
     t.decimal "base_volume"
     t.decimal "quote_volume"
@@ -149,14 +135,10 @@ ActiveRecord::Schema.define(version: 20171106201436) do
     t.index ["pair_id"], name: "index_trade_histories_on_pair_id"
   end
 
-  add_foreign_key "asset_exchanges", "assets"
-  add_foreign_key "asset_exchanges", "exchanges"
   add_foreign_key "assets", "exchanges"
-  add_foreign_key "exchange_pairs", "exchanges"
-  add_foreign_key "exchange_pairs", "pairs"
   add_foreign_key "order_books", "pairs"
   add_foreign_key "pairs", "exchanges"
-  add_foreign_key "quotations", "asset_exchanges"
+  add_foreign_key "pairs", "markets"
   add_foreign_key "tickers", "pairs"
   add_foreign_key "trade_histories", "pairs"
 end

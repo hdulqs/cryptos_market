@@ -1,22 +1,22 @@
 class Exchange < ApplicationRecord
-  has_many :asset_exchanges
-  has_many :assets, through: :asset_exchanges
-  has_many :exchange_pairs
-  has_many :pairs, through: :exchange_pairs
+  has_many :assets
+  has_many :pairs
+  has_many :markets, through: :pairs
+
   validates :name, uniqueness: true
   validates :name, presence: true
 
   def get_assets
-    RestExchange::GetAssets.new(self).call
+    RestExchange::Assets::Fetcher.new(self).call
   end
 
   def get_pairs
-    RestExchange::GetPairs.new(self).call
+    RestExchange::Pairs::Fetcher.new(self).call
   end
 
   def get_tickers
     if has_tickers_endpoint
-      RestExchange::GetTickers.new(self).call
+      RestExchange::Tickers::Fetcher.new(self).call
     else
       puts("There is no tickers endpoint for #{name}")
     end

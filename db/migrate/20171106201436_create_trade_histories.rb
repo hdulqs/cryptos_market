@@ -1,7 +1,7 @@
 class CreateTradeHistories < ActiveRecord::Migration[5.1]
   def change
     create_table :trade_histories do |t|
-      t.references :pair, foreign_key: true
+      t.references :pair, index: true, foreign_key: true
       t.string :order_type
       t.decimal :amount
       t.decimal :price

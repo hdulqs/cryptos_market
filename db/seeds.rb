@@ -1,22 +1,3 @@
-# Exchange.create!(name: 'bittrex')
-# bit_trex_currency_nb = RestExchange::BitTrex::GetCurrencies.new.call
-# puts("Retrieved #{bit_trex_currency_nb} BitTrex Currencies")
-# bit_trex_market_nb = RestExchange::BitTrex::GetMarkets.new.call
-# puts("Retrieved #{bit_trex_market_nb} BitTrex Markets")
-#
-# Exchange.create!(name: 'poloniex')
-# poloniex_currency_nb = RestExchange::Poloniex::GetCurrencies.new.call
-# puts("Retrieved #{poloniex_currency_nb} Poloniex Currencies")
-# poloniex_market_nb = RestExchange::Poloniex::GetMarkets.new.call
-# puts("Retrieved #{poloniex_market_nb} Poloniex Markets")
-#
-# Exchange.create!(name: 'bitfinex')
-# bitfinex_currency_nb = RestExchange::BitFinex::GetCurrencies.new.call
-# puts("Retrieved #{bitfinex_currency_nb} BitFinex Currencies")
-# bitfinex_market_nb = RestExchange::BitFinex::GetMarkets.new.call
-# puts("Retrieved #{bitfinex_market_nb} BitFinex Markets")
-
-
 
 
 poloniex = Exchange.create!(
@@ -61,7 +42,11 @@ poloniex = Exchange.create!(
     base_volume: "baseVolume",
     volume: "",
     quote_volume: "quoteVolume",
-    percent_change: "percentChange"
+    percent_change: "percentChange",
+    high: "high",
+    low: "low",
+    timestamp: "timestamp",
+    market_symbol: "market_symbol"
   }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "type",
@@ -114,8 +99,8 @@ bittrex = Exchange.create!(
     is_frozen: ""
   }.with_indifferent_access,
   order_book_data_map: {
-    asks: "buy",
-    bids: "sell",
+    asks: "sell",
+    bids: "buy",
     is_frozen: ""
   }.with_indifferent_access,
   ticker_data_map: {
@@ -125,7 +110,11 @@ bittrex = Exchange.create!(
     base_volume: "",
     volume: "",
     quote_volume: "",
-    percent_change: ""
+    percent_change: "",
+    high: "high",
+    low: "low",
+    timestamp: "timestamp",
+    market_symbol: "market_symbol"
   }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "OrderType",
@@ -189,7 +178,11 @@ bitfinex = Exchange.create!(
     base_volume: "",
     volume: "volume",
     quote_volume: "",
-    percent_change: ""
+    percent_change: "",
+    high: "high",
+    low: "low",
+    timestamp: "timestamp",
+    market_symbol: "market_symbol"
   }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "type",
@@ -255,7 +248,11 @@ kraken = Exchange.create!(
     base_volume: "",
     volume: "volume",
     quote_volume: "",
-    percent_change: ""
+    percent_change: "",
+    high: "high",
+    low: "low",
+    timestamp: "timestamp",
+    market_symbol: "market_symbol"
   }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "order_type",
@@ -275,6 +272,220 @@ puts ""
 kraken_pairs_count = kraken.get_pairs
 puts ""
 puts("Retrieved #{kraken_pairs_count} Kraken Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
+
+
+bitstamp = Exchange.create!(
+  name: 'bitstamp',
+  base_url: 'https://bitstamp.net',
+  get_assets_path: '/api/v2/trading-pairs-info/',
+  get_pairs_path: '/api/v2/trading-pairs-info/',
+  get_order_book_path: '/api/v2/order_book/CURRENCY_PAIR_PARAM/',
+  get_ticker_path: '/api/v2/ticker/CURRENCY_PAIR_PARAM/',
+  get_trade_history_path: '/api/v2/transactions/CURRENCY_PAIR_PARAM/',
+  has_tickers_endpoint: false,
+  has_ticker_endpoint: true,
+  has_assets_endpoint: false,
+  asset_data_map: {
+    name: "name",
+    iso_4217: "iso_4217",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "name",
+    base_currency: "base_currency",
+    quote_currency: "quote_currency",
+    min_trade_size: "minimum_order",
+    is_active: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "asks",
+    bids: "bids",
+    is_frozen: ""
+  }.with_indifferent_access,
+  ticker_data_map: {
+    ask: "ask",
+    bid: "bid",
+    last: "last",
+    base_volume: "",
+    volume: "volume",
+    quote_volume: "",
+    percent_change: "",
+    high: "high",
+    low: "low",
+    timestamp: "timestamp",
+    market_symbol: "market_symbol"
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "order_type",
+    amount: "amount",
+    price: "price",
+    total: "",
+    fill_type: "",
+    event_timestamp: "date"
+  }.with_indifferent_access
+)
+puts "Created Bitstamp Exchange"
+puts bitstamp.inspect
+bitstamp_assets_count = bitstamp.get_assets
+puts ""
+puts("Retrieved #{bitstamp_assets_count} Bitstamp Assets")
+puts ""
+bitstamp_pairs_count = bitstamp.get_pairs
+puts ""
+puts("Retrieved #{bitstamp_pairs_count} Bitstamp Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
+
+
+
+quoine = Exchange.create!(
+  name: 'quoine',
+  base_url: 'https://api.qryptos.com',
+  get_assets_path: '/products',
+  get_pairs_path: '/products',
+  get_order_book_path: '/products/CURRENCY_PAIR_PARAM/price_levels',
+  get_ticker_path: '/products/CURRENCY_PAIR_PARAM',
+  get_trade_history_path: '/executions?product_id=CURRENCY_PAIR_PARAM',
+  has_tickers_endpoint: false,
+  has_ticker_endpoint: true,
+  has_assets_endpoint: false,
+  asset_data_map: {
+    name: "name",
+    iso_4217: "iso_4217",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "name",
+    base_currency: "base_currency",
+    quote_currency: "quoted_currency",
+    min_trade_size: "",
+    is_active: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "sell_price_levels",
+    bids: "buy_price_levels",
+    is_frozen: ""
+  }.with_indifferent_access,
+  ticker_data_map: {
+    ask: "high_market_ask",
+    bid: "low_market_bid",
+    last: "last_traded_price",
+    base_volume: "",
+    volume: "volume_24h",
+    quote_volume: "",
+    percent_change: "",
+    high: "high_market_ask",
+    low: "low_market_bid",
+    timestamp: "timestamp",
+    market_symbol: "currency_pair_code"
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "taker_side",
+    amount: "quantity",
+    price: "price",
+    total: "",
+    fill_type: "",
+    event_timestamp: "created_at"
+  }.with_indifferent_access
+)
+puts "Created Quoine Exchange"
+puts quoine.inspect
+quoine_assets_count = quoine.get_assets
+puts ""
+puts("Retrieved #{quoine_assets_count} Quoine Assets")
+puts ""
+quoine_pairs_count = quoine.get_pairs
+puts ""
+puts("Retrieved #{quoine_pairs_count} Quoine Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
+
+
+hibtc = Exchange.create!(
+  name: 'hibtc',
+  base_url: 'https://api.hitbtc.com/api/2',
+  get_assets_path: '/public/currency',
+  get_pairs_path: '/public/symbol',
+  get_order_book_path: '/public/orderbook/CURRENCY_PAIR_PARAM',
+  get_ticker_path: '/public/ticker/CURRENCY_PAIR_PARAM',
+  get_trade_history_path: '/public/trades/CURRENCY_PAIR_PARAM',
+  has_tickers_endpoint: false,
+  has_ticker_endpoint: true,
+  has_assets_endpoint: false,
+  asset_data_map: {
+    name: "id",
+    iso_4217: "id",
+    min_confirmation: "payinConfirmations",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "id",
+    base_currency: "baseCurrency",
+    quote_currency: "quoteCurrency",
+    min_trade_size: "",
+    is_active: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "ask",
+    bids: "bid",
+    is_frozen: ""
+  }.with_indifferent_access,
+  ticker_data_map: {
+    ask: "ask",
+    bid: "bid",
+    last: "last",
+    base_volume: "",
+    volume: "volume",
+    quote_volume: "volumeQuote",
+    percent_change: "",
+    high: "high",
+    low: "low",
+    timestamp: "c_timestamp",
+    market_symbol: "symbol"
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "side",
+    amount: "quantity",
+    price: "price",
+    total: "",
+    fill_type: "",
+    event_timestamp: "timestamp"
+  }.with_indifferent_access
+)
+puts "Created HiBtc Exchange"
+puts hibtc.inspect
+hibtc_assets_count = hibtc.get_assets
+puts ""
+puts("Retrieved #{hibtc_assets_count} HiBtc Assets")
+puts ""
+hibtc_pairs_count = hibtc.get_pairs
+puts ""
+puts("Retrieved #{hibtc_pairs_count} HiBtc Currency Pairs")
 puts ""
 puts ""
 puts "#{Exchange.count} Exchanges Created"

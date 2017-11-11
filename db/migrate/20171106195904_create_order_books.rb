@@ -4,7 +4,7 @@ class CreateOrderBooks < ActiveRecord::Migration[5.1]
       t.jsonb :asks, null: false, default: '{}'
       t.jsonb :bids, null: false, default: '{}'
       t.boolean :is_frozen#, default: false
-      t.references :pair, foreign_key: true
+      t.references :pair, index: true, foreign_key: true
       t.jsonb :original_payload, null: false, default: '{}'
       t.timestamps
     end

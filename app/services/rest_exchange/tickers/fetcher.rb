@@ -1,5 +1,7 @@
-class RestExchange::GetTickers < RestExchange::Base
+class RestExchange::Tickers::Fetcher < RestExchange::Base
 
+  # Used only by Poloniex which does not provide a Ticker endpoint
+  #
   def initialize exchange
     @exchange = exchange
   end
@@ -21,7 +23,7 @@ class RestExchange::GetTickers < RestExchange::Base
         # )
         # @exchange.pairs << pair
       else
-        ticker = Ticker.create!(
+        ticker = ::Ticker.create!(
           bid: ticker[mapping[:bid]],
           ask: ticker[mapping[:ask]],
           last: ticker[mapping[:last]],

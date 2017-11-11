@@ -11,7 +11,7 @@ class CreateAssets < ActiveRecord::Migration[5.1]
       t.boolean :is_delisted#, default: false
       t.boolean :is_frozen#, default: false
       t.jsonb :original_payload, default: '{}'
-      t.references :exchange, foreign_key: true
+      t.references :exchange, index: true, foreign_key: true
       t.timestamps
     end
     add_index :assets, :original_payload, using: :gin
