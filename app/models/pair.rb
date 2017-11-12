@@ -21,4 +21,8 @@ class Pair < ApplicationRecord
     end
   end
 
+  def last_ticker
+    tickers.last
+  end
+
 end

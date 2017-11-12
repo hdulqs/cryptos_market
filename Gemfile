@@ -12,6 +12,9 @@ gem 'rails', '~> 5.1.4'
 #gem 'sqlite3'
 gem 'pg'
 
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+
 gem 'devise'
 
 gem 'bootstrap', '~> 4.0.0.beta2.1'
@@ -32,7 +35,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
+gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

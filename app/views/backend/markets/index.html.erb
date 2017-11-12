@@ -5,6 +5,8 @@
       <th>Name</th>
       <th>Base Currency</th>
       <th>Quote Currency</th>
+      <th>Supported Exchanges</th>
+      <th>Details</th>
       <th>Reports</th>
     </tr>
   </thead>
@@ -15,6 +17,8 @@
         <td><%= m.name %></td>
         <td><%= m.base_currency %></td>
         <td><%= m.quote_currency %></td>
+        <td><%= m.pairs.map{|l| l.exchange.name.upcase }.join(', ') %></td>
+        <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-success' %></td>
         <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-success' %></td>
       </tr>
     <% end %>

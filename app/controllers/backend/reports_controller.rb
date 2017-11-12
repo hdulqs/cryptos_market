@@ -2,8 +2,8 @@ class Backend::ReportsController < Backend::BaseController
 
 
   def index
-    market = Market.find(params[:market_id])
-    @reports = market.reports
+    @market = Market.find(params[:market_id])
+    @reports = @market.reports
   end
 
   def show

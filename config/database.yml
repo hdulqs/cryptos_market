@@ -5,11 +5,11 @@
 #   gem 'sqlite3'
 #
 default: &default
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 50 } %>
   timeout: 5000
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: 50
   username: <%= ENV.fetch('THEMIS_USERNAME', 'olivier') %>
   password: <%= ENV.fetch("THEMIS_PASSWORD", "") %>
   #min_messages: warning

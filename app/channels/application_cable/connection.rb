@@ -9,7 +9,7 @@ module ApplicationCable
     private
     def find_verified_user
       #binding.pry
-      if current_admin = env['warden'].admin
+      if current_admin = env['warden'].user
         current_admin
       else
         reject_unauthorized_connection

@@ -1,5 +1,36 @@
 class MarketAnalyser
 
+  def reports
+    markets = Market
+      .left_joins(:pairs)
+      .group(:id)
+      .order('COUNT(pairs.id) DESC')
+      .limit(15)
+    markets.each do |market|
+      market_id = market.id
+      ReportCreatorJob.perform_later(market_id)
+    end
+  end
+
+  def generate_report(market)
+    tickers = market.pairs.map{|l| l.last_ticker } # Most recent ticker for pairs
+    min_last = tickers.sort_by{|l| l[:last]}.first
+    max_last = tickers.sort_by{|l| l[:last]}.last
+    report = build_report(min_last, max_last)
+    persist_report(report, market)
+    report
+  end
+
+  def generate_report_for(market_name)
+    market = Market.find_by(name: market_name)
+    tickers = market.get_tickers
+    min_last = tickers.sort_by!{|l| l[:last]}.first
+    max_last = tickers.sort_by!{|l| l[:last]}.last
+    report = build_report(min_last, max_last)
+    #persist_market_report(report)
+    report
+  end
+
   def get_spreads_for_interesting_markets
     interesting_markets.map do |im|
       get_tickers_spread(im)
@@ -20,12 +51,19 @@ class MarketAnalyser
   end
 
   def persist_market_report report
-    market_report = Report.new(
+    Report.create!(
       market_id: report[:market_id],
       spread: report[:spread],
       pairs: report[:pairs_involved]
     )
-    market_report.save!
+  end
+
+  def persist_report report, market
+    Report.create!(
+      market_id: market.id,
+      spread: report[:spread],
+      pairs: report[:pairs_involved]
+    )
   end
 
   def get_tickers_for(market)
@@ -43,7 +81,7 @@ class MarketAnalyser
     end
   end
 
-  def generate_report min, max
+  def build_report min, max
     market_name = min[:market]
     market_id = min[:market_id]
     {
@@ -51,8 +89,8 @@ class MarketAnalyser
       market_id: market_id,
       spread: percentage_difference(min[:last], max[:last]),
       pairs_involved: [
-        { exchange: min[:exchange], last: min[:last], ask: min[:ask], bid: min[:bid], timestamp: min[:timestamp] },
-        { exchange: max[:exchange], last: max[:last], ask: max[:ask], bid: max[:bid], timestamp: max[:timestamp] }
+        { exchange: min.pair.exchange.name, last: min[:last], ask: min[:ask], bid: min[:bid], timestamp: min[:timestamp] },
+        { exchange: max.pair.exchange.name, last: max[:last], ask: max[:ask], bid: max[:bid], timestamp: max[:timestamp] }
       ]
     }
 

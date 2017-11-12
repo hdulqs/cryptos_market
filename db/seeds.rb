@@ -1,4 +1,4 @@
-
+Admin.create!(email: 'ducrouxolivier@gmail.com', password: 'ducrouxolivier@gmail.com', password_confirmation: 'ducrouxolivier@gmail.com')
 
 poloniex = Exchange.create!(
   name: 'poloniex',
