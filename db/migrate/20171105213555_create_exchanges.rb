@@ -12,6 +12,8 @@ class CreateExchanges < ActiveRecord::Migration[5.1]
       t.boolean :has_assets_endpoint
       t.boolean :has_ticker_endpoint
       t.boolean :has_tickers_endpoint
+      t.jsonb :endpoint_request_limit, null: false, default: '{}'
+      t.datetime :last_ticker_request
       t.jsonb :asset_data_map, null: false, default: '{}'
       t.jsonb :pair_data_map, null: false, default: '{}'
       t.jsonb :order_book_data_map, null: false, default: '{}'
@@ -26,5 +28,6 @@ class CreateExchanges < ActiveRecord::Migration[5.1]
     add_index :exchanges, :tickers_data_map, using: :gin
     add_index :exchanges, :ticker_data_map, using: :gin
     add_index :exchanges, :trade_history_data_map, using: :gin
+    add_index :exchanges, :endpoint_request_limit, using: :gin
   end
 end

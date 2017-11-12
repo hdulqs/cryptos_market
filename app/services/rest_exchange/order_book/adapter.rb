@@ -34,6 +34,15 @@ class RestExchange::OrderBook::Adapter
       order_book = @response_payload.with_indifferent_access
       order_book[:original_payload] = @response_payload
       order_book.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'bleutrade'
+      order_book = @response_payload['result'].with_indifferent_access
+      order_book[:original_payload] = @response_payload
+      order_book.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'liqui'
+      return nil if @response_payload['success'] == 0
+      order_book = @response_payload[@response_payload.keys.first].with_indifferent_access
+      order_book[:original_payload] = @response_payload
+      order_book.with_indifferent_access
     else
       order_book = @response_payload.with_indifferent_access
       order_book[:original_payload] = @response_payload

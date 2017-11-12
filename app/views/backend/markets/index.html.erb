@@ -7,6 +7,7 @@
       <th>Quote Currency</th>
       <th>Supported Exchanges</th>
       <th>Spread</th>
+      <th>Is Watched</th>
       <th>Details</th>
       <th>Reports</th>
     </tr>
@@ -24,6 +25,7 @@
         <% else %>
           <td><%= m.reports.last.spread %></td>
         <% end %>
+        <td><%= m.is_watched %></td>
         <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-success' %></td>
         <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-success' %></td>
       </tr>

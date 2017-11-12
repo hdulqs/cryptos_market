@@ -6,6 +6,7 @@ class RestExchange::TradeHistory::Persister
   end
 
   def call
+    return nil unless @std_trade_history
     @std_trade_history.each do |event|
       trade_history = ::TradeHistory.create!(
         order_type: event[mapping[:order_type]],

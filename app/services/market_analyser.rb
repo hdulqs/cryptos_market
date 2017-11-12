@@ -1,24 +1,32 @@
 class MarketAnalyser
 
+  def generate_report(market)
+    tickers = market.pairs.map{|l| l.last_ticker }.compact # Most recent ticker for pairs
+    #binding.pry
+    min_last = tickers.sort_by{|l| l[:last]}.first
+    max_last = tickers.sort_by{|l| l[:last]}.last
+    raise "cannot generate report for Market #{market.id}" unless min_last && max_last
+    report = build_report(min_last, max_last)
+    persist_report(report, market)
+    report
+  end
+
   def reports
     markets = Market
       .left_joins(:pairs)
       .group(:id)
       .order('COUNT(pairs.id) DESC')
-      .limit(15)
+      .limit(10)
     markets.each do |market|
       market_id = market.id
       ReportCreatorJob.perform_later(market_id)
     end
   end
 
-  def generate_report(market)
-    tickers = market.pairs.map{|l| l.last_ticker } # Most recent ticker for pairs
-    min_last = tickers.sort_by{|l| l[:last]}.first
-    max_last = tickers.sort_by{|l| l[:last]}.last
-    report = build_report(min_last, max_last)
-    persist_report(report, market)
-    report
+  def test_dev
+    #binding.pry
+    markets_of_interest = Market.of_interest
+    pairs_of_interest = markets_of_interest.map(&:pairs)
   end
 
   def generate_report_for(market_name)
@@ -82,18 +90,17 @@ class MarketAnalyser
   end
 
   def build_report min, max
-    market_name = min[:market]
-    market_id = min[:market_id]
+    market_name = min.pair.market.name
+    market_id = min.pair.market.id
     {
       market: market_name,
       market_id: market_id,
-      spread: percentage_difference(min[:last], max[:last]),
+      spread: percentage_difference(min.last, max.last),
       pairs_involved: [
-        { exchange: min.pair.exchange.name, last: min[:last], ask: min[:ask], bid: min[:bid], timestamp: min[:timestamp] },
-        { exchange: max.pair.exchange.name, last: max[:last], ask: max[:ask], bid: max[:bid], timestamp: max[:timestamp] }
+        { exchange: min.pair.exchange.name, last: min.last, ask: min.ask, bid: min.bid, timestamp: min.timestamp },
+        { exchange: max.pair.exchange.name, last: max.last, ask: max.ask, bid: max.bid, timestamp: max.timestamp }
       ]
     }
-
   end
 
   def percentage_difference val_a, val_b

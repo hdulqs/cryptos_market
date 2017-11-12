@@ -6,6 +6,7 @@ class RestExchange::OrderBook::Persister
   end
 
   def call
+    return nil unless @std_order_book
     order_book = ::OrderBook.create!(
       bids: @std_order_book[mapping[:bids]],
       asks: @std_order_book[mapping[:asks]],

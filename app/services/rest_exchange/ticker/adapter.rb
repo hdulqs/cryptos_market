@@ -34,6 +34,15 @@ class RestExchange::Ticker::Adapter
       ticker[:original_payload] = @response_payload
       ticker[:c_timestamp] = Time.zone.parse(@response_payload['timestamp']).to_i
       ticker.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'bleutrade'
+      ticker = @response_payload['result'].first.with_indifferent_access
+      ticker[:original_payload] = @response_payload
+      ticker.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'liqui'
+      return nil if @response_payload['success'] == 0
+      ticker = @response_payload[@response_payload.keys.first].with_indifferent_access
+      ticker[:original_payload] = @response_payload
+      ticker.with_indifferent_access
     else
       ticker = @response_payload.with_indifferent_access
       ticker[:original_payload] = @response_payload

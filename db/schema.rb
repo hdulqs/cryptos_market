@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.boolean "has_assets_endpoint"
     t.boolean "has_ticker_endpoint"
     t.boolean "has_tickers_endpoint"
+    t.jsonb "endpoint_request_limit", default: "{}", null: false
+    t.datetime "last_ticker_request"
     t.jsonb "asset_data_map", default: "{}", null: false
     t.jsonb "pair_data_map", default: "{}", null: false
     t.jsonb "order_book_data_map", default: "{}", null: false
@@ -71,6 +73,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_data_map"], name: "index_exchanges_on_asset_data_map", using: :gin
+    t.index ["endpoint_request_limit"], name: "index_exchanges_on_endpoint_request_limit", using: :gin
     t.index ["order_book_data_map"], name: "index_exchanges_on_order_book_data_map", using: :gin
     t.index ["pair_data_map"], name: "index_exchanges_on_pair_data_map", using: :gin
     t.index ["ticker_data_map"], name: "index_exchanges_on_ticker_data_map", using: :gin
@@ -82,6 +85,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.string "name"
     t.string "base_currency"
     t.string "quote_currency"
+    t.boolean "is_watched", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -107,6 +111,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.decimal "min_trade_size"
     t.boolean "is_active"
     t.boolean "is_frozen"
+    t.boolean "is_watched", default: false
     t.jsonb "original_payload", default: "{}", null: false
     t.bigint "exchange_id"
     t.bigint "market_id"

@@ -4,5 +4,8 @@ class Market < ApplicationRecord
   has_many :reports
   validates :name, uniqueness: true
 
+  scope :of_interest, -> {
+    where(is_watched: true)
+  }
 
 end

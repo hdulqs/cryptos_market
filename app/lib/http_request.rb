@@ -11,6 +11,7 @@ class HttpRequest
   end
 
   def get path
+    #binding.pry
     begin
       return RestClient.get(
         "#{@host + path}",

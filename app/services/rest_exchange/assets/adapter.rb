@@ -35,6 +35,17 @@ class RestExchange::Assets::Adapter
         asset[:original_payload] = asset.with_indifferent_access
         asset.with_indifferent_access
       end
+    elsif @exchange.name == 'bleutrade'
+      @response_payload['result'].map do |asset|
+        asset[:original_payload] = asset.with_indifferent_access
+        asset.with_indifferent_access
+      end
+    elsif @exchange.name == 'liqui'
+      #binding.pry
+      return [] if @response_payload['success'] == 0
+      @response_payload['pairs'].map do |key, value|
+        { original_payload: {key: key, value: value}, name: key, iso_4217: key, fee: value['fee'] }.with_indifferent_access
+      end
     else
       @response_payload.map do |asset|
         asset[:original_payload] = asset.with_indifferent_access

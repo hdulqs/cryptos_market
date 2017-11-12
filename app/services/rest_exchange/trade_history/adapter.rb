@@ -44,6 +44,17 @@ class RestExchange::TradeHistory::Adapter
         hist[:original_payload] = hist.with_indifferent_access
         hist.with_indifferent_access
       end
+    elsif @currency_pair.exchange.name == 'bleutrade'
+      @response_payload['result'].map do |hist|
+        hist[:original_payload] = hist.with_indifferent_access
+        hist.with_indifferent_access
+      end
+    elsif @currency_pair.exchange.name == 'liqui'
+      return nil if @response_payload['success'] == 0
+      @response_payload[@response_payload.keys.first].map do |hist|
+        hist[:original_payload] = hist.with_indifferent_access
+        hist.with_indifferent_access
+      end
     else
       @response_payload.map do |hist|
         hist[:original_payload] = hist.with_indifferent_access

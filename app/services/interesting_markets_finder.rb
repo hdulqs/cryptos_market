@@ -1,16 +1,17 @@
-class MarketsFetcherJob < ApplicationJob
-  queue_as :markets_fetcher_job
+class InterestingMarketsFinder
 
-  def perform
+  def call
     markets = Market
       .left_joins(:pairs)
       .group(:id)
       .order('COUNT(pairs.id) DESC')
-      .limit(15)
+      .limit(10)
     markets.each do |market|
+      market.is_watched = true
+      market.save!
       market.pairs.each do |pair|
-        pair_id = pair.id
-        TickerFetcherJob.set.perform_later(pair_id)
+        pair.is_watched = true
+        pair.save!
       end
     end
   end

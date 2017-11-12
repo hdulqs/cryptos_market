@@ -4,6 +4,7 @@ class CreateMarkets < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :base_currency
       t.string :quote_currency
+      t.boolean :is_watched, default: false
       t.timestamps
     end
   end

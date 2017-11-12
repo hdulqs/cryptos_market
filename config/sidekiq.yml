@@ -1,12 +1,12 @@
 :concurrency: 50
 :queues:
-  - ticker_fetcher_job
-  - markets_fetcher_job
   - reports_generator_job
+  - launcher_job
+  - ticker_fetcher_job
 :schedule:
-  markets_fetcher_job:
-    every: ['30s', first_in: '2s']   # Runs once per minute
-    class: MarketsFetcherJob
+  launcher_job:
+    in: '5s'
+    class: LauncherJob
   reports_generator_job:
-    every: ['30s', first_in: '27s']   # Runs once per minute
+    every: ['30s', first_in: '35s']   # Runs once per minute
     class: ReportsGeneratorJob

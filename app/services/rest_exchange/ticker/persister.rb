@@ -6,6 +6,7 @@ class RestExchange::Ticker::Persister
   end
 
   def call
+    return nil unless @std_ticker
     ticker = ::Ticker.create!(
       bid: @std_ticker[mapping[:bid]],
       ask: @std_ticker[mapping[:ask]],
