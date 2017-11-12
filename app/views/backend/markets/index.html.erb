@@ -6,6 +6,7 @@
       <th>Base Currency</th>
       <th>Quote Currency</th>
       <th>Supported Exchanges</th>
+      <th>Spread</th>
       <th>Details</th>
       <th>Reports</th>
     </tr>
@@ -18,6 +19,11 @@
         <td><%= m.base_currency %></td>
         <td><%= m.quote_currency %></td>
         <td><%= m.pairs.map{|l| l.exchange.name.upcase }.join(', ') %></td>
+        <% if m.reports.empty? %>
+          <td>No Report Yet</td>
+        <% else %>
+          <td><%= m.reports.last.spread %></td>
+        <% end %>
         <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-success' %></td>
         <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-success' %></td>
       </tr>
