@@ -43,6 +43,10 @@ class RestExchange::OrderBook::Adapter
       order_book = @response_payload[@response_payload.keys.first].with_indifferent_access
       order_book[:original_payload] = @response_payload
       order_book.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'yobit'
+      order_book = @response_payload[@response_payload.keys.first].with_indifferent_access
+      order_book[:original_payload] = @response_payload
+      order_book.with_indifferent_access
     else
       order_book = @response_payload.with_indifferent_access
       order_book[:original_payload] = @response_payload

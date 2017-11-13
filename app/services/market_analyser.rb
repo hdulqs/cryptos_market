@@ -5,7 +5,7 @@ class MarketAnalyser
     #binding.pry
     min_last = tickers.sort_by{|l| l[:last]}.first
     max_last = tickers.sort_by{|l| l[:last]}.last
-    raise "cannot generate report for Market #{market.id}" unless min_last && max_last
+    raise "cannot generate report for Market #{market.id}" if(min_last.nil? || max_last.nil?)
     report = build_report(min_last, max_last)
     persist_report(report, market)
     report
@@ -42,7 +42,7 @@ class MarketAnalyser
   def get_spreads_for_interesting_markets
     interesting_markets.map do |im|
       get_tickers_spread(im)
-    end.sort_by!{|l| l[:spread]}
+    end.sort_by!{|l| l[:price_difference]}
   end
 
   def interesting_markets
@@ -61,7 +61,7 @@ class MarketAnalyser
   def persist_market_report report
     Report.create!(
       market_id: report[:market_id],
-      spread: report[:spread],
+      price_difference: report[:price_difference],
       pairs: report[:pairs_involved]
     )
   end
@@ -69,7 +69,7 @@ class MarketAnalyser
   def persist_report report, market
     Report.create!(
       market_id: market.id,
-      spread: report[:spread],
+      price_difference: report[:price_difference],
       pairs: report[:pairs_involved]
     )
   end
@@ -95,7 +95,7 @@ class MarketAnalyser
     {
       market: market_name,
       market_id: market_id,
-      spread: percentage_difference(min.last, max.last),
+      price_difference: percentage_difference(min.last, max.last),
       pairs_involved: [
         { exchange: min.pair.exchange.name, last: min.last, ask: min.ask, bid: min.bid, timestamp: min.timestamp },
         { exchange: max.pair.exchange.name, last: max.last, ask: max.ask, bid: max.bid, timestamp: max.timestamp }
@@ -106,7 +106,8 @@ class MarketAnalyser
   def percentage_difference val_a, val_b
     val_a = val_a.to_f
     val_b = val_b.to_f
-    ( (val_b - val_a) / (val_a + val_b) ) * 100
+    result = ( (val_b - val_a) / (val_a + val_b) ) * 100
+    result.nan? ? 0 : result
   end
 
 

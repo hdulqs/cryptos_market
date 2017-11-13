@@ -8,22 +8,23 @@ class RestExchange::Pairs::Persister
   def call
     @pairs_array.each do |pair_payload|
       existing_pair = @exchange.pairs.find_by(name: pair_payload[mapping['name']])
-      #binding.pry
       unless existing_pair
+        base_currency = pair_payload[mapping[:base_currency]].upcase
+        quote_currency = pair_payload[mapping[:quote_currency]].upcase
+
+        existing_market = Market.find_by(base_currency: base_currency, quote_currency: quote_currency)
         # Create market if does not yet exists
-        existing_market = Market.find_by(base_currency: pair_payload[mapping[:base_currency]], quote_currency: pair_payload[mapping[:quote_currency]])
         unless existing_market
-          #binding.pry
           existing_market = Market.create!(
-            name: "#{pair_payload[mapping[:base_currency]]}-#{pair_payload[mapping[:quote_currency]]}",
-            base_currency: pair_payload[mapping[:base_currency]],
-            quote_currency: pair_payload[mapping[:quote_currency]]
+            name: "#{base_currency}-#{quote_currency}",
+            base_currency: base_currency,
+            quote_currency: quote_currency
           )
         end
         pair = Pair.new(
           name: pair_payload[mapping[:name]],
-          base_currency: pair_payload[mapping[:base_currency]],
-          quote_currency: pair_payload[mapping[:quote_currency]],
+          base_currency: base_currency,
+          quote_currency: quote_currency,
           min_trade_size: pair_payload[mapping[:min_trade_size]],
           is_active: pair_payload[mapping[:is_active]],
           is_frozen: pair_payload[mapping[:is_frozen]],

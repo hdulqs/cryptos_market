@@ -9,6 +9,14 @@ class Report < ApplicationRecord
     )
   end
 
+  after_commit do
+    market = self.market
+    diff = self.price_difference || 0
+    #market.price_difference = diff
+    #market.save!
+    market.update_column(:price_difference, diff)
+  end
+
   private
   def rendered_report(report)
     ApplicationController.renderer.render(partial: 'backend/reports/report', locals: { report: report })

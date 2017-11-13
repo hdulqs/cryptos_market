@@ -45,8 +45,17 @@ class RestExchange::Pairs::Adapter
         pair.with_indifferent_access
       end
     elsif @exchange.name == 'liqui'
+      return [] if @response_payload['success'] == 0
       @response_payload['pairs'].map do |k,v|
         { name: k, base_currency: k.split('_').first.upcase, quote_currency: k.split('_').last.upcase, original_payload: {key: k, value: v}, min_amount: v["min_amount"] }.with_indifferent_access
+      end
+    elsif @exchange.name == 'yobit'
+      @response_payload['pairs'].map do |k,v|
+        { name: k, base_currency: k.split('_').first.upcase, quote_currency: k.split('_').last.upcase, original_payload: {key: k, value: v}, min_amount: v["min_amount"] }.with_indifferent_access
+      end
+    elsif @exchange.name == 'gate'
+      @response_payload['pairs'].map do |k, v|
+        { name: k.keys.first, base_currency: k.keys.first.split('_').first.upcase, quote_currency: k.keys.first.split('_').last.upcase, original_payload: {key: k.keys.first, value: k[k.keys.first]}, min_amount: k[k.keys.first]["min_amount"] }.with_indifferent_access
       end
     else
       @response_payload.map do |pair|

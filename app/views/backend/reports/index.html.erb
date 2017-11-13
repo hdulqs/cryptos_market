@@ -1,10 +1,10 @@
 
-<table class="table table-hover">
+<table class="table report_market_<%= @market.id %> table-hover">
   <thead>
     <tr>
       <th>#</th>
       <th>Market</th>
-      <th>Spread</th>
+      <th>Price Difference</th>
       <th>Pair 1</th>
       <th>Pair 2</th>
       <th>More Info</th>
@@ -15,7 +15,7 @@
       <tr>
         <th scope="row"><%= r.id %></th>
         <td><%= r.market.name %></td>
-        <td><%= r.spread %></td>
+        <td><%= r.price_difference %></td>
         <td><%= r.pairs.first %></td>
         <td><%= r.pairs.last %></td>
         <td><%= link_to "Details", backend_market_report_path(r.market, r), class: 'btn btn-success' %></td>

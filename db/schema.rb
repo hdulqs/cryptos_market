@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.string "name"
     t.string "base_currency"
     t.string "quote_currency"
+    t.decimal "price_difference"
     t.boolean "is_watched", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -125,7 +126,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
   create_table "reports", force: :cascade do |t|
     t.bigint "market_id"
     t.jsonb "pairs", default: "{}", null: false
-    t.decimal "spread"
+    t.decimal "price_difference"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["market_id"], name: "index_reports_on_market_id"

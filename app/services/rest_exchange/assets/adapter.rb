@@ -29,7 +29,7 @@ class RestExchange::Assets::Adapter
       bitfinex_transform @response_payload.map{|l| l['url_symbol']}
     elsif @exchange.name == 'quoine'
       assets_pair_array = @response_payload.map{|l| "#{l['base_currency']}-#{l['quoted_currency']}"}
-      Transformers::PairsArrayToAssetsArray.new(assets_pair_array).run
+      Transformers::PairsArrayToAssetsArrayV2.new(assets_pair_array).run
     elsif @exchange.name == 'hibtc'
       @response_payload.map do |asset|
         asset[:original_payload] = asset.with_indifferent_access
@@ -41,11 +41,15 @@ class RestExchange::Assets::Adapter
         asset.with_indifferent_access
       end
     elsif @exchange.name == 'liqui'
-      #binding.pry
       return [] if @response_payload['success'] == 0
-      @response_payload['pairs'].map do |key, value|
-        { original_payload: {key: key, value: value}, name: key, iso_4217: key, fee: value['fee'] }.with_indifferent_access
-      end
+      pairs_array = @response_payload['pairs'].map{|k,v| k.sub('_', '-').upcase}
+      Transformers::PairsArrayToAssetsArrayV2.new(pairs_array).run
+    elsif @exchange.name == 'yobit'
+      pairs_array = @response_payload['pairs'].map{|k,v| k.sub('_', '-').upcase}
+      Transformers::PairsArrayToAssetsArrayV2.new(pairs_array).run
+    elsif @exchange.name == 'gate'
+      pairs_array = @response_payload
+      Transformers::PairsArrayToAssetsArrayV3.new(pairs_array).run
     else
       @response_payload.map do |asset|
         asset[:original_payload] = asset.with_indifferent_access

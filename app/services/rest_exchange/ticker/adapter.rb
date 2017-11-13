@@ -43,6 +43,10 @@ class RestExchange::Ticker::Adapter
       ticker = @response_payload[@response_payload.keys.first].with_indifferent_access
       ticker[:original_payload] = @response_payload
       ticker.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'yobit'
+      ticker = @response_payload[@response_payload.keys.first].with_indifferent_access
+      ticker[:original_payload] = @response_payload
+      ticker.with_indifferent_access
     else
       ticker = @response_payload.with_indifferent_access
       ticker[:original_payload] = @response_payload

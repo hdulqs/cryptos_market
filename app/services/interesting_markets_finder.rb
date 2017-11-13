@@ -1,11 +1,7 @@
 class InterestingMarketsFinder
 
   def call
-    markets = Market
-      .left_joins(:pairs)
-      .group(:id)
-      .order('COUNT(pairs.id) DESC')
-      .limit(10)
+    markets = Market.left_joins(:pairs).group(:id).order('COUNT(pairs.id) DESC').limit(100)
     markets.each do |market|
       market.is_watched = true
       market.save!

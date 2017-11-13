@@ -1,1 +1,24 @@
-<%= @report.inspect %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Ask</th>
+      <th>Bid</th>
+      <th>Last</th>
+      <th>Price Difference (%)</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @report.pairs.each do |pair| %>
+      <tr>
+        <th scope="row">#</th>
+        <td><%= pair['ask'] %></td>
+        <td><%= pair['bid'] %></td>
+        <td><%= pair['last'] %></td>
+        <td><%= @report.price_difference %></td>
+        <td><%= pair['timestamp'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
