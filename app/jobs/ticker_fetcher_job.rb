@@ -9,7 +9,7 @@ class TickerFetcherJob < ApplicationJob
       random_sec = Random.rand(1..9)
       if pair.exchange.last_ticker_request && (pair.exchange.last_ticker_request > (DateTime.current - 30.seconds)) # last_ticker_request Happened less than 30 seconds ago
         # Too early to perform request yet
-        next_request = DateTime.current + 15.seconds + random_sec.seconds
+        next_request = DateTime.current + 15.seconds + random_sec.seconds # Trying to fullfill its destiny every 15 seconds
       else
         pair.get_ticker
         next_request = DateTime.current + 50.seconds + random_sec.seconds

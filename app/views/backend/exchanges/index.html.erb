@@ -1,16 +1,31 @@
-<%= link_to "New Exchange", new_backend_exchange_path, class: "btn btn-success" %>
-<hr/>
 
-<ul>
-
-  <% @exchanges.each do |exchange| %>
-
-    <li>
-      <%= exchange.inspect %>
-      <%= link_to "show", backend_exchange_path(exchange), class: "btn btn-info" %>
-    </li>
-    <hr/>
-
-  <% end %>
-
-</ul>
+<h1 class="text-center">Exchanges List</h1>
+<p class="text-right" style="margin-right:2em;"><%= @exchanges.count %> Active Exchanges</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Base Url</th>
+      <th>Asset endpoint?</th>
+      <th>Ticker endpoint?</th>
+      <th>Tickers endpoint?</th>
+      <th>last_ticker_request</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @exchanges.each do |exchange| %>
+      <tr>
+        <th scope="row"><%= exchange.id %></th>
+        <td><%= exchange.name %></td>
+        <td><%= exchange.base_url %></td>
+        <td><%= exchange.has_assets_endpoint %></td>
+        <td><%= exchange.has_ticker_endpoint %></td>
+        <td><%= exchange.has_tickers_endpoint %></td>
+        <td><%= exchange.last_ticker_request %></td>
+        <td><%= link_to "show", backend_exchange_path(exchange), class: "btn btn-info" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

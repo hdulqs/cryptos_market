@@ -1,2 +1,5 @@
-<%= @exchange.inspect %>
-<%= link_to "Edit", edit_backend_exchange_path(@exchange), class: 'btn btn-success' %>
+<ul>
+  <% @exchange.attributes.each do |key, value| %>
+    <li><%= key %> : <%= value %></li>
+  <% end %>
+</ul>

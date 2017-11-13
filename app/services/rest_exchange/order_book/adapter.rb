@@ -47,6 +47,22 @@ class RestExchange::OrderBook::Adapter
       order_book = @response_payload[@response_payload.keys.first].with_indifferent_access
       order_book[:original_payload] = @response_payload
       order_book.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'coinexchange'
+      order_book = @response_payload['result'].with_indifferent_access
+      order_book[:original_payload] = @response_payload
+      order_book.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'wex'
+      order_book = @response_payload[@response_payload.keys.first].with_indifferent_access
+      order_book[:original_payload] = @response_payload
+      order_book.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'cryptopia'
+      order_book = @response_payload['Data'].with_indifferent_access
+      order_book[:original_payload] = @response_payload
+      order_book.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'exmo'
+      order_book = @response_payload[@response_payload.keys.first].with_indifferent_access
+      order_book[:original_payload] = @response_payload
+      order_book.with_indifferent_access
     else
       order_book = @response_payload.with_indifferent_access
       order_book[:original_payload] = @response_payload

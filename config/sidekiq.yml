@@ -3,10 +3,11 @@
   - reports_generator_job
   - launcher_job
   - ticker_fetcher_job
+  - tickers_fetcher_job
 :schedule:
   launcher_job:
     in: '2s'
     class: LauncherJob
   reports_generator_job:
-    every: ['30s', first_in: '120s']   # Runs once per minute
+    every: ['30s', first_in: '220s']   # Runs once per minute
     class: ReportsGeneratorJob

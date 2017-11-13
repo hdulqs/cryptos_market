@@ -5,6 +5,8 @@ class Pair < ApplicationRecord
   belongs_to :exchange
   belongs_to :market
 
+  scope :active, -> { where(is_active: true) }
+
   def get_order_book
     RestExchange::OrderBook::Fetcher.new(self).call
   end

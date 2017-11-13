@@ -47,6 +47,18 @@ class RestExchange::Ticker::Adapter
       ticker = @response_payload[@response_payload.keys.first].with_indifferent_access
       ticker[:original_payload] = @response_payload
       ticker.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'coinexchange'
+      ticker = @response_payload['result'].with_indifferent_access
+      ticker[:original_payload] = @response_payload
+      ticker.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'wex'
+      ticker = @response_payload[@response_payload.keys.first].with_indifferent_access
+      ticker[:original_payload] = @response_payload
+      ticker.with_indifferent_access
+    elsif @currency_pair.exchange.name == 'cryptopia'
+      ticker = @response_payload['Data'].with_indifferent_access
+      ticker[:original_payload] = @response_payload
+      ticker.with_indifferent_access
     else
       ticker = @response_payload.with_indifferent_access
       ticker[:original_payload] = @response_payload

@@ -38,15 +38,15 @@ poloniex = Exchange.create!(
   tickers_data_map: {
     ask: "lowestAsk",
     bid: "highestBid",
-    last: "Last",
+    last: "last",
     base_volume: "baseVolume",
     volume: "",
     quote_volume: "quoteVolume",
     percent_change: "percentChange",
-    high: "high",
-    low: "low",
-    timestamp: "timestamp",
-    market_symbol: "market_symbol"
+    high: "high24hr",
+    low: "low24hr",
+    timestamp: "",
+    market_symbol: ""
   }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "type",
@@ -146,7 +146,7 @@ bitfinex = Exchange.create!(
   get_trade_history_path: '/v1/trades/CURRENCY_PAIR_PARAM?limit_trades=50',
   has_tickers_endpoint: false,
   has_ticker_endpoint: true,
-  has_assets_endpoint: false,
+  has_assets_endpoint: true,
   asset_data_map: {
     name: "name",
     iso_4217: "iso_4217",
@@ -216,7 +216,7 @@ kraken = Exchange.create!(
   get_trade_history_path: '/0/public/Trades?pair=CURRENCY_PAIR_PARAM',
   has_tickers_endpoint: false,
   has_ticker_endpoint: true,
-  has_assets_endpoint: false,
+  has_assets_endpoint: true,
   asset_data_map: {
     name: "name",
     iso_4217: "altname",
@@ -435,7 +435,7 @@ hibtc = Exchange.create!(
   get_trade_history_path: '/public/trades/CURRENCY_PAIR_PARAM',
   has_tickers_endpoint: false,
   has_ticker_endpoint: true,
-  has_assets_endpoint: false,
+  has_assets_endpoint: true,
   asset_data_map: {
     name: "id",
     iso_4217: "id",
@@ -509,7 +509,7 @@ bleutrade = Exchange.create!(
   get_trade_history_path: '/public/getmarkethistory?market=CURRENCY_PAIR_PARAM',
   has_tickers_endpoint: false,
   has_ticker_endpoint: true,
-  has_assets_endpoint: false,
+  has_assets_endpoint: true,
   asset_data_map: {
     name: "CurrencyLong",
     iso_4217: "Currency",
@@ -721,7 +721,7 @@ gate = Exchange.create!(
   get_trade_history_path: '/trade/CURRENCY_PAIR_PARAM',
   has_tickers_endpoint: false,
   has_ticker_endpoint: true,
-  has_assets_endpoint: false,
+  has_assets_endpoint: true,
   asset_data_map: {
     name: "name",
     iso_4217: "iso_4217",
@@ -781,6 +781,288 @@ puts ""
 puts ""
 puts "#{Exchange.count} Exchanges Created"
 
+
+coinexchange = Exchange.create!(
+  name: 'coinexchange',
+  base_url: 'https://www.coinexchange.io/api/v1',
+  get_assets_path: '/getcurrencies',
+  get_pairs_path: '/getmarkets',
+  get_order_book_path: '/getorderbook?market_id=CURRENCY_PAIR_PARAM',
+  get_ticker_path: '/getmarketsummary?market_id=CURRENCY_PAIR_PARAM',
+  get_trade_history_path: '',
+  has_tickers_endpoint: false,
+  has_ticker_endpoint: true,
+  has_assets_endpoint: true,
+  asset_data_map: {
+    name: "Name",
+    iso_4217: "TickerCode",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "MarketID",
+    base_currency: "BaseCurrencyCode",
+    quote_currency: "MarketAssetCode",
+    min_trade_size: "",
+    is_active: "Active",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "SellOrders",
+    bids: "BuyOrders",
+    is_frozen: ""
+  }.with_indifferent_access,
+  ticker_data_map: {
+    ask: "AskPrice",
+    bid: "BidPrice",
+    last: "LastPrice",
+    base_volume: "",
+    volume: "Volume",
+    quote_volume: "",
+    percent_change: "Change",
+    high: "HighPrice",
+    low: "LowPrice",
+    timestamp: "",
+    market_symbol: ""
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "",
+    amount: "",
+    price: "",
+    total: "",
+    fill_type: "",
+    event_timestamp: ""
+  }.with_indifferent_access
+)
+puts "Created CoinExchange Exchange"
+puts coinexchange.inspect
+coinexchange_assets_count = coinexchange.get_assets
+puts ""
+puts("Retrieved #{coinexchange_assets_count} CoinExchange Assets")
+puts ""
+coinexchange_pairs_count = coinexchange.get_pairs
+puts ""
+puts("Retrieved #{coinexchange_pairs_count} CoinExchange Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
+
+
+wex = Exchange.create!(
+  name: 'wex',
+  base_url: 'https://wex.nz/api/3',
+  get_assets_path: '/info',
+  get_pairs_path: '/info',
+  get_order_book_path: '/depth/CURRENCY_PAIR_PARAM',
+  get_ticker_path: '/ticker/CURRENCY_PAIR_PARAM',
+  get_trade_history_path: '/trades/CURRENCY_PAIR_PARAM',
+  has_tickers_endpoint: false,
+  has_ticker_endpoint: true,
+  has_assets_endpoint: false,
+  asset_data_map: {
+    name: "name",
+    iso_4217: "iso_4217",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "name",
+    base_currency: "base_currency",
+    quote_currency: "quote_currency",
+    min_trade_size: "min_amount",
+    is_active: "",
+    is_frozen: "hidden"
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "asks",
+    bids: "bids",
+    is_frozen: ""
+  }.with_indifferent_access,
+  ticker_data_map: {
+    ask: "sell",
+    bid: "buy",
+    last: "last",
+    base_volume: "",
+    volume: "vol",
+    quote_volume: "",
+    percent_change: "",
+    high: "high",
+    low: "low",
+    timestamp: "updated",
+    market_symbol: ""
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "type",
+    amount: "amount",
+    price: "price",
+    total: "",
+    fill_type: "",
+    event_timestamp: "timestamp"
+  }.with_indifferent_access
+)
+puts "Created Wex Exchange"
+puts wex.inspect
+wex_assets_count = wex.get_assets
+puts ""
+puts("Retrieved #{wex_assets_count} Wex Assets")
+puts ""
+wex_pairs_count = wex.get_pairs
+puts ""
+puts("Retrieved #{wex_pairs_count} Wex Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
+
+
+cryptopia = Exchange.create!(
+  name: 'cryptopia',
+  base_url: 'https://www.cryptopia.co.nz/api',
+  get_assets_path: '/GetCurrencies',
+  get_pairs_path: '/GetTradePairs',
+  get_order_book_path: '/GetMarketOrders/CURRENCY_PAIR_PARAM',
+  get_ticker_path: '/GetMarket/CURRENCY_PAIR_PARAM',
+  get_trade_history_path: '/GetMarketHistory/CURRENCY_PAIR_PARAM',
+  has_tickers_endpoint: false,
+  has_ticker_endpoint: true,
+  has_assets_endpoint: false,
+  asset_data_map: {
+    name: "Name",
+    iso_4217: "Symbol",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "name",
+    base_currency: "Symbol",
+    quote_currency: "BaseSymbol",
+    min_trade_size: "MinimumTrade",
+    is_active: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "Sell",
+    bids: "Buy",
+    is_frozen: ""
+  }.with_indifferent_access,
+  ticker_data_map: {
+    ask: "AskPrice",
+    bid: "BidPrice",
+    last: "LastPrice",
+    base_volume: "BaseVolume",
+    volume: "Volume",
+    quote_volume: "",
+    percent_change: "Change",
+    high: "High",
+    low: "Low",
+    timestamp: "",
+    market_symbol: "Label"
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "Type",
+    amount: "Amount",
+    price: "Price",
+    total: "Total",
+    fill_type: "",
+    event_timestamp: "Timestamp"
+  }.with_indifferent_access
+)
+puts "Created Cryptopia Exchange"
+puts cryptopia.inspect
+cryptopia_assets_count = cryptopia.get_assets
+puts ""
+puts("Retrieved #{cryptopia_assets_count} Cryptopia Assets")
+puts ""
+cryptopia_pairs_count = cryptopia.get_pairs
+puts ""
+puts("Retrieved #{cryptopia_pairs_count} Cryptopia Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
+
+exmo = Exchange.create!(
+  name: 'exmo',
+  base_url: 'https://api.exmo.com/v1',
+  get_assets_path: '/currency/',
+  get_pairs_path: '/pair_settings/',
+  get_order_book_path: '/order_book?pair=CURRENCY_PAIR_PARAM',
+  get_tickers_path: '/ticker',
+  get_trade_history_path: '/trades?pair=CURRENCY_PAIR_PARAM',
+  has_tickers_endpoint: true,
+  has_ticker_endpoint: false,
+  has_assets_endpoint: true,
+  asset_data_map: {
+    name: "name",
+    iso_4217: "iso_4217",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "name",
+    base_currency: "base_currency",
+    quote_currency: "quote_currency",
+    min_trade_size: "min_amount",
+    is_active: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "ask",
+    bids: "bid",
+    is_frozen: ""
+  }.with_indifferent_access,
+  tickers_data_map: {
+    ask: "sell_price",
+    bid: "buy_price",
+    last: "last_trade",
+    base_volume: "",
+    volume: "vol",
+    quote_volume: "",
+    percent_change: "",
+    high: "high",
+    low: "low",
+    timestamp: "updated",
+    market_symbol: ""
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "type",
+    amount: "quantity",
+    price: "price",
+    total: "amount",
+    fill_type: "",
+    event_timestamp: "date"
+  }.with_indifferent_access
+)
+puts "Created Exmo Exchange"
+puts exmo.inspect
+exmo_assets_count = exmo.get_assets
+puts ""
+puts("Retrieved #{exmo_assets_count} Exmo Assets")
+puts ""
+exmo_pairs_count = exmo.get_pairs
+puts ""
+puts("Retrieved #{exmo_pairs_count} Exmo Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
 
 
 

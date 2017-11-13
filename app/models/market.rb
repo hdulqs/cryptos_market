@@ -8,4 +8,8 @@ class Market < ApplicationRecord
     where(is_watched: true)
   }
 
+  scope :credible, -> {
+    where(price_difference: 2..90)
+  }
+
 end

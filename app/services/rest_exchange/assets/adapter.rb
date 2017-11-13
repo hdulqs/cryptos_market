@@ -50,6 +50,23 @@ class RestExchange::Assets::Adapter
     elsif @exchange.name == 'gate'
       pairs_array = @response_payload
       Transformers::PairsArrayToAssetsArrayV3.new(pairs_array).run
+    elsif @exchange.name == 'coinexchange'
+      @response_payload['result'].map do |asset|
+        asset[:original_payload] = asset.with_indifferent_access
+        asset.with_indifferent_access
+      end
+    elsif @exchange.name == 'wex'
+      pairs_array = @response_payload['pairs'].map{|k,v| k.sub('_', '-').upcase}
+      Transformers::PairsArrayToAssetsArrayV2.new(pairs_array).run
+    elsif @exchange.name == 'cryptopia'
+      @response_payload['Data'].map do |asset|
+        asset[:original_payload] = asset.with_indifferent_access
+        asset.with_indifferent_access
+      end
+    elsif @exchange.name == 'exmo'
+      @response_payload.map do |asset|
+        { name: asset, iso_4217: asset, original_payload: asset }.with_indifferent_access
+      end
     else
       @response_payload.map do |asset|
         asset[:original_payload] = asset.with_indifferent_access

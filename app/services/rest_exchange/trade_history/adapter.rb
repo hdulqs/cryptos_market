@@ -60,6 +60,23 @@ class RestExchange::TradeHistory::Adapter
         hist[:original_payload] = hist.with_indifferent_access
         hist.with_indifferent_access
       end
+    elsif @currency_pair.exchange.name == 'coinexchange'
+      return nil # there is no Trade History endpoint at coinexchange
+    elsif @currency_pair.exchange.name == 'wex'
+      @response_payload[@response_payload.keys.first].map do |hist|
+        hist[:original_payload] = hist.with_indifferent_access
+        hist.with_indifferent_access
+      end
+    elsif @currency_pair.exchange.name == 'cryptopia'
+      @response_payload['Data'].map do |hist|
+        hist[:original_payload] = hist.with_indifferent_access
+        hist.with_indifferent_access
+      end
+    elsif @currency_pair.exchange.name == 'exmo'
+      @response_payload[@response_payload.keys.first].map do |hist|
+        hist[:original_payload] = hist.with_indifferent_access
+        hist.with_indifferent_access
+      end
     else
       @response_payload.map do |hist|
         hist[:original_payload] = hist.with_indifferent_access

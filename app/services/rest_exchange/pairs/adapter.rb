@@ -57,6 +57,25 @@ class RestExchange::Pairs::Adapter
       @response_payload['pairs'].map do |k, v|
         { name: k.keys.first, base_currency: k.keys.first.split('_').first.upcase, quote_currency: k.keys.first.split('_').last.upcase, original_payload: {key: k.keys.first, value: k[k.keys.first]}, min_amount: k[k.keys.first]["min_amount"] }.with_indifferent_access
       end
+    elsif @exchange.name == 'coinexchange'
+      @response_payload['result'].map do |pair|
+        pair[:original_payload] = pair.with_indifferent_access
+        pair.with_indifferent_access
+      end
+    elsif @exchange.name == 'wex'
+      @response_payload['pairs'].map do |k,v|
+        { name: k, base_currency: k.split('_').first.upcase, quote_currency: k.split('_').last.upcase, original_payload: {key: k, value: v}, min_amount: v["min_amount"] }.with_indifferent_access
+      end
+    elsif @exchange.name == 'cryptopia'
+      @response_payload['Data'].map do |pair|
+        pair[:original_payload] = pair.with_indifferent_access
+        pair[:name] = pair['Symbol'] + '_' + pair['BaseSymbol']
+        pair.with_indifferent_access
+      end
+    elsif @exchange.name == 'exmo'
+      @response_payload.map do |k,v|
+        { name: k, base_currency: k.split('_').first.upcase, quote_currency: k.split('_').last.upcase, original_payload: {key: k, value: v}, min_amount: v["min_amount"] }.with_indifferent_access
+      end
     else
       @response_payload.map do |pair|
         pair[:original_payload] = pair.with_indifferent_access
