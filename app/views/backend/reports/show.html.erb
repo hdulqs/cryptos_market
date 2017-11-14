@@ -22,3 +22,9 @@
     <% end %>
   </tbody>
 </table>
+
+<ul>
+  <% @report.attributes.each do |key, value| %>
+      <li><%= key %> : <%= value %></li>
+  <% end %>
+</ul>

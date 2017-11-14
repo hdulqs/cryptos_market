@@ -14,6 +14,7 @@
       <th>volume</th>
       <th>Base volume</th>
       <th>Quote volume</th>
+      <th>Details</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +29,7 @@
         <td><%= ticker.volume %></td>
         <td><%= ticker.base_volume %></td>
         <td><%= ticker.quote_volume %></td>
+        <td><%= link_to 'Details', backend_market_pair_ticker_path(@pair.market, @pair, ticker), class: 'btn btn-info' %></td>
       </tr>
     <% end %>
   </tbody>

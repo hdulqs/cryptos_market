@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       resources :reports, only: [:index, :show]
       resources :pairs, only: [:index, :show] do
         resources :tickers, only: [:index, :show]
+        resources :order_books, only: [:index, :show]
+        resources :trade_histories, only: [:index, :show]
       end
     end
   end
