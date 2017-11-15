@@ -5,6 +5,7 @@ class MarketAnalyser
     #binding.pry
     min_last = tickers.sort_by{|l| l[:last]}.first
     max_last = tickers.sort_by{|l| l[:last]}.last
+    return if(min_last.nil? || max_last.nil?)
     raise "cannot generate report for Market #{market.id}" if(min_last.nil? || max_last.nil?)
     report = build_report(min_last, max_last)
     persist_report(report, market)
