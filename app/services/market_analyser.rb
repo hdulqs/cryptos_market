@@ -3,9 +3,13 @@ class MarketAnalyser
   def generate_report(market)
     tickers = market.pairs.map{|l| l.last_ticker }.compact # Most recent ticker for pairs
     #binding.pry
-    min_last = tickers.sort_by{|l| l[:last]}.first
-    max_last = tickers.sort_by{|l| l[:last]}.last
-    return if(min_last.nil? || max_last.nil?)
+    #begin
+    min_last = tickers.select{|l| l unless l.last.nil?}.sort_by{|l| l[:last]}.first
+    max_last = tickers.select{|l| l unless l.last.nil?}.sort_by{|l| l[:last]}.last
+    #rescue
+    #  binding.pry
+    #end
+    #return if(min_last.nil? || max_last.nil?)
     raise "cannot generate report for Market #{market.id}" if(min_last.nil? || max_last.nil?)
     report = build_report(min_last, max_last)
     persist_report(report, market)
