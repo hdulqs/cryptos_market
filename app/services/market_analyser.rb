@@ -16,6 +16,16 @@ class MarketAnalyser
     report
   end
 
+  def spread_report(market)
+    tickers = market.pairs.map{|l| l.last_ticker }.compact
+    min_bid_ticker = tickers.select{|l| l unless l.bid.nil?}.sort_by{|l| l[:bid]}.first
+    max_ask_ticker = tickers.select{|l| l unless l.ask.nil?}.sort_by{|l| l[:ask]}.last
+    raise "cannot generate report for Market #{market.id}" if(max_ask_ticker.nil? || min_bid_ticker.nil?)
+    report = build_report_spread(min_bid_ticker, max_ask_ticker)
+    persist_report(report, market)
+    report
+  end
+
   def reports
     markets = Market
       .left_joins(:pairs)
@@ -101,6 +111,20 @@ class MarketAnalyser
       market: market_name,
       market_id: market_id,
       price_difference: percentage_difference(min.last, max.last),
+      pairs_involved: [
+        { exchange: min.pair.exchange.name, pair_id: min.pair.id, ticker_id: min.id, last: min.last, ask: min.ask, bid: min.bid, timestamp: min.timestamp },
+        { exchange: max.pair.exchange.name, pair_id: max.pair.id, ticker_id: max.id, last: max.last, ask: max.ask, bid: max.bid, timestamp: max.timestamp }
+      ]
+    }
+  end
+
+  def build_report_spread min, max
+    market_name = min.pair.market.name
+    market_id = min.pair.market.id
+    {
+      market: market_name,
+      market_id: market_id,
+      price_difference: percentage_difference(min.bid, max.ask),
       pairs_involved: [
         { exchange: min.pair.exchange.name, pair_id: min.pair.id, ticker_id: min.id, last: min.last, ask: min.ask, bid: min.bid, timestamp: min.timestamp },
         { exchange: max.pair.exchange.name, pair_id: max.pair.id, ticker_id: max.id, last: max.last, ask: max.ask, bid: max.bid, timestamp: max.timestamp }

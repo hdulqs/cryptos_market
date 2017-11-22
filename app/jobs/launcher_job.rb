@@ -4,6 +4,7 @@ class LauncherJob < ApplicationJob
   queue_as :launcher_job
 
   def perform
+    # Cleaner.reset_sidekiq
     markets_of_interest = Market.of_interest
     pairs_of_interest = markets_of_interest.map(&:pairs).flatten
 

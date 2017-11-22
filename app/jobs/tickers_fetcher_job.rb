@@ -6,7 +6,7 @@ class TickersFetcherJob < ApplicationJob
   def perform exchange_id
     exchange = Exchange.find(exchange_id)
     exchange.get_tickers
-    next_request = DateTime.current + 40.seconds
+    next_request = DateTime.current + 60.seconds
     TickersFetcherJob.set(wait_until: next_request).perform_later(exchange_id)
   end
 
