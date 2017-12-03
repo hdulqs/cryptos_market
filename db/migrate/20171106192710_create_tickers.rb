@@ -3,6 +3,7 @@ class CreateTickers < ActiveRecord::Migration[5.1]
     create_table :tickers do |t|
       t.decimal :bid
       t.decimal :ask
+      t.decimal :spread
       t.decimal :last
       t.decimal :high
       t.decimal :low

@@ -126,7 +126,9 @@ ActiveRecord::Schema.define(version: 20171111150305) do
   create_table "reports", force: :cascade do |t|
     t.bigint "market_id"
     t.jsonb "pairs", default: "{}", null: false
+    t.jsonb "tickers", default: "{}", null: false
     t.decimal "price_difference"
+    t.boolean "is_opportunity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["market_id"], name: "index_reports_on_market_id"
@@ -136,6 +138,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
   create_table "tickers", force: :cascade do |t|
     t.decimal "bid"
     t.decimal "ask"
+    t.decimal "spread"
     t.decimal "last"
     t.decimal "high"
     t.decimal "low"
