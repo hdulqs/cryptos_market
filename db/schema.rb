@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.jsonb "pairs", default: "{}", null: false
     t.jsonb "tickers", default: "{}", null: false
     t.decimal "price_difference"
-    t.boolean "is_opportunity"
+    t.boolean "is_opportunity", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["market_id"], name: "index_reports_on_market_id"

@@ -15,6 +15,11 @@ class Report < ApplicationRecord
     #market.price_difference = diff
     #market.save!
     market.update_column(:price_difference, diff)
+    ask = self.pairs.first["ask"].to_f
+    bid = self.pairs.last["bid"].to_f
+    if (ask - bid) < 0
+      self.update_column(:is_opportunity, true)
+    end
   end
 
   private
