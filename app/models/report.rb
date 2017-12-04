@@ -19,6 +19,7 @@ class Report < ApplicationRecord
     bid = self.pairs.last["bid"].to_f
     if (ask - bid) < 0
       self.update_column(:is_opportunity, true)
+      market.update_column(:has_opportunity, true)
     end
   end
 

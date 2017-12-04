@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.string "quote_currency"
     t.decimal "price_difference"
     t.boolean "is_watched", default: false
+    t.boolean "has_opportunity", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
