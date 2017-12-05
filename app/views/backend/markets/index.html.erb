@@ -1,9 +1,9 @@
 <style media="screen">
   .red-row{
-    background-color: red;
+    background-color: #f18585;
   }
   .green-row{
-    background-color: green;
+    background-color: #8ce28c;
   }
 </style>
 <h1 class="text-center"><%= @markets.count %> Markets of Interest</h1>
@@ -37,8 +37,8 @@
         <% end %>
         <td><%= m.has_opportunity %></td>
         <td><%= m.is_watched %></td>
-        <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-success' %></td>
-        <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-success' %></td>
+        <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-info' %></td>
+        <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-warning' %></td>
       </tr>
     <% end %>
   </tbody>
