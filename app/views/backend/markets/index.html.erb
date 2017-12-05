@@ -1,3 +1,11 @@
+<style media="screen">
+  .red-row{
+    background-color: red;
+  }
+  .green-row{
+    background-color: green;
+  }
+</style>
 <h1 class="text-center"><%= @markets.count %> Markets of Interest</h1>
 <table class="table table-hover">
   <thead>
@@ -16,7 +24,7 @@
   </thead>
   <tbody>
     <% @markets.each do |m| %>
-      <tr>
+      <tr class="<%= m.has_opportunity ? 'green-row' : 'red-row' %>">
         <th scope="row"><%= m.id %></th>
         <td><%= m.name %></td>
         <td><%= m.base_currency %></td>
