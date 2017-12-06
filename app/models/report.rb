@@ -20,6 +20,9 @@ class Report < ApplicationRecord
     if (ask - bid) < 0
       self.update_column(:is_opportunity, true)
       market.update_column(:has_opportunity, true)
+    else
+      self.update_column(:is_opportunity, false)
+      market.update_column(:has_opportunity, false)
     end
   end
 
