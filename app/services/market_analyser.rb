@@ -123,13 +123,15 @@ class MarketAnalyser
   def build_report min, max, tickers
     market_name = min.pair.market.name
     market_id = min.pair.market.id
+    min_time = Time.at(min.timestamp) rescue 0
+    max_time = Time.at(max.timestamp) rescue 0
     {
       market: market_name,
       market_id: market_id,
       price_difference: percentage_difference(min.last, max.last),
       pairs_involved: [
-        { exchange: min.pair.exchange.name, pair_id: min.pair.id, ticker_id: min.id, last: min.last, spread: min.spread, ask: min.ask, bid: min.bid, timestamp: min.timestamp },
-        { exchange: max.pair.exchange.name, pair_id: max.pair.id, ticker_id: max.id, last: max.last, spread: max.spread, ask: max.ask, bid: max.bid, timestamp: max.timestamp }
+        { exchange: min.pair.exchange.name, pair_id: min.pair.id, ticker_id: min.id, last: min.last, spread: min.spread, ask: min.ask, bid: min.bid, timestamp: min_time },
+        { exchange: max.pair.exchange.name, pair_id: max.pair.id, ticker_id: max.id, last: max.last, spread: max.spread, ask: max.ask, bid: max.bid, timestamp: max_time }
       ],
       all_tickers: format_tickers(tickers)
     }
