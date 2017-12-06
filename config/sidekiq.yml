@@ -5,9 +5,9 @@
   - ticker_fetcher_job
   - tickers_fetcher_job
 :schedule:
-  #launcher_job:
-  #  in: '2s'
-  #  class: LauncherJob
   reports_generator_job:
     every: ['60s', first_in: '800s']   # Runs once per minute
     class: ReportsGeneratorJob
+  #launcher_job:
+  #  in: '2s'
+  #  class: LauncherJob
