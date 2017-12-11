@@ -67,6 +67,11 @@ class RestExchange::Assets::Adapter
       @response_payload.map do |asset|
         { name: asset, iso_4217: asset, original_payload: asset }.with_indifferent_access
       end
+    elsif @exchange.name == 'etherdelta'
+      pairs_array = @response_payload.map{|k,v| k.sub('_', '-').upcase}
+      Transformers::PairsArrayToAssetsArrayV2.new(pairs_array).run
+    elsif @exchange.name == 'binance'
+      bitfinex_transform @response_payload.map{|l| l['symbol']}.uniq
     else
       @response_payload.map do |asset|
         asset[:original_payload] = asset.with_indifferent_access

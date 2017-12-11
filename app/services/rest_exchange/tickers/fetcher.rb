@@ -19,14 +19,14 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
       existing_pair = @exchange.pairs.find_by(name: key)
       unless existing_pair
         # Should not happen
-        raise "Pair does not exists"
-        # pair = Pair.new(
-        #   name: key,
-        #   base_currency: key.split("_").first,
-        #   quote_currency: key.split("_").last,
-        #   is_frozen: ticker["isFrozen"]
-        # )
-        # @exchange.pairs << pair
+        #binding.pry
+        #raise "Pair does not exists"
+         pair = Pair.new(
+           name: key,
+           base_currency: key.split("_").first,
+           quote_currency: key.split("_").last
+         )
+         @exchange.pairs << pair
       else
         ticker = ::Ticker.create!(
           bid: ticker[mapping[:bid]],

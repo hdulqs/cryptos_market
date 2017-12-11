@@ -1,3 +1,5 @@
+
+<h3 class="text-center">Pairs with biggest difference</h3>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -28,3 +30,29 @@
       <li><%= key %> : <%= value %></li>
   <% end %>
 </ul>
+
+<h3 class="text-center">All Tickers</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Exchange</th>
+      <th>Ask</th>
+      <th>Bid</th>
+      <th>Last</th>
+      <th>spread</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @report.tickers.each do |ticker| %>
+      <tr>
+        <th scope="row">#</th>
+        <td><%= ticker['exchange_name'] %></td>
+        <td><%= ticker['ask'] %></td>
+        <td><%= ticker['bid'] %></td>
+        <td><%= ticker['last'] %></td>
+        <td><%= ticker['spread'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

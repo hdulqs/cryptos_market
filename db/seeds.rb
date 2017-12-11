@@ -1,4 +1,233 @@
+
+# quoine = Exchange.create!(
+#   name: 'quoine',
+#   base_url: 'https://api.qryptos.com',
+#   get_assets_path: '/products',
+#   get_pairs_path: '/products',
+#   get_order_book_path: '/products/CURRENCY_PAIR_PARAM/price_levels',
+#   get_ticker_path: '/products/CURRENCY_PAIR_PARAM',
+#   get_trade_history_path: '/executions?product_id=CURRENCY_PAIR_PARAM',
+#   has_tickers_endpoint: false,
+#   has_ticker_endpoint: true,
+#   has_assets_endpoint: false,
+#   asset_data_map: {
+#     name: "name",
+#     iso_4217: "iso_4217",
+#     min_confirmation: "",
+#     tx_fee: "",
+#     is_active: "",
+#     coin_type: "",
+#     is_frozen: "",
+#     is_delisted: "",
+#     is_disabled: ""
+#   }.with_indifferent_access,
+#   pair_data_map: {
+#     name: "name",
+#     base_currency: "base_currency",
+#     quote_currency: "quoted_currency",
+#     min_trade_size: "",
+#     is_active: "",
+#     is_frozen: ""
+#   }.with_indifferent_access,
+#   order_book_data_map: {
+#     asks: "sell_price_levels",
+#     bids: "buy_price_levels",
+#     is_frozen: ""
+#   }.with_indifferent_access,
+#   ticker_data_map: {
+#     ask: "high_market_ask",
+#     bid: "low_market_bid",
+#     last: "last_traded_price",
+#     base_volume: "",
+#     volume: "volume_24h",
+#     quote_volume: "",
+#     percent_change: "",
+#     high: "high_market_ask",
+#     low: "low_market_bid",
+#     timestamp: "timestamp",
+#     market_symbol: "currency_pair_code"
+#   }.with_indifferent_access,
+#   trade_history_data_map: {
+#     order_type: "taker_side",
+#     amount: "quantity",
+#     price: "price",
+#     total: "",
+#     fill_type: "",
+#     event_timestamp: "created_at"
+#   }.with_indifferent_access
+# )
+# puts "Created Quoine Exchange"
+# puts quoine.inspect
+# quoine_assets_count = quoine.get_assets
+# puts ""
+# puts("Retrieved #{quoine_assets_count} Quoine Assets")
+# puts ""
+# quoine_pairs_count = quoine.get_pairs
+# puts ""
+# puts("Retrieved #{quoine_pairs_count} Quoine Currency Pairs")
+# puts ""
+# puts ""
+# puts "#{Exchange.count} Exchanges Created"
+
+# liqui = Exchange.create!(
+#   name: 'liqui',
+#   base_url: 'https://api.liqui.io/api/3',
+#   get_assets_path: '/info',
+#   get_pairs_path: '/info',
+#   get_order_book_path: '/depth/CURRENCY_PAIR_PARAM',
+#   get_ticker_path: '/ticker/CURRENCY_PAIR_PARAM',
+#   get_trade_history_path: '/trades/CURRENCY_PAIR_PARAM',
+#   has_tickers_endpoint: false,
+#   has_ticker_endpoint: true,
+#   has_assets_endpoint: false,
+#   asset_data_map: {
+#     name: "name",
+#     iso_4217: "iso_4217",
+#     min_confirmation: "",
+#     tx_fee: "fee",
+#     is_active: "",
+#     coin_type: "",
+#     is_frozen: "",
+#     is_delisted: "",
+#     is_disabled: ""
+#   }.with_indifferent_access,
+#   pair_data_map: {
+#     name: "name",
+#     base_currency: "base_currency",
+#     quote_currency: "quote_currency",
+#     min_trade_size: "min_amount",
+#     is_active: "",
+#     is_frozen: ""
+#   }.with_indifferent_access,
+#   order_book_data_map: {
+#     asks: "asks",
+#     bids: "bids",
+#     is_frozen: ""
+#   }.with_indifferent_access,
+#   ticker_data_map: {
+#     ask: "sell",
+#     bid: "buy",
+#     last: "last",
+#     base_volume: "",
+#     volume: "vol",
+#     quote_volume: "",
+#     percent_change: "",
+#     high: "high",
+#     low: "low",
+#     timestamp: "",
+#     market_symbol: ""
+#   }.with_indifferent_access,
+#   trade_history_data_map: {
+#     order_type: "type",
+#     amount: "amount",
+#     price: "price",
+#     total: "",
+#     fill_type: "",
+#     event_timestamp: "timestamp"
+#   }.with_indifferent_access
+# )
+# puts "Created Liqui Exchange"
+# puts liqui.inspect
+# liqui_assets_count = liqui.get_assets
+# puts ""
+# puts("Retrieved #{liqui_assets_count} Liqui Assets")
+# puts ""
+# liqui_pairs_count = liqui.get_pairs
+# puts ""
+# puts("Retrieved #{liqui_pairs_count} Liqui Currency Pairs")
+# puts ""
+# puts ""
+# puts "#{Exchange.count} Exchanges Created"
+
+# hibtc = Exchange.create!(
+#   name: 'hibtc',
+#   base_url: 'https://api.hitbtc.com/api/2',
+#   get_assets_path: '/public/currency',
+#   get_pairs_path: '/public/symbol',
+#   get_order_book_path: '/public/orderbook/CURRENCY_PAIR_PARAM',
+#   get_ticker_path: '/public/ticker/CURRENCY_PAIR_PARAM',
+#   get_trade_history_path: '/public/trades/CURRENCY_PAIR_PARAM',
+#   has_tickers_endpoint: false,
+#   has_ticker_endpoint: true,
+#   has_assets_endpoint: true,
+#   asset_data_map: {
+#     name: "id",
+#     iso_4217: "id",
+#     min_confirmation: "payinConfirmations",
+#     tx_fee: "",
+#     is_active: "",
+#     coin_type: "",
+#     is_frozen: "",
+#     is_delisted: "",
+#     is_disabled: ""
+#   }.with_indifferent_access,
+#   pair_data_map: {
+#     name: "id",
+#     base_currency: "baseCurrency",
+#     quote_currency: "quoteCurrency",
+#     min_trade_size: "",
+#     is_active: "",
+#     is_frozen: ""
+#   }.with_indifferent_access,
+#   order_book_data_map: {
+#     asks: "ask",
+#     bids: "bid",
+#     is_frozen: ""
+#   }.with_indifferent_access,
+#   ticker_data_map: {
+#     ask: "ask",
+#     bid: "bid",
+#     last: "last",
+#     base_volume: "volume",
+#     volume: "",
+#     quote_volume: "volumeQuote",
+#     percent_change: "",
+#     high: "high",
+#     low: "low",
+#     timestamp: "c_timestamp",
+#     market_symbol: "symbol"
+#   }.with_indifferent_access,
+#   trade_history_data_map: {
+#     order_type: "side",
+#     amount: "quantity",
+#     price: "price",
+#     total: "",
+#     fill_type: "",
+#     event_timestamp: "timestamp"
+#   }.with_indifferent_access
+# )
+# puts "Created HiBtc Exchange"
+# puts hibtc.inspect
+# hibtc_assets_count = hibtc.get_assets
+# puts ""
+# puts("Retrieved #{hibtc_assets_count} HiBtc Assets")
+# puts ""
+# hibtc_pairs_count = hibtc.get_pairs
+# puts ""
+# puts("Retrieved #{hibtc_pairs_count} HiBtc Currency Pairs")
+# puts ""
+# puts ""
+# puts "#{Exchange.count} Exchanges Created"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Admin.create!(email: 'ducrouxolivier@gmail.com', password: 'ducrouxolivier@gmail.com', password_confirmation: 'ducrouxolivier@gmail.com')
+
 
 poloniex = Exchange.create!(
   name: 'poloniex',
@@ -354,146 +583,6 @@ puts "#{Exchange.count} Exchanges Created"
 
 
 
-# quoine = Exchange.create!(
-#   name: 'quoine',
-#   base_url: 'https://api.qryptos.com',
-#   get_assets_path: '/products',
-#   get_pairs_path: '/products',
-#   get_order_book_path: '/products/CURRENCY_PAIR_PARAM/price_levels',
-#   get_ticker_path: '/products/CURRENCY_PAIR_PARAM',
-#   get_trade_history_path: '/executions?product_id=CURRENCY_PAIR_PARAM',
-#   has_tickers_endpoint: false,
-#   has_ticker_endpoint: true,
-#   has_assets_endpoint: false,
-#   asset_data_map: {
-#     name: "name",
-#     iso_4217: "iso_4217",
-#     min_confirmation: "",
-#     tx_fee: "",
-#     is_active: "",
-#     coin_type: "",
-#     is_frozen: "",
-#     is_delisted: "",
-#     is_disabled: ""
-#   }.with_indifferent_access,
-#   pair_data_map: {
-#     name: "name",
-#     base_currency: "base_currency",
-#     quote_currency: "quoted_currency",
-#     min_trade_size: "",
-#     is_active: "",
-#     is_frozen: ""
-#   }.with_indifferent_access,
-#   order_book_data_map: {
-#     asks: "sell_price_levels",
-#     bids: "buy_price_levels",
-#     is_frozen: ""
-#   }.with_indifferent_access,
-#   ticker_data_map: {
-#     ask: "high_market_ask",
-#     bid: "low_market_bid",
-#     last: "last_traded_price",
-#     base_volume: "",
-#     volume: "volume_24h",
-#     quote_volume: "",
-#     percent_change: "",
-#     high: "high_market_ask",
-#     low: "low_market_bid",
-#     timestamp: "timestamp",
-#     market_symbol: "currency_pair_code"
-#   }.with_indifferent_access,
-#   trade_history_data_map: {
-#     order_type: "taker_side",
-#     amount: "quantity",
-#     price: "price",
-#     total: "",
-#     fill_type: "",
-#     event_timestamp: "created_at"
-#   }.with_indifferent_access
-# )
-# puts "Created Quoine Exchange"
-# puts quoine.inspect
-# quoine_assets_count = quoine.get_assets
-# puts ""
-# puts("Retrieved #{quoine_assets_count} Quoine Assets")
-# puts ""
-# quoine_pairs_count = quoine.get_pairs
-# puts ""
-# puts("Retrieved #{quoine_pairs_count} Quoine Currency Pairs")
-# puts ""
-# puts ""
-# puts "#{Exchange.count} Exchanges Created"
-
-
-hibtc = Exchange.create!(
-  name: 'hibtc',
-  base_url: 'https://api.hitbtc.com/api/2',
-  get_assets_path: '/public/currency',
-  get_pairs_path: '/public/symbol',
-  get_order_book_path: '/public/orderbook/CURRENCY_PAIR_PARAM',
-  get_ticker_path: '/public/ticker/CURRENCY_PAIR_PARAM',
-  get_trade_history_path: '/public/trades/CURRENCY_PAIR_PARAM',
-  has_tickers_endpoint: false,
-  has_ticker_endpoint: true,
-  has_assets_endpoint: true,
-  asset_data_map: {
-    name: "id",
-    iso_4217: "id",
-    min_confirmation: "payinConfirmations",
-    tx_fee: "",
-    is_active: "",
-    coin_type: "",
-    is_frozen: "",
-    is_delisted: "",
-    is_disabled: ""
-  }.with_indifferent_access,
-  pair_data_map: {
-    name: "id",
-    base_currency: "baseCurrency",
-    quote_currency: "quoteCurrency",
-    min_trade_size: "",
-    is_active: "",
-    is_frozen: ""
-  }.with_indifferent_access,
-  order_book_data_map: {
-    asks: "ask",
-    bids: "bid",
-    is_frozen: ""
-  }.with_indifferent_access,
-  ticker_data_map: {
-    ask: "ask",
-    bid: "bid",
-    last: "last",
-    base_volume: "volume",
-    volume: "",
-    quote_volume: "volumeQuote",
-    percent_change: "",
-    high: "high",
-    low: "low",
-    timestamp: "c_timestamp",
-    market_symbol: "symbol"
-  }.with_indifferent_access,
-  trade_history_data_map: {
-    order_type: "side",
-    amount: "quantity",
-    price: "price",
-    total: "",
-    fill_type: "",
-    event_timestamp: "timestamp"
-  }.with_indifferent_access
-)
-puts "Created HiBtc Exchange"
-puts hibtc.inspect
-hibtc_assets_count = hibtc.get_assets
-puts ""
-puts("Retrieved #{hibtc_assets_count} HiBtc Assets")
-puts ""
-hibtc_pairs_count = hibtc.get_pairs
-puts ""
-puts("Retrieved #{hibtc_pairs_count} HiBtc Currency Pairs")
-puts ""
-puts ""
-puts "#{Exchange.count} Exchanges Created"
 
 
 
@@ -570,75 +659,7 @@ puts ""
 puts "#{Exchange.count} Exchanges Created"
 
 
-liqui = Exchange.create!(
-  name: 'liqui',
-  base_url: 'https://api.liqui.io/api/3',
-  get_assets_path: '/info',
-  get_pairs_path: '/info',
-  get_order_book_path: '/depth/CURRENCY_PAIR_PARAM',
-  get_ticker_path: '/ticker/CURRENCY_PAIR_PARAM',
-  get_trade_history_path: '/trades/CURRENCY_PAIR_PARAM',
-  has_tickers_endpoint: false,
-  has_ticker_endpoint: true,
-  has_assets_endpoint: false,
-  asset_data_map: {
-    name: "name",
-    iso_4217: "iso_4217",
-    min_confirmation: "",
-    tx_fee: "fee",
-    is_active: "",
-    coin_type: "",
-    is_frozen: "",
-    is_delisted: "",
-    is_disabled: ""
-  }.with_indifferent_access,
-  pair_data_map: {
-    name: "name",
-    base_currency: "base_currency",
-    quote_currency: "quote_currency",
-    min_trade_size: "min_amount",
-    is_active: "",
-    is_frozen: ""
-  }.with_indifferent_access,
-  order_book_data_map: {
-    asks: "asks",
-    bids: "bids",
-    is_frozen: ""
-  }.with_indifferent_access,
-  ticker_data_map: {
-    ask: "sell",
-    bid: "buy",
-    last: "last",
-    base_volume: "",
-    volume: "vol",
-    quote_volume: "",
-    percent_change: "",
-    high: "high",
-    low: "low",
-    timestamp: "",
-    market_symbol: ""
-  }.with_indifferent_access,
-  trade_history_data_map: {
-    order_type: "type",
-    amount: "amount",
-    price: "price",
-    total: "",
-    fill_type: "",
-    event_timestamp: "timestamp"
-  }.with_indifferent_access
-)
-puts "Created Liqui Exchange"
-puts liqui.inspect
-liqui_assets_count = liqui.get_assets
-puts ""
-puts("Retrieved #{liqui_assets_count} Liqui Assets")
-puts ""
-liqui_pairs_count = liqui.get_pairs
-puts ""
-puts("Retrieved #{liqui_pairs_count} Liqui Currency Pairs")
-puts ""
-puts ""
-puts "#{Exchange.count} Exchanges Created"
+
 
 
 yobit = Exchange.create!(
@@ -1064,7 +1085,146 @@ puts ""
 puts ""
 puts "#{Exchange.count} Exchanges Created"
 
+etherdelta = Exchange.create!(
+  name: 'etherdelta',
+  base_url: 'https://api.etherdelta.com',
+  get_assets_path: '/returnTicker',
+  get_pairs_path: '/returnTicker',
+  get_order_book_path: '/order_book?pair=CURRENCY_PAIR_PARAM',
+  get_tickers_path: '/returnTicker',
+  get_trade_history_path: '/trades?pair=CURRENCY_PAIR_PARAM',
+  has_tickers_endpoint: true,
+  has_ticker_endpoint: false,
+  has_assets_endpoint: false,
+  asset_data_map: {
+    name: "name",
+    iso_4217: "iso_4217",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "name",
+    base_currency: "base_currency",
+    quote_currency: "quote_currency",
+    min_trade_size: "",
+    is_active: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "",
+    bids: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  tickers_data_map: {
+    ask: "ask",
+    bid: "bid",
+    last: "last",
+    base_volume: "baseVolume",
+    volume: "",
+    quote_volume: "quoteVolume",
+    percent_change: "percentChange",
+    high: "",
+    low: "",
+    timestamp: "",
+    market_symbol: ""
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "",
+    amount: "",
+    price: "",
+    total: "",
+    fill_type: "",
+    event_timestamp: ""
+  }.with_indifferent_access
+)
+puts "Created EtherDelta Exchange"
+puts etherdelta.inspect
+etherdelta_assets_count = etherdelta.get_assets
+puts ""
+puts("Retrieved #{etherdelta_assets_count} EtherDelta Assets")
+puts ""
+etherdelta_pairs_count = etherdelta.get_pairs
+puts ""
+puts("Retrieved #{etherdelta_pairs_count} EtherDelta Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
 
+
+binance = Exchange.create!(
+  name: 'binance',
+  base_url: 'https://api.binance.com',
+  get_assets_path: '/api/v1/ticker/allPrices',
+  get_pairs_path: '/api/v1/ticker/allPrices',
+  get_order_book_path: '/api/v1/depth?symbol=CURRENCY_PAIR_PARAM',
+  get_ticker_path: '/api/v1/ticker/24hr?symbol=CURRENCY_PAIR_PARAM',
+  get_trade_history_path: '/api/v1/aggTrades?symbol=CURRENCY_PAIR_PARAM',
+  has_tickers_endpoint: false,
+  has_ticker_endpoint: true,
+  has_assets_endpoint: false,
+  asset_data_map: {
+    name: "name",
+    iso_4217: "iso_4217",
+    min_confirmation: "",
+    tx_fee: "",
+    is_active: "",
+    coin_type: "",
+    is_frozen: "",
+    is_delisted: "",
+    is_disabled: ""
+  }.with_indifferent_access,
+  pair_data_map: {
+    name: "name",
+    base_currency: "base_currency",
+    quote_currency: "quote_currency",
+    min_trade_size: "",
+    is_active: "",
+    is_frozen: ""
+  }.with_indifferent_access,
+  order_book_data_map: {
+    asks: "asks",
+    bids: "bids",
+    is_frozen: ""
+  }.with_indifferent_access,
+  ticker_data_map: {
+    ask: "askPrice",
+    bid: "bidPrice",
+    last: "lastPrice",
+    base_volume: "",
+    volume: "volume",
+    quote_volume: "quoteVolume",
+    percent_change: "priceChangePercent",
+    high: "highPrice",
+    low: "lowPrice",
+    timestamp: "",
+    market_symbol: ""
+  }.with_indifferent_access,
+  trade_history_data_map: {
+    order_type: "",
+    amount: "",
+    price: "",
+    total: "",
+    fill_type: "",
+    event_timestamp: ""
+  }.with_indifferent_access
+)
+puts "Created Binance Exchange"
+puts binance.inspect
+binance_assets_count = binance.get_assets
+puts ""
+puts("Retrieved #{binance_assets_count} Binance Assets")
+puts ""
+binance_pairs_count = binance.get_pairs
+puts ""
+puts("Retrieved #{binance_pairs_count} Binance Currency Pairs")
+puts ""
+puts ""
+puts "#{Exchange.count} Exchanges Created"
 
 
 InterestingMarketsFinder.new.call
