@@ -8,7 +8,6 @@
       <th>Ask</th>
       <th>Bid</th>
       <th>Last</th>
-      <th>Price Difference (%)</th>
       <th>Timestamp</th>
     </tr>
   </thead>
@@ -20,7 +19,6 @@
         <td><%= pair['ask'] %></td>
         <td><%= pair['bid'] %></td>
         <td><%= pair['last'] %></td>
-        <td><%= @report.price_difference %></td>
         <td><%= pair['timestamp'] %></td>
       </tr>
     <% end %>
