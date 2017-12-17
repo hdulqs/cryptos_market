@@ -22,9 +22,9 @@
         <td><%= ticker['last'] %></td>
         <td><%= ticker['spread'] %></td>
         <% if Pair.find(ticker['pair_id']).is_watched %>
-          <td><%= link_to "unwatch pair #{ticker['pair_id']}", unwatch_backend_market_pair_path(@market.id, ticker['pair_id']), method: :patch, class: "btn btn-danger", disabled: true %></td>
+          <td><%= link_to "Unwatch pair #{ticker['pair_id']}", unwatch_backend_market_pair_path(@market.id, ticker['pair_id']), method: :patch, class: "btn btn-danger" %></td>
         <% else %>
-          <td><%= "pair #{ticker['pair_id']} unwatched" %></td>
+          <td><%= "pair #{ticker['pair_id']} Unwatched" %></td>
         <% end %>
       </tr>
     <% end %>
@@ -32,6 +32,7 @@
 </table>
 
 <%= link_to "Show Pairs", backend_market_pairs_path(@market), class: 'btn btn-primary btn-lg btn-block' %>
+<%= link_to "Unwatch Market", unwatch_backend_market_path(@market), method: :patch, class: "btn btn-danger btn-lg btn-block" %>
 
 <hr>
 

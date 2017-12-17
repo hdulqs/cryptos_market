@@ -14,5 +14,11 @@ class Backend::MarketsController < Backend::BaseController
     @market = Market.find(params[:id])
   end
 
+  def unwatch
+    market = Market.find(params[:id])
+    market.update_column(:is_watched, false)
+    redirect_to backend_markets_path
+  end
+
 
 end
