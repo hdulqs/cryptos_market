@@ -34,6 +34,17 @@
   </tbody>
 </table>
 
+<section class="jumbotron">
+    <h4 class="text-center"><%= @reports.first.pairs.first['exchange'] %> - <%= @reports.first.pairs.last['exchange'] %> :</h4>
+    <p class="text-center">
+      ( (<%= @reports.first.pairs.last['bid'] %> - <%= @reports.first.pairs.first['ask'] %>) / (<%= @reports.first.pairs.last['bid'] %> + <%= @reports.first.pairs.first['ask'] %>) ) * 100
+    </p>
+    <p class="text-center"> = </p>
+    <p class="text-center">
+      <%= ( (@reports.first.pairs.last['bid'].to_f - @reports.first.pairs.first['ask'].to_f) / (@reports.first.pairs.last['bid'].to_f + @reports.first.pairs.first['ask'].to_f) ) * 100 %> %
+    </p>
+</section>
+
 <%= link_to "Show Pairs", backend_market_pairs_path(@market), class: 'btn btn-primary btn-lg btn-block' %>
 <%= link_to "Unwatch Market", unwatch_backend_market_path(@market), method: :patch, class: "btn btn-danger btn-lg btn-block" %>
 
