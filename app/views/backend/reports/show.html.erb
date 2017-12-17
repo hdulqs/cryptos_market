@@ -1,5 +1,5 @@
 
-<h3 class="text-center">Pairs with highest price difference</h3>
+<h3 class="text-center">Pairs with highest last price difference</h3>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -25,6 +25,15 @@
   </tbody>
 </table>
 
+<section class="jumbotron">
+    <p class="text-center">
+      ( (<%= @report.pairs.last['bid'] %> - <%= @report.pairs.first['ask'] %>) / (<%= @report.pairs.last['bid'] %> + <%= @report.pairs.first['ask'] %>) ) * 100
+    </p>
+    <p class="text-center"> = </p>
+    <p class="text-center">
+      <%= ( (@report.pairs.last['bid'].to_f - @report.pairs.first['ask'].to_f) / (@report.pairs.last['bid'].to_f + @report.pairs.first['ask'].to_f) ) * 100 %> %
+    </p>
+</section>
 <ul>
   <% @report.attributes.each do |key, value| %>
       <li><%= key %> : <%= value %></li>

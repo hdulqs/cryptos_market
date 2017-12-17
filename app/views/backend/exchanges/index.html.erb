@@ -1,5 +1,7 @@
+<%= link_to "Market List", backend_markets_path, class: 'btn btn-success' %>
 
 <h1 class="text-center">Exchanges List</h1>
+
 <p class="text-right" style="margin-right:2em;"><%= @exchanges.count %> Active Exchanges</p>
 <table class="table table-hover">
   <thead>
@@ -12,6 +14,7 @@
       <th>Tickers endpoint?</th>
       <th>last_ticker_request</th>
       <th>Details</th>
+      <th>Pairs</th>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +27,8 @@
         <td><%= exchange.has_ticker_endpoint %></td>
         <td><%= exchange.has_tickers_endpoint %></td>
         <td><%= exchange.last_ticker_request %></td>
-        <td><%= link_to "show", backend_exchange_path(exchange), class: "btn btn-info" %></td>
+        <td><%= link_to "Details", backend_exchange_path(exchange), class: "btn btn-info" %></td>
+        <td><%= link_to "Pairs List", backend_exchange_exchange_pairs_path(exchange), class: "btn btn-warning" %></td>
       </tr>
     <% end %>
   </tbody>

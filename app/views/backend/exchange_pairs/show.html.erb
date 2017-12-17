@@ -1,4 +1,4 @@
-<%= link_to "Pairs List", backend_market_pairs_path(@pair.market), class: 'btn btn-success' %>
+
 <table class="table table-hover">
   <thead>
     <tr>
@@ -8,7 +8,6 @@
       <th>Quote Currency</th>
       <th>Min Trade Size</th>
       <th>Exchange</th>
-      <th>Is Watched</th>
       <th>Original Payload</th>
     </tr>
   </thead>
@@ -20,7 +19,6 @@
       <td><%= @pair.quote_currency %></td>
       <td><%= @pair.min_trade_size %></td>
       <td><%= @pair.exchange.name %></td>
-      <td><%= @pair.is_watched %></td>
       <td><%= @pair.original_payload %></td>
     </tr>
   </tbody>

@@ -2,8 +2,8 @@ class Backend::PairsController < Backend::BaseController
 
 
   def index
-    market = Market.find(params[:market_id])
-    @pairs = market.pairs
+    @market = Market.find(params[:market_id])
+    @pairs = @market.pairs
   end
 
   def show

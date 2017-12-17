@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
   namespace :backend do
-    resources :exchanges
+    resources :exchanges do
+      resources :exchange_pairs, only: [:index, :show]
+    end
     devise_for :admins, :controllers => { :sessions => "backend/admins/sessions", registrations: "backend/admins/registrations" }
     resources :markets, only: [:index, :show] do
       member do
