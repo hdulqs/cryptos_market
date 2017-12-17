@@ -101,7 +101,8 @@ class MarketAnalyser
       market_id: market.id,
       price_difference: report[:price_difference],
       pairs: report[:pairs_involved],
-      tickers: report[:all_tickers]
+      tickers: report[:all_tickers],
+      spread: report[:spread]
     )
   end
 
@@ -125,6 +126,7 @@ class MarketAnalyser
     market_id = min.pair.market.id
     min_time = Time.at(min.timestamp) rescue 0
     max_time = Time.at(max.timestamp) rescue 0
+    arbitrage_spread = ( (max.bid - min.ask) / (max.bid + min.ask) ) * 100 rescue 0
     {
       market: market_name,
       market_id: market_id,
@@ -133,7 +135,8 @@ class MarketAnalyser
         { exchange: min.pair.exchange.name, pair_id: min.pair.id, ticker_id: min.id, last: min.last, spread: min.spread, ask: min.ask, bid: min.bid, timestamp: min_time },
         { exchange: max.pair.exchange.name, pair_id: max.pair.id, ticker_id: max.id, last: max.last, spread: max.spread, ask: max.ask, bid: max.bid, timestamp: max_time }
       ],
-      all_tickers: format_tickers(tickers)
+      all_tickers: format_tickers(tickers),
+      spread: arbitrage_spread
     }
   end
 

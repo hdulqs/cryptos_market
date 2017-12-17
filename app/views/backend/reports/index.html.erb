@@ -43,6 +43,12 @@
     <p class="text-center">
       <%= ( (@reports.first.pairs.last['bid'].to_f - @reports.first.pairs.first['ask'].to_f) / (@reports.first.pairs.last['bid'].to_f + @reports.first.pairs.first['ask'].to_f) ) * 100 %> %
     </p>
+    <p class="text-center">
+      Last Price difference : <%= @reports.first.market.price_difference %> %
+    </p>
+    <p class="text-center">
+      Spread : <%= @reports.first.spread %> %
+    </p>
 </section>
 
 <%= link_to "Show Pairs", backend_market_pairs_path(@market), class: 'btn btn-primary btn-lg btn-block' %>

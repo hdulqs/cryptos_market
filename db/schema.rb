@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111150305) do
+ActiveRecord::Schema.define(version: 20171217184940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.boolean "has_opportunity", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "spread"
   end
 
   create_table "order_books", force: :cascade do |t|
@@ -132,6 +133,7 @@ ActiveRecord::Schema.define(version: 20171111150305) do
     t.boolean "is_opportunity", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "spread"
     t.index ["market_id"], name: "index_reports_on_market_id"
     t.index ["pairs"], name: "index_reports_on_pairs", using: :gin
   end
