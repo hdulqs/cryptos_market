@@ -21,7 +21,7 @@
         <td><%= ticker['bid'] %></td>
         <td><%= ticker['last'] %></td>
         <td><%= ticker['spread'] %></td>
-        <td><%= link_to "unwatch pair #{ticker['pair_id']}", unwatch_backend_market_pair_path(@market.id, ticker['pair_id']), method: :patch %></td>
+        <td><%= link_to "unwatch pair #{ticker['pair_id']}", unwatch_backend_market_pair_path(@market.id, ticker['pair_id']), method: :patch, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
