@@ -1,7 +1,7 @@
 class MarketAnalyser
 
   def generate_report(market)
-    tickers = market.pairs.map{|l| l.last_ticker }.compact # Most recent ticker for pairs
+    tickers = market.pairs.map{|l| l.last_ticker if l.is_watched}.compact # Most recent ticker for pairs
     #binding.pry
     #begin
     min_last = tickers.select{|l| l unless l.last.nil?}.sort_by{|l| l[:last]}.first

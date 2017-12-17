@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :markets, only: [:index, :show] do
       resources :reports, only: [:index, :show]
       resources :pairs, only: [:index, :show] do
+        member do
+          patch :unwatch
+        end
         resources :tickers, only: [:index, :show]
         resources :order_books, only: [:index, :show]
         resources :trade_histories, only: [:index, :show]
