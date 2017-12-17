@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :exchange_pairs, only: [:index, :show]
     end
     devise_for :admins, :controllers => { :sessions => "backend/admins/sessions", registrations: "backend/admins/registrations" }
+    resources :opportunities, only: [:index, :show]
     resources :markets, only: [:index, :show] do
       member do
         patch :unwatch

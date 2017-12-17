@@ -12,13 +12,12 @@ class Report < ApplicationRecord
   after_commit do
     market = self.market
     diff = self.price_difference || 0
-    #market.price_difference = diff
-    #market.save!
+
     market.update_column(:price_difference, diff)
     market.update_column(:spread, self.spread)
     ask = self.pairs.first["ask"].to_f
     bid = self.pairs.last["bid"].to_f
-    #spread = ( (bid - ask) / (bid + ask) ) * 100
+
     if (ask - bid) < 0
       self.update_column(:is_opportunity, true)
       market.update_column(:has_opportunity, true)
