@@ -3,7 +3,7 @@ class Backend::TickersController < Backend::BaseController
 
   def index
     @pair = Pair.find(params[:pair_id])
-    @tickers = @pair.tickers
+    @tickers = @pair.tickers.order(id: :desc)
   end
 
   def show
