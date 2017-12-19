@@ -47,7 +47,7 @@
   <%= form_for [:backend, @pair.market, @pair] do |f| %>
 
     <%= f.label "Change Pair's Market to : " %>
-    <%= f.select :market_id, Market.order(name: :asc).map{|m| ["#{m.name}", m.id]} %>
+    <%= f.select :market_id, Market.of_interest.order(name: :asc).map{|m| ["#{m.name} (#{m.id})", m.id]} %>
 
     <%= f.submit 'submit' %>
 
