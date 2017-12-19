@@ -12,6 +12,8 @@ class Backend::MarketsController < Backend::BaseController
 
   def show
     @market = Market.find(params[:id])
+    #binding.pry
+    @graph_data = @market.pairs.map{ |p| { name: p.exchange.name, data: p.tickers.order(created_at: :desc).limit(100).map{|t| [t.created_at.to_i, t.last.to_f]} } }
   end
 
   def unwatch
