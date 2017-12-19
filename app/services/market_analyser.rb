@@ -4,6 +4,8 @@ class MarketAnalyser
     tickers = market.pairs.map{|l| l.last_ticker if l.is_watched}.compact # Most recent ticker for pairs
     #binding.pry
     #begin
+    return if tickers.empty?
+    
     min_last = tickers.select{|l| l unless l.last.nil?}.sort_by{|l| l[:last]}.first
     max_last = tickers.select{|l| l unless l.last.nil?}.sort_by{|l| l[:last]}.last
     #rescue

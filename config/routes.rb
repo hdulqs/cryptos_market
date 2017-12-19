@@ -18,7 +18,7 @@ Rails.application.routes.draw do
         patch :unwatch
       end
       resources :reports, only: [:index, :show]
-      resources :pairs, only: [:index, :show] do
+      resources :pairs, only: [:index, :show, :edit, :update] do
         member do
           patch :unwatch
         end
