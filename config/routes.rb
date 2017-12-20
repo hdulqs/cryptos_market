@@ -14,13 +14,18 @@ Rails.application.routes.draw do
     devise_for :admins, :controllers => { :sessions => "backend/admins/sessions", registrations: "backend/admins/registrations" }
     resources :opportunities, only: [:index, :show]
     resources :markets, only: [:index, :show] do
+      collection do
+        get :all
+      end
       member do
         patch :unwatch
+        patch :watch
       end
       resources :reports, only: [:index, :show]
       resources :pairs, only: [:index, :show, :edit, :update] do
         member do
           patch :unwatch
+          patch :watch
         end
         resources :tickers, only: [:index, :show]
         resources :order_books, only: [:index, :show]

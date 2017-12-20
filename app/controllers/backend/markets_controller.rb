@@ -10,6 +10,10 @@ class Backend::MarketsController < Backend::BaseController
       #   .limit(50)
   end
 
+  def all
+    @markets = Market.all.page params[:page]
+  end
+
   def show
     @market = Market.find(params[:id])
     #binding.pry
@@ -19,6 +23,12 @@ class Backend::MarketsController < Backend::BaseController
   def unwatch
     market = Market.find(params[:id])
     market.update_column(:is_watched, false)
+    redirect_to backend_markets_path
+  end
+
+  def watch
+    market = Market.find(params[:id])
+    market.update_column(:is_watched, true)
     redirect_to backend_markets_path
   end
 

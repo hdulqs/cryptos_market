@@ -18,7 +18,7 @@
       <td><%= @market.base_currency %></td>
       <td><%= @market.quote_currency %></td>
       <td><%= @market.pairs.count %></td>
-      <td><%= @market.reports.last.spread %></td>
+      <td><%= @market.reports.empty? ? "unknown" : @market.reports.last.spread %></td>
     </tr>
   </tbody>
 </table>
@@ -37,7 +37,8 @@ document.addEventListener("turbolinks:load", function(){
 
   Highcharts.chart('container', {
       chart: {
-          type: 'spline'
+          type: 'spline',
+          zoomType: 'y'
       },
       title: {
           text: "Market <%= @market.name %>"
@@ -153,7 +154,11 @@ document.addEventListener("turbolinks:load", function(){
 <section class="text-center">
   <%= link_to 'Show Pairs', backend_market_pairs_path(@market), class: 'btn btn-info', data: { turbolinks: false } %>
   <%= link_to "Market Reports", backend_market_reports_path(@market), class: 'btn btn-success', data: { turbolinks: false } %>
-  <%= link_to "Unwatch Market", unwatch_backend_market_path(@market), method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure ?' } %>
+  <% if @market.is_watched %>
+    <%= link_to "Unwatch Market", unwatch_backend_market_path(@market), method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure ?' } %>
+  <% else %>
+    <%= link_to "Watch Market", watch_backend_market_path(@market), method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure ?' } %>
+  <% end %>
 </section>
 
 <br>

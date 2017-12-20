@@ -32,6 +32,11 @@
   <%= link_to 'Show Tickers', backend_market_pair_tickers_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
   <%= link_to 'Show Order Books', backend_market_pair_order_books_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
   <%= link_to 'Show Trade History', backend_market_pair_trade_histories_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
+  <% if @pair.is_watched %>
+    <%= link_to "Unwatch pair #{@pair.id}", unwatch_backend_market_pair_path(@pair.market.id, @pair.id), method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure ?' } %>
+  <% else %>
+    <%= link_to "Watch pair #{@pair.id}", watch_backend_market_pair_path(@pair.market.id, @pair.id), method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure ?' } %>
+  <% end %>
 </section>
 
 <hr>

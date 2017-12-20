@@ -7,9 +7,8 @@
   }
 </style>
 <%= link_to "Exchange List", backend_exchanges_path, class: 'btn btn-success', data: { turbolinks: false } %>
-<%= link_to "View all #{Market.count} Markets", all_backend_markets_path, class: 'btn btn-info float-right', data: { turbolinks: false } %>
-<%= link_to "View Opportunities", backend_opportunities_path, class: 'btn btn-info float-right', style: "margin-right:1em;", data: { turbolinks: false } %>
-<h1 class="text-center"><%= @markets.count %> Markets Watched</h1>
+<%= link_to "Opportunities", backend_opportunities_path, class: 'btn btn-info float-right', data: { turbolinks: false } %>
+<h1 class="text-center"><%= Market.count %> Markets</h1>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -39,7 +38,7 @@
         <% else %>
           <td><%= m.price_difference.round(2) %></td>
         <% end %>
-        <td><%= m.spread.round(2) %></td>
+        <td><%= m.spread ? m.spread.round(2) : "unknown" %></td>
         <td><%= m.has_opportunity %></td>
         <td><%= m.is_watched %></td>
         <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-info', data: { turbolinks: false } %></td>
@@ -48,3 +47,8 @@
     <% end %>
   </tbody>
 </table>
+<hr>
+<article style="margin:0 auto;width:800px;">
+  <%= paginate @markets %>
+</article>
+<hr>

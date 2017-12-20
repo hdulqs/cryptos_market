@@ -16,6 +16,12 @@ class Backend::PairsController < Backend::BaseController
     redirect_to backend_market_reports_path(params[:market_id])
   end
 
+  def watch
+    pair = Pair.find(params[:id])
+    pair.update_column(:is_watched, true)
+    redirect_to backend_market_reports_path(params[:market_id])
+  end
+
   def update
     @pair = Pair.find(params[:id])
     if @pair.update_attributes(pair_params)
