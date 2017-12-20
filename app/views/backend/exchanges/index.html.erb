@@ -27,8 +27,8 @@
         <td><%= exchange.has_ticker_endpoint %></td>
         <td><%= exchange.has_tickers_endpoint %></td>
         <td><%= exchange.last_ticker_request %></td>
-        <td><%= link_to "Details", backend_exchange_path(exchange), class: "btn btn-info" %></td>
-        <td><%= link_to "Pairs List", backend_exchange_exchange_pairs_path(exchange), class: "btn btn-warning" %></td>
+        <td><%= link_to "Details", backend_exchange_path(exchange), class: "btn btn-info", data: { turbolinks: false } %></td>
+        <td><%= link_to "Pairs List", backend_exchange_exchange_pairs_path(exchange), class: "btn btn-warning", data: { turbolinks: false } %></td>
       </tr>
     <% end %>
   </tbody>

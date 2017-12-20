@@ -1,4 +1,4 @@
-<%= link_to "Pairs List", backend_market_pairs_path(@pair.market), class: 'btn btn-success' %>
+<%= link_to "Pairs List", backend_market_pairs_path(@pair.market), class: 'btn btn-success', data: { turbolinks: false } %>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -29,9 +29,9 @@
 
 
 <section class="text-center">
-  <%= link_to 'Show Tickers', backend_market_pair_tickers_path(@pair.market, @pair), class: 'btn btn-info' %>
-  <%= link_to 'Show Order Books', backend_market_pair_order_books_path(@pair.market, @pair), class: 'btn btn-info' %>
-  <%= link_to 'Show Trade History', backend_market_pair_trade_histories_path(@pair.market, @pair), class: 'btn btn-info' %>
+  <%= link_to 'Show Tickers', backend_market_pair_tickers_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
+  <%= link_to 'Show Order Books', backend_market_pair_order_books_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
+  <%= link_to 'Show Trade History', backend_market_pair_trade_histories_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
 </section>
 
 <hr>
@@ -57,7 +57,7 @@
 
 <hr>
 
-<%= link_to "Go to Exchange List", backend_exchanges_path, class: 'btn btn-success' %>
+<%= link_to "Go to Exchange List", backend_exchanges_path, class: 'btn btn-success', data: { turbolinks: false } %>
 
 <script type="text/javascript">
   $(document).ready(function() {

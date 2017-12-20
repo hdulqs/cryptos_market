@@ -27,7 +27,7 @@
 
 
 <section class="text-center">
-  <%= link_to 'Show Tickers', backend_market_pair_tickers_path(@pair.market, @pair), class: 'btn btn-info' %>
-  <%= link_to 'Show Order Books', backend_market_pair_order_books_path(@pair.market, @pair), class: 'btn btn-info' %>
-  <%= link_to 'Show Trade History', backend_market_pair_trade_histories_path(@pair.market, @pair), class: 'btn btn-info' %>
+  <%= link_to 'Show Tickers', backend_market_pair_tickers_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
+  <%= link_to 'Show Order Books', backend_market_pair_order_books_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
+  <%= link_to 'Show Trade History', backend_market_pair_trade_histories_path(@pair.market, @pair), class: 'btn btn-info', data: { turbolinks: false } %>
 </section>

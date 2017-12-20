@@ -1,6 +1,7 @@
 <h2 class="text-center">Report for Market : <%= @market.name %></h2>
 
-<%= link_to "Back to Market List", backend_markets_path, class: 'btn btn-success' %>
+<%= link_to "Back to Market List", backend_markets_path, class: 'btn btn-success', data: { turbolinks: false } %>
+<%= link_to "Market Details", backend_market_path(@market), class: 'btn btn-success float-right', data: { turbolinks: false } %>
 
 <h3 class="text-center">Last Tickers</h3>
 <table class="table table-hover">
@@ -26,11 +27,11 @@
         <td><%= ticker['last'] %></td>
         <td><%= ticker['spread'] %></td>
         <% if Pair.find(ticker['pair_id']).is_watched %>
-          <td><%= link_to "Unwatch pair #{ticker['pair_id']}", unwatch_backend_market_pair_path(@market.id, ticker['pair_id']), method: :patch, class: "btn btn-danger" %></td>
+          <td><%= link_to "Unwatch pair #{ticker['pair_id']}", unwatch_backend_market_pair_path(@market.id, ticker['pair_id']), method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure ?' } %></td>
         <% else %>
           <td><%= "pair #{ticker['pair_id']} Unwatched" %></td>
         <% end %>
-        <td><%= link_to "Go to Pair #{ticker['pair_id']}", backend_market_pair_path(@market.id, ticker['pair_id']), class: "btn btn-info" %></td>
+        <td><%= link_to "Go to Pair #{ticker['pair_id']}", backend_market_pair_path(@market.id, ticker['pair_id']), class: "btn btn-info", data: { turbolinks: false } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -54,7 +55,7 @@
 </section>
 
 
-<%= link_to "Show All Market Pairs", backend_market_pairs_path(@market), class: 'btn btn-primary btn-lg btn-block' %>
+<%= link_to "Show All Market Pairs", backend_market_pairs_path(@market), class: 'btn btn-primary btn-lg btn-block', data: { turbolinks: false } %>
 
 <hr>
 
@@ -80,7 +81,7 @@
         <td><%= r.is_opportunity %></td>
         <td><%= r.pairs.first %></td>
         <td><%= r.pairs.last %></td>
-        <td><%= link_to "Details", backend_market_report_path(r.market, r), class: 'btn btn-success' %></td>
+        <td><%= link_to "Details", backend_market_report_path(r.market, r), class: 'btn btn-success', data: { turbolinks: false } %></td>
       </tr>
     <% end %>
   </tbody>

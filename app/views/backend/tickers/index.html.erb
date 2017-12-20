@@ -29,7 +29,7 @@
         <td><%= ticker.volume %></td>
         <td><%= ticker.base_volume %></td>
         <td><%= ticker.quote_volume %></td>
-        <td><%= link_to 'Details', backend_market_pair_ticker_path(@pair.market, @pair, ticker), class: 'btn btn-info' %></td>
+        <td><%= link_to 'Details', backend_market_pair_ticker_path(@pair.market, @pair, ticker), class: 'btn btn-info', data: { turbolinks: false } %></td>
       </tr>
     <% end %>
   </tbody>

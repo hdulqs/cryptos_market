@@ -5,5 +5,5 @@
   <td><%= report.is_opportunity %></td>
   <td><%= report.pairs.first %></td>
   <td><%= report.pairs.last %></td>
-  <td><%= link_to "Details", backend_market_report_path(report.market, report), class: 'btn btn-success' %></td>
+  <td><%= link_to "Details", backend_market_report_path(report.market, report), class: 'btn btn-success', data: { turbolinks: false } %></td>
 </tr>

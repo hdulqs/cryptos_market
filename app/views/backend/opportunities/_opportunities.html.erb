@@ -33,8 +33,8 @@
           <td><%= m.spread.round(2) %></td>
           <td><%= m.has_opportunity %></td>
           <td><%= m.is_watched %></td>
-          <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-info' %></td>
-          <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-warning' %></td>
+          <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-info', data: { turbolinks: false } %></td>
+          <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-warning', data: { turbolinks: false } %></td>
         </tr>
       <% end %>
     </tbody>

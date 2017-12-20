@@ -6,9 +6,9 @@
     background-color: #8ce28c;
   }
 </style>
-<%= link_to "Exchange List", backend_exchanges_path, class: 'btn btn-success' %>
-<%= link_to "Opportunities", backend_opportunities_path, class: 'btn btn-info float-right' %>
-<h1 class="text-center"><%= @markets.count %> Watched Markets</h1>
+<%= link_to "Exchange List", backend_exchanges_path, class: 'btn btn-success', data: { turbolinks: false } %>
+<%= link_to "Opportunities", backend_opportunities_path, class: 'btn btn-info float-right', data: { turbolinks: false } %>
+<h1 class="text-center"><%= @markets.count %> Markets Watched</h1>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -41,8 +41,8 @@
         <td><%= m.spread.round(2) %></td>
         <td><%= m.has_opportunity %></td>
         <td><%= m.is_watched %></td>
-        <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-info' %></td>
-        <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-warning' %></td>
+        <td><%= link_to "Details", backend_market_path(m), class: 'btn btn-info', data: { turbolinks: false } %></td>
+        <td><%= link_to "Reports", backend_market_reports_path(m), class: 'btn btn-warning', data: { turbolinks: false } %></td>
       </tr>
     <% end %>
   </tbody>

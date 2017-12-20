@@ -1,4 +1,4 @@
-<%= link_to "Show Market", backend_market_path(@market), class: 'btn btn-success' %>
+<%= link_to "Show Market", backend_market_path(@market), class: 'btn btn-success', data: { turbolinks: false } %>
 
 <table class="table table-hover">
   <thead>
@@ -22,7 +22,7 @@
         <td><%= pair.min_trade_size %></td>
         <td><%= pair.exchange.name %></td>
         <td><%= pair.original_payload %></td>
-        <td><%= link_to "Details", backend_market_pair_path(pair.market, pair), class: 'btn btn-success' %></td>
+        <td><%= link_to "Details", backend_market_pair_path(pair.market, pair), class: 'btn btn-success', data: { turbolinks: false } %></td>
       </tr>
     <% end %>
   </tbody>

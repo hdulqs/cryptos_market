@@ -25,7 +25,7 @@
         <td><%= pair.exchange.name %></td>
         <td><%= pair.is_watched %></td>
         <td><%= pair.original_payload %></td>
-        <td><%= link_to "Details", backend_market_pair_path(pair.market, pair), class: 'btn btn-success' %></td>
+        <td><%= link_to "Details", backend_market_pair_path(pair.market, pair), class: 'btn btn-success', data: { turbolinks: false } %></td>
       </tr>
     <% end %>
   </tbody>
