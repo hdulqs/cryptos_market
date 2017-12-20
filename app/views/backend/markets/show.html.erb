@@ -38,7 +38,7 @@ document.addEventListener("turbolinks:load", function(){
   Highcharts.chart('container', {
       chart: {
           type: 'spline',
-          zoomType: 'y'
+          zoomType: 'xy'
       },
       title: {
           text: "Market <%= @market.name %>"
