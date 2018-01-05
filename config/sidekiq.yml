@@ -9,6 +9,6 @@
     #every: ['60s', first_in: '60s']   # Runs once per minute
     class: ReportsGeneratorJob
     every: ['60s', first_in: '900s']   # Runs once per minute
-  launcher_job:
-    in: '2s'
-    class: LauncherJob
+  # launcher_job:
+  #   in: '2s'
+  #   class: LauncherJob

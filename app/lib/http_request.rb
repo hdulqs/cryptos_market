@@ -18,7 +18,8 @@ class HttpRequest
         {
           authorization: @auth_header,
           content_type: :json,
-          accept: :json
+          accept: :json,
+          user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36"
         }
       )
     rescue RestClient::ExceptionWithResponse => e
