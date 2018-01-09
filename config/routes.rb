@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  root to: "home#index"
-
   require 'sidekiq/web'
   Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
   mount Sidekiq::Web => '/sidekiq'
@@ -37,16 +35,19 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      namespace :public do
+        resources :markets, only: [:index, :show]
+      end
+    end
+  end
+
   namespace :frontend do
     root to: "home#index"
   end
 
-  namespace :api do
-    namespace :v1 do
-      namespace :public do
-        resources :markets, only: [:index]
-      end
-    end
-  end
+  root to: "frontend/home#index"
+  get "*path", to: "frontend/home#index"
 
 end
