@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-  get 'home/index'
+
+  root to: "home#index"
+
   require 'sidekiq/web'
   Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
   mount Sidekiq::Web => '/sidekiq'
+
   mount ActionCable.server, at: '/cable'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "home#index"
   namespace :backend do
+    root to: "home#index"
     resources :exchanges do
       resources :exchange_pairs, only: [:index, :show]
     end
@@ -33,4 +36,17 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :frontend do
+    root to: "home#index"
+  end
+
+  namespace :api do
+    namespace :v1 do
+      namespace :public do
+        resources :markets, only: [:index]
+      end
+    end
+  end
+
 end
