@@ -2,7 +2,7 @@ class Ticker < ApplicationRecord
   belongs_to :pair
   before_create :get_spread
 
-  after_commit do
+  after_create do
     TickersChannel.broadcast_to(
       'all',
       ticker: render_ticker(self)
