@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import Cable from 'actioncable'
 import axios from 'axios'
-import MarketList from './components/market_list'
+import MarketList from './../components/market_list'
 import { Grid } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as markets_actions from './actions'
-import store from './../main/store'
+import * as markets_actions from './../actions'
+import store from './../../main/store'
+
+const styles = {
+  main_row: {
+    background: 'black',
+    color: 'white'
+  }
+}
 
 class MarketContainer extends Component {
 
@@ -31,7 +38,7 @@ class MarketContainer extends Component {
 
   render() {
     return(
-      <Grid>
+      <Grid fluid={true} style={styles.main_row}>
         <MarketList markets={this.props.markets}></MarketList>
       </Grid>
     )

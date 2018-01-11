@@ -39,7 +39,10 @@ export const update_markets_ticker = (markets, ticker) => {
             bid: ticker.bid,
             last: ticker.last
           }
+          pair.last_to_be_updated = true
           pair.last_ticker = lastticker
+        }else{
+          pair.last_to_be_updated = false
         }
       })
     )
