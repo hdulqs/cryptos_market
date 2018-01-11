@@ -12,7 +12,7 @@ class TickerFetcherJob < ApplicationJob
         next_request = DateTime.current + 15.seconds  # Trying to fullfill its destiny every 15 seconds
       else
         pair.get_ticker
-        next_request = DateTime.current + 25.seconds + random_sec.seconds # Request to exchange for pair_id every 3 minutes
+        next_request = DateTime.current + 15.seconds + random_sec.seconds # Request to exchange for pair_id every 3 minutes
       end
       TickerFetcherJob.set(wait_until: next_request).perform_later(pair_id)
     end

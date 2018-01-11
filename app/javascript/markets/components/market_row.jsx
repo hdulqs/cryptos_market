@@ -5,10 +5,6 @@ import { Col } from 'react-bootstrap';
 
 export default class MarketRow extends Component {
 
-  //componentWillReceiveProps(nxt){
-  //  console.log(nxt)
-  //}
-
   render(){
     return(
       <div>
@@ -22,4 +18,5 @@ export default class MarketRow extends Component {
       </div>
     )
   }
+  
 }

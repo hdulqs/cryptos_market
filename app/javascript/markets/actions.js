@@ -29,7 +29,7 @@ export const fetch_markets = () => {
 
 export const update_markets_ticker = (markets, ticker) => {
   return (dispatch) => {
-    let new_markets = [...markets]//[...this.state.markets]
+    let new_markets = [...markets]
     new_markets.map((market) =>
       market.pairs.map((pair) => {
         if(pair.id === ticker.pair_id){
@@ -46,27 +46,3 @@ export const update_markets_ticker = (markets, ticker) => {
     dispatch(received_ticker(new_markets))
   }
 }
-
-/*export const createSocket = () => {
-  return (dispatch, getState) => {
-    let cable = Cable.createConsumer()
-    cable.subscriptions.create({
-        channel: 'TickersChannel'
-      }, {
-      connected: () => {
-        console.log('connnected successfully')
-      },
-      received: (data) => {
-        console.log(data.ticker)
-        let pair_ticker = JSON.parse(data.ticker)
-        let markets = getState().MarketsReducer.markets
-        if(markets.length > 0){
-          dispatch(received_ticker(markets, pair_ticker))
-        }
-        //this.props.update_markets_ticker(this.props.markets, pair_ticker)
-        //this.update_ticker(pair_ticker)
-        //this.updateMarketTicker(pair_ticker)
-      }
-    })
-  }
-}*/
