@@ -11,9 +11,20 @@ const styles = {
 
 
 const MarketTable = (props) => {
-    this.css_tilde = (pair) => {
-      return pair.last_to_be_updated ? styles.red_flash : {}
-    }
+    //this.css_tilde = (pair) => {
+    //  return pair.last_to_be_updated ? styles.red_flash : {}
+    //}
+    let pairs = props.pairs.map((pair) => {
+      let last_value = parseFloat(pair.last_ticker.last)
+      let last_ticker_value = isNaN(last_value) ? 0 : last_value
+      return {
+        pair_id: pair.id,
+        ticker: last_ticker_value,
+        pair: pair
+      }
+    })
+    let ordered_pairs = pairs.sort((a, b) => b.ticker - a.ticker)
+    let pairs_array = ordered_pairs.map((pair) => pair.pair)
     return(
       <Table condensed responsive>
         <thead>
@@ -25,7 +36,7 @@ const MarketTable = (props) => {
         </thead>
         <tbody>
           {
-            props.pairs.map((pair) =>
+            pairs_array.map((pair) =>
               <MarketPair key={pair.id} pair={pair}></MarketPair>
             )
           }
