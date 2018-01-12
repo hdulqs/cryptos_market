@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import MarketRow from './market_row'
 import MarketItem from './market_item'
-import { Row } from 'react-bootstrap'
+import { Row, FormGroup, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as markets_actions from './../actions'
 
 const styles = {
-  market_list: {
-    //display: 'flex',
-    //'flexWrap': 'wrap'
+  search_bar: {
+    marginTop: '15px'
+  },
+  search_input: {
+    backgroundColor: '#908e83',
+    color: 'white',
+    textAlign: 'center'
   }
 }
 
@@ -17,7 +21,7 @@ export default class MarketList extends Component {
 
   constructor(props){
     super(props)
-    this.state = {containerWidth: 0, col_nb: 4}
+    this.state = {containerWidth: 0, col_nb: 4, markets: props.markets}
   }
 
   _handleWindowResize = () => {
@@ -48,6 +52,10 @@ export default class MarketList extends Component {
   //  this.state.show_extra ? this.setState({show_extra: false}) : this.setState({show_extra: true})
   //}
 
+  componentWillReceiveProps(props){
+    this.setState({markets: props.markets})
+  }
+
 
   componentDidMount () {
     this.setState({
@@ -56,14 +64,33 @@ export default class MarketList extends Component {
     window.addEventListener('resize', this._handleWindowResize)
   }
 
+  search_market = (event) => {
+    let filtered_markets = this.filterList(event)
+    //console.log(filtered_markets)
+    //console.log(event.target.value)
+    this.setState({markets: filtered_markets})
+  }
+
+  filterList = (event) => {
+    let updatedList = this.props.markets
+    updatedList = updatedList.filter((item) => {
+      return item.name.toLowerCase().search(
+        event.target.value.toLowerCase()) !== -1
+    })
+    return updatedList
+  }
+
   render(){
     let markets_xx = []
-    let copy_markets = [...this.props.markets]
+    let copy_markets = [...this.state.markets]
     while (copy_markets.length) {
       markets_xx.push(copy_markets.splice(0, this.state.col_nb))
     }
     return(
       <div style={styles.market_list}>
+        <FormGroup style={styles.search_bar}>
+			     <FormControl type="text" placeholder="Search Cryptos Market" onChange={this.search_market} style={styles.search_input} />
+		    </FormGroup>
         {
           markets_xx.map((markets) =>
             <Row className="show-grid" key={markets[0].id}>
