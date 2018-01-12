@@ -1,7 +1,10 @@
 class Api::V1::Public::MarketsController < Api::V1::BaseController
 
   def index
-    @markets = Market.of_interest.first(12)
+    @markets = Market.of_interest
+                    .left_joins(:pairs)
+                    .group(:id)
+                    .order('COUNT(pairs.id) DESC')#.first(12)
     render 'api/v1/public/markets/index.json'
   end
 
