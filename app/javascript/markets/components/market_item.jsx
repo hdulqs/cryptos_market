@@ -4,17 +4,20 @@ import { Col } from 'react-bootstrap'
 //import MarketPair from './market_pair'
 import MarketTable from './market_table'
 import ReactTable from 'react-table'
+import ReactDOM from 'react-dom'
 
 const styles = {
   market_item: {
     'alignContent': 'center',
-    'minWidth': '25%',
+    'minWidth': 'calc(100% / 12 * 3)',
     'display': 'block',
     'width': '20em',
     'border': '1px solid #737300',
     'padding': '0em 0.5em',
-    //'maxHeight': '16em',
-    //'overflow': 'scroll'
+    'maxHeight': '16.6em',
+    'overflow': 'scroll',
+    //'overflow': 'hidden',
+    position: 'relative'
   },
   title: {
     'color': '#adf96c'
@@ -22,8 +25,46 @@ const styles = {
   item_header: {
     display: 'flex',
     justifyContent: 'space-around'
+  },
+  header_price: {
+    color: 'gold'
+  },
+  button_more: {
+    position: 'absolute',
+    bottom: '1px'
   }
 }
+
+/*const get_market_item_style = (width) => {
+  return {
+    market_item: {
+      alignContent: 'center',
+      minWidth: width + '%',
+      display: 'block',
+      width: '20em',
+      border: '1px solid #737300',
+      padding: '0em 0.5em',
+      maxHeight: '16.6em',
+      overflow: 'scroll',
+      //'overflow': 'hidden',
+      position: 'relative'
+    },
+    title: {
+      'color': '#adf96c'
+    },
+    item_header: {
+      display: 'flex',
+      justifyContent: 'space-around'
+    },
+    header_price: {
+      color: 'gold'
+    },
+    button_more: {
+      position: 'absolute',
+      bottom: '1px'
+    }
+  }
+}*/
 
 const getHighestPrice = (pairs) => {
   let a = []
@@ -33,21 +74,79 @@ const getHighestPrice = (pairs) => {
   return Math.max(...c)
 }
 
-const MarketItem = (props) => {
+export default class MarketItem extends Component {
+//const MarketItem = (props) => {
   //const market_size = props.market.pairs.length
   //const highest_price = getHighestPrice(props.market.pairs)
+  constructor(props){
+    super(props)
+    this.state = {
+      style: styles/*,
+      show_extra: false,
+      containerWidth: 0*/
+    }
+  }
+
+  /*_handleWindowResize = () => {
+    let wind_width = window.innerWidth
+    let col_nb = this.getColNb(wind_width)
+    let new_style = get_market_item_style(col_nb)
+    this.setState({
+      containerWidth: wind_width,
+      style: new_style
+    })
+  }
+
+  show_more = () => {
+    this.state.show_extra ? this.setState({show_extra: false}) : this.setState({show_extra: true})
+  }
+
+  getColNb = (width) => {
+    if(width < 600){
+      return 100
+    }else if (600 < width < 1000) {
+      return 50
+    }else if (width > 1000){
+      return 33
+    }
+  }
+
+  componentDidMount () {
+    this.setState({
+      containerWidth: window.innerWidth
+    })
+    window.addEventListener('resize', this._handleWindowResize)
+  }*/
+
+  get_style = () => {
+    //let styl = ...this.state.style.market_item
+    /*if(this.state.show_extra){
+      return this.state.style.market_item_full
+    }else{
+      return this.state.style.market_item
+    }*/
+    //let col_nb = this.getColNb(this.state.containerWidth)
+
+    //return get_market_item_style(col_nb)
+    return this.state.style.market_item
+  }
+
+  render(){
   return(
-    <div style={styles.market_item}>
-      <div style={styles.item_header}>
-      <h4 style={styles.title}>{props.market.name}</h4>
-      <h4>{getHighestPrice(props.market.pairs)}</h4>
+    <div style={this.get_style()}>
+      <div style={this.state.style.item_header}>
+      <h4 style={this.state.style.title}>{this.props.market.name}</h4>
+      <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
       </div>
-      <MarketTable pairs={props.market.pairs}></MarketTable>
+      <MarketTable pairs={this.props.market.pairs}></MarketTable>
+      {/*<button  style={this.state.style.button_more} onClick={this.show_more}>More</button>*/}
+
     </div>
   )
+  }
 }
 
-export default MarketItem
+//export default MarketItem
 
 
 /*export default class MarketItem extends Component {
