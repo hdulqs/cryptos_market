@@ -30,7 +30,7 @@ class MarketContainer extends Component {
         console.log('successfully connected to TickersChannel')
       },
       received: (data) => {
-        console.log(data.ticker)
+        //console.log(data.ticker)
         this.props.update_markets_ticker(this.props.markets, JSON.parse(data.ticker))
       }
     })
