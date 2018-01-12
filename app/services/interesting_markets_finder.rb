@@ -2,9 +2,14 @@ class InterestingMarketsFinder
 
   def call
     # markets = Market.left_joins(:pairs).group(:id).order('COUNT(pairs.id) DESC').limit(300)
-    markets = Market.where(base_currency: "ETH")
-                    .or(Market.where(quote_currency: "ETH"))
-                    .left_joins(:pairs)
+    #markets = Market.where(base_currency: "ETH")
+    #                .or(Market.where(quote_currency: "ETH"))
+    #                .left_joins(:pairs)
+    #                .group(:id)
+    #                .order('COUNT(pairs.id) DESC')
+    #                .limit(300)
+
+    markets = Market.left_joins(:pairs)
                     .group(:id)
                     .order('COUNT(pairs.id) DESC')
                     .limit(300)

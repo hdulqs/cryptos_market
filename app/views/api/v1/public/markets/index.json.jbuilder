@@ -9,9 +9,11 @@ json.markets @markets do |market|
     json.last_to_be_updated false
     json.last_ticker do
       json.id pair.tickers.last ? pair.tickers.last.id : nil
-      json.last pair.tickers.last ? pair.tickers.last.last : nil
+      json.market_name market.name
       json.ask pair.tickers.last ? pair.tickers.last.ask : nil
       json.bid pair.tickers.last ? pair.tickers.last.bid : nil
+      json.last pair.tickers.last ? pair.tickers.last.last : nil
+      json.volume pair.tickers.last ? pair.tickers.last.volume : (pair.tickers.last ? pair.tickers.last.base_volume : nil)
     end
   end
 end

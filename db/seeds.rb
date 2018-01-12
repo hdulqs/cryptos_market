@@ -269,7 +269,7 @@ poloniex = Exchange.create!(
     bid: "highestBid",
     last: "last",
     base_volume: "baseVolume",
-    volume: "",
+    volume: "baseVolume",
     quote_volume: "quoteVolume",
     percent_change: "percentChange",
     high: "high24hr",
@@ -303,11 +303,12 @@ bittrex = Exchange.create!(
   get_assets_path: '/api/v1.1/public/getcurrencies',
   get_pairs_path: '/api/v1.1/public/getmarkets',
   get_order_book_path: '/api/v1.1/public/getorderbook?market=CURRENCY_PAIR_PARAM&type=both', # Cannot specify depth with BitTrex
-  get_ticker_path: '/api/v1.1/public/getticker?market=CURRENCY_PAIR_PARAM',
+  #get_ticker_path: '/api/v1.1/public/getticker?market=CURRENCY_PAIR_PARAM',
+  get_tickers_path: '/api/v1.1/public/getmarketsummaries',
   get_trade_history_path: '/api/v1.1/public/getmarkethistory?market=CURRENCY_PAIR_PARAM',
   has_assets_endpoint: true,
-  has_tickers_endpoint: false,
-  has_ticker_endpoint: true,
+  has_tickers_endpoint: true,
+  has_ticker_endpoint: false,
   asset_data_map: {
     name: "CurrencyLong",
     iso_4217: "Currency",
@@ -332,18 +333,31 @@ bittrex = Exchange.create!(
     bids: "buy",
     is_frozen: ""
   }.with_indifferent_access,
-  ticker_data_map: {
+  #ticker_data_map: {
+  #  ask: "Ask",
+  #  bid: "Bid",
+  #  last: "Last",
+  #  base_volume: "",
+  #  volume: "",
+  #  quote_volume: "",
+  #  percent_change: "",
+  #  high: "high",
+  #  low: "low",
+  #  timestamp: "timestamp",
+  #  market_symbol: "market_symbol"
+  #}.with_indifferent_access,
+  tickers_data_map: {
     ask: "Ask",
     bid: "Bid",
     last: "Last",
-    base_volume: "",
-    volume: "",
+    base_volume: "BaseVolume",
+    volume: "Volume",
     quote_volume: "",
     percent_change: "",
-    high: "high",
-    low: "low",
-    timestamp: "timestamp",
-    market_symbol: "market_symbol"
+    high: "High",
+    low: "Low",
+    timestamp: "TimeStamp",
+    market_symbol: "MarketName"
   }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "OrderType",
@@ -594,7 +608,8 @@ bleutrade = Exchange.create!(
   get_assets_path: '/public/getcurrencies',
   get_pairs_path: '/public/getmarkets',
   get_order_book_path: '/public/getorderbook?market=CURRENCY_PAIR_PARAM&type=all',
-  get_ticker_path: '/public/getticker?market=CURRENCY_PAIR_PARAM',
+  #get_ticker_path: '/public/getticker?market=CURRENCY_PAIR_PARAM',
+  get_tickers_path: '/public/getmarketsummaries',
   get_trade_history_path: '/public/getmarkethistory?market=CURRENCY_PAIR_PARAM',
   has_tickers_endpoint: false,
   has_ticker_endpoint: true,
@@ -623,19 +638,32 @@ bleutrade = Exchange.create!(
     bids: "buy",
     is_frozen: ""
   }.with_indifferent_access,
-  ticker_data_map: {
+  tickers_data_map: {
     ask: "Ask",
     bid: "Bid",
     last: "Last",
-    base_volume: "",
-    volume: "",
+    base_volume: "BaseVolume",
+    volume: "Volume",
     quote_volume: "",
     percent_change: "",
-    high: "",
-    low: "",
-    timestamp: "",
-    market_symbol: ""
+    high: "High",
+    low: "Low",
+    timestamp: "TimeStamp",
+    market_symbol: "MarketName"
   }.with_indifferent_access,
+  # ticker_data_map: {
+  #   ask: "Ask",
+  #   bid: "Bid",
+  #   last: "Last",
+  #   base_volume: "",
+  #   volume: "",
+  #   quote_volume: "",
+  #   percent_change: "",
+  #   high: "",
+  #   low: "",
+  #   timestamp: "",
+  #   market_symbol: ""
+  # }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "OrderType",
     amount: "Quantity",

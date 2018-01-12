@@ -1,10 +1,6 @@
-class LauncherJob < ApplicationJob
-  # Runs Once at startup !
-  #sidekiq_options :retry => false
-  queue_as :launcher_job
+class TickerLauncher
 
-  def perform
-    # Cleaner.reset_sidekiq
+  def call
     markets_of_interest = Market.of_interest
     pairs_of_interest = markets_of_interest.map(&:pairs).flatten
 

@@ -11,7 +11,6 @@ const styles = {
 
 
 const MarketTable = (props) => {
-    //let css = props.pair.last_to_be_updated ? styles.red_flash : {}
     this.css_tilde = (pair) => {
       return pair.last_to_be_updated ? styles.red_flash : {}
     }
@@ -20,9 +19,8 @@ const MarketTable = (props) => {
         <thead>
           <tr>
             <th>Exchange</th>
-            <th>Ask</th>
-            <th>Bid</th>
             <th>Last</th>
+            <th>Volume</th>
           </tr>
         </thead>
         <tbody>

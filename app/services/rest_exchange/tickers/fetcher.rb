@@ -58,6 +58,10 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
       tickers_payload
     elsif @exchange.name == 'exmo'
       tickers_payload
+    elsif @exchange.name == 'bittrex'
+      tickers_payload['result'].with_indifferent_access
+    elsif @exchange.name == 'bleutrade'
+      tickers_payload['result'].with_indifferent_access
     else
       tickers_payload
     end
