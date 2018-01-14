@@ -53,25 +53,25 @@ class MarketItem extends Component {
     this.state.show_chart ? this.setState({show_chart: false}) : this.setState({show_chart: true})
   }
 
-  get_highest_ask = (pairs) => {
+  get_lowest_ask = (pairs) => {
     let a = []
     pairs.map((pair) => a.push(pair.last_ticker.ask) )
-    let b = a.filter((x) => x !== null )
-    let c = b.map((nb) => parseFloat(nb))
-    return Math.max(...c)
-  }
-
-  get_lowest_bid = (pairs) => {
-    let a = []
-    pairs.map((pair) => a.push(pair.last_ticker.bid) )
     let b = a.filter((x) => x !== null )
     let c = b.map((nb) => parseFloat(nb))
     return Math.min(...c)
   }
 
+  get_highest_bid = (pairs) => {
+    let a = []
+    pairs.map((pair) => a.push(pair.last_ticker.bid) )
+    let b = a.filter((x) => x !== null )
+    let c = b.map((nb) => parseFloat(nb))
+    return Math.max(...c)
+  }
+
   get_spread = (pairs) => {
-    let low = this.get_lowest_bid(pairs)
-    let high = this.get_highest_ask(pairs)
+    let low = this.get_lowest_ask(pairs)
+    let high = this.get_highest_bid(pairs)
     //return Math.round( ((high - low) / (high + low)) * 100 )
     return ( ((high - low) / (high + low)) * 100 ).toFixed(2)
   }
@@ -85,8 +85,8 @@ class MarketItem extends Component {
           <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
         </div>
         <div style={this.state.style.item_header}>
-          <p>Ask: {this.get_highest_ask(this.props.market.pairs)}</p>
-          <p>Bid: {this.get_lowest_bid(this.props.market.pairs)}</p>
+          <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
+          <p>Bid: {this.get_highest_bid(this.props.market.pairs)}</p>
           <p>Spread: {this.get_spread(this.props.market.pairs)}%</p>
         </div>
         { this.state.show_chart ?
