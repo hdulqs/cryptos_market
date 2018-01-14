@@ -9,10 +9,10 @@ import * as markets_actions from './../actions'
 import store from './../../main/store'
 
 const styles = {
-  main_row: {
-    background: 'black',
-    color: 'white'
-  }
+  //main_row: {
+  //  background: 'black',
+  //  color: 'white'
+  //}
 }
 
 class MarketContainer extends Component {
@@ -38,7 +38,7 @@ class MarketContainer extends Component {
 
   render() {
     return(
-      <Grid fluid={true} style={styles.main_row}>
+      <Grid fluid={true}>
         <MarketList markets={this.props.markets}></MarketList>
       </Grid>
     )

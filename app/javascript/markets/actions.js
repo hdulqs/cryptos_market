@@ -37,7 +37,8 @@ export const update_markets_ticker = (markets, ticker) => {
             id: ticker.id,
             ask: ticker.ask,
             bid: ticker.bid,
-            last: ticker.last
+            last: ticker.last,
+            volume: ticker.volume
           }
           pair.last_to_be_updated = true
           pair.last_ticker = lastticker

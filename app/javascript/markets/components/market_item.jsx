@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Col } from 'react-bootstrap'
-//import MarketPair from './market_pair'
 import MarketTable from './market_table'
-import ReactTable from 'react-table'
+//import ReactTable from 'react-table'
+import MarketChartIndex from './market_chart_index'
 import ReactDOM from 'react-dom'
 
 const styles = {
@@ -62,17 +62,18 @@ export default class MarketItem extends Component {
     }*/
   }
 
-  show_more = () => {
+  /*show_more = () => {
     this.state.show_extra ? this.setState({show_extra: false}) : this.setState({show_extra: true})
-  }
+  }*/
 
   render(){
   return(
     <div style={this.get_style()}>
       <div style={this.state.style.item_header}>
-      <h4 style={this.state.style.title}>{this.props.market.name}</h4>
+      <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
       <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
       </div>
+      <MarketChartIndex market={this.props.market}></MarketChartIndex>
       <MarketTable pairs={this.props.market.pairs}></MarketTable>
       {/*<button style={this.state.style.button_more} onClick={this.show_more}>More</button>*/}
     </div>
