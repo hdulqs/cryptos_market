@@ -30,7 +30,8 @@ export default class MarketChartIndex extends Component {
     let exchange_param = market.pairs[intent_nb].exchange_name
     //let yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date).getTime()
     //let start_timestamp = new Date().getTime() - (24 * 60 * 60 * 1000)
-    axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json', "Access-Control-Allow-Origin": "*"})
+    //axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json', "Access-Control-Allow-Origin": "*"})
+    axios.get('https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json'})
       .then((response) => {
         let res = response.data
         let json = res["result"][900]

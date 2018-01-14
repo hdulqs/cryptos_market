@@ -42,7 +42,7 @@ export default class MarketList extends Component {
     }else if (width >= 768 && width < 992) {
       return 2
     }else if (width >= 992 && width < 1200){
-      return 3
+      return 2
     }else if (width >= 1200){
       return 3
     }
