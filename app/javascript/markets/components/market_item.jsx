@@ -2,22 +2,15 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Glyphicon } from 'react-bootstrap'
 import MarketTable from './market_table'
-//import ReactTable from 'react-table'
 import MarketChartIndex from './market_chart_index'
 import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as markets_actions from './../actions'
 
 const styles = {
   market_item: {
-    //'alignContent': 'center',
-    //'minWidth': 'calc(100% / 12 * 3)',
-    //'display': 'block',
-    //'width': '20em',
-    //'border': '1px solid #737300',
-    //'padding': '0em 0.5em',
-    //'maxHeight': '14em',
-    //'overflow': 'scroll',
     'overflow': 'hidden',
-    //position: 'relative'
   },
   title: {
     'color': '#adf96c'
@@ -28,10 +21,6 @@ const styles = {
   },
   header_price: {
     color: 'gold'
-  },
-  button_more: {
-    //position: 'absolute',
-    //bottom: '1px'
   },
   chart_glyph: {
     marginTop: '0.7em'
@@ -46,7 +35,7 @@ const getHighestPrice = (pairs) => {
   return Math.max(...c)
 }
 
-export default class MarketItem extends Component {
+class MarketItem extends Component {
 
   constructor(props){
     super(props)
@@ -58,11 +47,6 @@ export default class MarketItem extends Component {
 
   get_style = () => {
     return this.state.style.market_item
-    /*if(this.state.show_extra){
-      return this.state.style.market_item_full
-    }else{
-      return this.state.style.market_item
-    }*/
   }
 
   show_more = () => {
@@ -70,21 +54,31 @@ export default class MarketItem extends Component {
   }
 
   render(){
-  return(
-    <div style={this.get_style()}>
-      <div style={this.state.style.item_header}>
-      <div style={styles.chart_glyph} onClick={this.show_more}>{this.state.show_chart ? (<Glyphicon glyph="list" />) : (<Glyphicon glyph="stats" />)}</div>
-      <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
-      <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
+    return(
+      <div style={this.get_style()}>
+        <div style={this.state.style.item_header}>
+        <div style={styles.chart_glyph} onClick={this.show_more}>{this.state.show_chart ? (<Glyphicon glyph="list" />) : (<Glyphicon glyph="stats" />)}</div>
+        <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
+        <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
+        </div>
+        { this.state.show_chart ?
+            ( <MarketChartIndex market={this.props.market} charts_data={this.props.charts_data}></MarketChartIndex> )
+            :
+            ( <MarketTable pairs={this.props.market.pairs}></MarketTable> )
+        }
       </div>
-      {/*<button className="btn btn-warning btn-block" onClick={this.show_more}>{this.state.show_chart ? "Unload" : "Load"} <Glyphicon glyph="plus" /></button>*/}
-      { this.state.show_chart ?
-          ( <MarketChartIndex market={this.props.market}></MarketChartIndex> )
-          :
-          ( <MarketTable pairs={this.props.market.pairs}></MarketTable> )
-      }
-
-    </div>
-  )
+    )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    charts_data: state.MarketsReducer.charts_data
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(markets_actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MarketItem)

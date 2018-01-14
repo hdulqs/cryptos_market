@@ -1,8 +1,11 @@
+//import update from 'immutability-helper'
+
 export const MARKETS_FETCHED = 'MARKETS_FETCHED'
 export const RECEIVED_TICKER = 'RECEIVED_TICKER'
 
 const initialState = {
-  markets: []
+  markets: [],
+  charts_data: {}
 };
 
 export default function MarketsReducer(state = initialState, action={}) {
@@ -13,11 +16,17 @@ export default function MarketsReducer(state = initialState, action={}) {
         markets: action.payload
       }
     case 'RECEIVED_TICKER':
-      //if(state.markets.length === 0)
-        //console.log("empty markets array")
       return {
         ...state,
         markets: action.payload
+      }
+    case 'HOCL_FETCHED':
+      return {
+        ...state,
+        charts_data: {
+          ...state.charts_data,
+          [action.payload.market_name]: action.payload.charts_data
+        }
       }
     default:
       return state;

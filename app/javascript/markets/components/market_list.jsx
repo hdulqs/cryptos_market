@@ -26,10 +26,7 @@ export default class MarketList extends Component {
 
   _handleWindowResize = () => {
     let wind_width = window.innerWidth
-    //console.log(wind_width)
     let col_nb = this.getColNb(wind_width)
-    //console.log(col_nb)
-    //let new_style = get_market_item_style(col_nb)
     this.setState({
       containerWidth: wind_width,
       col_nb: col_nb
@@ -48,10 +45,6 @@ export default class MarketList extends Component {
     }
   }
 
-  //show_more = () => {
-  //  this.state.show_extra ? this.setState({show_extra: false}) : this.setState({show_extra: true})
-  //}
-
   componentWillReceiveProps(props){
     if(props.markets.length > 0)
       this.setState({markets: props.markets})
@@ -67,8 +60,6 @@ export default class MarketList extends Component {
 
   search_market = (event) => {
     let filtered_markets = this.filterList(event)
-    //console.log(filtered_markets)
-    //console.log(event.target.value)
     this.setState({markets: filtered_markets})
   }
 

@@ -8,12 +8,7 @@ import { bindActionCreators } from 'redux'
 import * as markets_actions from './../actions'
 import store from './../../main/store'
 
-const styles = {
-  //main_row: {
-  //  background: 'black',
-  //  color: 'white'
-  //}
-}
+const styles = {}
 
 class MarketContainer extends Component {
 
