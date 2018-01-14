@@ -8,7 +8,7 @@ const MarketRow = (props) => {
     <div>
       {
         props.markets.map((market) =>
-          <Col xs={12} sm={6} md={4} lg={3} key={market.id}>
+          <Col xs={12} sm={6} md={4} lg={4} key={market.id}>
             <MarketItem market={market}></MarketItem>
           </Col>
         )

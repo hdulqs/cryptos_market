@@ -21,7 +21,7 @@ export default class MarketList extends Component {
 
   constructor(props){
     super(props)
-    this.state = {containerWidth: 0, col_nb: 4, markets: props.markets}
+    this.state = {containerWidth: 0, col_nb: 3, markets: props.markets}
   }
 
   _handleWindowResize = () => {
@@ -44,7 +44,7 @@ export default class MarketList extends Component {
     }else if (width >= 992 && width < 1200){
       return 3
     }else if (width >= 1200){
-      return 4
+      return 3
     }
   }
 
