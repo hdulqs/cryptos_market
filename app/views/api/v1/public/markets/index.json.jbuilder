@@ -3,7 +3,7 @@ json.markets @markets do |market|
   json.name market.name
   json.base_currency market.base_currency
   json.quote_currency market.quote_currency
-  json.pairs market.pairs do |pair|
+  json.pairs market.pairs.where(is_watched: true) do |pair|
     json.id pair.id
     json.exchange_name pair.exchange.name
     json.last_to_be_updated false
