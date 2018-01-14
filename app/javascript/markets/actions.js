@@ -59,44 +59,49 @@ export const update_markets_ticker = (markets, ticker) => {
   }
 }
 
-
-export const retrieve_ohcl = (market, intent_nb) => {
+export const got_hocl = (obj) => {
   return (dispatch) => {
-    //let intent_nb = 0
-    //let market_param = market.name.split("-").reverse().join("").toLowerCase()
-    let market_param = market.name.split("-").join("").toLowerCase()
-    let exchange_param = market.pairs[intent_nb].exchange_name
-    //let yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date).getTime()
-    //let start_timestamp = new Date().getTime() - (24 * 60 * 60 * 1000)
-    //axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json', "Access-Control-Allow-Origin": "*"})
-    axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json'})
-      .then((response) => {
-        let res = response.data
-        let json = res["result"][900]
-        let arr = []
-        json.map((item) => {
-          let obj = {
-            date: new Date(item[0] * 1000),
-            open: item[1],
-            high: item[2],
-            low: item[3],
-            close: item[4],
-            volume: item[5],
-          }
-          arr.push(obj)
-        })
-        let obj = {}
-        obj.market_name = market.name
-        obj.charts_data = arr
-        dispatch(hocl_fetched(obj))
-      })
-      .catch((error) => {
-        if(error.response.status === 400){
-          if(intent_nb < 4){
-            intent_nb = intent_nb + 1
-            this.retrieve_ohcl(market, intent_nb)
-          }
-        }
-      })
-    }
+    dispatch(hocl_fetched(obj))
+  }
 }
+
+// export const retrieve_ohcl = (market, intent_nb) => {
+//   return (dispatch) => {
+//     //let intent_nb = 0
+//     //let market_param = market.name.split("-").reverse().join("").toLowerCase()
+//     let market_param = market.name.split("-").join("").toLowerCase()
+//     let exchange_param = market.pairs[intent_nb].exchange_name
+//     //let yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date).getTime()
+//     //let start_timestamp = new Date().getTime() - (24 * 60 * 60 * 1000)
+//     //axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json', "Access-Control-Allow-Origin": "*"})
+//     axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json'})
+//       .then((response) => {
+//         let res = response.data
+//         let json = res["result"][900]
+//         let arr = []
+//         json.map((item) => {
+//           let obj = {
+//             date: new Date(item[0] * 1000),
+//             open: item[1],
+//             high: item[2],
+//             low: item[3],
+//             close: item[4],
+//             volume: item[5],
+//           }
+//           arr.push(obj)
+//         })
+//         let obj = {}
+//         obj.market_name = market.name
+//         obj.charts_data = arr
+//         dispatch(hocl_fetched(obj))
+//       })
+//       .catch((error) => {
+//         if(error.response.status === 400){
+//           if(intent_nb < 4){
+//             intent_nb = intent_nb + 1
+//             this.retrieve_ohcl(market, intent_nb)
+//           }
+//         }
+//       })
+//     }
+// }
