@@ -89,7 +89,7 @@ class MarketChart extends React.Component {
 		const end = xAccessor(data[Math.max(0, data.length - 30)]);
 		const xExtents = [start, end];
 		return (
-			<ChartCanvas height={200}
+			<ChartCanvas height={280}
 				ratio={ratio}
 				width={width}
 				margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
@@ -104,8 +104,8 @@ class MarketChart extends React.Component {
 				<Chart id={1}
 					yExtents={d => [d.high, d.low]}
 				>
-					{/*<XAxis axisAt="bottom" orient="bottom"/>
-					<YAxis axisAt="right" orient="right" ticks={5} />*/}
+					<XAxis axisAt="bottom" orient="bottom" />
+					<YAxis axisAt="right" orient="right" tickStroke="white" ticks={5} />
 
 					<MouseCoordinateX
 						at="bottom"
@@ -118,12 +118,17 @@ class MarketChart extends React.Component {
 
 					<AreaSeries yAccessor={d => d.close}/>
 
+          
+					<SingleValueTooltip
+						yLabel="Volume" yAccessor={(d) => d.volume}
+						origin={[-40, 20]}/>
+
 				</Chart>
 				<Chart id={2}
 					yExtents={d => d.volume}
 					height={150} origin={(w, h) => [0, h - 150]}
 				>
-					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")}/>
+					<YAxis axisAt="left" orient="left" ticks={5} tickStroke="white" tickFormat={format(".2s")}/>
 
 					<MouseCoordinateY
 						at="left"

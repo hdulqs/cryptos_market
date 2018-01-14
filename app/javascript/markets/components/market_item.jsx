@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Col } from 'react-bootstrap'
+import { Glyphicon } from 'react-bootstrap'
 import MarketTable from './market_table'
 //import ReactTable from 'react-table'
 import MarketChartIndex from './market_chart_index'
@@ -32,6 +32,9 @@ const styles = {
   button_more: {
     //position: 'absolute',
     //bottom: '1px'
+  },
+  chart_glyph: {
+    marginTop: '0.7em'
   }
 }
 
@@ -49,7 +52,7 @@ export default class MarketItem extends Component {
     super(props)
     this.state = {
       style: styles,
-      show_extra: false
+      show_chart: false
     }
   }
 
@@ -62,20 +65,25 @@ export default class MarketItem extends Component {
     }*/
   }
 
-  /*show_more = () => {
-    this.state.show_extra ? this.setState({show_extra: false}) : this.setState({show_extra: true})
-  }*/
+  show_more = () => {
+    this.state.show_chart ? this.setState({show_chart: false}) : this.setState({show_chart: true})
+  }
 
   render(){
   return(
     <div style={this.get_style()}>
       <div style={this.state.style.item_header}>
+      <div style={styles.chart_glyph} onClick={this.show_more}>{this.state.show_chart ? (<Glyphicon glyph="list" />) : (<Glyphicon glyph="stats" />)}</div>
       <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
       <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
       </div>
-      <MarketChartIndex market={this.props.market}></MarketChartIndex>
-      <MarketTable pairs={this.props.market.pairs}></MarketTable>
-      {/*<button style={this.state.style.button_more} onClick={this.show_more}>More</button>*/}
+      {/*<button className="btn btn-warning btn-block" onClick={this.show_more}>{this.state.show_chart ? "Unload" : "Load"} <Glyphicon glyph="plus" /></button>*/}
+      { this.state.show_chart ?
+          ( <MarketChartIndex market={this.props.market}></MarketChartIndex> )
+          :
+          ( <MarketTable pairs={this.props.market.pairs}></MarketTable> )
+      }
+
     </div>
   )
   }

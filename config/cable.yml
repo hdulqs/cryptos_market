@@ -9,4 +9,4 @@ test:
 production:
   adapter: redis
   url: redis://localhost:6379/1
-  channel_prefix: themis_production
+  channel_prefix: cryptos_market_production

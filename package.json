@@ -1,5 +1,5 @@
 {
-  "name": "themis",
+  "name": "cryptos_market",
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.2.0",

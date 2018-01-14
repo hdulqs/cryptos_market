@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MarketChart from './market_chart';
 import axios from 'axios'
+import { Glyphicon } from 'react-bootstrap'
 
 import { TypeChooser } from "react-stockcharts/lib/helper";
 import { timeParse } from "d3-time-format";
@@ -63,7 +64,7 @@ export default class MarketChartIndex extends Component {
   render() {
     if (this.state.data.length === 0) {
 			return (
-        <div className="text-center">Loading Chart...</div>
+        <div className="loader-small"></div>
       )
 		}
 		return (

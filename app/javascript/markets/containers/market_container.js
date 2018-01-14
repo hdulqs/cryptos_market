@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Cable from 'actioncable'
 import axios from 'axios'
 import MarketList from './../components/market_list'
-import { Grid } from 'react-bootstrap'
+import { Grid, Glyphicon } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as markets_actions from './../actions'
@@ -37,6 +37,11 @@ class MarketContainer extends Component {
   }
 
   render() {
+    if (this.props.markets.length === 0) {
+			return (
+        <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
+      )
+		}
     return(
       <Grid fluid={true}>
         <MarketList markets={this.props.markets}></MarketList>

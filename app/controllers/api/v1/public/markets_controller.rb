@@ -1,7 +1,7 @@
 class Api::V1::Public::MarketsController < Api::V1::BaseController
 
   def index
-    @markets = Market.find([306, 305, 329])#Market.of_interest.first(4)
+    @markets = Market.of_interest#.find([306, 305, 329, 383, 378, 262]) #Market.of_interest.first(8)
                     #.of_interest
                     #.left_joins(:pairs)
                     #.group(:id)

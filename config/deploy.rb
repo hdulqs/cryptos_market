@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock "3.10.0"
 
-set :application, "themis"
-set :repo_url, "git@bitbucket.org:OlIvIeR77/themis.git"
+set :application, "cryptos_market"
+set :repo_url, "git@bitbucket.org:OlIvIeR77/cryptos_market.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -15,8 +15,8 @@ set :deploy_to, "/home/deployer/apps/#{fetch(:application)}"
 
 # capistrano-rvm config :
 set :rvm_type, :user
-set :rvm_ruby_version, 'ruby-2.4.1@themis'
-#set :rvm_ruby_version, 'ruby-2.4.1@themis'
+set :rvm_ruby_version, 'ruby-2.4.1@cryptos_market'
+#set :rvm_ruby_version, 'ruby-2.4.1@cryptos_market'
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
