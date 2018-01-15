@@ -9,11 +9,7 @@ const styles = {
   }
 }
 
-
 const MarketTable = (props) => {
-    //this.css_tilde = (pair) => {
-    //  return pair.last_to_be_updated ? styles.red_flash : {}
-    //}
     let pairs = props.pairs.map((pair) => {
       let last_value = parseFloat(pair.last_ticker.last)
       let last_ticker_value = isNaN(last_value) ? 0 : last_value
@@ -47,21 +43,3 @@ const MarketTable = (props) => {
 }
 
 export default MarketTable
-
-
-/*export default class MarketPair extends Component {
-
-  render(){
-    return(
-      <li>
-        <h6>
-          {this.props.pair.exchange_name} : {this.props.pair.id}
-        </h6>
-        <small>{this.props.pair.last_ticker.ask}</small> :
-        <small>{this.props.pair.last_ticker.bid}</small> :
-        <small>{this.props.pair.last_ticker.last}</small>
-      </li>
-    )
-  }
-
-}*/

@@ -30,7 +30,7 @@ class MarketChartIndex extends Component {
         let res = response.data
         let json = res["result"][900]
         let arr = []
-        json.map((item) => {
+        json.forEach((item) => {
           let obj = {
             date: new Date(item[0] * 1000),
             open: item[1],

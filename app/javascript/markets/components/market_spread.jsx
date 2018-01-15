@@ -6,12 +6,11 @@ export default class MarketSpread extends Component {
 
   constructor(props){
     super(props)
-    this.get_highest_bid(props.pairs)
   }
 
   get_lowest_ask = (pairs) => {
     let arr = []
-    pairs.map((pair) => {
+    pairs.forEach((pair) => {
       if(pair.last_ticker.ask !== null)
         arr.push({pair: pair, lowest_ask: pair.last_ticker.ask})
     })
@@ -22,7 +21,7 @@ export default class MarketSpread extends Component {
 
   get_highest_bid = (pairs) => {
     let arr = []
-    pairs.map((pair) => {
+    pairs.forEach((pair) => {
       if(pair.last_ticker.bid !== null)
         arr.push({pair: pair, highest_bid: pair.last_ticker.bid})
     })
