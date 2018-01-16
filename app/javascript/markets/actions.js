@@ -8,6 +8,13 @@ export const markets_fetched = (markets) => {
   }
 }
 
+export const market_search_fetched = (markets) => {
+  return {
+    type: 'MARKET_SEARCH_FETCHED',
+    payload: markets
+  }
+}
+
 export const hocl_fetched = (hocl) => {
   return {
     type: 'HOCL_FETCHED',
@@ -78,6 +85,17 @@ export const set_markets_loading = (is_loading) => {
   }
 }
 
+export const market_search = (value) => {
+  return (dispatch) => {
+    axios.get('/api/v1/public/markets?market_search=' + value, {responseType: 'json'})
+      .then((response) => {
+        dispatch(market_search_fetched({page_nb: 0, markets: response.data.markets}))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+}
 
 // export const retrieve_ohcl = (market, intent_nb) => {
 //   return (dispatch) => {

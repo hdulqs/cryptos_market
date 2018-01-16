@@ -18,7 +18,7 @@ const styles = {
   }
 }
 
-export default class MarketList extends Component {
+class MarketList extends Component {
 
   constructor(props){
     super(props)
@@ -60,18 +60,22 @@ export default class MarketList extends Component {
   }
 
   search_market = (event) => {
-    let filtered_markets = this.filterList(event)
-    this.setState({markets: filtered_markets})
+    //if(event.target.value.length > 0){
+      this.props.set_markets_loading(true)
+      this.props.market_search(event.target.value)
+    //}
+    //let filtered_markets = this.filterList(event)
+    //this.setState({markets: filtered_markets})
   }
 
-  filterList = (event) => {
-    let updatedList = this.props.markets
-    updatedList = updatedList.filter((item) => {
-      return item.name.toLowerCase().search(
-        event.target.value.toLowerCase()) !== -1
-    })
-    return updatedList
-  }
+  //filterList = (event) => {
+  //  let updatedList = this.props.markets
+  //  updatedList = updatedList.filter((item) => {
+  //    return item.name.toLowerCase().search(
+  //      event.target.value.toLowerCase()) !== -1
+  //  })
+  //  return updatedList
+  //}
 
   render(){
     let markets_xx = []
@@ -95,3 +99,18 @@ export default class MarketList extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    markets: state.MarketsReducer.markets,
+    current_page: state.MarketsReducer.current_page,
+    is_markets_loading: state.MarketsReducer.is_markets_loading
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(markets_actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MarketList)

@@ -19,6 +19,12 @@ export default function MarketsReducer(state = initialState, action={}) {
         current_page: action.payload.page_nb,
         is_markets_loading: false
       }
+    case 'MARKET_SEARCH_FETCHED':
+      return {
+        ...state,
+        markets: action.payload.markets,
+        is_markets_loading: false
+      }
     case 'RECEIVED_TICKER':
       return {
         ...state,
