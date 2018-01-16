@@ -12,9 +12,23 @@ const styles = {}
 
 class MarketContainer extends Component {
 
+  constructor(props){
+    super(props)
+  }
+
   componentDidMount(){
-    this.props.fetch_markets()
+    this.props.set_markets_loading(true)
+    this.props.fetch_markets(this.props.current_page + 1)
     this.createSocket()
+    window.addEventListener('scroll', this.onScroll, false)
+  }
+
+  onScroll = () => {
+    if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
+            && this.props.markets.length && !this.props.is_markets_loading ) {
+      this.props.set_markets_loading(true)
+      this.props.fetch_markets(this.props.current_page + 1)
+    }
   }
 
   createSocket() {
@@ -48,7 +62,9 @@ class MarketContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    markets: state.MarketsReducer.markets
+    markets: state.MarketsReducer.markets,
+    current_page: state.MarketsReducer.current_page,
+    is_markets_loading: state.MarketsReducer.is_markets_loading
   }
 }
 

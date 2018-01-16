@@ -5,7 +5,9 @@ export const RECEIVED_TICKER = 'RECEIVED_TICKER'
 
 const initialState = {
   markets: [],
-  charts_data: {}
+  charts_data: {},
+  current_page: 0,
+  is_loading: true
 };
 
 export default function MarketsReducer(state = initialState, action={}) {
@@ -13,12 +15,19 @@ export default function MarketsReducer(state = initialState, action={}) {
     case 'MARKETS_FETCHED':
       return {
         ...state,
-        markets: action.payload
+        markets: state.markets.concat(action.payload.markets),
+        current_page: action.payload.page_nb,
+        is_markets_loading: false
       }
     case 'RECEIVED_TICKER':
       return {
         ...state,
         markets: action.payload
+      }
+    case 'MARKETS_LOADING':
+      return {
+        ...state,
+        is_markets_loading: action.payload
       }
     case 'HOCL_FETCHED':
       return {

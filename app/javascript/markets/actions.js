@@ -15,6 +15,13 @@ export const hocl_fetched = (hocl) => {
   }
 }
 
+export const markets_loading = (is_loading) => {
+  return {
+    type: 'MARKETS_LOADING',
+    payload: is_loading
+  }
+}
+
 
 export const received_ticker = (markets) => {
   return {
@@ -23,11 +30,11 @@ export const received_ticker = (markets) => {
   }
 }
 
-export const fetch_markets = () => {
+export const fetch_markets = (page_nb) => {
   return (dispatch) => {
-    axios.get('/api/v1/public/markets', {responseType: 'json'})
+    axios.get('/api/v1/public/markets?page=' + page_nb, {responseType: 'json'})
       .then((response) => {
-        dispatch(markets_fetched(response.data.markets))
+        dispatch(markets_fetched({page_nb: page_nb, markets: response.data.markets}))
       })
       .catch((error) => {
         console.log(error)
@@ -64,6 +71,13 @@ export const got_hocl = (obj) => {
     dispatch(hocl_fetched(obj))
   }
 }
+
+export const set_markets_loading = (is_loading) => {
+  return (dispatch) => {
+    dispatch(markets_loading(is_loading))
+  }
+}
+
 
 // export const retrieve_ohcl = (market, intent_nb) => {
 //   return (dispatch) => {

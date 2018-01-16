@@ -1,11 +1,12 @@
 class Api::V1::Public::MarketsController < Api::V1::BaseController
 
   def index
-    @markets = Market#.of_interest#.find([306, 305, 329, 383, 378, 262]) #Market.of_interest.first(8)
+    @markets = Market#.of_interest.find([306, 305, 329, 383, 378, 262]) #Market.of_interest.first(8)
                     .of_interest
                     .left_joins(:pairs)
                     .group(:id)
                     .order('COUNT(pairs.id) DESC')
+                    .page(params[:page]).per(12) # kaminari pagination
     render 'api/v1/public/markets/index.json'
   end
 
