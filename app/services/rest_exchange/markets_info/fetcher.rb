@@ -1,4 +1,4 @@
-class RestExchange::Tickers::Fetcher < RestExchange::Base
+class RestExchange::MarketsInfo::Fetcher < RestExchange::Base
 
   # Used only by Poloniex which does not provide a Ticker endpoint
   #
@@ -13,7 +13,6 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
     @exchange.save!
 
     std_tickers = normalized_tickers(tickers_payload)
-    #binding.pry
 
     std_tickers.each do |key, ticker|
       # binding.pry
@@ -60,34 +59,9 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
     elsif @exchange.name == 'exmo'
       tickers_payload
     elsif @exchange.name == 'bittrex'
-      tickers_payload['result'].map do |item|
-        [item["MarketName"], item]
-      end
+      tickers_payload['result'].with_indifferent_access
     elsif @exchange.name == 'bleutrade'
-      tickers_payload['result'].map do |item|
-        [item["MarketName"], item]
-      end
-    elsif @exchange.name == 'coinexchange'
-      tickers_payload['result'].map do |item|
-        [item["MarketID"], item]
-      end
-    elsif @exchange.name == 'cryptopia'
-      tickers_payload['Data'].map do |item|
-        key = item["Label"].split('/').join('_')
-        [key, item]
-      end
-    elsif @exchange.name == 'etherdelta'
-      tickers_payload
-    elsif @exchange.name == 'gate'
-      tickers_payload
-    elsif @exchange.name == 'hibtc'
-      tickers_payload.map do |item|
-        [item["symbol"], item]
-      end
-    elsif @exchange.name == 'quoine'
-      tickers_payload.map do |item|
-        [item['currency_pair_code'], item]
-      end
+      tickers_payload['result'].with_indifferent_access
     else
       tickers_payload
     end

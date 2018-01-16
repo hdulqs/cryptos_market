@@ -12,7 +12,7 @@ class Ticker < ApplicationRecord
 
   private
   def get_spread
-    self.spread = ( (ask - bid) / (ask + bid) ) * 100
+    self.spread = ( (ask - bid) / (ask + bid) ) * 100 rescue 0
   end
 
   def render_ticker ticker
