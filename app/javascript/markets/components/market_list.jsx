@@ -5,6 +5,7 @@ import { Row, FormGroup, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as markets_actions from './../actions'
+import uuid from 'uuid/v1'
 
 const styles = {
   search_bar: {
@@ -85,7 +86,7 @@ export default class MarketList extends Component {
 		    </FormGroup>
         {
           markets_xx.map((markets) =>
-            <Row className="show-grid" key={markets[0].id}>
+            <Row className="show-grid" key={uuid()}>
               <MarketRow markets={markets}></MarketRow>
             </Row>
           )
