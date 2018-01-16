@@ -13,6 +13,7 @@ json.markets @markets do |market|
       json.ask pair.tickers.last ? pair.tickers.last.ask : nil
       json.bid pair.tickers.last ? pair.tickers.last.bid : nil
       json.last pair.tickers.last ? pair.tickers.last.last : nil
+      json.percent_change pair.tickers.last ? pair.tickers.last.percent_change : nil
       json.volume pair.tickers.last ? pair.tickers.last.volume : (pair.tickers.last ? pair.tickers.last.base_volume : nil)
     end
   end

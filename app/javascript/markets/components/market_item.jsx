@@ -28,6 +28,12 @@ const styles = {
   },
   chart_list_glyph: {
     display: 'flex'
+  },
+  arrow_up: {
+    color: 'green'
+  },
+  arrow_down: {
+    color: 'red'
   }
 }
 
@@ -88,6 +94,25 @@ class MarketItem extends Component {
     return ( ((high - low) / (high + low)) * 100 ).toFixed(2)
   }
 
+  get_percent_change = (pairs) => {
+    let change = 0
+    this.props.market.pairs.forEach((pair) => {
+      if(pair.last_ticker.percent_change === null){
+        return
+      }
+      change = pair.last_ticker.percent_change
+    })
+    if(change > 0){
+      return (
+        <div style={this.state.style.arrow_up}>{parseFloat(change).toFixed(2)} %&nbsp;<Glyphicon glyph="arrow-up" /></div>
+      )
+    }else {
+      return (
+        <div style={this.state.style.arrow_down}>{parseFloat(change).toFixed(2)} %&nbsp;<Glyphicon glyph="arrow-down" /></div>
+      )
+    }
+  }
+
   render(){
     return(
       <div>
@@ -96,67 +121,70 @@ class MarketItem extends Component {
             case "chart":
               return (
                 <div>
-                <div style={this.state.style.item_header}>
-                <div style={styles.chart_glyph} onClick={this.show_table_tab}>
-                  <Glyphicon glyph="list" />
-                </div>
-                <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
-                <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
-                </div>
-                <div style={this.state.style.item_header}>
-                  <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
-                  <p>Bid: {this.get_highest_bid(this.props.market.pairs)}</p>
-                  <p onClick={this.show_spread_tab}>
-                    <Glyphicon glyph="search" /> Spread: {this.get_spread(this.props.market.pairs)}%
-                  </p>
-                </div>
-                <MarketChartIndex market={this.props.market} charts_data={this.props.charts_data}></MarketChartIndex>
+                  <div style={this.state.style.item_header}>
+                    <div style={styles.chart_glyph} onClick={this.show_table_tab}>
+                      <Glyphicon glyph="list" />
+                    </div>
+                    <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
+                    <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
+                    <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
+                  </div>
+                  <div style={this.state.style.item_header}>
+                    <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
+                    <p>Bid: {this.get_highest_bid(this.props.market.pairs)}</p>
+                    <p onClick={this.show_spread_tab}>
+                      <Glyphicon glyph="search" /> Spread: {this.get_spread(this.props.market.pairs)}%
+                    </p>
+                  </div>
+                  <MarketChartIndex market={this.props.market} charts_data={this.props.charts_data}></MarketChartIndex>
                 </div>
               )
             case "spread":
               return (
                 <div>
                 <div style={this.state.style.item_header}>
-                <div style={styles.chart_list_glyph}>
-                  <div style={styles.chart_glyph} onClick={this.show_table_tab}>
-                    <Glyphicon glyph="list" />
+                  <div style={styles.chart_list_glyph}>
+                    <div style={styles.chart_glyph} onClick={this.show_table_tab}>
+                      <Glyphicon glyph="list" />
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div style={styles.chart_glyph} onClick={this.show_chart_tab}>
+                      <Glyphicon glyph="stats" />
+                    </div>
                   </div>
-                  &nbsp;&nbsp;&nbsp;
-                  <div style={styles.chart_glyph} onClick={this.show_chart_tab}>
-                    <Glyphicon glyph="stats" />
+                  <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
+                  <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
+                  <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
                   </div>
-                </div>
-                <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
-                <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
-                </div>
-                <div style={this.state.style.item_header}>
-                  <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
-                  <p>Bid: {this.get_highest_bid(this.props.market.pairs)}</p>
-                  <p onClick={this.show_spread_tab}>
-                    <Glyphicon glyph="search" /> Spread: {this.get_spread(this.props.market.pairs)}%
-                  </p>
-                </div>
-                <MarketSpread pairs={this.props.market.pairs}></MarketSpread>
+                  <div style={this.state.style.item_header}>
+                    <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
+                    <p>Bid: {this.get_highest_bid(this.props.market.pairs)}</p>
+                    <p onClick={this.show_spread_tab}>
+                      <Glyphicon glyph="search" /> Spread: {this.get_spread(this.props.market.pairs)}%
+                    </p>
+                  </div>
+                  <MarketSpread pairs={this.props.market.pairs}></MarketSpread>
                 </div>
               )
             case "table":
               return (
                 <div>
-                <div style={this.state.style.item_header}>
-                <div style={styles.chart_glyph} onClick={this.show_chart_tab}>
-                  <Glyphicon glyph="stats" />
-                </div>
-                <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
-                <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
-                </div>
-                <div style={this.state.style.item_header}>
-                  <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
-                  <p>Bid: {this.get_highest_bid(this.props.market.pairs)}</p>
-                  <p onClick={this.show_spread_tab}>
-                    <Glyphicon glyph="search" /> Spread: {this.get_spread(this.props.market.pairs)}%
-                  </p>
-                </div>
-                <MarketTable pairs={this.props.market.pairs}></MarketTable>
+                  <div style={this.state.style.item_header}>
+                  <div style={styles.chart_glyph} onClick={this.show_chart_tab}>
+                    <Glyphicon glyph="stats" />
+                  </div>
+                  <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
+                  <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
+                  <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
+                  </div>
+                  <div style={this.state.style.item_header}>
+                    <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
+                    <p>Bid: {this.get_highest_bid(this.props.market.pairs)}</p>
+                    <p onClick={this.show_spread_tab}>
+                      <Glyphicon glyph="search" /> Spread: {this.get_spread(this.props.market.pairs)}%
+                    </p>
+                  </div>
+                  <MarketTable pairs={this.props.market.pairs}></MarketTable>
                 </div>
               )
             default:
