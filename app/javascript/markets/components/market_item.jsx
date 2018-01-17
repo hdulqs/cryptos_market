@@ -50,25 +50,31 @@ class MarketItem extends Component {
   constructor(props){
     super(props)
     this.state = {
-      style: styles,
-      current_tab: 'table'
+      style: styles
     }
   }
+
 
   get_style = () => {
     return this.state.style.market_item
   }
 
   show_chart_tab = () => {
-    this.setState({current_tab: 'chart'})
+    let payload = {market_id: this.props.market.id, tab: 'chart'}
+    this.props.select_tab(payload)
+    //this.setState({current_tab: 'chart'})
   }
 
   show_table_tab = () => {
-    this.setState({current_tab: 'table'})
+    let payload = {market_id: this.props.market.id, tab: 'table'}
+    this.props.select_tab(payload)
+    //this.setState({current_tab: 'table'})
   }
 
   show_spread_tab = () => {
-    this.setState({current_tab: 'spread'})
+    let payload = {market_id: this.props.market.id, tab: 'spread'}
+    this.props.select_tab(payload)
+    //this.setState({current_tab: 'spread'})
   }
 
   get_lowest_ask = (pairs) => {
@@ -114,10 +120,11 @@ class MarketItem extends Component {
   }
 
   render(){
+    let tab = this.props.current_tab[this.props.market.id] || 'table'
     return(
       <div>
         {(() => {
-          switch (this.state.current_tab) {
+          switch (tab) {
             case "chart":
               return (
                 <div>
@@ -199,7 +206,8 @@ class MarketItem extends Component {
 const mapStateToProps = (state) => {
   return {
     markets: state.MarketsReducer.markets,
-    charts_data: state.MarketsReducer.charts_data
+    charts_data: state.MarketsReducer.charts_data,
+    current_tab: state.MarketsReducer.current_tab
   }
 }
 

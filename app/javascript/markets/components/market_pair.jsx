@@ -6,7 +6,7 @@ import history from './../../main/history'
 
 const styles = {
   red_flash: {
-    color: 'red'
+    color: 'red' //'#efff00'
   }
 }
 

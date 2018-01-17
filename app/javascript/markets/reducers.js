@@ -7,7 +7,8 @@ const initialState = {
   markets: [],
   charts_data: {},
   current_page: 0,
-  is_loading: true
+  is_loading: true,
+  current_tab: {}
 };
 
 export default function MarketsReducer(state = initialState, action={}) {
@@ -41,6 +42,14 @@ export default function MarketsReducer(state = initialState, action={}) {
         charts_data: {
           ...state.charts_data,
           [action.payload.market_name]: action.payload.charts_data
+        }
+      }
+    case 'SET_TAB':
+      return {
+        ...state,
+        current_tab: {
+          ...state.current_tab,
+          [action.payload.market_id]: action.payload.tab
         }
       }
     default:

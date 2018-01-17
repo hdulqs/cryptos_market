@@ -47,6 +47,9 @@ class MarketChartIndex extends Component {
         this.props.got_hocl(obj)
       })
       .catch((error) => {
+        if(error.response.status === 429){
+          return false
+        }
         if(error.response.status === 400){
           if(intent_nb < 4){
             intent_nb = intent_nb + 1

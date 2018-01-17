@@ -36,6 +36,13 @@ export const received_ticker = (market) => {
   }
 }
 
+export const set_tab = (tab) => {
+  return {
+    type: 'SET_TAB',
+    payload: tab
+  }
+}
+
 
 
 export const fetch_markets = (page_nb) => {
@@ -101,6 +108,11 @@ export const market_search = (value) => {
   }
 }
 
+export const select_tab = (tab) => {
+  return (dispatch) => {
+    dispatch(set_tab(tab))
+  }
+}
 // export const retrieve_ohcl = (market, intent_nb) => {
 //   return (dispatch) => {
 //     //let intent_nb = 0
