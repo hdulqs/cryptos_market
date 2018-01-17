@@ -29,13 +29,14 @@ export const markets_loading = (is_loading) => {
   }
 }
 
-
-export const received_ticker = (markets) => {
+export const received_ticker = (market) => {
   return {
     type: 'RECEIVED_TICKER',
-    payload: markets
+    payload: market
   }
 }
+
+
 
 export const fetch_markets = (page_nb) => {
   return (dispatch) => {
@@ -52,25 +53,24 @@ export const fetch_markets = (page_nb) => {
 export const update_markets_ticker = (markets, ticker) => {
   return (dispatch) => {
     let new_markets = [...markets]
-    new_markets.map((market) =>
-      market.pairs.map((pair) => {
-        if(pair.id === ticker.pair_id){
-          const lastticker = {
-            id: ticker.id,
-            ask: ticker.ask,
-            bid: ticker.bid,
-            last: ticker.last,
-            volume: ticker.volume,
-            percent_change: ticker.percent_change
-          }
-          pair.last_to_be_updated = true
-          pair.last_ticker = lastticker
-        }else{
-          pair.last_to_be_updated = false
+    let new_market = new_markets.find((x) => x.id === ticker.market_id)
+    new_market.pairs.map((pair) => {
+      if(pair.id === ticker.pair_id){
+        const lastticker = {
+          id: ticker.id,
+          ask: ticker.ask,
+          bid: ticker.bid,
+          last: ticker.last,
+          volume: ticker.volume,
+          percent_change: ticker.percent_change
         }
-      })
-    )
-    dispatch(received_ticker(new_markets))
+        pair.last_to_be_updated = true
+        pair.last_ticker = lastticker
+      }else{
+        pair.last_to_be_updated = false
+      }
+    })
+    dispatch(received_ticker(new_market))
   }
 }
 

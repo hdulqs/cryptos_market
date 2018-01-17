@@ -28,7 +28,7 @@ export default function MarketsReducer(state = initialState, action={}) {
     case 'RECEIVED_TICKER':
       return {
         ...state,
-        markets: action.payload
+        markets: state.markets.map(market => (market.id === action.payload.market_id) ? action.payload : market)
       }
     case 'MARKETS_LOADING':
       return {
