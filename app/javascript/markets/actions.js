@@ -54,6 +54,9 @@ export const update_markets_ticker = (markets, ticker) => {
   return (dispatch) => {
     let new_markets = [...markets]
     let new_market = new_markets.find((x) => x.id === ticker.market_id)
+    if(new_market === undefined){
+      return
+    }
     new_market.pairs.map((pair) => {
       if(pair.id === ticker.pair_id){
         const lastticker = {
