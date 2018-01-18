@@ -24,10 +24,12 @@ class MarketContainer extends Component {
   }
 
   onScroll = () => {
-    if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
-            && this.props.markets.length && !this.props.is_markets_loading ) {
-      this.props.set_markets_loading(true)
-      this.props.fetch_markets(this.props.current_page + 1)
+    if(window.location.pathname === '/'){
+      if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
+              && this.props.markets.length && !this.props.is_markets_loading ) {
+        this.props.set_markets_loading(true)
+        this.props.fetch_markets(this.props.current_page + 1)
+      }
     }
   }
 
