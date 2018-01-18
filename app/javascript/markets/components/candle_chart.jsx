@@ -133,7 +133,7 @@ class CandleChart extends React.Component {
 					<MouseCoordinateY
 						at="right"
 						orient="right"
-						displayFormat={format(".2f")} />
+						displayFormat={format(".5f")} />
 
 					<CandlestickSeries
 						stroke={d => d.close > d.open ? "#6BA583" : "#DB0000"}
@@ -151,7 +151,7 @@ class CandleChart extends React.Component {
 					<EdgeIndicator itemType="last" orient="right" edgeAt="right"
 						yAccessor={d => d.close} fill={d => d.close > d.open ? "#6BA583" : "#DB0000"}/>
 
-					<OHLCTooltip origin={[-40, -10]}/>
+					<OHLCTooltip origin={[-40, -10]} />
 					<MovingAverageTooltip
 						onClick={e => console.log(e)}
 						origin={[-38, 15]}
@@ -180,7 +180,7 @@ class CandleChart extends React.Component {
 					yExtents={d => d.volume}
 					height={100} origin={(w, h) => [0, h - 475]}
 				>
-					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")}
+					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".4s")}
 						tickStroke="#FFFFFF" />
 					<BarSeries
 						yAccessor={d => d.volume}
@@ -200,7 +200,7 @@ class CandleChart extends React.Component {
 					<MouseCoordinateY
 						at="right"
 						orient="right"
-						displayFormat={format(".2f")} />
+						displayFormat={format(".4f")} />
 
 					<StochasticSeries
 						yAccessor={d => d.slowSTO}
@@ -228,7 +228,7 @@ class CandleChart extends React.Component {
 					<MouseCoordinateY
 						at="right"
 						orient="right"
-						displayFormat={format(".2f")} />
+						displayFormat={format(".4f")} />
 
 					<StochasticSeries
 						yAccessor={d => d.fastSTO}
@@ -257,11 +257,11 @@ class CandleChart extends React.Component {
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
-						displayFormat={timeFormat("%Y-%m-%d")} />
+						displayFormat={timeFormat("%m-%d-%H:%M")} />
 					<MouseCoordinateY
 						at="right"
 						orient="right"
-						displayFormat={format(".2f")} />
+						displayFormat={format(".4f")} />
 
 					<StochasticSeries
 						yAccessor={d => d.fullSTO}
