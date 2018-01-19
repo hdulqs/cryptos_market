@@ -22,7 +22,7 @@ class MarketList extends Component {
 
   constructor(props){
     super(props)
-    this.state = {containerWidth: 0, col_nb: 3, markets: props.markets}
+    this.state = {containerWidth: 0, col_nb: 3}
   }
 
   _handleWindowResize = () => {
@@ -46,10 +46,10 @@ class MarketList extends Component {
     }
   }
 
-  componentWillReceiveProps(props){
-    if(props.markets.length > 0)
-      this.setState({markets: props.markets})
-  }
+  //componentWillReceiveProps(props){
+  //  if(props.markets.length > 0)
+  //    this.setState({markets: props.markets})
+  //}
 
 
   componentDidMount () {
@@ -79,7 +79,7 @@ class MarketList extends Component {
 
   render(){
     let markets_xx = []
-    let copy_markets = [...this.state.markets]
+    let copy_markets = [...this.props.markets]
     while (copy_markets.length) {
       markets_xx.push(copy_markets.splice(0, this.state.col_nb))
     }

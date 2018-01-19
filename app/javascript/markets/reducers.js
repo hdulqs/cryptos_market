@@ -7,7 +7,7 @@ const initialState = {
   markets: [],
   charts_data: {},
   current_page: 0,
-  is_loading: true,
+  is_markets_loading: true,
   current_tab: {}
 };
 

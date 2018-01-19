@@ -17,10 +17,16 @@ class MarketContainer extends Component {
   }
 
   componentDidMount(){
-    this.props.set_markets_loading(true)
-    this.props.fetch_markets(this.props.current_page + 1)
+    if(this.props.markets.length === 0){
+      this.props.set_markets_loading(true)
+      this.props.fetch_markets(this.props.current_page + 1)
+    }
     this.createSocket()
     window.addEventListener('scroll', this.onScroll, false)
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.onScroll)
   }
 
   onScroll = () => {
