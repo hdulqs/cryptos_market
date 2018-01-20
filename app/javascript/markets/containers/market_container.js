@@ -25,12 +25,8 @@ class MarketContainer extends Component {
     window.addEventListener('scroll', this.onScroll, false)
   }
 
-  componentWillUnmount(){
-    window.removeEventListener('scroll', this.onScroll)
-  }
-
   onScroll = () => {
-    if(window.location.pathname === '/'){
+    if(window.location.pathname === '/asset-pairs'){
       if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
               && this.props.markets.length && !this.props.is_markets_loading ) {
         this.props.set_markets_loading(true)
@@ -40,7 +36,8 @@ class MarketContainer extends Component {
   }
 
   createSocket() {
-    Cable.createConsumer().subscriptions.create({
+    this.tickers_consumer = Cable.createConsumer()
+    this.tickers_subscription = this.tickers_consumer.subscriptions.create({
         channel: 'TickersChannel'
       }, {
       connected: () => {
@@ -51,6 +48,11 @@ class MarketContainer extends Component {
         this.props.update_markets_ticker(this.props.markets, JSON.parse(data.ticker))
       }
     })
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.onScroll)
+    this.tickers_subscription && this.tickers_consumer.subscriptions.remove(this.tickers_subscription)
   }
 
   render() {

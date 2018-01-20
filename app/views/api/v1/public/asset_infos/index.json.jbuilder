@@ -1,0 +1,18 @@
+json.asset_infos @asset_infos do |asset|
+  json.id asset.id
+  json.original_id asset.original_id
+  json.rank asset.rank
+  json.name asset.name
+  json.symbol asset.symbol
+  json.price_usd asset.price_usd
+  json.price_btc asset.price_btc
+  json.max_supply asset.max_supply
+  json.total_supply asset.total_supply
+  json.volume_usd_24h asset.volume_usd_24h
+  json.market_cap_usd asset.market_cap_usd
+  json.available_supply asset.available_supply
+  json.percent_change_1h asset.percent_change_1h
+  json.percent_change_7d asset.percent_change_7d
+  json.percent_change_24h asset.percent_change_24h
+  json.last_updated asset.last_updated
+end

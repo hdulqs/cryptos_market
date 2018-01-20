@@ -3,6 +3,7 @@
   - reports_generator_job
   - ticker_fetcher_job
   - tickers_fetcher_job
+  - assets_info_fetcher_job
 :schedule:
   reports_generator_job:
     #every: ['60s', first_in: '60s']   # Runs once per minute

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217184940) do
+ActiveRecord::Schema.define(version: 20180120112513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(version: 20171217184940) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "asset_infos", force: :cascade do |t|
+    t.string "original_id"
+    t.integer "rank"
+    t.string "name"
+    t.string "symbol"
+    t.decimal "price_usd"
+    t.decimal "price_btc"
+    t.decimal "volume_usd_24h"
+    t.decimal "market_cap_usd"
+    t.decimal "available_supply"
+    t.decimal "total_supply"
+    t.decimal "max_supply"
+    t.decimal "percent_change_1h"
+    t.decimal "percent_change_24h"
+    t.decimal "percent_change_7d"
+    t.integer "last_updated"
+    t.jsonb "original_payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "assets", force: :cascade do |t|

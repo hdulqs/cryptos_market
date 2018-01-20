@@ -1,0 +1,2 @@
+class AssetInfo < ApplicationRecord
+end
