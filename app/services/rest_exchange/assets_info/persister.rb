@@ -6,13 +6,12 @@ class RestExchange::AssetsInfo::Persister
 
   def call
     @assets_array.each do |asset_payload|
-      #binding.pry
       asset = AssetInfo.find_by(original_id: asset_payload[:id])
       if asset
         asset_payload[:volume_usd_24h] = asset_payload["24h_volume_usd"]
         asset_payload.except!("id", "24h_volume_usd")
         asset.update_attributes(asset_payload)
-      else asset
+      else
         asset = AssetInfo.new(
           original_id: asset_payload[:id],
           rank: asset_payload[:rank],
