@@ -89,9 +89,9 @@ class MarketList extends Component {
     }
     return(
       <div style={styles.market_list}>
-        <FormGroup style={styles.search_bar}>
+        {/*<FormGroup style={styles.search_bar}>
 			     <FormControl type="text" placeholder="Search Cryptos Market" onChange={this.search_market} style={styles.search_input} />
-		    </FormGroup>
+		    </FormGroup>*/}
         {
           markets_xx.map((markets) =>
             <Row className="show-grid" key={uuid()}>

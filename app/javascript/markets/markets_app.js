@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import MarketContainer from './containers/market_container'
+import MarketsNavBar from './markets_nav_bar'
 
 const MarketsApp = () => {
   return (
-    <MarketContainer />
+    <nav>
+      <MarketsNavBar />
+      <MarketContainer />
+    </nav>
   )
 }
 

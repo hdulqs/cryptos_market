@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import AssetsContainer from './containers/assets_container'
+import AssetsNavBar from './assets_nav_bar'
 
 const AssetsApp = () => {
   return (
-    <AssetsContainer />
+    <nav>
+      <AssetsNavBar />
+      <AssetsContainer />
+    </nav>
   )
 }
 

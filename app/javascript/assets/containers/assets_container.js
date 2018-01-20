@@ -61,7 +61,6 @@ class AssetsContainer extends Component {
 		}
     return(
       <Grid fluid={true}>
-        <h2 className='text-center'>Cryptos Market Cap</h2>
         <AssetList markets={this.props.assets}></AssetList>
       </Grid>
     )

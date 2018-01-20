@@ -10,7 +10,7 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
                     .left_joins(:pairs)
                     .group(:id)
                     .order('COUNT(pairs.id) DESC')
-                    .page(params[:page]).per(12)
+                    .page(params[:page]).per(15)
     end
     render 'api/v1/public/markets/index.json'
   end

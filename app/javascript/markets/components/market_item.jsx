@@ -14,7 +14,8 @@ const styles = {
     'overflow': 'hidden',
   },
   title: {
-    'color': '#adf96c'
+    //'color': '#adf96c'
+    color: 'rgb(234, 195, 98)'
   },
   item_header: {
     display: 'flex',

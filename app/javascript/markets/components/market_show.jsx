@@ -6,6 +6,7 @@ import CandleChart from './candle_chart'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as markets_actions from './../actions'
+import { Glyphicon } from 'react-bootstrap'
 
 class MarketShow extends Component {
 
@@ -84,7 +85,7 @@ class MarketShow extends Component {
                       this.props.charts_data[this.props.match.params.market]
     if (charts_data.length === 0) {
 			return (
-        <div className="loader-small"></div>
+        <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
       )
 		}
     return(
