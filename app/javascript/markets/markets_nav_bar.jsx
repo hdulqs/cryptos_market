@@ -7,19 +7,14 @@ import * as markets_actions from './actions'
 class MarketsNavBar extends Component {
 
   search_market = (event) => {
-    //if(event.target.value.length > 0){
     let value = ''
     if(event.target.value === 'none'){
       value = event.target.parentElement.getElementsByClassName('form-control')[0].value
     }else {
       value = event.target.value
     }
-
     this.props.set_markets_loading(true)
     this.props.market_search(value)
-    //}
-    //let filtered_markets = this.filterList(event)
-    //this.setState({markets: filtered_markets})
   }
 
   render(){

@@ -19,17 +19,12 @@ export default function AssetsReducer(state = initialState, action={}) {
         current_page: action.payload.page_nb,
         is_assets_loading: false
       }
-    // case 'MARKET_SEARCH_FETCHED':
-    //   return {
-    //     ...state,
-    //     assets: action.payload.assets,
-    //     is_assets_loading: false
-    //   }
-    // case 'RECEIVED_TICKER':
-    //   return {
-    //     ...state,
-    //     assets: state.assets.map(market => (market.id === action.payload.market_id) ? action.payload : market)
-    //   }
+    case 'ASSET_SEARCH_FETCHED':
+      return {
+        ...state,
+        assets: action.payload.assets,
+        is_assets_loading: false
+      }
     case 'ASSETS_LOADING':
       return {
         ...state,

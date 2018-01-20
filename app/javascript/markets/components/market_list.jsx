@@ -63,14 +63,14 @@ class MarketList extends Component {
     window.removeEventListener('resize', this._handleWindowResize)
   }
 
-  search_market = (event) => {
-    //if(event.target.value.length > 0){
-    this.props.set_markets_loading(true)
-    this.props.market_search(event.target.value)
-    //}
-    //let filtered_markets = this.filterList(event)
-    //this.setState({markets: filtered_markets})
-  }
+  // search_market = (event) => {
+  //   //if(event.target.value.length > 0){
+  //   this.props.set_markets_loading(true)
+  //   this.props.market_search(event.target.value)
+  //   //}
+  //   //let filtered_markets = this.filterList(event)
+  //   //this.setState({markets: filtered_markets})
+  // }
 
   //filterList = (event) => {
   //  let updatedList = this.props.markets
