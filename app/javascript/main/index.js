@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <Switch>
           <Route exact path='/' component={AssetsApp} />
           <Route exact path='/asset-pairs' component={MarketsApp} />
-          <Route path='/:symbol' component={AssetShow} />
+          <Route exact path='/:symbol' component={AssetShow} />
           <Route path='/:exchange_name/:market' component={MarketShow} />
         </Switch>
       </Router>
