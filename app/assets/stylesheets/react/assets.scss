@@ -5,6 +5,34 @@
 
 .asset_row {
   td {
-    padding: 15px !important;
+    padding: 5px !important;
+    height: 90px;
+
+    // span{
+    //   line-height: 70px;
+    // }
   }
+}
+
+.table-condensed>tbody>tr>td{
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.candle-chart{
+  .react-stockcharts-tooltip{
+    fill: white;
+  }
+}
+
+.loader-row {
+  position: relative;
+  top: 6.5em;
+  left: calc(50% - 4em);
+  width: 2em;
+  height: 2em;
+  border: 0.4em solid #ff7f0e;
+  border-left: 0.4em solid #e6e6e4;
+  border-radius: 50%;
+  animation: load8 1.1s infinite linear;
 }

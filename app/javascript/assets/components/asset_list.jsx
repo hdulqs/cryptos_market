@@ -54,9 +54,8 @@ class AssetList extends Component {
     				<th>24h Volume</th>
             <th>Market Cap</th>
             <th>Available Supply</th>
-            <th>Percent Change 1h</th>
-            <th>Percent Change 24h</th>
-            <th>Percent Change 7d</th>
+            <th>24h Change</th>
+            <th>7d Trend</th>
     			</tr>
     		</thead>
     		<tbody>

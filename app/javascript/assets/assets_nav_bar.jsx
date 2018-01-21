@@ -17,6 +17,13 @@ class AssetsNavBar extends Component {
     this.props.asset_search(value)
   }
 
+  reset_search_asset = (event) => {
+    let value = ''
+    this.props.set_assets_loading(true)
+    this.props.asset_search(value)
+    event.target.parentElement.getElementsByClassName('form-control')[0].value = ''
+  }
+
   render(){
     return (
       <Navbar inverse>
@@ -29,7 +36,7 @@ class AssetsNavBar extends Component {
     		<Navbar.Collapse>
           <Nav>
             <NavItem eventKey={1} href="/">
-              Assets
+              Coins
             </NavItem>
             <NavItem eventKey={2} href="/asset-pairs">
               Markets
@@ -37,9 +44,10 @@ class AssetsNavBar extends Component {
           </Nav>
       			<Navbar.Form pullRight>
       				<FormGroup>
-      					<FormControl type="text" placeholder="Search Asset" onChange={this.search_asset} />
+      					<FormControl type="text" placeholder="Search Asset"  />
       				</FormGroup>{' '}
-      				<Button type="submit" value="none" onClick={this.search_asset}>Search</Button>
+      				<Button type="submit" value="none" className='btn btn-info' onClick={this.search_asset}>Search</Button>&nbsp;
+      				<Button type="submit" value="none" className='btn btn-danger' onClick={this.reset_search_asset}>Reset</Button>
       			</Navbar.Form>
 
     		</Navbar.Collapse>

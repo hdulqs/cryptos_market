@@ -83,7 +83,7 @@ class AssetShow extends Component {
       )
 		}
     return(
-      <div>
+      <div className='candle-chart'>
         <h2 className='text-center'>{this.props.match.params.symbol}-USD</h2>
         <CandleChart data={this.state.asset_chart} />
       </div>
