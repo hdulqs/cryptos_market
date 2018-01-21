@@ -22,7 +22,7 @@ const MarketTable = (props) => {
     let ordered_pairs = pairs.sort((a, b) => b.ticker - a.ticker)
     let pairs_array = ordered_pairs.map((pair) => pair.pair)
     return(
-      <Table condensed responsive>
+      <Table condensed responsive hover>
         <thead>
           <tr>
             <th>Exchange</th>

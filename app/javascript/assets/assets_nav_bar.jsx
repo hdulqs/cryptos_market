@@ -17,6 +17,12 @@ class AssetsNavBar extends Component {
     this.props.asset_search(value)
   }
 
+  key_press_search_asset = (event) => {
+    if(event.charCode === 13){
+      this.search_asset(event)
+    }
+  }
+
   reset_search_asset = (event) => {
     let value = ''
     this.props.set_assets_loading(true)
@@ -44,7 +50,7 @@ class AssetsNavBar extends Component {
           </Nav>
       			<Navbar.Form pullRight>
       				<FormGroup>
-      					<FormControl type="text" placeholder="Search Asset"  />
+      					<FormControl type="text" placeholder="Search Asset" onKeyPress={this.key_press_search_asset} />
       				</FormGroup>{' '}
       				<Button type="submit" value="none" className='btn btn-info' onClick={this.search_asset}>Search</Button>&nbsp;
       				<Button type="submit" value="none" className='btn btn-danger' onClick={this.reset_search_asset}>Reset</Button>

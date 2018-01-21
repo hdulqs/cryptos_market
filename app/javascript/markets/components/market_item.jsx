@@ -133,7 +133,7 @@ class MarketItem extends Component {
                     <div style={styles.chart_glyph} onClick={this.show_table_tab}>
                       <Glyphicon glyph="list" />
                     </div>
-                    <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
+                    <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
                     <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
                     <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
                   </div>
@@ -160,7 +160,7 @@ class MarketItem extends Component {
                       <Glyphicon glyph="stats" />
                     </div>
                   </div>
-                  <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
+                  <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
                   <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
                   <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
                   </div>
@@ -181,7 +181,7 @@ class MarketItem extends Component {
                   <div style={styles.chart_glyph} onClick={this.show_chart_tab}>
                     <Glyphicon glyph="stats" />
                   </div>
-                  <h4 style={this.state.style.title}>{this.props.market.name + this.props.market.id}</h4>
+                  <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
                   <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
                   <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
                   </div>

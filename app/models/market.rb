@@ -4,6 +4,12 @@ class Market < ApplicationRecord
   has_many :reports
   validates :name, uniqueness: true
 
+  has_attached_file :base_currency_logo, styles: { medium: "300x300>", thumb: "20x20>" }
+  validates_attachment_content_type :base_currency_logo, content_type: /\Aimage\/.*\z/
+
+  has_attached_file :quote_currency_logo, styles: { medium: "300x300>", thumb: "20x20>" }
+  validates_attachment_content_type :quote_currency_logo, content_type: /\Aimage\/.*\z/
+
   scope :of_interest, -> {
     where(is_watched: true)
   }

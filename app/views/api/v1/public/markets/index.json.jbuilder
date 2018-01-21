@@ -3,6 +3,8 @@ json.markets @markets do |market|
   json.name market.name
   json.base_currency market.base_currency
   json.quote_currency market.quote_currency
+  json.base_currency_logo market.base_currency_logo.url(:thumb)
+  json.quote_currency_logo market.quote_currency_logo.url(:thumb)
   json.pairs market.pairs.where(is_watched: true) do |pair|
     json.id pair.id
     json.exchange_name pair.exchange.name
