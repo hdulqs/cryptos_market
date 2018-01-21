@@ -1,5 +1,6 @@
 json.asset_infos @asset_infos do |asset|
   json.id asset.id
+  json.logo_path_thumb asset.logo.url(:thumb)
   json.original_id asset.original_id
   json.rank asset.rank
   json.name asset.name

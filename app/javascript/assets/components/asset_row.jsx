@@ -93,7 +93,7 @@ class AssetsRow extends Component {
     return(
       <tr className="asset_row" onClick={this.navigateToShowAsset}>
 				<td><span>{this.props.asset.rank}</span></td>
-        <td><span>{this.props.asset.name} ({this.props.asset.symbol})</span></td>
+        <td><span><img src={this.props.asset.logo_path_thumb} />&nbsp;&nbsp;{this.props.asset.name} ({this.props.asset.symbol})</span></td>
         <td><NumberFormat value={this.props.asset.price_usd || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></td>
 				<td><NumberFormat value={this.props.asset.volume_usd_24h || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} /></td>
         <td><NumberFormat value={this.props.asset.market_cap_usd || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} /></td>

@@ -17,6 +17,8 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 
+gem 'paperclip', '~> 5.0.0'
+
 gem 'devise'
 
 gem 'kaminari'

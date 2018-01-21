@@ -15,7 +15,7 @@ const styles = {
   },
   title: {
     //'color': '#adf96c'
-    color: 'rgb(234, 195, 98)'
+    color: '#ff7f0e'
   },
   item_header: {
     display: 'flex',
