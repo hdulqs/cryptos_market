@@ -56,7 +56,7 @@ class CustomTooltip extends Component {
 					{/*<ToolTipTSpanLabel key="label_O"> O: </ToolTipTSpanLabel><tspan key="value_O">{open}</tspan>
 					<ToolTipTSpanLabel key="label_H"> H: </ToolTipTSpanLabel><tspan key="value_H">{high}</tspan>
 					<ToolTipTSpanLabel key="label_L"> L: </ToolTipTSpanLabel><tspan key="value_L">{low}</tspan>*/}
-					<ToolTipTSpanLabel className='tooltip-span-label-line-chart' key="label_C"> Value: </ToolTipTSpanLabel><tspan className='tooltip-span-label-line-chart' key="value_C">{close}</tspan>
+					<ToolTipTSpanLabel className='tooltip-span-label-line-chart' key="label_C"> Quote: </ToolTipTSpanLabel><tspan className='tooltip-span-label-line-chart' key="value_C">{close}</tspan>
 					<ToolTipTSpanLabel className='tooltip-span-label-line-chart' key="label_Vol"> Vol: </ToolTipTSpanLabel><tspan className='tooltip-span-label-line-chart' key="value_Vol">{volume}</tspan>
 				</ToolTipText>
 			</g>
