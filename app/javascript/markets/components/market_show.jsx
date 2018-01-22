@@ -6,20 +6,21 @@ import CandleChart from './candle_chart'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as markets_actions from './../actions'
-import { Glyphicon } from 'react-bootstrap'
+import { Glyphicon, Button } from 'react-bootstrap'
 
 class MarketShow extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      market: {}
+      market: {},
+      time_scale: 900
     }
   }
 
   componentDidMount(){
     this.getMarket(this.props.match.params.market)
-    this.retrieve_ohcl(this.props.match.params.market, 0)
+    this.retrieve_ohcl(this.props.match.params.market, 900)
   }
 
   getMarket = (market) => {
@@ -37,7 +38,7 @@ class MarketShow extends Component {
   }
 
 
-  retrieve_ohcl = (market) => {
+  retrieve_ohcl = (market, period) => {
     //let intent_nb = 0
     //let market_param = market.name.split("-").reverse().join("").toLowerCase()
     let market_param = market.split("-").join("").toLowerCase()
@@ -45,10 +46,10 @@ class MarketShow extends Component {
     //let yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date).getTime()
     //let start_timestamp = new Date().getTime() - (24 * 60 * 60 * 1000)
     //axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json', "Access-Control-Allow-Origin": "*"})
-    axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=900', {responseType: 'json'})
+    axios.get('https://cors-anywhere.herokuapp.com/https://api.cryptowat.ch/markets/' + exchange_param + '/' + market_param + '/ohlc?periods=' + period, {responseType: 'json'})
       .then((response) => {
         let res = response.data
-        let json = res["result"][900]
+        let json = res["result"][period]
         let arr = []
         json.forEach((item) => {
           let obj = {
@@ -65,6 +66,7 @@ class MarketShow extends Component {
         obj.market_name = market
         obj.charts_data = arr
         this.props.got_hocl(obj)
+        this.setState({time_scale: period})
       })
       .catch((error) => {
         if(error.response.status === 429){
@@ -79,6 +81,26 @@ class MarketShow extends Component {
       })
   }
 
+  one_minute_scale = () => {
+    this.retrieve_ohcl(this.props.match.params.market, 60)
+  }
+
+  three_minutes_scale = () => {
+    this.retrieve_ohcl(this.props.match.params.market, 180)
+  }
+
+  five_minutes_scale = () => {
+    this.retrieve_ohcl(this.props.match.params.market, 300)
+  }
+
+  fifteen_minutes_scale = () => {
+    this.retrieve_ohcl(this.props.match.params.market, 900)
+  }
+
+  one_hour_scale = () => {
+    this.retrieve_ohcl(this.props.match.params.market, 3600)
+  }
+
   render(){
     let charts_data = this.props.charts_data[this.props.match.params.market] === undefined ?
                       [] :
@@ -89,8 +111,15 @@ class MarketShow extends Component {
       )
 		}
     return(
-      <div>
+      <div className='candle-chart'>
         <h2 className='text-center'>{this.state.market ? this.state.market.name : ''}</h2>
+        <header className="market_show_header">
+          <Button type="submit" className={this.state.time_scale === 60 ? 'btn active' : 'btn'} onClick={this.one_minute_scale}>1 Minute</Button>&nbsp;
+          <Button type="submit" className={this.state.time_scale === 180 ? 'btn active' : 'btn'} onClick={this.three_minutes_scale}>3 Minutes</Button>&nbsp;
+          <Button type="submit" className={this.state.time_scale === 300 ? 'btn active' : 'btn'} onClick={this.five_minutes_scale}>5 Minutes</Button>&nbsp;
+          <Button type="submit" className={this.state.time_scale === 900 ? 'btn active' : 'btn'} onClick={this.fifteen_minutes_scale}>15 Minutes</Button>&nbsp;
+          <Button type="submit" className={this.state.time_scale === 3600 ? 'btn active' : 'btn'} onClick={this.one_hour_scale}>1 hour</Button>&nbsp;
+        </header>
         <CandleChart data={charts_data} />
       </div>
     )
