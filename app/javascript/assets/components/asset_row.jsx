@@ -43,9 +43,10 @@ class AssetsRow extends Component {
   }
 
   render(){
-    let assets_chart_data = this.props.assets_chart_data[this.props.asset.symbol] === undefined ?
+    let asset_symbol = this.props.asset.symbol === 'MIOTA' ? 'IOT' : this.props.asset.symbol
+    let assets_chart_data = this.props.assets_chart_data[asset_symbol] === undefined ?
                       [] :
-                      this.props.assets_chart_data[this.props.asset.symbol]
+                      this.props.assets_chart_data[asset_symbol]
     return(
       <tr className="asset_row" onClick={this.navigateToShowAsset}>
 				<td><span>{this.props.asset.rank}</span></td>
