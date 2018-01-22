@@ -20,6 +20,17 @@ body {
   right: 1em;
 }
 
+.tooltip-span-label-line-chart{
+  fill-opacity: 0;
+}
+
+.table-hover > tbody > tr:hover {
+
+  .tooltip-span-label-line-chart{
+    fill-opacity: 1;
+  }
+}
+
 .loader {
   position: absolute;
   top: calc(50% - 4em);

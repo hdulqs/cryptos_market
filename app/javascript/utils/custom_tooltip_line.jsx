@@ -51,13 +51,13 @@ class CustomTooltip extends Component {
 				transform={`translate(${ x }, ${ y })`} onClick={onClick}>
 				<ToolTipText x={0} y={0}
 					fontFamily={fontFamily} fontSize={fontSize}>
-					<ToolTipTSpanLabel key="label" x={0} dy="5">Date: </ToolTipTSpanLabel>
-					<tspan key="value">{displayDate}</tspan>
+					<ToolTipTSpanLabel className='tooltip-span-label-line-chart' key="label" x={0} dy="5">Date: </ToolTipTSpanLabel>
+					<tspan className='tooltip-span-label-line-chart' key="value">{displayDate}</tspan>
 					{/*<ToolTipTSpanLabel key="label_O"> O: </ToolTipTSpanLabel><tspan key="value_O">{open}</tspan>
 					<ToolTipTSpanLabel key="label_H"> H: </ToolTipTSpanLabel><tspan key="value_H">{high}</tspan>
 					<ToolTipTSpanLabel key="label_L"> L: </ToolTipTSpanLabel><tspan key="value_L">{low}</tspan>*/}
-					<ToolTipTSpanLabel key="label_C"> C: </ToolTipTSpanLabel><tspan key="value_C">{close}</tspan>
-					<ToolTipTSpanLabel key="label_Vol"> Vol: </ToolTipTSpanLabel><tspan key="value_Vol">{volume}</tspan>
+					<ToolTipTSpanLabel className='tooltip-span-label-line-chart' key="label_C"> Value: </ToolTipTSpanLabel><tspan className='tooltip-span-label-line-chart' key="value_C">{close}</tspan>
+					<ToolTipTSpanLabel className='tooltip-span-label-line-chart' key="label_Vol"> Vol: </ToolTipTSpanLabel><tspan className='tooltip-span-label-line-chart' key="value_Vol">{volume}</tspan>
 				</ToolTipText>
 			</g>
 		);
