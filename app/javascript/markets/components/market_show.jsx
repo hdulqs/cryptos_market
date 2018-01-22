@@ -101,6 +101,10 @@ class MarketShow extends Component {
     this.retrieve_ohcl(this.props.match.params.market, 3600)
   }
 
+  one_day_scale = () => {
+    this.retrieve_ohcl(this.props.match.params.market, 86400)
+  }
+
   render(){
     let charts_data = this.props.charts_data[this.props.match.params.market] === undefined ?
                       [] :
@@ -118,7 +122,8 @@ class MarketShow extends Component {
           <Button type="submit" className={this.state.time_scale === 180 ? 'btn active' : 'btn'} onClick={this.three_minutes_scale}>3 Minutes</Button>&nbsp;
           <Button type="submit" className={this.state.time_scale === 300 ? 'btn active' : 'btn'} onClick={this.five_minutes_scale}>5 Minutes</Button>&nbsp;
           <Button type="submit" className={this.state.time_scale === 900 ? 'btn active' : 'btn'} onClick={this.fifteen_minutes_scale}>15 Minutes</Button>&nbsp;
-          <Button type="submit" className={this.state.time_scale === 3600 ? 'btn active' : 'btn'} onClick={this.one_hour_scale}>1 hour</Button>&nbsp;
+          <Button type="submit" className={this.state.time_scale === 3600 ? 'btn active' : 'btn'} onClick={this.one_hour_scale}>1 Hour</Button>&nbsp;
+          <Button type="submit" className={this.state.time_scale === 86400 ? 'btn active' : 'btn'} onClick={this.one_day_scale}>1 Day</Button>&nbsp;
         </header>
         <CandleChart data={charts_data} />
       </div>
