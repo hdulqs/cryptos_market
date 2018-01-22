@@ -38,6 +38,13 @@ class AssetList extends Component {
   //  return updatedList
   //}
 
+  one_month_scale = () => {
+    this.props.assets.forEach((asset) => {
+      this.props.retrieve_assets_ohcl(asset.symbol, '1m')
+    })
+    this.setState({time_scale: '1m'})
+  }
+
   seven_days_scale = () => {
     this.props.assets.forEach((asset) => {
       this.props.retrieve_assets_ohcl(asset.symbol, '7d')
@@ -73,6 +80,7 @@ class AssetList extends Component {
             <th>Available Supply</th>
             <th>24h Change</th>
             <th>
+              <span className={this.state.time_scale === '1m' ? 'scale_link active_scale' : 'scale_link'} onClick={this.one_month_scale}>1m</span>&nbsp;&nbsp;&nbsp;
               <span className={this.state.time_scale === '7d' ? 'scale_link active_scale' : 'scale_link'} onClick={this.seven_days_scale}>7d</span>&nbsp;&nbsp;&nbsp;
               <span className={this.state.time_scale === '1d' ? 'scale_link active_scale' : 'scale_link'} onClick={this.one_day_scale}>1d</span>&nbsp;&nbsp;&nbsp;
               <span className={this.state.time_scale === '6h' ? 'scale_link active_scale' : 'scale_link'} onClick={this.six_hour_scale}>6h</span>

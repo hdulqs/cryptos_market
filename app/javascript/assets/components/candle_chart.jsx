@@ -24,11 +24,12 @@ import {
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 import {
-	OHLCTooltip,
+	//OHLCTooltip,
 	MovingAverageTooltip,
 	BollingerBandTooltip,
 	StochasticTooltip,
 } from "react-stockcharts/lib/tooltip";
+import OHLCTooltip from './custom_tooltip_candle'
 import { ema, stochasticOscillator, bollingerBand } from "react-stockcharts/lib/indicator";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
