@@ -17,6 +17,16 @@
   }
 }
 
+.active_scale{
+  color: orange;
+}
+
+.scale_link{
+  &:hover{
+    cursor: pointer;
+  }
+}
+
 .table-condensed>tbody>tr>td{
   vertical-align: middle;
   display: table-cell;

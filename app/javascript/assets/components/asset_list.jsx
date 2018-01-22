@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-//import MarketRow from './market_row'
-//import MarketItem from './market_item'
 import AssetRow from './asset_row'
 import { Row, Table, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -8,12 +6,19 @@ import { bindActionCreators } from 'redux'
 import * as assets_actions from './../actions'
 import uuid from 'uuid/v1'
 
+const styles = {
+
+}
+
 
 class AssetList extends Component {
 
   constructor(props){
     super(props)
-    //this.state = {containerWidth: 0, col_nb: 3}
+    this.state = {
+      style: styles,
+      time_scale: '7d'
+    }
   }
 
 
@@ -24,15 +29,6 @@ class AssetList extends Component {
   componentWillUnmount(){
   }
 
-  search_market = (event) => {
-    //if(event.target.value.length > 0){
-    //this.props.set_markets_loading(true)
-    //this.props.market_search(event.target.value)
-    //}
-    //let filtered_markets = this.filterList(event)
-    //this.setState({markets: filtered_markets})
-  }
-
   //filterList = (event) => {
   //  let updatedList = this.props.markets
   //  updatedList = updatedList.filter((item) => {
@@ -41,6 +37,27 @@ class AssetList extends Component {
   //  })
   //  return updatedList
   //}
+
+  seven_days_scale = () => {
+    this.props.assets.forEach((asset) => {
+      this.props.retrieve_assets_ohcl(asset.symbol, '7d')
+    })
+    this.setState({time_scale: '7d'})
+  }
+
+  one_day_scale = () => {
+    this.props.assets.forEach((asset) => {
+      this.props.retrieve_assets_ohcl(asset.symbol, '1d')
+    })
+    this.setState({time_scale: '1d'})
+  }
+
+  six_hour_scale = () => {
+    this.props.assets.forEach((asset) => {
+      this.props.retrieve_assets_ohcl(asset.symbol, '6h')
+    })
+    this.setState({time_scale: '6h'})
+  }
 
   render(){
 
@@ -55,13 +72,17 @@ class AssetList extends Component {
             <th>Market Cap</th>
             <th>Available Supply</th>
             <th>24h Change</th>
-            <th>7d Trend</th>
+            <th>
+              <span className={this.state.time_scale === '7d' ? 'scale_link active_scale' : 'scale_link'} onClick={this.seven_days_scale}>7d</span>&nbsp;&nbsp;&nbsp;
+              <span className={this.state.time_scale === '1d' ? 'scale_link active_scale' : 'scale_link'} onClick={this.one_day_scale}>1d</span>&nbsp;&nbsp;&nbsp;
+              <span className={this.state.time_scale === '6h' ? 'scale_link active_scale' : 'scale_link'} onClick={this.six_hour_scale}>6h</span>
+            </th>
     			</tr>
     		</thead>
     		<tbody>
         {
           this.props.assets.map((asset) =>
-            <AssetRow key={uuid()} asset={asset}></AssetRow>
+            <AssetRow time_scale={this.state.time_scale} key={uuid()} asset={asset}></AssetRow>
           )
         }
         </tbody>

@@ -18,9 +18,10 @@ import {
 } from "react-stockcharts/lib/coordinates";
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
-import {
-	OHLCTooltip,
-} from "react-stockcharts/lib/tooltip";
+// import {
+// 	OHLCTooltip,
+// } from "react-stockcharts/lib/tooltip";
+import CustomTooltip from './custom_tooltip'
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
@@ -63,9 +64,9 @@ class LineChart extends React.Component {
 				xAccessor={xAccessor}
 				displayXAccessor={displayXAccessor}
 				xExtents={xExtents}
-				mouseMoveEvent={false}
-				panEvent={false}
-		    zoomEvent={false}
+				mouseMoveEvent={true}
+				panEvent={true}
+		    zoomEvent={true}
 		    clamp={false}
 			>
 				<Chart id={1}
@@ -81,7 +82,7 @@ class LineChart extends React.Component {
 						orient="right"
 						ticks={5}
 
-					/>
+					/>*/}
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
@@ -89,17 +90,17 @@ class LineChart extends React.Component {
 					<MouseCoordinateY
 						at="right"
 						orient="right"
-						displayFormat={format(".2f")} />*/}
+						displayFormat={format(".2f")} />
 
 					<LineSeries
 						yAccessor={d => d.close}
 						interpolation={interpolation}
 						stroke="#ff7f0e"
 					/>
-					{/*<OHLCTooltip forChart={1} origin={[-45, 5]}/>*/}
+					<CustomTooltip forChart={1} origin={[0, 5]}/>
 				</Chart>
 
-				{/*<CrossHairCursor />*/}
+				<CrossHairCursor />
 			</ChartCanvas>
 
 		);

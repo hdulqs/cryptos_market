@@ -42,7 +42,7 @@ class MarketsNavBar extends Component {
     		<Navbar.Collapse>
           <Nav>
             <NavItem eventKey={1} href="/">
-              Coins
+              Assets
             </NavItem>
             <NavItem eventKey={2} href="/asset-pairs">
               Markets

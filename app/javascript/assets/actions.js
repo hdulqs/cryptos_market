@@ -24,6 +24,13 @@ export const assets_loading = (is_loading) => {
   }
 }
 
+export const assets_ohcl_fetched = (obj) => {
+  return {
+    type: 'ASSETS_OHCL_FETCHED',
+    payload: obj
+  }
+}
+
 
 export const fetch_assets = (page_nb) => {
   return (dispatch) => {
@@ -52,6 +59,71 @@ export const asset_search = (value) => {
       })
       .catch((error) => {
         console.log(error)
+      })
+  }
+}
+
+
+export const retrieve_assets_ohcl = (symbol, time_scale) => {
+  return (dispatch) => {
+    //let symbol = symbol
+    // histohour ==> 7 last days with 3 hours step
+    // histoday ==> 7 last months with 3 days step
+    // histominute ==> 3 last hours with 3 minutes step
+    // aggreagte is step
+    if(symbol === 'MIOTA'){
+      symbol = 'IOT'
+    }
+
+    let limit = 60
+    let request_type = 'histohour'
+    let step = 3
+    if(time_scale === '7d'){
+      limit = 60
+      step = 3
+      request_type = 'histohour'
+    }else if (time_scale === '1d') {
+      limit = 24
+      step = 1
+      request_type = 'histohour'
+    }else if (time_scale === '6h') {
+      limit = 120
+      step = 3
+      request_type = 'histominute'
+    }
+
+    axios.get('https://min-api.cryptocompare.com/data/' + request_type + '?tsym=USD&limit=' + limit + '&fsym=' + symbol + '&aggregate=' + step, {responseType: 'json'})
+      .then((response) => {
+        let res = response.data
+        let json_arr = res["Data"]
+        let arr = []
+        json_arr.forEach((item) => {
+          let obj = {
+            date: new Date(item.time * 1000),
+            open: item.open,
+            high: item.high,
+            low: item.low,
+            close: item.close,
+            volume: item.volumeto + item.volumefrom
+          }
+          arr.push(obj)
+        })
+        let obj = {}
+        obj.market_name = symbol
+        obj.charts_data = arr
+        dispatch(assets_ohcl_fetched(obj))
+        //this.setState({chart_data: arr})
+      })
+      .catch((error) => {
+        if(error.response.status === 429){
+          return false
+        }
+        if(error.response.status === 400){
+          //if(intent_nb < 4){
+          //  intent_nb = intent_nb + 1
+          //  this.retrieve_ohcl(market, intent_nb)
+          //}
+        }
       })
   }
 }

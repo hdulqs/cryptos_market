@@ -4,7 +4,7 @@ export const ASSETS_FETCHED = 'ASSETS_FETCHED'
 
 const initialState = {
   assets: [],
-  asset_charts_data: {},
+  assets_chart_data: {},
   current_page: 0,
   is_assets_loading: true,
   current_tab: {}
@@ -29,6 +29,14 @@ export default function AssetsReducer(state = initialState, action={}) {
       return {
         ...state,
         is_assets_loading: action.payload
+      }
+    case 'ASSETS_OHCL_FETCHED':
+      return {
+        ...state,
+        assets_chart_data: {
+          ...state.assets_chart_data,
+          [action.payload.market_name]: action.payload.charts_data
+        }
       }
     default:
       return state
