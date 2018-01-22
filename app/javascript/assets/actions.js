@@ -157,7 +157,7 @@ export const retrieve_assets_ohcl_candle = (symbol, time_scale) => {
     }else if (time_scale === '1d') {
       limit = 96
       step = 15
-      request_type = 'histohour'
+      request_type = 'histominute'
     }else if (time_scale === '6h') {
       limit = 120
       step = 3
