@@ -21,7 +21,7 @@ import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 // import {
 // 	OHLCTooltip,
 // } from "react-stockcharts/lib/tooltip";
-import CustomTooltip from './custom_tooltip'
+import CustomTooltip from './../../utils/custom_tooltip_line'
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 

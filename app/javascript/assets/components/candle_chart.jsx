@@ -29,7 +29,7 @@ import {
 	BollingerBandTooltip,
 	StochasticTooltip,
 } from "react-stockcharts/lib/tooltip";
-import OHLCTooltip from './custom_tooltip_candle'
+import OHLCTooltip from './../../utils/custom_tooltip_candle'
 import { ema, stochasticOscillator, bollingerBand } from "react-stockcharts/lib/indicator";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
