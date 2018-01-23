@@ -33,6 +33,7 @@ class AssetsLogoRetriever
             puts "added logo to #{asset_info.symbol}"
           else
             puts "no path for #{asset_info.symbol}"
+          end
         end
       end
     end
