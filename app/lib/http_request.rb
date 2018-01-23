@@ -23,13 +23,16 @@ class HttpRequest
         }
       )
     rescue RestClient::ExceptionWithResponse => e
-      puts "Request Failing at #{@host + path}"
+      puts "RestClient::ExceptionWithResponse Failing at #{@host + path}"
+      puts e.response.body
       raise e
     rescue RestClient::RequestFailed => e
-      puts "Request Failing at #{@host + path}"
+      puts "RestClient::RequestFailed at #{@host + path}"
+      puts e.response.body
       raise e
     rescue Exception => e
-      puts "Request Failing at #{@host + path}"
+      puts "Exception at #{@host + path}"
+      puts e.response.body
       raise e
     end
   end
