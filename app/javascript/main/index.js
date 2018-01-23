@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import store from './store'
 import MarketsApp from '../markets/markets_app'
 import AssetsApp from '../assets/assets_app'
+import ExchangesApp from '../exchanges/exchanges_app'
+import AboutApp from '../about/about_app'
 import AssetShow from '../assets/components/asset_show'
 import MarketShow from '../markets/components/market_show'
 import history from './history'
@@ -17,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <Switch>
           <Route exact path='/' component={AssetsApp} />
           <Route exact path='/asset-pairs' component={MarketsApp} />
+          <Route exact path='/exchanges' component={ExchangesApp} />
+          <Route exact path='/about' component={AboutApp} />
           <Route exact path='/:symbol' component={AssetShow} />
           <Route path='/:exchange_name/:market' component={MarketShow} />
         </Switch>

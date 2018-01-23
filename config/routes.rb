@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       namespace :public do
         resources :markets, only: [:index, :show]
         resources :asset_infos, only: [:index, :show]
+        resources :exchanges, only: [:index]
       end
     end
   end
