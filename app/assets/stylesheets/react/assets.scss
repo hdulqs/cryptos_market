@@ -2,6 +2,21 @@
   //color: #ff7f0e !important;
 }
 
+.global-market-infos{
+  //color: white !important;
+  font-size: 0.8em;
+}
+
+.global-market-info-line-1{
+  position: absolute;
+  top: 0.6em;
+}
+
+.global-market-info-line-2{
+  position: relative;
+  top: 1em;
+}
+
 .table-hover>tbody>tr:hover {
   color: black;
   font-weight: 400;
