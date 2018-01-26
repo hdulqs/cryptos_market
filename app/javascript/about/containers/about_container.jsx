@@ -21,6 +21,7 @@ export default class AboutContainer extends Component {
       <Grid fluid={true}>
         <h2 className='text-center'>About</h2>
         <p className='text-center'>CryptosMarket is a digital assets data analysis platform</p>
+        <p className='text-center'>info.cryptosmarket@gmail.com</p>
       </Grid>
     )
   }
