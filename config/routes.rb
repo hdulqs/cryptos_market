@@ -1,8 +1,14 @@
+class AdminConstraint
+  def matches?(request)
+    return false unless request.session["warden.user.backend_admin.key"]
+    return true
+  end
+end
+
 Rails.application.routes.draw do
 
   require 'sidekiq/web'
-  Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => '/backend/sidekiq', :constraints => AdminConstraint.new
 
   mount ActionCable.server, at: '/cable'
 
