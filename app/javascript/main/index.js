@@ -11,11 +11,18 @@ import AboutApp from '../about/about_app'
 import AssetShow from '../assets/components/asset_show'
 import MarketShow from '../markets/components/market_show'
 import history from './history'
+import ReactGA from 'react-ga'
+
+ReactGA.initialize('UA-33195925-2')
+
+const ga_tracking = () => {
+  ReactGA.pageview(window.location.hash)
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Provider store={store}>
-      <Router history={history}>
+      <Router onUpdate={ga_tracking} history={history}>
         <Switch>
           <Route exact path='/' component={AssetsApp} />
           <Route exact path='/asset-pairs' component={MarketsApp} />

@@ -5,10 +5,10 @@
   - tickers_fetcher_job
   - assets_info_fetcher_job
 :schedule:
-  reports_generator_job:
-    #every: ['60s', first_in: '60s']   # Runs once per minute
-    class: ReportsGeneratorJob
-    every: ['60s', first_in: '900s']   # Runs once per minute
+  # reports_generator_job:
+  #   #every: ['60s', first_in: '60s']   # Runs once per minute
+  #   class: ReportsGeneratorJob
+  #   every: ['60s', first_in: '900s']   # Runs once per minute
   assets_info_fetcher_job:
     class: AssetsInfoFetcherJob
     every: ['120s', first_in: '5s']   # Runs once per minute
