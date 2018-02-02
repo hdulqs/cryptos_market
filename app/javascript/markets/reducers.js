@@ -8,7 +8,8 @@ const initialState = {
   charts_data: {},
   current_page: 0,
   is_markets_loading: true,
-  current_tab: {}
+  current_tab: {},
+  markets_infos: {}
 };
 
 export default function MarketsReducer(state = initialState, action={}) {
@@ -20,6 +21,11 @@ export default function MarketsReducer(state = initialState, action={}) {
         current_page: action.payload.page_nb,
         is_markets_loading: false
       }
+    case 'MARKETS_INFOS_FETCHED':
+      return {
+        ...state,
+        markets_infos: action.payload.markets_infos
+      }
     case 'MARKET_SEARCH_FETCHED':
       return {
         ...state,
@@ -27,6 +33,7 @@ export default function MarketsReducer(state = initialState, action={}) {
         is_markets_loading: false
       }
     case 'RECEIVED_TICKER':
+      // Here we should update just one pair instead of the whole market
       return {
         ...state,
         markets: state.markets.map(market => (market.id === action.payload.market_id) ? action.payload : market)

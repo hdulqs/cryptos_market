@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import AssetsContainer from './containers/assets_container'
-import AssetsNavBar from './assets_nav_bar'
+import PortfolioContainer from './containers/portfolio_container'
+import PortfolioNavBar from './portfolio_nav_bar'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as sessions_actions from './../sessions/actions'
 import store from './../main/store'
 
 
-class AssetsApp extends Component {
+class PortfolioApp extends Component {
 
   constructor(props){
     super(props)
@@ -22,8 +22,8 @@ class AssetsApp extends Component {
   render() {
     return(
       <nav>
-        <AssetsNavBar user={this.props.user} />
-        <AssetsContainer />
+        <PortfolioNavBar user={this.props.user} />
+        <PortfolioContainer />
       </nav>
     )
   }
@@ -42,4 +42,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(sessions_actions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetsApp)
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioApp)

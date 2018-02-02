@@ -43,6 +43,12 @@ export const set_tab = (tab) => {
   }
 }
 
+export const markets_infos_fetched = (infos) => {
+  return {
+    type: 'MARKETS_INFOS_FETCHED',
+    payload: infos
+  }
+}
 
 
 export const fetch_markets = (page_nb) => {
@@ -50,6 +56,18 @@ export const fetch_markets = (page_nb) => {
     axios.get('/api/v1/public/markets?page=' + page_nb, {responseType: 'json'})
       .then((response) => {
         dispatch(markets_fetched({page_nb: page_nb, markets: response.data.markets}))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+}
+
+export const fetch_markets_infos = () => {
+  return (dispatch) => {
+    axios.get('https://api.coinmarketcap.com/v1/global/', {responseType: 'json'})
+      .then((response) => {
+        dispatch(markets_infos_fetched({markets_infos: response.data}))
       })
       .catch((error) => {
         console.log(error)

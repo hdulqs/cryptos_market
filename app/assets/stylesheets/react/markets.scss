@@ -60,8 +60,9 @@ body {
 
 
 .ticker_row {
-  animation-name: ticker_fetched;
-  animation-duration: 2.5s;
+  color: red;
+  //animation-name: ticker_fetched;
+  //animation-duration: 2.5s;
 }
 
 @keyframes ticker_fetched {

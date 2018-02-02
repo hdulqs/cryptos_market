@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as assets_actions from './actions'
 import * as sessions_actions from './../sessions/actions'
 import * as markets_actions from './../markets/actions'
 import axios from 'axios'
 import NumberFormat from 'react-number-format'
 import history from './../main/history'
 
-class AssetsNavBar extends Component {
+class PortfolioNavBar extends Component {
 
   constructor(props){
     super(props)
@@ -19,30 +18,6 @@ class AssetsNavBar extends Component {
     if(this.props.markets_infos['total_24h_volume_usd'] === undefined){
       this.props.fetch_markets_infos()
     }
-  }
-
-  search_asset = (event) => {
-    let value = ''
-    if(event.target.value === 'none'){
-      value = event.target.parentElement.getElementsByClassName('form-control')[0].value
-    }else {
-      value = event.target.value
-    }
-    this.props.set_assets_loading(true)
-    this.props.asset_search(value)
-  }
-
-  key_press_search_asset = (event) => {
-    if(event.charCode === 13){
-      this.search_asset(event)
-    }
-  }
-
-  reset_search_asset = (event) => {
-    let value = ''
-    this.props.set_assets_loading(true)
-    this.props.asset_search(value)
-    event.target.parentElement.getElementsByClassName('form-control')[0].value = ''
   }
 
   logout = () => {
@@ -103,14 +78,6 @@ class AssetsNavBar extends Component {
           </Nav>
 
 
-    			<Navbar.Form pullRight className='search-area'>
-    				<FormGroup>
-    					<FormControl type="text" placeholder="Search Asset" onKeyPress={this.key_press_search_asset} />
-    				</FormGroup>{' '}
-    				<Button type="submit" value="none" className='btn btn-info' onClick={this.search_asset}>Search</Button>&nbsp;
-    				<Button type="submit" value="none" className='btn btn-danger' onClick={this.reset_search_asset}>Reset</Button>
-    			</Navbar.Form>
-
 
           <Navbar.Text pullRight className='global-market-infos'>
               <span className='global-market-info-line-1'>
@@ -139,7 +106,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(Object.assign({}, assets_actions, sessions_actions, markets_actions), dispatch)
+  return bindActionCreators(Object.assign({}, sessions_actions, markets_actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetsNavBar)
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioNavBar)

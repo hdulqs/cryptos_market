@@ -48,6 +48,7 @@ Rails.application.routes.draw do
         resources :asset_infos, only: [:index, :show]
         resources :exchanges, only: [:index]
       end
+      resources :sessions, only: [:create]
     end
   end
 

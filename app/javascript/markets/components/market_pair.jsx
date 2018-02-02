@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Link } from 'react-router-dom'
 import { Col } from 'react-bootstrap'
-import { withRouter } from 'react-router-dom'
+//import { withRouter } from 'react-router-dom'
 import history from './../../main/history'
 
 const MarketPair = (props) => {

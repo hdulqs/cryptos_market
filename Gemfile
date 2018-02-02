@@ -21,6 +21,8 @@ gem 'paperclip', '~> 5.0.0'
 
 gem 'devise'
 
+gem 'jwt'
+
 gem 'kaminari'
 
 gem 'bootstrap', '~> 4.0.0.beta2.1'
