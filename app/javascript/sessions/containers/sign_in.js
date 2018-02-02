@@ -44,9 +44,8 @@ class SignInContainer extends Component {
 
     return(
       <Grid fluid={true}>
-
-        <h2 className='text-center'>Login</h2>
         <br/>
+        <h2 className='text-center'>Login</h2>
 
         <p className='text-center sessions_error'>{this.props.errors.code} {this.props.errors.message}</p>
 
@@ -54,9 +53,15 @@ class SignInContainer extends Component {
 
           <FormGroup controlId="formHorizontalEmail">
             <Col sm={3}> </Col>
-            <Col sm={6}> <FormControl type="email" placeholder="Email" value={this.state.email} onChange={this.email_form_update} /> </Col>
+            <Col sm={6}> <hr/> </Col>
             <Col sm={3}> </Col>
           </FormGroup>
+
+          <FormGroup controlId="formHorizontalEmail">
+            <Col sm={3}> </Col>
+            <Col sm={6}> <FormControl type="email" placeholder="Email" value={this.state.email} onChange={this.email_form_update} /> </Col>
+            <Col sm={3}> </Col>
+            </FormGroup>
 
           <FormGroup controlId="formHorizontalPassword">
             <Col sm={3}> </Col>
@@ -66,7 +71,7 @@ class SignInContainer extends Component {
 
           <FormGroup>
             <Col sm={3}> </Col>
-            <Col sm={6}> <Button className='btn btn-block' type="submit" onClick={this.sessions_form_submit}>Sign in</Button> </Col>
+            <Col sm={6}> <Button className='btn btn-block btn-success' type="submit" onClick={this.sessions_form_submit}>Sign in</Button> </Col>
             <Col sm={3}> </Col>
           </FormGroup>
 
