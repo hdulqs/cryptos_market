@@ -122,7 +122,7 @@ class PortfolioPieChart extends Component {
     let pie_chart_data = this.props.portfolio_assets.map((asset) => {
       return {
         name: asset.asset_info.name,
-        value: parseFloat(asset.asset_info.price_usd)
+        value: parseFloat(asset.amount) * parseFloat(asset.asset_info.price_usd)
       }
     })
 
@@ -134,7 +134,7 @@ class PortfolioPieChart extends Component {
 
     return(
       <section>
-        <h2 className='text-center'>Total balance : <NumberFormat value={total || 0} displayType={'text'} thousandSeparator={" "} suffix={' USD'} decimalScale={2} /></h2>
+        <h2 className='text-center'>{this.props.portfolio_assets.length} Assets : <NumberFormat value={total || 0} displayType={'text'} thousandSeparator={" "} suffix={' USD'} decimalScale={2} /></h2>
         <hr/>
         <TwoLevelPieChart pie_chart_data={pie_chart_data} />
       </section>
