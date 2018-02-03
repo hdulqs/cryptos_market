@@ -42,12 +42,12 @@ class PortfolioRow extends Component {
 
   render(){
     return(
-      <tr className="portfolio_asset_row" onClick={() => this.select_portfolio_asset(this.props.portfolio_asset.asset_info.symbol)}>
+      <tr className="portfolio-asset-row" onClick={() => this.select_portfolio_asset(this.props.portfolio_asset.asset_info.symbol)}>
         <td><span>{this.props.portfolio_asset.asset_info.rank}</span></td>
-        <td><span className='asset-symbol-title'><img src={this.props.portfolio_asset.asset_info.logo_path_thumb} />&nbsp;&nbsp;{this.props.portfolio_asset.asset_info.name} ({this.props.portfolio_asset.asset_info.symbol})</span></td>
+        <td><span className='portfolio-asset-symbol-title'><img src={this.props.portfolio_asset.asset_info.logo_path_thumb} />&nbsp;&nbsp;{this.props.portfolio_asset.asset_info.name} ({this.props.portfolio_asset.asset_info.symbol})</span></td>
         <td><span>{this.props.portfolio_asset.amount}</span></td>
-        <td className='asset-row-price'><NumberFormat value={this.props.portfolio_asset.asset_info.price_usd || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></td>
-        <td className='asset-row-price'><NumberFormat value={this.props.portfolio_asset.asset_info.price_usd * this.props.portfolio_asset.amount || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></td>
+        <td className='portfolio-asset-row-price'><NumberFormat value={this.props.portfolio_asset.asset_info.price_usd || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></td>
+        <td className='portfolio-asset-row-price'><NumberFormat value={this.props.portfolio_asset.asset_info.price_usd * this.props.portfolio_asset.amount || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></td>
         <td>{this.props.portfolio_asset.asset_info.percent_change_24h > 0 ? (<Glyphicon style={this.state.style.arrow_up} glyph="arrow-up" />) : (<Glyphicon style={this.state.style.arrow_down} glyph="arrow-down" />)}{this.props.portfolio_asset.asset_info.percent_change_24h > 0 ? '+' + this.props.portfolio_asset.asset_info.percent_change_24h : this.props.portfolio_asset.asset_info.percent_change_24h}</td>
 			</tr>
     )
