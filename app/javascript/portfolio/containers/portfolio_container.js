@@ -23,7 +23,7 @@ class PortfolioContainer extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.jwt)
+    //console.log(this.props.jwt)
     if(localStorage.jwt && localStorage.jwt.length){
       this.props.fetch_portfolio_assets(localStorage.jwt)
     }else{
@@ -68,6 +68,7 @@ class PortfolioContainer extends Component {
                 <div className="loader-small"></div>
                 :
                 <div className='candle-chart'>
+                  <h2 className='text-center'>{this.props.selected_portfolio_asset} - USD</h2>
                   <CandleChart data={assets_chart_data} />
                 </div>
             }

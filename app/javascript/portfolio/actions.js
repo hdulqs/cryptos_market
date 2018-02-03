@@ -20,7 +20,7 @@ export const fetch_portfolio_assets = (jwt_token) => {
       .then((response) => {
         dispatch(portfolio_assets_fetched({portfolio_assets: response.data.data.portfolio_assets}))
         dispatch(set_selected_portfolio_asset(response.data.data.portfolio_assets[0].symbol))
-        dispatch(retrieve_assets_ohcl_candle(response.data.data.portfolio_assets[0].symbol), '7D')
+        dispatch(retrieve_assets_ohcl_candle(response.data.data.portfolio_assets[0].symbol, "7D"))
       })
       .catch((error) => {
         console.log(error)
@@ -95,7 +95,7 @@ export const retrieve_assets_ohcl_candle = (symbol, time_scale) => {
       request_type = 'histohour'
     }
     else if (time_scale === '7D') {
-      limit = 120
+      limit = 2000
       step = 1
       request_type = 'histohour'
     }

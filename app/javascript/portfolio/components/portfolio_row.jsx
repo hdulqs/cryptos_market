@@ -35,7 +35,7 @@ class PortfolioRow extends Component {
   }
 
   select_portfolio_asset = (symbol) => {
-    console.log(symbol)
+    //console.log(symbol)
     this.props.retrieve_assets_ohcl_candle(symbol, '7D')
     this.props.update_selected_portfolio_asset(symbol)
   }
