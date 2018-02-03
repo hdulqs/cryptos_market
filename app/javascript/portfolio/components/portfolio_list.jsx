@@ -22,7 +22,11 @@ class PortfolioList extends Component {
   }
 
   render(){
-
+    let portfolio_assets = this.props.portfolio_assets
+    if(portfolio_assets.length > 0){
+      //order by total
+      portfolio_assets.sort((a, b) => (a.amount * a.asset_info.price_usd) < (b.amount * b.asset_info.price_usd) )
+    }
     return(
       <Table responsive condensed hover>
     		<thead>
@@ -37,7 +41,7 @@ class PortfolioList extends Component {
     		</thead>
     		<tbody>
         {
-          this.props.portfolio_assets.map((asset) =>
+          portfolio_assets.map((asset) =>
             <PortfolioRow key={uuid()} portfolio_asset={asset}></PortfolioRow>
           )
         }
