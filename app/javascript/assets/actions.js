@@ -170,7 +170,7 @@ export const retrieve_assets_ohcl_candle = (symbol, time_scale) => {
       request_type = 'histohour'
     }
     else if (time_scale === '7D') {
-      limit = 120
+      limit = 2000
       step = 1
       request_type = 'histohour'
     }
