@@ -98,6 +98,7 @@ export const retrieve_assets_ohcl = (symbol, time_scale) => {
       request_type = 'histoday'
     }
 
+
     axios.get('https://min-api.cryptocompare.com/data/' + request_type + '?tsym=USD&limit=' + limit + '&fsym=' + symbol + '&aggregate=' + step, {responseType: 'json'})
       .then((response) => {
         let res = response.data
@@ -166,6 +167,11 @@ export const retrieve_assets_ohcl_candle = (symbol, time_scale) => {
     else if (time_scale === '1m') {
       limit = 120
       step = 6
+      request_type = 'histohour'
+    }
+    else if (time_scale === '7D') {
+      limit = 120
+      step = 1
       request_type = 'histohour'
     }
 

@@ -19,6 +19,7 @@
     "react-router-dom": "^4.2.2",
     "react-stockcharts": "^0.7.0-beta.19",
     "react-table": "^6.7.6",
+    "recharts": "^1.0.0-beta.10",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",

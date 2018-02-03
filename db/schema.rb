@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202104510) do
+ActiveRecord::Schema.define(version: 20180202212744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,24 @@ ActiveRecord::Schema.define(version: 20180202104510) do
     t.index ["original_payload"], name: "index_pairs_on_original_payload", using: :gin
   end
 
+  create_table "portfolio_assets", force: :cascade do |t|
+    t.bigint "portfolio_id"
+    t.bigint "asset_info_id"
+    t.string "symbol"
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_info_id"], name: "index_portfolio_assets_on_asset_info_id"
+    t.index ["portfolio_id"], name: "index_portfolio_assets_on_portfolio_id"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_portfolios_on_user_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.bigint "market_id"
     t.jsonb "pairs", default: "{}", null: false
@@ -228,6 +246,9 @@ ActiveRecord::Schema.define(version: 20180202104510) do
   add_foreign_key "order_books", "pairs"
   add_foreign_key "pairs", "exchanges"
   add_foreign_key "pairs", "markets"
+  add_foreign_key "portfolio_assets", "asset_infos"
+  add_foreign_key "portfolio_assets", "portfolios"
+  add_foreign_key "portfolios", "users"
   add_foreign_key "reports", "markets"
   add_foreign_key "tickers", "pairs"
   add_foreign_key "trade_histories", "pairs"

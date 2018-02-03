@@ -22,12 +22,6 @@ class AssetList extends Component {
   }
 
 
-  componentDidMount () {
-
-  }
-
-  componentWillUnmount(){
-  }
 
   //filterList = (event) => {
   //  let updatedList = this.props.markets

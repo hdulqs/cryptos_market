@@ -13,7 +13,8 @@ module JwtAuthConcern
     protected
     def authenticate_token!
       if c_user
-        sign_in(c_user, store: false)
+        #binding.pry
+        current_user || sign_in(c_user, store: false)
       else
         sign_out(c_user)
         render_error(code: 404, message: "Invalid JWT Token", error_fields: {}) && return
@@ -22,7 +23,8 @@ module JwtAuthConcern
 
     private
     def token
-      request.env.fetch("HTTP_AUTH_TOKEN") || nil
+      request.headers.fetch('Authorization') || nil
+      # request.env.fetch("HTTP_AUTH_TOKEN") || nil
     end
 
     def decoded_token

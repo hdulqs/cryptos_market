@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :exchange_pairs, only: [:index, :show]
     end
     devise_for :admins, :controllers => { :sessions => "backend/admins/sessions", registrations: "backend/admins/registrations" }
+    devise_for :users, controllers: { :sessions => "backend/users/sessions", registrations: "backend/users/registrations" }
     resources :opportunities, only: [:index, :show]
     resources :markets, only: [:index, :show] do
       collection do
@@ -47,6 +48,9 @@ Rails.application.routes.draw do
         resources :markets, only: [:index, :show]
         resources :asset_infos, only: [:index, :show]
         resources :exchanges, only: [:index]
+      end
+      namespace :private do
+        resources :portfolio, only: [:index]
       end
       resources :sessions, only: [:create]
     end
