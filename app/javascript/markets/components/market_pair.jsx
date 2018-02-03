@@ -13,7 +13,7 @@ const MarketPair = (props) => {
   let css_ticker = props.pair.last_to_be_updated ? 'ticker_row' : ''
   return(
     <tr key={props.pair.id} className={css_ticker} onClick={navigateToShowMarket}>
-      <td>{props.pair.exchange_name + props.pair.id}</td>
+      <td>{props.pair.exchange_name}</td>
       <td>{props.pair.last_ticker.last}</td>
       <td>{props.pair.last_ticker.volume}</td>
     </tr>
