@@ -6,3 +6,14 @@
 .recharts-wrapper{
   top: -6em;
 }
+
+.recharts-legend-wrapper{
+  ul{
+    list-style-type: none;
+  }
+}
+
+.portfolio-asset-row.active{
+  color: black;
+  font-weight: 400;
+}

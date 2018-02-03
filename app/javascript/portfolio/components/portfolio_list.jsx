@@ -37,6 +37,7 @@ class PortfolioList extends Component {
             <th>Price </th>
             <th>Total </th>
             <th>24h Change</th>
+            <th>7d Change</th>
     			</tr>
     		</thead>
     		<tbody>

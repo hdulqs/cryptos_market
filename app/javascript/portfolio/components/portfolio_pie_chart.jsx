@@ -9,11 +9,11 @@ import NumberFormat from 'react-number-format'
 
 const styles = {}
 
-import {PieChart, Pie, Sector, Cell} from 'recharts'
+import {PieChart, Pie, Sector, Cell, Legend} from 'recharts'
 const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
 
-const COLORS = ['red', 'yellow', '#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'green', 'blue'];
+const COLORS = ['#dc6f13', '#3ab73a', '#a75b76', '#5a96ca', '#FFBB28', '#FF8042', '#0088FE', 'blue'];
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -71,10 +71,23 @@ class TwoLevelPieChart extends Component {
   onPieEnter = (data, index) => {
     this.setState({
       activeIndex: index
-    });
+    })
   }
 
 	render () {
+    const renderLegend = (props) => {
+      const { payload } = props;
+
+      return (
+        <ul>
+        {
+          payload.map((entry, index) => (
+            <li key={`item-${index}`} style={{color: entry.payload.fill}}>{entry.value} : {(entry.payload.percent * 100).toFixed(1)}%</li>
+          ))
+        }
+        </ul>
+      );
+    }
   	return (
     	<PieChart width={600} height={380}>
         <Pie
@@ -93,6 +106,7 @@ class TwoLevelPieChart extends Component {
           	this.props.pie_chart_data.map((entry, index) => <Cell key={uuid()} fill={COLORS[index % COLORS.length]}/>)
           }
           </Pie>
+          <Legend layout="vertical" align='right' verticalAlign='bottom' content={renderLegend} iconType='square'/>
        </PieChart>
     );
   }
