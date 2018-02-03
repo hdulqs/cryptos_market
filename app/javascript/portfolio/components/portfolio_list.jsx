@@ -25,7 +25,7 @@ class PortfolioList extends Component {
     let portfolio_assets = this.props.portfolio_assets
     if(portfolio_assets.length > 0){
       //order by total
-      portfolio_assets.sort((a, b) => (a.amount * a.asset_info.price_usd) < (b.amount * b.asset_info.price_usd) )
+      portfolio_assets.sort((a, b) => (parseFloat(a.amount) * parseFloat(a.asset_info.price_usd)) < (parseFloat(b.amount) * parseFloat(b.asset_info.price_usd)) )
     }
     return(
       <Table responsive condensed hover>
