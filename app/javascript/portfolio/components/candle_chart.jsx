@@ -366,7 +366,7 @@ class CandleChart extends React.Component {
 		} = xScaleProvider(initialData);
 
 		const start = xAccessor(last(data));
-		const end = xAccessor(data[Math.max(0, data.length - 150)]);
+		const end = xAccessor(data[Math.max(0, data.length - 1000)]);
 		const xExtents = [start, end];
 		return (
 			<ChartCanvas height={380}
