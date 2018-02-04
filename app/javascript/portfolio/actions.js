@@ -19,8 +19,10 @@ export const fetch_portfolio_assets = (jwt_token) => {
     axios.get('/api/v1/private/portfolio', {headers: {Authorization: jwt_token, responseType: 'json'}})
       .then((response) => {
         dispatch(portfolio_assets_fetched({portfolio_assets: response.data.data.portfolio_assets}))
-        dispatch(set_selected_portfolio_asset(response.data.data.portfolio_assets[0].symbol))
-        dispatch(retrieve_assets_ohcl_candle(response.data.data.portfolio_assets[0].symbol, "7D"))
+        if(response.data.data.portfolio_assets.length){          
+          dispatch(set_selected_portfolio_asset(response.data.data.portfolio_assets[0].symbol))
+          dispatch(retrieve_assets_ohcl_candle(response.data.data.portfolio_assets[0].symbol, "7D"))
+        }
       })
       .catch((error) => {
         console.log(error)

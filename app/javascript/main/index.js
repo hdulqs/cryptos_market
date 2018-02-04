@@ -7,6 +7,7 @@ import store from './store'
 import MarketsApp from '../markets/markets_app'
 import AssetsApp from '../assets/assets_app'
 import SignInApp from '../sessions/sign_in_app'
+import SignUpApp from '../registrations/sign_up_app'
 import ExchangesApp from '../exchanges/exchanges_app'
 import AboutApp from '../about/about_app'
 import PortfolioApp from '../portfolio/portfolio_app'
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <Switch>
           <Route exact path='/' component={withTracker(AssetsApp)} />
           <Route path='/sign_in' component={withTracker(SignInApp)} />
+          <Route path='/sign_up' component={withTracker(SignUpApp)} />
           <Route path='/asset-pairs' component={withTracker(MarketsApp)} />
           <Route exact path='/exchanges' component={withTracker(ExchangesApp)} />
           <Route exact path='/about' component={withTracker(AboutApp)} />

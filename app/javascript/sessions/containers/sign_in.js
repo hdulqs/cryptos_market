@@ -39,6 +39,10 @@ class SignInContainer extends Component {
     //console.log(this.state.sessions)
   }
 
+  navigate_to_sign_up = () => {
+    history.push('sign_up')
+  }
+
 
   render() {
 
@@ -75,6 +79,11 @@ class SignInContainer extends Component {
             <Col sm={3}> </Col>
           </FormGroup>
 
+          <FormGroup>
+            <Col sm={3}> </Col>
+            <Col sm={6}> <Button className='btn btn-block btn-info' type="submit" onClick={this.navigate_to_sign_up}>Sign Up</Button> </Col>
+            <Col sm={3}> </Col>
+          </FormGroup>
         </Form>
 
       </Grid>

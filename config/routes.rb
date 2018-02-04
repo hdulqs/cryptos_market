@@ -53,6 +53,7 @@ Rails.application.routes.draw do
         resources :portfolio, only: [:index]
       end
       resources :sessions, only: [:create]
+      resources :registrations, only: [:create]
     end
   end
 
