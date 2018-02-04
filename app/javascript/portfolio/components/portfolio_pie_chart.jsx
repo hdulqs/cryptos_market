@@ -152,7 +152,7 @@ class PortfolioPieChart extends Component {
 
     return(
       <section>
-        <h2 className='text-center'>{this.props.portfolio_assets.length} Assets : <NumberFormat value={total || 0} displayType={'text'} thousandSeparator={" "} suffix={' USD'} decimalScale={2} /></h2>
+        <h5 className='text-center'>{this.props.portfolio_assets.length} Assets - <NumberFormat value={total || 0} displayType={'text'} thousandSeparator={" "} suffix={' USD'} decimalScale={2} /></h5>
         <hr/>
         <TwoLevelPieChart pie_chart_data={pie_chart_data}
           activeIndex={this.props.selected_portfolio_asset}
