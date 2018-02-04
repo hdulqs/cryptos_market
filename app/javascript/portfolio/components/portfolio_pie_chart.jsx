@@ -134,7 +134,7 @@ class PortfolioPieChart extends Component {
 
     let pie_chart_data = this.props.portfolio_assets.map((asset) => {
       return {
-        name: asset.asset_info.name,
+        name: asset.symbol,
         value: parseFloat(asset.amount) * parseFloat(asset.asset_info.price_usd)
       }
     })
