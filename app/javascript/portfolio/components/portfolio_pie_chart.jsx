@@ -4,6 +4,8 @@ import { Row, Table, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as assets_actions from './../../assets/actions'
+import * as portfolio_actions from './../actions'
+
 import uuid from 'uuid/v1'
 import NumberFormat from 'react-number-format'
 
@@ -69,9 +71,11 @@ class TwoLevelPieChart extends Component {
   }
 
   onPieEnter = (data, index) => {
-    this.setState({
-      activeIndex: index
-    })
+    this.props.update_selected_portfolio_asset(data.name)
+    this.props.retrieve_assets_ohcl_candle(data.name, '7D')
+    // this.setState({
+    //   activeIndex: index
+    // })
   }
 
 	render () {
@@ -150,7 +154,10 @@ class PortfolioPieChart extends Component {
       <section>
         <h2 className='text-center'>{this.props.portfolio_assets.length} Assets : <NumberFormat value={total || 0} displayType={'text'} thousandSeparator={" "} suffix={' USD'} decimalScale={2} /></h2>
         <hr/>
-        <TwoLevelPieChart pie_chart_data={pie_chart_data} activeIndex={this.props.selected_portfolio_asset} />
+        <TwoLevelPieChart pie_chart_data={pie_chart_data}
+          activeIndex={this.props.selected_portfolio_asset}
+          update_selected_portfolio_asset={this.props.update_selected_portfolio_asset}
+          retrieve_assets_ohcl_candle={this.props.retrieve_assets_ohcl_candle} />
       </section>
     )
   }
@@ -165,7 +172,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(assets_actions, dispatch)
+  return bindActionCreators(Object.assign({}, portfolio_actions, assets_actions), dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortfolioPieChart)
