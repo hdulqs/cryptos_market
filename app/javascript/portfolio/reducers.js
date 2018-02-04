@@ -3,7 +3,9 @@ const initialState = {
   portfolio_assets: [],
   selected_portfolio_asset: undefined,
   is_add_asset_modal_visible: false,
-  errors: {}
+  is_edit_asset_modal_visible: false,
+  errors: {},
+  edit_errors: {}
 };
 
 export default function PortfolioReducer(state = initialState, action={}) {
@@ -16,7 +18,14 @@ export default function PortfolioReducer(state = initialState, action={}) {
     case 'SHOW_ADD_ASSET_MODAL':
       return {
         ...state,
-        is_add_asset_modal_visible: action.payload
+        is_add_asset_modal_visible: action.payload,
+        errors: {}
+      }
+    case 'SHOW_EDIT_ASSET_MODAL':
+      return {
+        ...state,
+        is_edit_asset_modal_visible: action.payload,
+        edit_errors: {}
       }
     case 'SET_SELECTED_PORTFOLIO_ASSET':
       return {
@@ -28,10 +37,21 @@ export default function PortfolioReducer(state = initialState, action={}) {
         ...state,
         portfolio_assets: state.portfolio_assets.concat(action.payload.data)
       }
+    case 'EDITED_PORTFOLIO_ASSET':
+      return {
+        ...state,
+        portfolio_assets: state.portfolio_assets.map((asset) => (asset.symbol === action.payload.data.symbol) ? action.payload.data : asset)
+        //state.markets.map(market => (market.id === action.payload.market_id) ? action.payload : market)
+      }
     case 'ADD_ASSET_ERROR':
       return {
         ...state,
         errors: action.payload.errors
+      }
+    case 'EDIT_ASSET_ERROR':
+      return {
+        ...state,
+        edit_errors: action.payload.errors
       }
     case 'REMOVED_ASSET_FROM_PORTFOLIO':
       return {

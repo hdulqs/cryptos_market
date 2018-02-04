@@ -58,6 +58,7 @@ Rails.application.routes.draw do
           collection do
             post :add_asset
             patch :remove_asset
+            patch :edit_asset
           end
         end
       end

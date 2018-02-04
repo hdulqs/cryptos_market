@@ -14,7 +14,7 @@ const styles = {
 
 }
 
-class AddAssetModal extends Component {
+class EditAssetModal extends Component {
 
   constructor(props){
     super(props)
@@ -22,29 +22,18 @@ class AddAssetModal extends Component {
       style: styles,
       asset_infos: [],
       selected_value: undefined,
-      amount: 0
+      amount: 0,
+      is_edit_asset_modal_visible: false
     }
   }
 
-  componentDidMount(){
-    axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
-      .then((response) => {
-        let payload = response.data.asset_infos.map((asset) => {
-          return {
-            value: asset.id,
-            symbol: asset.symbol,
-            label: asset.name + ' (' + asset.symbol + ')'
-          }
-        })
-        this.setState({asset_infos: payload})
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+  componentWillReceiveProps(){
+    if(this.props.asset)
+      this.setState({amount: this.props.asset.amount})
   }
 
   close_asset_modal = () => {
-    this.props.show_add_asset_modal(false)
+    this.props.show_edit_asset_modal(false)
   }
 
   amount_form_update = (event) => {
@@ -54,31 +43,26 @@ class AddAssetModal extends Component {
   asset_form_submit = (event) => {
     event.preventDefault()
     let payload = {
-      asset_info: this.state.selected_value,
+      symbol: this.props.asset.symbol,
       amount: this.state.amount
     }
-    this.props.post_add_portfolio_asset(payload)
+    this.props.patch_edit_portfolio_asset(payload)
   }
 
   render(){
     return(
-      <Modal show={this.props.is_add_asset_modal_visible} onHide={this.close_asset_modal}>
+      <Modal show={this.props.is_edit_asset_modal_visible} onHide={this.close_asset_modal}>
         <Modal.Header closeButton>
           <Modal.Title>Add a new Asset to Portfolio</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <p className='text-center sessions_error'>{this.props.errors.code} {this.props.errors.message}</p>
-          <h4>Choose an Asset</h4>
+        <p className='text-center sessions_error'>{this.props.edit_errors.code} {this.props.edit_errors.message}</p>
           <Form horizontal>
-            <VirtualizedSelect
-              options={this.state.asset_infos}
-              onChange={(selectValue) => this.setState({selected_value: selectValue})}
-              value={this.state.selected_value}
-            />
+            <h4 className='text-center'>{this.props.asset && this.props.asset.symbol}</h4>
             <br/>
             <FormControl type="number" placeholder="Amount" value={this.state.amount} onChange={this.amount_form_update} />
             <br/>
-             <Button className='btn btn-block btn-success' type="submit" onClick={this.asset_form_submit}>Create</Button>
+             <Button className='btn btn-block btn-success' type="submit" onClick={this.asset_form_submit}>Update</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -93,8 +77,8 @@ class AddAssetModal extends Component {
 const mapStateToProps = (state) => {
   return {
     portfolio_assets: state.PortfolioReducer.portfolio_assets,
-    is_add_asset_modal_visible: state.PortfolioReducer.is_add_asset_modal_visible,
-    errors: state.PortfolioReducer.errors
+    is_edit_asset_modal_visible: state.PortfolioReducer.is_edit_asset_modal_visible,
+    edit_errors: state.PortfolioReducer.edit_errors
   }
 }
 
@@ -102,4 +86,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(Object.assign({}, portfolio_actions, assets_actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddAssetModal)
+export default connect(mapStateToProps, mapDispatchToProps)(EditAssetModal)

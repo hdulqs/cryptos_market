@@ -30,12 +30,21 @@ class Api::V1::Private::PortfolioController < Api::V1::Private::BaseController
     if current_user.portfolio.portfolio_assets.find_by(symbol: params["symbol"]).destroy!
       render json: {message: 'success'}, status: 204
     end
+  end
+
+  def edit_asset
     #binding.pry
+    @portfolio_asset = current_user.portfolio.portfolio_assets.find_by(symbol: params["symbol"]["symbol"])
+    @portfolio_asset.amount = params["symbol"]["amount"].to_f
+    if @portfolio_asset.save
+      render 'api/v1/private/portfolio/add_asset.json'
+    else
+      render_error(code: 422, message: "Could not Edit asset", error_fields: {errors: @portfolio_asset.errors}) && return
+    end
   end
 
   private
   def asset_infos_params
-    #binding.pry
     params.require(:asset_info).permit!
   end
 end

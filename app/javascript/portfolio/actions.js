@@ -14,6 +14,13 @@ export const show_add_asset_modal = (bool) => {
   }
 }
 
+export const show_edit_asset_modal = (bool) => {
+  return {
+    type: 'SHOW_EDIT_ASSET_MODAL',
+    payload: bool
+  }
+}
+
 export const set_selected_portfolio_asset = (symbol) => {
   return {
     type: 'SET_SELECTED_PORTFOLIO_ASSET',
@@ -35,10 +42,26 @@ export const add_asset_error = (error) => {
   }
 }
 
+export const edit_asset_error = (error) => {
+  return {
+    type: 'EDIT_ASSET_ERROR',
+    payload: error
+  }
+}
+
+
+
 export const removed_asset_from_portfolio = (symbol) => {
   return {
     type: 'REMOVED_ASSET_FROM_PORTFOLIO',
     payload: symbol
+  }
+}
+
+export const edited_portfolio_asset = (asset) => {
+  return {
+    type: 'EDITED_PORTFOLIO_ASSET',
+    payload: asset
   }
 }
 
@@ -79,6 +102,23 @@ export const post_add_portfolio_asset = (payload) => {
 }
 
 
+export const patch_edit_portfolio_asset = (payload) => {
+  return (dispatch) => {
+    axios.patch('/api/v1/private/portfolio/edit_asset', {symbol: payload}, {headers: {Authorization: localStorage.jwt, responseType: 'json'}})
+      .then((response) => {
+        console.log(response.data)
+        dispatch(edited_portfolio_asset(response.data))
+        dispatch(show_edit_asset_modal(false))
+      })
+      .catch((error) => {
+        if(error.response.status === 422){
+          dispatch(edit_asset_error({errors: error.response.data.error}))
+          //reset_local_storage_session()
+        }
+        console.log(error)
+      })
+  }
+}
 
 export const remove_selected_asset = (payload) => {
   return (dispatch) => {
@@ -107,6 +147,12 @@ export const update_selected_portfolio_asset = (symbol) => {
 export const set_show_add_asset_modal = (bool) => {
   return (dispatch) => {
     dispatch(show_add_asset_modal(bool))
+  }
+}
+
+export const set_show_edit_asset_modal = (bool) => {
+  return (dispatch) => {
+    dispatch(show_edit_asset_modal(bool))
   }
 }
 

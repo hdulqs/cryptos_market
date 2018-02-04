@@ -7,6 +7,7 @@ import * as assets_actions from './../../assets/actions'
 import * as portfolio_actions from './../../portfolio/actions'
 import uuid from 'uuid/v1'
 import NumberFormat from 'react-number-format'
+import EditAssetModal from './edit_asset_modal'
 
 const styles = {
 
@@ -28,7 +29,7 @@ class AssetOverview extends Component {
   }
 
   edit_selected_asset = () => {
-    console.log(this.props.portfolio_assets)
+    this.props.set_show_edit_asset_modal(true)
   }
 
   remove_selected_asset = () => {
@@ -50,6 +51,7 @@ class AssetOverview extends Component {
 
     return(
       <section>
+        <EditAssetModal asset={asset} />
         <h2 className='text-center'>{asset && asset.asset_info.name || ''}</h2>
         <hr/>
         <h4 className='text-center'><NumberFormat value={asset && asset.amount && (asset.amount * asset.asset_info.price_usd) || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></h4>
