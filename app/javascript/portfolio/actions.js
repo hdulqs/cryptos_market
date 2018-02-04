@@ -35,6 +35,13 @@ export const add_asset_error = (error) => {
   }
 }
 
+export const removed_asset_from_portfolio = (symbol) => {
+  return {
+    type: 'REMOVED_ASSET_FROM_PORTFOLIO',
+    payload: symbol
+  }
+}
+
 export const fetch_portfolio_assets = (jwt_token) => {
   return (dispatch) => {
     axios.get('/api/v1/private/portfolio', {headers: {Authorization: jwt_token, responseType: 'json'}})
@@ -70,6 +77,26 @@ export const post_add_portfolio_asset = (payload) => {
       })
   }
 }
+
+
+
+export const remove_selected_asset = (payload) => {
+  return (dispatch) => {
+    axios.patch('/api/v1/private/portfolio/remove_asset', {symbol: payload}, {headers: {Authorization: localStorage.jwt, responseType: 'json'}})
+      .then((response) => {
+        console.log(response.data)
+        dispatch(removed_asset_from_portfolio(payload))
+      })
+      .catch((error) => {
+        if(error.response.status === 422){
+          //dispatch(add_asset_error({errors: error.response.data.error}))
+          //reset_local_storage_session()
+        }
+        console.log(error)
+      })
+  }
+}
+
 
 export const update_selected_portfolio_asset = (symbol) => {
   return (dispatch) => {

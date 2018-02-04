@@ -10,7 +10,7 @@ import * as assets_actions from './../../assets/actions'
 import store from './../../main/store'
 import history from './../../main/history'
 import CandleChart from './../components/candle_chart'
-import Overview from './../components/overview'
+import AssetOverview from './../components/asset_overview'
 import PortfolioPieChart from './../components/portfolio_pie_chart'
 import AddAssetModal from './../components/add_asset_modal'
 
@@ -46,7 +46,10 @@ class PortfolioContainer extends Component {
         { this.props.is_add_asset_modal_visible && <AddAssetModal /> }
 
         <Row className="portfolio-chart-row">
-          <Col xs={12} md={12}>
+          <Col xs={12} md={2}>
+            <AssetOverview />
+          </Col>
+          <Col xs={12} md={10}>
             {
               assets_chart_data.length === 0 ?
                 <div className="loader-small"></div>

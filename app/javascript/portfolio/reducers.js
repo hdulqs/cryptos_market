@@ -33,6 +33,12 @@ export default function PortfolioReducer(state = initialState, action={}) {
         ...state,
         errors: action.payload.errors
       }
+    case 'REMOVED_ASSET_FROM_PORTFOLIO':
+      return {
+        ...state,
+        portfolio_assets: state.portfolio_assets.filter((asset) => asset.symbol !== action.payload),
+        selected_portfolio_asset: state.portfolio_assets.filter((asset) => asset.symbol !== action.payload)[0].symbol
+      }
     default:
       return state
   }

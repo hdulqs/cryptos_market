@@ -57,6 +57,7 @@ Rails.application.routes.draw do
         resources :portfolio, only: [:index] do
           collection do
             post :add_asset
+            patch :remove_asset
           end
         end
       end

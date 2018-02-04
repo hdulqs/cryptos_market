@@ -26,6 +26,13 @@ class Api::V1::Private::PortfolioController < Api::V1::Private::BaseController
     end
   end
 
+  def remove_asset
+    if current_user.portfolio.portfolio_assets.find_by(symbol: params["symbol"]).destroy!
+      render json: {message: 'success'}, status: 204
+    end
+    #binding.pry
+  end
+
   private
   def asset_infos_params
     #binding.pry
