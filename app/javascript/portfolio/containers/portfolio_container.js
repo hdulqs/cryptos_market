@@ -46,10 +46,10 @@ class PortfolioContainer extends Component {
         { this.props.is_add_asset_modal_visible && <AddAssetModal /> }
 
         <Row className="portfolio-chart-row">
-          <Col xs={12} md={2}>
+          <Col xs={12} md={2} sm={2}>
             <AssetOverview />
           </Col>
-          <Col xs={12} md={10}>
+          <Col xs={12} md={10} sm={10}>
             {
               assets_chart_data.length === 0 ?
                 <div className="loader-small"></div>
@@ -63,11 +63,11 @@ class PortfolioContainer extends Component {
         </Row>
 
         <Row className="show-grid">
-          <Col xs={12} md={8}>
+          <Col xs={12} md={8} sm={8}>
             <PortfolioList />
             <Button className='btn btn-info' onClick={this.open_asset_modal}>Add Asset</Button>
           </Col>
-          <Col xs={12} md={4}>
+          <Col xs={12} md={4} sm={4}>
             <PortfolioPieChart />
           </Col>
         </Row>

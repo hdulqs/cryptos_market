@@ -57,8 +57,7 @@ class AssetOverview extends Component {
         <h4 className='text-center'><NumberFormat value={asset && asset.amount && (asset.amount * asset.asset_info.price_usd) || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></h4>
         <hr/>
         <h4 className='text-center'>{asset && asset.amount || 0} {asset && asset.symbol}</h4>
-        <hr/>
-        <h4 className='text-center'>{total && asset && asset.amount && ((asset.amount * asset.asset_info.price_usd * 100) / total).toFixed(2)}%</h4>
+        {/*<h4 className='text-center'>{total && asset && asset.amount && ((asset.amount * asset.asset_info.price_usd * 100) / total).toFixed(2)}%</h4>*/}
         <hr/>
         <h4 className='text-center'>{asset && asset.asset_info.price_btc || 0} BTC</h4>
         <hr/>
