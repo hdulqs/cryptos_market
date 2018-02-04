@@ -369,7 +369,7 @@ class CandleChart extends React.Component {
 		const end = xAccessor(data[Math.max(0, data.length - 1000)]);
 		const xExtents = [start, end];
 		return (
-			<ChartCanvas height={380}
+			<ChartCanvas height={330}
 				ratio={ratio}
 				width={width}
 				margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
