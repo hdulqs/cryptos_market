@@ -5,6 +5,10 @@
 
 .recharts-wrapper{
   top: -6em;
+  left: -6em;
+  .recharts-surface{
+    overflow: visible;
+  }
 }
 
 .recharts-legend-wrapper{

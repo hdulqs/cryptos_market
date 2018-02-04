@@ -89,7 +89,7 @@ class TwoLevelPieChart extends Component {
     }
     let index = this.props.pie_chart_data.findIndex(data => data.name === this.props.activeIndex)
   	return (
-    	<PieChart width={600} height={380}>
+    	<PieChart width={400} height={380}>
         <Pie
         	activeIndex={index}
           activeShape={renderActiveShape}
@@ -106,7 +106,7 @@ class TwoLevelPieChart extends Component {
           	this.props.pie_chart_data.map((entry, index) => <Cell key={uuid()} fill={COLORS[index % COLORS.length]}/>)
           }
           </Pie>
-          <Legend layout="vertical" align='right' verticalAlign='bottom' content={renderLegend} iconType='square'/>
+          {/*<Legend layout="vertical" align='right' verticalAlign='bottom' content={renderLegend} iconType='square'/>*/}
        </PieChart>
     );
   }

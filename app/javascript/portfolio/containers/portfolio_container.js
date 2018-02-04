@@ -63,11 +63,11 @@ class PortfolioContainer extends Component {
         </Row>
 
         <Row className="show-grid">
-          <Col xs={12} md={6}>
+          <Col xs={12} md={8}>
             <PortfolioList />
             <Button className='btn btn-info' onClick={this.open_asset_modal}>Add Asset</Button>
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={4}>
             <PortfolioPieChart />
           </Col>
         </Row>
