@@ -36,7 +36,9 @@ class PortfolioRow extends Component {
 
   select_portfolio_asset = (symbol) => {
     //console.log(symbol)
-    this.props.retrieve_assets_ohcl_candle(symbol, '7D')
+    if(this.props.assets_chart_data[symbol] === undefined){
+      this.props.retrieve_assets_ohcl_candle(symbol, '7D')
+    }
     this.props.update_selected_portfolio_asset(symbol)
   }
 
@@ -58,7 +60,8 @@ class PortfolioRow extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    selected_portfolio_asset: state.PortfolioReducer.selected_portfolio_asset
+    selected_portfolio_asset: state.PortfolioReducer.selected_portfolio_asset,
+    assets_chart_data: state.AssetsReducer.assets_chart_data
   }
 }
 
