@@ -46,11 +46,19 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :public do
         resources :markets, only: [:index, :show]
-        resources :asset_infos, only: [:index, :show]
+        resources :asset_infos, only: [:index, :show] do
+          collection do
+            get :all
+          end
+        end
         resources :exchanges, only: [:index]
       end
       namespace :private do
-        resources :portfolio, only: [:index]
+        resources :portfolio, only: [:index] do
+          collection do
+            post :add_asset
+          end
+        end
       end
       resources :sessions, only: [:create]
       resources :registrations, only: [:create]

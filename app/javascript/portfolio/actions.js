@@ -7,10 +7,31 @@ export const portfolio_assets_fetched = (portfolio_assets) => {
   }
 }
 
+export const show_add_asset_modal = (bool) => {
+  return {
+    type: 'SHOW_ADD_ASSET_MODAL',
+    payload: bool
+  }
+}
+
 export const set_selected_portfolio_asset = (symbol) => {
   return {
     type: 'SET_SELECTED_PORTFOLIO_ASSET',
     payload: symbol
+  }
+}
+
+export const added_asset_to_portfolio = (payload) => {
+  return {
+    type: 'ADDED_ASSET_TO_PORTFOLIO',
+    payload: payload
+  }
+}
+
+export const add_asset_error = (error) => {
+  return {
+    type: 'ADD_ASSET_ERROR',
+    payload: error
   }
 }
 
@@ -19,7 +40,7 @@ export const fetch_portfolio_assets = (jwt_token) => {
     axios.get('/api/v1/private/portfolio', {headers: {Authorization: jwt_token, responseType: 'json'}})
       .then((response) => {
         dispatch(portfolio_assets_fetched({portfolio_assets: response.data.data.portfolio_assets}))
-        if(response.data.data.portfolio_assets.length){          
+        if(response.data.data.portfolio_assets.length){
           dispatch(set_selected_portfolio_asset(response.data.data.portfolio_assets[0].symbol))
           dispatch(retrieve_assets_ohcl_candle(response.data.data.portfolio_assets[0].symbol, "7D"))
         }
@@ -30,9 +51,35 @@ export const fetch_portfolio_assets = (jwt_token) => {
   }
 }
 
+export const post_add_portfolio_asset = (payload) => {
+  return (dispatch) => {
+    axios.post('/api/v1/private/portfolio/add_asset', payload, {headers: {Authorization: localStorage.jwt, responseType: 'json'}})
+      .then((response) => {
+        console.log(response.data)
+        dispatch(added_asset_to_portfolio(response.data))
+        dispatch(set_selected_portfolio_asset(response.data.data.symbol))
+        dispatch(retrieve_assets_ohcl_candle(response.data.data.symbol, "7D"))
+        dispatch(show_add_asset_modal(false))
+      })
+      .catch((error) => {
+        if(error.response.status === 422){
+          dispatch(add_asset_error({errors: error.response.data.error}))
+          //reset_local_storage_session()
+        }
+        console.log(error)
+      })
+  }
+}
+
 export const update_selected_portfolio_asset = (symbol) => {
   return (dispatch) => {
     dispatch(set_selected_portfolio_asset(symbol))
+  }
+}
+
+export const set_show_add_asset_modal = (bool) => {
+  return (dispatch) => {
+    dispatch(show_add_asset_modal(bool))
   }
 }
 

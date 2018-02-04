@@ -12,18 +12,16 @@ import history from './../../main/history'
 import CandleChart from './../components/candle_chart'
 import Overview from './../components/overview'
 import PortfolioPieChart from './../components/portfolio_pie_chart'
+import AddAssetModal from './../components/add_asset_modal'
+
 
 class PortfolioContainer extends Component {
 
   constructor(props){
     super(props)
-    this.state = {
-      show_add_asset_modal: false
-    }
   }
 
   componentDidMount(){
-    //console.log(this.props.jwt)
     if(localStorage.jwt && localStorage.jwt.length){
       this.props.fetch_portfolio_assets(localStorage.jwt)
     }else{
@@ -31,12 +29,8 @@ class PortfolioContainer extends Component {
     }
   }
 
-  close_asset_modal = () => {
-    this.setState({show_add_asset_modal: false})
-  }
-
   open_asset_modal = () => {
-    this.setState({show_add_asset_modal: true})
+    this.props.set_show_add_asset_modal(true)
   }
 
   render() {
@@ -49,17 +43,7 @@ class PortfolioContainer extends Component {
     return(
       <Grid fluid={true}>
 
-        <Modal show={this.state.show_add_asset_modal} onHide={this.close_asset_modal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add new Asset to Portfolio</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Text in a modal</h4>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button className='btn btn-danger' onClick={this.close_asset_modal}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+        { this.props.is_add_asset_modal_visible && <AddAssetModal /> }
 
         <Row className="portfolio-chart-row">
           <Col xs={12} md={12}>
@@ -96,7 +80,8 @@ const mapStateToProps = (state) => {
     jwt: state.SessionsReducer.jwt,
     portfolio_assets: state.PortfolioReducer.portfolio_assets,
     selected_portfolio_asset: state.PortfolioReducer.selected_portfolio_asset,
-    assets_chart_data: state.AssetsReducer.assets_chart_data
+    assets_chart_data: state.AssetsReducer.assets_chart_data,
+    is_add_asset_modal_visible: state.PortfolioReducer.is_add_asset_modal_visible
   }
 }
 

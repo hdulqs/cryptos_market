@@ -10,6 +10,11 @@ class Api::V1::Public::AssetInfosController < Api::V1::BaseController
     render 'api/v1/public/asset_infos/index.json'
   end
 
+  def all
+    @asset_infos = AssetInfo.all.order(:rank)
+    render 'api/v1/public/asset_infos/index.json'
+  end
+
   def show
     #@market = Market.find_by(name: params[:id])
     #render 'api/v1/public/markets/show.json'
