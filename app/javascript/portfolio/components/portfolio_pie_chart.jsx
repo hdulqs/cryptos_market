@@ -87,10 +87,11 @@ class TwoLevelPieChart extends Component {
         </ul>
       );
     }
+    let index = this.props.pie_chart_data.findIndex(data => data.name === this.props.activeIndex)
   	return (
     	<PieChart width={600} height={380}>
         <Pie
-        	activeIndex={this.state.activeIndex}
+        	activeIndex={index}
           activeShape={renderActiveShape}
           data={this.props.pie_chart_data}
           cx={300}
@@ -149,7 +150,7 @@ class PortfolioPieChart extends Component {
       <section>
         <h2 className='text-center'>{this.props.portfolio_assets.length} Assets : <NumberFormat value={total || 0} displayType={'text'} thousandSeparator={" "} suffix={' USD'} decimalScale={2} /></h2>
         <hr/>
-        <TwoLevelPieChart pie_chart_data={pie_chart_data} />
+        <TwoLevelPieChart pie_chart_data={pie_chart_data} activeIndex={this.props.selected_portfolio_asset} />
       </section>
     )
   }
@@ -158,7 +159,8 @@ class PortfolioPieChart extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    portfolio_assets: state.PortfolioReducer.portfolio_assets
+    portfolio_assets: state.PortfolioReducer.portfolio_assets,
+    selected_portfolio_asset: state.PortfolioReducer.selected_portfolio_asset
   }
 }
 
