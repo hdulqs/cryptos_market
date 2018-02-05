@@ -44,7 +44,7 @@ class PortfolioRow extends Component {
 
   render(){
     return(
-      <tr className={this.props.portfolio_asset.asset_info.symbol === this.props.selected_portfolio_asset ? 'portfolio-asset-row active' : 'portfolio-asset-row'} onMouseOver={() => this.select_portfolio_asset(this.props.portfolio_asset.asset_info.symbol)}>
+      <tr className={this.props.portfolio_asset.asset_info.symbol === this.props.selected_portfolio_asset ? 'portfolio-asset-row active' : 'portfolio-asset-row'} onClick={() => this.select_portfolio_asset(this.props.portfolio_asset.asset_info.symbol)}>
         <td><span>{this.props.portfolio_asset.asset_info.rank}</span></td>
         <td><span className='portfolio-asset-symbol-title'><img src={this.props.portfolio_asset.asset_info.logo_path_thumb} />&nbsp;&nbsp;{this.props.portfolio_asset.asset_info.name} ({this.props.portfolio_asset.asset_info.symbol})</span></td>
         <td><span>{this.props.portfolio_asset.amount}</span></td>
