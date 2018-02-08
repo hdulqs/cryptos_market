@@ -37,6 +37,9 @@ class MarketContainer extends Component {
 
   createSocket() {
     const token = localStorage.getItem('jwt')
+    if(!token){
+      return
+    }
     if(window.location.port === '3000'){
       this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable?jwt=' + token)
     }else{
