@@ -54,8 +54,7 @@ const mapStateToProps = (state) => {
     jwt: state.SessionsReducer.jwt,
     is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
     is_edit_alarm_modal_visible: state.AlarmsReducer.is_edit_alarm_modal_visible,
-    alarms: state.AlarmsReducer.alarms,
-    //assets_infos: state.AlarmsReducer.assets_infos
+    alarms: state.AlarmsReducer.alarms
   }
 }
 

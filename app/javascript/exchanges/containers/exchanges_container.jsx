@@ -12,29 +12,15 @@ class ExchangesContainer extends Component {
 
   constructor(props){
     super(props)
-    // this.state = {
-    //   exchanges: []
-    // }
   }
 
   componentDidMount(){
-    // this.fetch_exchanges()
-    this.props.fetch_exchanges()
+    if(!this.props.exchanges.length){
+      this.props.fetch_exchanges()
+    }
   }
 
-  // fetch_exchanges = () => {
-  //   axios.get('/api/v1/public/exchanges', {responseType: 'json'})
-  //     .then((response) => {
-  //       this.setState({exchanges: response.data.exchanges})
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // }
-
-
   render() {
-
     return(
       <Grid fluid={true}>
         <br/>
