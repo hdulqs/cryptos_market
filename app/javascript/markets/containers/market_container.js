@@ -21,9 +21,9 @@ class MarketContainer extends Component {
       this.props.set_markets_loading(true)
       this.props.fetch_markets(this.props.current_page + 1)
     }
-    if(localStorage.getItem('jwt')){
+    //if(localStorage.getItem('jwt')){
       this.createSocket()
-    }
+    //}
     window.addEventListener('scroll', this.onScroll, false)
   }
 
@@ -38,11 +38,11 @@ class MarketContainer extends Component {
   }
 
   createSocket() {
-    const token = localStorage.getItem('jwt')
+    //const token = localStorage.getItem('jwt')
     if(window.location.port === '3000'){
-      this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable?jwt=' + token)
+      this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable')
     }else{
-      this.tickers_consumer = Cable.createConsumer('ws://95.85.52.224/cable?jwt=' + token)
+      this.tickers_consumer = Cable.createConsumer('ws://95.85.52.224/cable')
     }
     this.tickers_subscription = this.tickers_consumer.subscriptions.create({
         channel: 'TickersChannel'
