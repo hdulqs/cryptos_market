@@ -66,10 +66,10 @@ class AssetOverview extends Component {
 
         <Row>
           <Col md={6}>
-            <Button className='btn btn-danger btn-block' type="submit" onClick={this.remove_selected_asset}>Remove</Button>
+            <Button className='btn btn-block' type="submit" onClick={this.remove_selected_asset}>Remove</Button>
           </Col>
           <Col md={6}>
-            <Button className='btn btn-info btn-block' type="submit" onClick={this.edit_selected_asset}>Edit</Button>
+            <Button className='btn btn-block' type="submit" onClick={this.edit_selected_asset}>Edit</Button>
           </Col>
         </Row>
 

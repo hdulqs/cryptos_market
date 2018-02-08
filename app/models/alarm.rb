@@ -11,6 +11,9 @@ class Alarm < ApplicationRecord
     if has_min_limit && (min_limit >= asset_info.price_usd)
       errors.add(:min_limit, "Must be less than current asset usd price")
     end
+    if has_min_limit && (min_limit <= 0)
+      errors.add(:min_limit, "Must be greater than 0")
+    end
   end
 
   def max_limit_consistency
