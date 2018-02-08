@@ -12,7 +12,7 @@ class TickerFetcherJob < ApplicationJob
       else
         pair.get_ticker
         random_sec = Random.rand(1..30)
-        next_request = DateTime.current + random_sec.seconds + 80.seconds # Request to exchange for pair_id every
+        next_request = DateTime.current + (random_sec + 80).seconds # Request to exchange for pair_id every
       end
       TickerFetcherJob.set(wait_until: next_request).perform_later(pair_id)
     end

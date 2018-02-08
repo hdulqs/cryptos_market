@@ -121,7 +121,12 @@ class MarketItem extends Component {
   }
 
   get_latest_price = (pairs) => {
-    pairs.filter(pair => pair.last_to_be_updated === true)
+    let pair = pairs.find(pair => pair.last_to_be_updated === true)
+    if(pair){
+      return pair.last_ticker.last
+    }else{
+      return pairs[0].last_ticker.last
+    }
   }
 
   render(){
@@ -139,7 +144,7 @@ class MarketItem extends Component {
                     </div>
                     <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
                     <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
-                    <h4 style={this.state.style.header_price}>{get_latest_price(this.props.market.pairs)}</h4>
+                    <h4 style={this.state.style.header_price}>{this.get_latest_price(this.props.market.pairs)}</h4>
                   </div>
                   <div style={this.state.style.item_header}>
                     <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
@@ -166,7 +171,7 @@ class MarketItem extends Component {
                   </div>
                   <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
                   <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
-                  <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
+                  <h4 style={this.state.style.header_price}>{this.get_latest_price(this.props.market.pairs)}</h4>
                   </div>
                   <div style={this.state.style.item_header}>
                     <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
@@ -187,7 +192,7 @@ class MarketItem extends Component {
                   </div>
                   <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
                   <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
-                  <h4 style={this.state.style.header_price}>{getHighestPrice(this.props.market.pairs)}</h4>
+                  <h4 style={this.state.style.header_price}>{this.get_latest_price(this.props.market.pairs)}</h4>
                   </div>
                   <div style={this.state.style.item_header}>
                     <p>Ask: {this.get_lowest_ask(this.props.market.pairs)}</p>
