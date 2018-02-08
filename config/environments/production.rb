@@ -17,7 +17,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-
+  #  The ‘1’ in the second parameter means that 1 historic log file will be kept, so you’ll have up to 100Mb of logs – the current log and the previous chunk of 50Mb
   config.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rails.env}.log"), 1, 50 * 1024 * 1024)
 
   # Eager load code on boot. This eager loads most of Rails and
