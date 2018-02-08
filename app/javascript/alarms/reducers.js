@@ -2,7 +2,9 @@
 const initialState = {
   alarms: [],
   is_create_alarm_modal_visible: false,
-  errors: {}
+  is_edit_alarm_modal_visible: false,
+  errors: {},
+  selected_alarm: {}
 };
 
 export default function PortfolioReducer(state = initialState, action={}) {
@@ -13,10 +15,26 @@ export default function PortfolioReducer(state = initialState, action={}) {
         is_create_alarm_modal_visible: action.payload,
         errors: {}
       }
+    case 'SHOW_EDIT_ALARM_MODAL':
+      return {
+        ...state,
+        is_edit_alarm_modal_visible: action.payload,
+        errors: {}
+      }
     case 'ALARM_CREATED':
       return {
         ...state,
         alarms: state.alarms.concat(action.payload.data.alarm)
+      }
+    case 'ALARM_SELECTED':
+      return {
+        ...state,
+        selected_alarm: action.payload
+      }
+    case 'EDITED_ALARM':
+      return {
+        ...state,
+        alarms: state.alarms.map((alarm) => (alarm.asset_symbol === action.payload.data.alarm.asset_symbol) ? action.payload.data.alarm : alarm)
       }
     case 'DESTROYED_ALARM':
       return {

@@ -59,6 +59,7 @@ Rails.application.routes.draw do
           collection do
             patch :toggle_activation
             patch :destroy_alarm
+            patch :edit_alarm
           end
         end
         resources :portfolio, only: [:index] do

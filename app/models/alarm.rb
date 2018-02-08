@@ -7,6 +7,7 @@ class Alarm < ApplicationRecord
   validates :asset_symbol, presence: true
 
   def min_limit_consistency
+    # binding.pry
     if has_min_limit && (min_limit >= asset_info.price_usd)
       errors.add(:min_limit, "Must be less than current asset usd price")
     end

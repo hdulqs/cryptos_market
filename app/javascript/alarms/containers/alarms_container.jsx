@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux'
 import CreateAlarmModal from './../components/create_alarm_modal'
 import * as alarms_actions from './../actions'
 import AlarmsList from './../components/alarms_list'
+import EditAlarmModal from './../components/edit_alarm_modal'
+
 class AlarmsContainer extends Component {
 
   constructor(props){
@@ -31,6 +33,7 @@ class AlarmsContainer extends Component {
       <Grid fluid={true}>
         <h2 className='text-center'>Alarms</h2>
         { this.props.is_create_alarm_modal_visible && <CreateAlarmModal /> }
+        { this.props.is_edit_alarm_modal_visible && <EditAlarmModal /> }
         { this.props.alarms.length ?
             <AlarmsList alarms={this.props.alarms} />
             :
@@ -49,6 +52,7 @@ const mapStateToProps = (state) => {
   return {
     jwt: state.SessionsReducer.jwt,
     is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
+    is_edit_alarm_modal_visible: state.AlarmsReducer.is_edit_alarm_modal_visible,
     alarms: state.AlarmsReducer.alarms
   }
 }

@@ -37,4 +37,22 @@ class Api::V1::Private::AlarmsController < Api::V1::Private::BaseController
     render json: {msg: 'ok'}, status: 204
   end
 
+  def edit_alarm
+    @alarm = current_user.alarms.find_by(asset_symbol: alarm_edit_params[:asset_symbol])
+    render_error(code: 422, message: "Could not find Alarm", error_fields: {}) && return unless @alarm
+    #is_valid_request = alarm_edit_params["has_min_limit"].present? && (alarm_edit_params["has_max_limit"].present? && alarm_edit_params["max_limit"].present? && alarm_edit_params["min_limit"].present?)
+    #render_error(code: 422, message: "Invalid form request", error_fields: {}) && return unless is_valid_request
+    #binding.pry
+    if @alarm.update_attributes(alarm_edit_params)
+      render 'api/v1/private/alarms/show.json'
+    else
+      render_error(code: 422, message: @alarm.errors.full_messages, error_fields: @alarm.errors) && return
+    end
+  end
+
+  private
+  def alarm_edit_params
+    params.require(:symbol).permit(:has_min_limit, :has_max_limit, :max_limit, :min_limit, :asset_symbol)
+  end
+
 end

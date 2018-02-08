@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //import * as assets_actions from './actions'
 import * as sessions_actions from './../sessions/actions'
+import * as markets_actions from './../markets/actions'
 import axios from 'axios'
 import NumberFormat from 'react-number-format'
 import history from './../main/history'
@@ -142,7 +143,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(sessions_actions, dispatch)
+  return bindActionCreators(Object.assign({}, sessions_actions, markets_actions), dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExchangesNavBar)

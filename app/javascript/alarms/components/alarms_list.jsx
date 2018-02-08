@@ -32,8 +32,6 @@ export default class AlarmsList extends Component {
     				<th>Min Limit</th>
             <th>Max Limit</th>
             <th>Is Active</th>
-            <th>Has Min Limit</th>
-            <th>Has Max Limit</th>
             <th>Created At</th>
             <th>Toggle Activation</th>
             <th>Edit</th>

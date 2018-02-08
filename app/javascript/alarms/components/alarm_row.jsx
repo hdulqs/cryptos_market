@@ -39,7 +39,8 @@ class AlarmRow extends Component {
   }
 
   edit_alarm = () => {
-
+    this.props.set_selected_alarm(this.props.alarm)
+    this.props.set_show_edit_alarm_modal(true)
   }
 
   render(){
@@ -47,8 +48,8 @@ class AlarmRow extends Component {
       <tr className="asset_row" onClick={this.navigateToShowAsset}>
         <td></td>
         <td><span>{this.props.alarm.asset_symbol}</span></td>
-        <td><NumberFormat value={this.props.alarm.min_limit || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} /></td>
-        <td><NumberFormat value={this.props.alarm.max_limit || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} /></td>
+        <td><NumberFormat value={this.props.alarm.min_limit || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={9} /></td>
+        <td><NumberFormat value={this.props.alarm.max_limit || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={9} /></td>
         <td>
           {
             this.props.alarm.is_active ?
@@ -57,8 +58,6 @@ class AlarmRow extends Component {
               <span style={this.state.style.red}><Glyphicon glyph="remove-circle" /></span>
           }
         </td>
-        <td><span>{this.props.alarm.has_min_limit ? 'true' : 'false'}</span></td>
-        <td><span>{this.props.alarm.has_max_limit ? 'true' : 'false'}</span></td>
         <td><span>{this.props.alarm.created_at}</span></td>
         <td>
           {
