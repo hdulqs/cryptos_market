@@ -14,10 +14,11 @@ module JwtAuthConcern
     def authenticate_token!
       if c_user
         #binding.pry
+        render_error(code: 401, message: "You must confirm your account", error_fields: {}) && return unless current_user.confirmed?
         current_user || sign_in(c_user, store: false)
       else
         sign_out(c_user)
-        render_error(code: 404, message: "Invalid JWT Token", error_fields: {}) && return
+        render_error(code: 401, message: "Invalid JWT Token", error_fields: {}) && return
       end
     end
 
@@ -28,7 +29,7 @@ module JwtAuthConcern
     end
 
     def decoded_token
-      render_error(code: 404, message: "Invalid JWT Token", error_fields: {}) && return unless token
+      render_error(code: 401, message: "Invalid JWT Token", error_fields: {}) && return unless token
       JsonWebToken.decode(token)
     end
 

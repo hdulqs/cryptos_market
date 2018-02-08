@@ -10,6 +10,7 @@ import SignInApp from '../sessions/sign_in_app'
 import SignUpApp from '../registrations/sign_up_app'
 import ExchangesApp from '../exchanges/exchanges_app'
 import AboutApp from '../about/about_app'
+import AlarmsApp from '../alarms/alarms_app'
 import PortfolioApp from '../portfolio/portfolio_app'
 import AssetShow from '../assets/components/asset_show'
 import MarketShow from '../markets/components/market_show'
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <Route path='/asset-pairs' component={withTracker(MarketsApp)} />
           <Route exact path='/exchanges' component={withTracker(ExchangesApp)} />
           <Route exact path='/about' component={withTracker(AboutApp)} />
+          <Route exact path='/alarms' component={withTracker(AlarmsApp)} />
           <Route exact path='/portfolio' component={withTracker(PortfolioApp)} />
           <Route exact path='/:symbol' component={withTracker(AssetShow)} />
           <Route path='/:exchange_name/:market' component={withTracker(MarketShow)} />

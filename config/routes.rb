@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       resources :exchange_pairs, only: [:index, :show]
     end
     devise_for :admins, :controllers => { :sessions => "backend/admins/sessions", registrations: "backend/admins/registrations" }
-    devise_for :users, controllers: { :sessions => "backend/users/sessions", registrations: "backend/users/registrations" }
+
     resources :opportunities, only: [:index, :show]
     resources :markets, only: [:index, :show] do
       collection do
@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      devise_for :users, controllers: { :sessions => "backend/users/sessions", registrations: "backend/users/registrations", confirmations: 'backend/users/confirmations' }
       namespace :public do
         resources :markets, only: [:index, :show]
         resources :asset_infos, only: [:index, :show] do
@@ -54,6 +55,12 @@ Rails.application.routes.draw do
         resources :exchanges, only: [:index]
       end
       namespace :private do
+        resources :alarms, only: [:index, :create] do
+          collection do
+            patch :toggle_activation
+            patch :destroy_alarm
+          end
+        end
         resources :portfolio, only: [:index] do
           collection do
             post :add_asset

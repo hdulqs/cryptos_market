@@ -51,8 +51,9 @@ export const submit_form_registrations = (registrations) => {
     axios.post('/api/v1/registrations', {email: registrations.email, password: registrations.password, password_confirmation: registrations.password_confirmation})
       .then((response) => {
         dispatch(registrations_form_submited_success({registrations: response.data.data.sessions}))
-        save_session_to_local_storage(response.data.data.sessions)
-        history.push('/')
+        //save_session_to_local_storage(response.data.data.sessions)
+        dispatch(registrations_error({errors: {message: ['Confirm your email before loging in'], status: 401}}))
+        //history.push('/')
       })
       .catch((error) => {
         if(error.response.status === 422){

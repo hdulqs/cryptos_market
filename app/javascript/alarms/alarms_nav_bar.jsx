@@ -4,11 +4,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as sessions_actions from './../sessions/actions'
 import * as markets_actions from './../markets/actions'
-import axios from 'axios'
 import NumberFormat from 'react-number-format'
 import history from './../main/history'
 
-class PortfolioNavBar extends Component {
+class AlarmsNavBar extends Component {
 
   constructor(props){
     super(props)
@@ -18,10 +17,6 @@ class PortfolioNavBar extends Component {
     if(this.props.markets_infos['total_24h_volume_usd'] === undefined){
       this.props.fetch_markets_infos()
     }
-  }
-
-  logout = () => {
-    this.props.do_reset_local_storage_session()
   }
 
   navigate_to = (path) => {
@@ -60,24 +55,19 @@ class PortfolioNavBar extends Component {
             </NavItem>
           </Nav>
 
+
           <Nav pullRight>
-
             { this.props.user.email === undefined ?
-
               <NavItem eventKey={6} onClick={() => this.navigate_to('sign_in')}>
                 Login
               </NavItem>
-
               :
-
               <NavDropdown className='navbar-right' eventKey={6} title={this.props.user.email} id="basic-nav-dropdown">
                 <MenuItem eventKey={6.1}>Edit Account</MenuItem>
                 <MenuItem divider />
                 <MenuItem eventKey={6.2} onClick={this.logout}>Logout</MenuItem>
               </NavDropdown>
-
             }
-
           </Nav>
 
           <Navbar.Text pullRight className='global-market-infos'>
@@ -90,7 +80,6 @@ class PortfolioNavBar extends Component {
               <NumberFormat value={this.props.markets_infos['total_24h_volume_usd'] || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} />
             </span>
           </Navbar.Text>
-
 
     		</Navbar.Collapse>
   	  </Navbar>
@@ -111,4 +100,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(Object.assign({}, sessions_actions, markets_actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortfolioNavBar)
+export default connect(mapStateToProps, mapDispatchToProps)(AlarmsNavBar)

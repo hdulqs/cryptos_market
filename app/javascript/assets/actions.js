@@ -36,7 +36,7 @@ export const fetch_assets = (page_nb) => {
   return (dispatch) => {
     axios.get('/api/v1/public/asset_infos?page=' + page_nb, {responseType: 'json'})
       .then((response) => {
-        dispatch(assets_fetched({page_nb: page_nb, assets: response.data.asset_infos}))
+        dispatch(assets_fetched({page_nb: page_nb, assets: response.data.assets_infos}))
       })
       .catch((error) => {
         console.log(error)
@@ -55,7 +55,7 @@ export const asset_search = (value) => {
   return (dispatch) => {
     axios.get('/api/v1/public/asset_infos?asset_search=' + value, {responseType: 'json'})
       .then((response) => {
-        dispatch(asset_search_fetched({page_nb: 0, assets: response.data.asset_infos}))
+        dispatch(asset_search_fetched({page_nb: 0, assets: response.data.assets_infos}))
       })
       .catch((error) => {
         console.log(error)
@@ -152,21 +152,21 @@ export const retrieve_assets_ohcl_candle = (symbol, time_scale) => {
     let request_type = 'histohour'
     let step = 3
     if(time_scale === '7d'){
-      limit = 60
-      step = 3
+      limit = 360
+      step = 1
       request_type = 'histohour'
     }else if (time_scale === '1d') {
-      limit = 96
-      step = 15
+      limit = 288
+      step = 5
       request_type = 'histominute'
     }else if (time_scale === '6h') {
-      limit = 120
-      step = 3
+      limit = 360
+      step = 1
       request_type = 'histominute'
     }
     else if (time_scale === '1m') {
-      limit = 120
-      step = 6
+      limit = 240
+      step = 3
       request_type = 'histohour'
     }
     else if (time_scale === '7D') {

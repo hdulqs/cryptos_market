@@ -22,7 +22,7 @@ class Api::V1::Private::PortfolioController < Api::V1::Private::BaseController
     if(@portfolio_asset.save)
       render 'api/v1/private/portfolio/add_asset.json'
     else
-      render_error(code: 422, message: "Could not Add asset to portfolio", error_fields: {errors: @portfolio_asset.errors}) && return
+      render_error(code: 422, message: @portfolio_asset.errors.full_messages, error_fields: {errors: @portfolio_asset.errors}) && return
     end
   end
 
@@ -39,7 +39,7 @@ class Api::V1::Private::PortfolioController < Api::V1::Private::BaseController
     if @portfolio_asset.save
       render 'api/v1/private/portfolio/add_asset.json'
     else
-      render_error(code: 422, message: "Could not Edit asset", error_fields: {errors: @portfolio_asset.errors}) && return
+      render_error(code: 422, message: @portfolio_asset.errors.full_messages, error_fields: {errors: @portfolio_asset.errors}) && return
     end
   end
 

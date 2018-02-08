@@ -20,7 +20,7 @@ class AddAssetModal extends Component {
     super(props)
     this.state = {
       style: styles,
-      asset_infos: [],
+      assets_infos: [],
       selected_value: undefined,
       amount: 0
     }
@@ -29,14 +29,14 @@ class AddAssetModal extends Component {
   componentDidMount(){
     axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
       .then((response) => {
-        let payload = response.data.asset_infos.map((asset) => {
+        let payload = response.data.assets_infos.map((asset) => {
           return {
             value: asset.id,
             symbol: asset.symbol,
             label: asset.name + ' (' + asset.symbol + ')'
           }
         })
-        this.setState({asset_infos: payload})
+        this.setState({assets_infos: payload})
       })
       .catch((error) => {
         console.log(error)
@@ -71,7 +71,7 @@ class AddAssetModal extends Component {
           <h4>Choose an Asset</h4>
           <Form horizontal>
             <VirtualizedSelect
-              options={this.state.asset_infos}
+              options={this.state.assets_infos}
               onChange={(selectValue) => this.setState({selected_value: selectValue})}
               value={this.state.selected_value}
             />
