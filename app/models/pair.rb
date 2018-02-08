@@ -30,7 +30,7 @@ class Pair < ApplicationRecord
   end
 
   def last_ticker
-    tickers.last
+    Ticker.find(last_ticker_id)
   end
 
 end

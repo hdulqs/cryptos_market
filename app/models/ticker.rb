@@ -7,6 +7,7 @@ class Ticker < ApplicationRecord
       'all',
       ticker: render_ticker(self)
     )
+    pair.update_column(:last_ticker_id, id)
   end
 
 
