@@ -37,7 +37,11 @@ class MarketContainer extends Component {
 
   createSocket() {
     const token = localStorage.getItem('jwt')
-    this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable?jwt=' + token)
+    if(window.location.port === '3000'){
+      this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable?jwt=' + token)
+    }else{
+      this.tickers_consumer = Cable.createConsumer('ws://95.85.52.224/cable?jwt=' + token)
+    }
     this.tickers_subscription = this.tickers_consumer.subscriptions.create({
         channel: 'TickersChannel'
       }, {
