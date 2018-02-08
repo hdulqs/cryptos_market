@@ -21,15 +21,15 @@ class MarketsNavBar extends Component {
     }
   }
 
-  search_asset = (event) => {
+  search_market = (event) => {
     let value = ''
     if(event.target.value === 'none'){
       value = event.target.parentElement.getElementsByClassName('form-control')[0].value
     }else {
       value = event.target.value
     }
-    this.props.set_assets_loading(true)
-    this.props.asset_search(value)
+    this.props.set_markets_loading(true)
+    this.props.market_search(value)
   }
 
   key_press_search_asset = (event) => {
@@ -38,10 +38,10 @@ class MarketsNavBar extends Component {
     }
   }
 
-  reset_search_asset = (event) => {
+  reset_search_market = (event) => {
     let value = ''
-    this.props.set_assets_loading(true)
-    this.props.asset_search(value)
+    this.props.set_markets_loading(true)
+    this.props.market_search(value)
     event.target.parentElement.getElementsByClassName('form-control')[0].value = ''
   }
 
