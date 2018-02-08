@@ -60,6 +60,15 @@ export const edited_alarm = (alarm) => {
   }
 }
 
+export const assets_infos_fetched = (assets_infos) => {
+  return {
+    type: 'ASSETS_INFOS_FETCHED',
+    payload: assets_infos
+  }
+}
+
+
+
 
 export const set_selected_alarm = (alarm) => {
   return (dispatch) => {
@@ -162,7 +171,17 @@ export const patch_edit_alarm = (payload) => {
 }
 
 
-
+export const fetch_assets_infos = () => {
+  return (dispatch) => {
+    axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
+      .then((response) => {
+        dispatch(assets_infos_fetched({assets_infos: response.data.assets_infos}))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+}
 
 
 export const set_create_alarm_error = (errors) => {

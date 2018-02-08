@@ -28,8 +28,10 @@ export default class AlarmsList extends Component {
     		<thead>
     			<tr>
             <th></th>
+            <th></th>
             <th>Asset </th>
     				<th>Min Limit</th>
+    				<th>Current Price</th>
             <th>Max Limit</th>
             <th>Is Active</th>
             <th>Created At</th>

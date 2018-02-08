@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
+  namespace :api, format: 'json' do
     namespace :v1 do
       devise_for :users, controllers: { :sessions => "backend/users/sessions", registrations: "backend/users/registrations", confirmations: 'backend/users/confirmations' }
       namespace :public do

@@ -30,21 +30,31 @@ class EditAlarmModal extends Component {
   }
 
   componentDidMount(){
-    axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
-      .then((response) => {
-        let payload = response.data.assets_infos.map((asset) => {
-          return {
-            value: asset.id,
-            symbol: asset.symbol,
-            label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
-            usd_price: asset.price_usd
-          }
-        })
-        this.setState({assets_infos: payload})
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    let payload = this.props.assets_infos.map((asset) => {
+      return {
+        value: asset.id,
+        symbol: asset.symbol,
+        label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
+        usd_price: asset.price_usd
+      }
+    })
+    this.setState({assets_infos: payload})
+
+    // axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
+    //   .then((response) => {
+    //     let payload = response.data.assets_infos.map((asset) => {
+    //       return {
+    //         value: asset.id,
+    //         symbol: asset.symbol,
+    //         label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
+    //         usd_price: asset.price_usd
+    //       }
+    //     })
+    //     this.setState({assets_infos: payload})
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
 
     if(this.props.selected_alarm){
       //let asset = this.state.assets_infos.find((asset) => asset.symbol === selected_asset_value.symbol)
@@ -187,7 +197,8 @@ const mapStateToProps = (state) => {
   return {
     is_edit_alarm_modal_visible: state.AlarmsReducer.is_edit_alarm_modal_visible,
     selected_alarm: state.AlarmsReducer.selected_alarm,
-    errors: state.AlarmsReducer.errors
+    errors: state.AlarmsReducer.errors,
+    assets_infos: state.AlarmsReducer.assets_infos
   }
 }
 

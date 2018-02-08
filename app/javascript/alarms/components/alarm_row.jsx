@@ -44,11 +44,17 @@ class AlarmRow extends Component {
   }
 
   render(){
+    let asset_infos = {}
+    if(this.props.assets_infos.length){
+      asset_infos = this.props.assets_infos.find(asset => asset.symbol === this.props.alarm.asset_symbol)
+    }
     return(
       <tr className="asset_row" onClick={this.navigateToShowAsset}>
         <td></td>
+        <td><img src={asset_infos && asset_infos.logo_path_thumb} /></td>
         <td><span>{this.props.alarm.asset_symbol}</span></td>
         <td><NumberFormat value={this.props.alarm.min_limit || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={9} /></td>
+        <td><NumberFormat value={asset_infos.price_usd || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={9} /></td>
         <td><NumberFormat value={this.props.alarm.max_limit || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={9} /></td>
         <td>
           {
@@ -62,9 +68,9 @@ class AlarmRow extends Component {
         <td>
           {
             this.props.alarm.is_active ?
-              <span onClick={this.toggle_activation}>Desactivate</span>
+              <span onClick={this.toggle_activation} style={this.state.style.red}><Glyphicon glyph="sort" /> Desactivate</span>
               :
-              <span onClick={this.toggle_activation}>Activate</span>
+              <span onClick={this.toggle_activation} style={this.state.style.green}><Glyphicon glyph="sort" /> Activate</span>
           }
         </td>
         <td><Glyphicon glyph="cog" onClick={this.edit_alarm} /></td>
@@ -79,6 +85,7 @@ const mapStateToProps = (state) => {
   return {
     //is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
     //alarms: state.AlarmsReducer.alarms
+    assets_infos: state.AlarmsReducer.assets_infos
   }
 }
 

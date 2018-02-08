@@ -4,7 +4,8 @@ const initialState = {
   is_create_alarm_modal_visible: false,
   is_edit_alarm_modal_visible: false,
   errors: {},
-  selected_alarm: {}
+  selected_alarm: {},
+  assets_infos: []
 };
 
 export default function PortfolioReducer(state = initialState, action={}) {
@@ -14,6 +15,11 @@ export default function PortfolioReducer(state = initialState, action={}) {
         ...state,
         is_create_alarm_modal_visible: action.payload,
         errors: {}
+      }
+    case 'ASSETS_INFOS_FETCHED':
+      return {
+        ...state,
+        assets_infos: action.payload.assets_infos
       }
     case 'SHOW_EDIT_ALARM_MODAL':
       return {

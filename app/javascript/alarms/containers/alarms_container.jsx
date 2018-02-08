@@ -18,6 +18,7 @@ class AlarmsContainer extends Component {
   componentDidMount(){
     if(localStorage.jwt && localStorage.jwt.length){
       this.props.fetch_user_alarms(localStorage.jwt)
+      this.props.fetch_assets_infos()
     }else{
       history.push('sign_in')
     }
@@ -53,7 +54,8 @@ const mapStateToProps = (state) => {
     jwt: state.SessionsReducer.jwt,
     is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
     is_edit_alarm_modal_visible: state.AlarmsReducer.is_edit_alarm_modal_visible,
-    alarms: state.AlarmsReducer.alarms
+    alarms: state.AlarmsReducer.alarms,
+    //assets_infos: state.AlarmsReducer.assets_infos
   }
 }
 

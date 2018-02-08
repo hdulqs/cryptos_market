@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <Route exact path='/alarms' component={withTracker(AlarmsApp)} />
           <Route exact path='/portfolio' component={withTracker(PortfolioApp)} />
           <Route exact path='/:symbol' component={withTracker(AssetShow)} />
-          <Route path='/:exchange_name/:market' component={withTracker(MarketShow)} />
+          <Route exact path='/:exchange_name/:market' component={withTracker(MarketShow)} />
         </Switch>
       </Router>
     </Provider>,

@@ -30,21 +30,34 @@ class CreateAlarmModal extends Component {
   }
 
   componentDidMount(){
-    axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
-      .then((response) => {
-        let payload = response.data.assets_infos.map((asset) => {
-          return {
-            value: asset.id,
-            symbol: asset.symbol,
-            label: asset.name + ' (' + asset.symbol + ')',
-            usd_price: asset.price_usd
-          }
-        })
-        this.setState({assets_infos: payload})
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    let payload = this.props.assets_infos.map((asset) => {
+      return {
+        value: asset.id,
+        symbol: asset.symbol,
+        label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
+        usd_price: asset.price_usd
+      }
+    })
+    this.setState({assets_infos: payload})
+
+    //this.setState({assets_infos: this.props.assets_infos})
+
+
+    // axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
+    //   .then((response) => {
+    //     let payload = response.data.assets_infos.map((asset) => {
+    //       return {
+    //         value: asset.id,
+    //         symbol: asset.symbol,
+    //         label: asset.name + ' (' + asset.symbol + ')',
+    //         usd_price: asset.price_usd
+    //       }
+    //     })
+    //     this.setState({assets_infos: payload})
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   }
 
   close_asset_modal = () => {
@@ -145,7 +158,8 @@ class CreateAlarmModal extends Component {
 const mapStateToProps = (state) => {
   return {
     is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
-    errors: state.AlarmsReducer.errors
+    errors: state.AlarmsReducer.errors,
+    assets_infos: state.AlarmsReducer.assets_infos
   }
 }
 
