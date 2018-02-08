@@ -125,7 +125,7 @@ class MarketItem extends Component {
     if(pair){
       return pair.last_ticker.last
     }else{
-      return pairs[0].last_ticker.last
+      return pairs.length > 0 ? pairs[0].last_ticker.last : 0
     }
   }
 
