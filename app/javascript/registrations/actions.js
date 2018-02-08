@@ -51,9 +51,11 @@ export const submit_form_registrations = (registrations) => {
     axios.post('/api/v1/registrations', {email: registrations.email, password: registrations.password, password_confirmation: registrations.password_confirmation})
       .then((response) => {
         dispatch(registrations_form_submited_success({registrations: response.data.data.sessions}))
-        //save_session_to_local_storage(response.data.data.sessions)
-        dispatch(registrations_error({errors: {message: ['Confirm your email before loging in'], status: 401}}))
-        //history.push('/')
+        dispatch(registrations_error({errors: {message: ['You must confirm your email before signing in'], status: 401}}))
+        // Clean form wait 2 seconds and redirect to sign_in
+        setTimeout(() => {
+          history.push('/sign_in')
+        }, 4000)
       })
       .catch((error) => {
         if(error.response.status === 422){

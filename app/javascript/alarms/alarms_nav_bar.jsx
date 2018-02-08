@@ -19,6 +19,11 @@ class AlarmsNavBar extends Component {
     }
   }
 
+  logout = () => {
+    this.props.do_reset_local_storage_session()
+  }
+
+
   navigate_to = (path) => {
     history.push(path)
   }
