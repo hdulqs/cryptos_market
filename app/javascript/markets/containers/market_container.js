@@ -21,7 +21,9 @@ class MarketContainer extends Component {
       this.props.set_markets_loading(true)
       this.props.fetch_markets(this.props.current_page + 1)
     }
-    this.createSocket()
+    if(localStorage.getItem('jwt')){
+      this.createSocket()
+    }
     window.addEventListener('scroll', this.onScroll, false)
   }
 
@@ -37,9 +39,6 @@ class MarketContainer extends Component {
 
   createSocket() {
     const token = localStorage.getItem('jwt')
-    if(!token){
-      return
-    }
     if(window.location.port === '3000'){
       this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable?jwt=' + token)
     }else{
