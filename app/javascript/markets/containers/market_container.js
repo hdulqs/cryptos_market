@@ -39,11 +39,12 @@ class MarketContainer extends Component {
 
   createSocket() {
     //const token = localStorage.getItem('jwt')
-    if(window.location.port === '3000'){
-      this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable')
-    }else{
-      this.tickers_consumer = Cable.createConsumer('ws://95.85.52.224/cable')
-    }
+    this.tickers_consumer = Cable.createConsumer()
+    // if(window.location.port === '3000'){
+    //   this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable')
+    // }else{
+    //   this.tickers_consumer = Cable.createConsumer('ws://95.85.52.224/cable')
+    // }
     this.tickers_subscription = this.tickers_consumer.subscriptions.create({
         channel: 'TickersChannel'
       }, {
