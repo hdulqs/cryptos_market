@@ -36,7 +36,8 @@ class MarketContainer extends Component {
   }
 
   createSocket() {
-    this.tickers_consumer = Cable.createConsumer()
+    const token = localStorage.getItem('jwt')
+    this.tickers_consumer = Cable.createConsumer('ws://localhost:3000/cable?jwt=' + token)
     this.tickers_subscription = this.tickers_consumer.subscriptions.create({
         channel: 'TickersChannel'
       }, {
