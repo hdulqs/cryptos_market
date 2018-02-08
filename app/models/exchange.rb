@@ -22,4 +22,6 @@ class Exchange < ApplicationRecord
     end
   end
 
+  scope :watched, -> { where(is_watched: true) }
+
 end

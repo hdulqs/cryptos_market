@@ -64,7 +64,7 @@ class AlarmRow extends Component {
               <span style={this.state.style.red}><Glyphicon glyph="remove-circle" /></span>
           }
         </td>
-        <td><span>{this.props.alarm.created_at}</span></td>
+        <td><span>{this.props.alarm.created_at} UTC</span></td>
         <td>
           {
             this.props.alarm.is_active ?

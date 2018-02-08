@@ -5,6 +5,7 @@ import SessionsReducer from '../sessions/reducers'
 import RegistrationsReducer from '../registrations/reducers'
 import PortfolioReducer from '../portfolio/reducers'
 import AlarmsReducer from '../alarms/reducers'
+import ExchangesReducer from '../exchanges/reducers'
 
 const allReducers = combineReducers({
   MarketsReducer,
@@ -12,7 +13,8 @@ const allReducers = combineReducers({
   SessionsReducer,
   RegistrationsReducer,
   AlarmsReducer,
-  PortfolioReducer
+  PortfolioReducer,
+  ExchangesReducer
 })
 
 export default allReducers

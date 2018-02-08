@@ -32,7 +32,7 @@ class AlarmsContainer extends Component {
   render() {
     return(
       <Grid fluid={true}>
-        <h2 className='text-center'>Alarms</h2>
+        <br/>
         { this.props.is_create_alarm_modal_visible && <CreateAlarmModal /> }
         { this.props.is_edit_alarm_modal_visible && <EditAlarmModal /> }
         { this.props.alarms.length ?
