@@ -2,7 +2,7 @@
 :queues:
   #- reports_generator_job
   #- ticker_fetcher_job
-  - tickers_fetcher_job
+  #- tickers_fetcher_job
   - assets_info_fetcher_job
   - alarm_watcher_job
   - alarm_mailer_job

@@ -12,6 +12,9 @@ class Pair < ApplicationRecord
       tickers: { created_at: (Time.now - 10.minutes)..Time.now }
     )
   }
+  scope :with_last_ticker, -> {
+    where.not(last_ticker_id: nil)
+  }
 
   def get_order_book
     RestExchange::OrderBook::Fetcher.new(self).call
