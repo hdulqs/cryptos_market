@@ -87,6 +87,10 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
       tickers_payload.map do |item|
         [item['currency_pair_code'], item]
       end
+    elsif @exchange.name == 'kucoin'
+      tickers_payload['data'].map do |ticker|
+        [ticker['symbol'], ticker]
+      end
     else
       tickers_payload
     end

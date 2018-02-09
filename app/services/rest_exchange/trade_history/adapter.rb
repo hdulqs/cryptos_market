@@ -77,6 +77,11 @@ class RestExchange::TradeHistory::Adapter
         hist[:original_payload] = hist.with_indifferent_access
         hist.with_indifferent_access
       end
+    elsif @currency_pair.exchange.name == 'kucoin'
+      th_array = @response_payload['data']
+      th_array.map do |event|
+        { original_payload: event, price: event[2], amount: event[3], event_timestamp: event[0], order_type: event[1] }.with_indifferent_access
+      end
     else
       @response_payload.map do |hist|
         hist[:original_payload] = hist.with_indifferent_access

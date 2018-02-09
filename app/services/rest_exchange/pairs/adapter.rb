@@ -84,6 +84,11 @@ class RestExchange::Pairs::Adapter
       @response_payload.map do |pair|
         { name: pair['symbol'], base_currency: pair["symbol"][0..2].upcase, quote_currency: pair["symbol"][3..5].upcase, original_payload: pair }.with_indifferent_access
       end
+    elsif @exchange.name == 'kucoin'
+      @response_payload['data'].map do |pair|
+        pair[:original_payload] = pair.with_indifferent_access
+        pair.with_indifferent_access
+      end
     else
       @response_payload.map do |pair|
         pair[:original_payload] = pair.with_indifferent_access
