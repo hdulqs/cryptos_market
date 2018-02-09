@@ -9,8 +9,7 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
   def call
     tickers_payload = perform_request(@exchange.base_url, @exchange.get_tickers_path)
 
-    @exchange.last_ticker_request = DateTime.current
-    @exchange.save!
+    @exchange.update_column(:last_ticker_request, DateTime.current)
 
     std_tickers = normalized_tickers(tickers_payload)
     #binding.pry

@@ -2,6 +2,12 @@ class Ticker < ApplicationRecord
   belongs_to :pair
   before_create :get_spread
 
+  before_create do
+    if pair.tickers.count > 10
+      pair.tickers.first.destroy
+    end
+  end
+
   after_create do
     TickersChannel.broadcast_to(
       'all',
