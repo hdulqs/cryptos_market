@@ -64,7 +64,12 @@ class MarketContainer extends Component {
   }
 
   render() {
-    if (this.props.markets.length === 0) {
+    if (!this.props.markets.length) {
+      if(!this.props.is_markets_loading){
+        return (
+          <p className='text-center no-result'>No result</p>
+        )
+      }
 			return (
         <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
       )

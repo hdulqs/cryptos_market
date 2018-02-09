@@ -111,7 +111,7 @@ class MarketShow extends Component {
                       this.props.charts_data[this.props.match.params.market]
     if (charts_data.length === 0) {
 			return (
-        <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
+        <p className='text-center no-result'>No chart data yet</p>
       )
 		}
     return(

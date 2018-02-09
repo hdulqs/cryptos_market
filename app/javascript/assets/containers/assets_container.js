@@ -54,14 +54,18 @@ class AssetsContainer extends Component {
   }
 
   render() {
-    if (this.props.assets.length === 0) {
+    if (this.props.is_assets_loading) {
 			return (
         <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
       )
 		}
     return(
       <Grid fluid={true}>
-        <AssetList markets={this.props.assets}></AssetList>
+        { this.props.assets.length ?
+            <AssetList markets={this.props.assets}></AssetList>
+            :
+            <p className='text-center no-result'>No result</p>
+        }
       </Grid>
     )
   }
