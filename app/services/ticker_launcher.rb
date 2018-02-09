@@ -21,3 +21,11 @@ class TickerLauncher
   end
 
 end
+
+# Exchange.find_by(name: 'kraken').pairs.watched.each do |pair|
+#   pair_id = pair.id
+#   random_sec = Random.rand(1..30)
+#   moment = DateTime.current + random_sec.seconds
+#   TickerFetcherJob.set(wait_until: moment).perform_later(pair_id)
+#   sleep 10
+# end
