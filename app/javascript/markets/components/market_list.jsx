@@ -89,6 +89,7 @@ class MarketList extends Component {
     }
     return(
       <div style={styles.market_list}>
+        <p className='text-right markets-under-header'>{this.props.markets_stats.watched_markets_count} markets</p>
         {/*<FormGroup style={styles.search_bar}>
 			     <FormControl type="text" placeholder="Search Cryptos Market" onChange={this.search_market} style={styles.search_input} />
 		    </FormGroup>*/}
@@ -109,7 +110,8 @@ const mapStateToProps = (state) => {
   return {
     markets: state.MarketsReducer.markets,
     current_page: state.MarketsReducer.current_page,
-    is_markets_loading: state.MarketsReducer.is_markets_loading
+    is_markets_loading: state.MarketsReducer.is_markets_loading,
+    markets_stats: state.MarketsReducer.markets_stats
   }
 }
 

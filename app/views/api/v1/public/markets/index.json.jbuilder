@@ -20,3 +20,7 @@ json.markets @markets do |market|
     end
   end
 end
+json.markets_stats do
+  json.watched_markets_count @watched_markets_count
+  #json.total_markets_count @total_markets_count
+end

@@ -55,7 +55,7 @@ export const fetch_markets = (page_nb) => {
   return (dispatch) => {
     axios.get('/api/v1/public/markets?page=' + page_nb, {responseType: 'json'})
       .then((response) => {
-        dispatch(markets_fetched({page_nb: page_nb, markets: response.data.markets}))
+        dispatch(markets_fetched({page_nb: page_nb, markets: response.data.markets, markets_stats: response.data.markets_stats}))
       })
       .catch((error) => {
         console.log(error)
@@ -118,7 +118,7 @@ export const market_search = (value) => {
   return (dispatch) => {
     axios.get('/api/v1/public/markets?market_search=' + value, {responseType: 'json'})
       .then((response) => {
-        dispatch(market_search_fetched({page_nb: 0, markets: response.data.markets}))
+        dispatch(market_search_fetched({page_nb: 0, markets: response.data.markets, markets_stats: response.data.markets_stats}))
       })
       .catch((error) => {
         console.log(error)
