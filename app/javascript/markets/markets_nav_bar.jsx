@@ -32,9 +32,9 @@ class MarketsNavBar extends Component {
     this.props.market_search(value)
   }
 
-  key_press_search_asset = (event) => {
+  key_press_search_market = (event) => {
     if(event.charCode === 13){
-      this.search_asset(event)
+      this.search_market(event)
     }
   }
 
@@ -107,7 +107,7 @@ class MarketsNavBar extends Component {
 
           <Navbar.Form pullRight className='search-area'>
             <FormGroup>
-              <FormControl type="text" placeholder="Search Market" onChange={this.search_market} onKeyPress={this.key_press_search_market} />
+              <FormControl type="text" placeholder="Search Market"  onKeyPress={this.key_press_search_market} />
             </FormGroup>{' '}
             <Button type="submit" value="none" className='btn btn-info' onClick={this.search_market}>Search</Button>&nbsp;
             <Button type="submit" value="none" className='btn btn-danger' onClick={this.reset_search_market}>Reset</Button>

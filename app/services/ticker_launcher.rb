@@ -16,7 +16,7 @@ class TickerLauncher
     Exchange.where(has_tickers_endpoint: true).each do |exchange|
       exchange_id = exchange.id
       TickersFetcherJob.perform_later(exchange_id)
-      sleep 5
+      sleep 15
     end
   end
 
