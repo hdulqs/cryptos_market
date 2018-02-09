@@ -53,7 +53,7 @@ class EditAssetModal extends Component {
     return(
       <Modal show={this.props.is_edit_asset_modal_visible} onHide={this.close_asset_modal}>
         <Modal.Header closeButton>
-          <Modal.Title>Add a new Asset to Portfolio</Modal.Title>
+          <Modal.Title>Edit Portfolio Asset</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <p className='text-center sessions_error'>{this.props.edit_errors.code} {this.props.edit_errors.message}</p>
