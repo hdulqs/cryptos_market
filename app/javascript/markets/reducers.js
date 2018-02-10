@@ -31,9 +31,29 @@ export default function MarketsReducer(state = initialState, action={}) {
     case 'MARKET_SEARCH_FETCHED':
       return {
         ...state,
+        //markets: state.markets.concat(action.payload.markets),
         markets: action.payload.markets,
         is_markets_loading: false,
-        markets_stats: action.payload.markets_stats
+        markets_stats: action.payload.markets_stats,
+        current_page: action.payload.page_nb
+      }
+    case 'CLICK_MARKET_SEARCH_FETCHED':
+      return {
+        ...state,
+        //markets: state.markets.concat(action.payload.markets),
+        markets: action.payload.markets,
+        is_markets_loading: false,
+        markets_stats: action.payload.markets_stats,
+        current_page: action.payload.page_nb
+      }
+    case 'SCROLL_MARKET_SEARCH_FETCHED':
+      return {
+        ...state,
+        markets: state.markets.concat(action.payload.markets),
+        //markets: action.payload.markets,
+        is_markets_loading: false,
+        markets_stats: action.payload.markets_stats,
+        current_page: action.payload.page_nb
       }
     case 'RECEIVED_TICKER':
       // Here we should update just one pair instead of the whole market

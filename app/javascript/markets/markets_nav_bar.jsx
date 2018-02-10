@@ -13,12 +13,19 @@ class MarketsNavBar extends Component {
 
   constructor(props){
     super(props)
+    this.state = {
+      market_search_input: ''
+    }
   }
 
   componentDidMount(){
     if(this.props.markets_infos['total_24h_volume_usd'] === undefined){
       this.props.fetch_markets_infos()
     }
+    window.addEventListener('scroll', this.onScroll, false)
+  }
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.onScroll)
   }
 
   search_market = (event) => {
@@ -29,7 +36,7 @@ class MarketsNavBar extends Component {
       value = event.target.value
     }
     this.props.set_markets_loading(true)
-    this.props.market_search(value)
+    this.props.click_market_search(value, this.props.current_page)
   }
 
   key_press_search_market = (event) => {
@@ -41,8 +48,9 @@ class MarketsNavBar extends Component {
   reset_search_market = (event) => {
     let value = ''
     this.props.set_markets_loading(true)
-    this.props.market_search(value)
-    event.target.parentElement.getElementsByClassName('form-control')[0].value = ''
+    this.props.click_market_search(value, 0)
+    this.setState({market_search_input: ''})
+    //event.target.parentElement.getElementsByClassName('form-control')[0].value = ''
   }
 
   logout = () => {
@@ -51,6 +59,20 @@ class MarketsNavBar extends Component {
 
   navigate_to = (path) => {
     history.push(path)
+  }
+
+  onScroll = () => {
+    if(window.location.pathname === '/asset-pairs'){
+      if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
+              && this.props.markets.length && !this.props.is_markets_loading ) {
+        this.props.set_markets_loading(true)
+        this.props.scroll_market_search(this.state.market_search_input, this.props.current_page + 1)
+      }
+    }
+  }
+
+  market_search_input_changed = (event) => {
+    this.setState({market_search_input: event.target.value})
   }
 
   render(){
@@ -107,7 +129,7 @@ class MarketsNavBar extends Component {
 
           <Navbar.Form pullRight className='search-area'>
             <FormGroup>
-              <FormControl type="text" placeholder="Search Market"  onKeyPress={this.key_press_search_market} />
+              <FormControl type="text" placeholder="Search Market" value={this.state.market_search_input} onChange={this.market_search_input_changed}  onKeyPress={this.key_press_search_market} />
             </FormGroup>{' '}
             <Button type="submit" value="none" className='btn btn-info' onClick={this.search_market}>Search</Button>&nbsp;
             <Button type="submit" value="none" className='btn btn-danger' onClick={this.reset_search_market}>Reset</Button>
@@ -136,6 +158,7 @@ const mapStateToProps = (state) => {
     markets: state.MarketsReducer.markets,
     current_page: state.MarketsReducer.current_page,
     is_markets_loading: state.MarketsReducer.is_markets_loading,
+    current_page: state.MarketsReducer.current_page,
     markets_infos: state.MarketsReducer.markets_infos
   }
 }

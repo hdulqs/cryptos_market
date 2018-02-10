@@ -14,6 +14,20 @@ export const market_search_fetched = (markets) => {
     payload: markets
   }
 }
+export const click_market_search_fetched = (markets) => {
+  return {
+    type: 'CLICK_MARKET_SEARCH_FETCHED',
+    payload: markets
+  }
+}
+export const scroll_market_search_fetched = (markets) => {
+  return {
+    type: 'SCROLL_MARKET_SEARCH_FETCHED',
+    payload: markets
+  }
+}
+
+
 
 export const hocl_fetched = (hocl) => {
   return {
@@ -114,11 +128,23 @@ export const set_markets_loading = (is_loading) => {
   }
 }
 
-export const market_search = (value) => {
+export const click_market_search = (value, page_nb) => {
   return (dispatch) => {
-    axios.get('/api/v1/public/markets?market_search=' + value, {responseType: 'json'})
+    axios.get('/api/v1/public/markets?market_search=' + value + '&page=' + page_nb, {responseType: 'json'})
       .then((response) => {
-        dispatch(market_search_fetched({page_nb: 0, markets: response.data.markets, markets_stats: response.data.markets_stats}))
+        dispatch(click_market_search_fetched({page_nb: page_nb, markets: response.data.markets, markets_stats: response.data.markets_stats}))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+}
+
+export const scroll_market_search = (value, page_nb) => {
+  return (dispatch) => {
+    axios.get('/api/v1/public/markets?market_search=' + value + '&page=' + page_nb, {responseType: 'json'})
+      .then((response) => {
+        dispatch(scroll_market_search_fetched({page_nb: page_nb, markets: response.data.markets, markets_stats: response.data.markets_stats}))
       })
       .catch((error) => {
         console.log(error)

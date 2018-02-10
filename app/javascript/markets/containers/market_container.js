@@ -24,18 +24,18 @@ class MarketContainer extends Component {
     //if(localStorage.getItem('jwt')){
       this.createSocket()
     //}
-    window.addEventListener('scroll', this.onScroll, false)
+    //window.addEventListener('scroll', this.onScroll, false)
   }
 
-  onScroll = () => {
-    if(window.location.pathname === '/asset-pairs'){
-      if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
-              && this.props.markets.length && !this.props.is_markets_loading ) {
-        this.props.set_markets_loading(true)
-        this.props.fetch_markets(this.props.current_page + 1)
-      }
-    }
-  }
+  // onScroll = () => {
+  //   if(window.location.pathname === '/asset-pairs'){
+  //     if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
+  //             && this.props.markets.length && !this.props.is_markets_loading ) {
+  //       this.props.set_markets_loading(true)
+  //       this.props.fetch_markets(this.props.current_page + 1)
+  //     }
+  //   }
+  // }
 
   createSocket() {
     //const token = localStorage.getItem('jwt')
@@ -59,7 +59,7 @@ class MarketContainer extends Component {
   }
 
   componentWillUnmount(){
-    window.removeEventListener('scroll', this.onScroll)
+    //window.removeEventListener('scroll', this.onScroll)
     this.tickers_subscription && this.tickers_consumer.subscriptions.remove(this.tickers_subscription)
   }
 
