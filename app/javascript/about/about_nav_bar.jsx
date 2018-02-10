@@ -57,11 +57,11 @@ class AboutNavBar extends Component {
 
           <Navbar.Text pullRight className='global-market-infos'>
               <span className='global-market-info-line-2'>
-              Total Market Cap : {' '}
+              Market Cap : {' '}
               <NumberFormat value={this.props.markets_infos['total_market_cap_usd'] || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} />
               </span>
               <span className='global-market-info-line-1'>
-              24H Volume : {' '}
+              24h Volume : {' '}
               <NumberFormat value={this.props.markets_infos['total_24h_volume_usd'] || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} />
               </span>
           </Navbar.Text>
