@@ -22,7 +22,8 @@ class AddAssetModal extends Component {
       style: styles,
       assets_infos: [],
       selected_value: undefined,
-      amount: 0
+      amount: 0,
+      is_submited: false
     }
   }
 
@@ -48,11 +49,13 @@ class AddAssetModal extends Component {
   }
 
   amount_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({amount: event.target.value})
   }
 
   asset_form_submit = (event) => {
     event.preventDefault()
+    this.setState({is_submited: true})
     let payload = {
       asset_info: this.state.selected_value,
       amount: this.state.amount
@@ -78,7 +81,7 @@ class AddAssetModal extends Component {
             <br/>
             <FormControl type="number" placeholder="Amount" value={this.state.amount} onChange={this.amount_form_update} />
             <br/>
-             <Button className='btn btn-block btn-success' type="submit" onClick={this.asset_form_submit}>Create</Button>
+             <Button className='btn btn-block btn-success' type="submit"  disabled={this.state.is_submited} onClick={this.asset_form_submit}>Create</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>

@@ -25,7 +25,8 @@ class CreateAlarmModal extends Component {
       max_limit: 0,
       min_limit: 0,
       is_min_limit_active: false,
-      is_max_limit_active: false
+      is_max_limit_active: false,
+      is_submited: false
     }
   }
 
@@ -65,15 +66,18 @@ class CreateAlarmModal extends Component {
   }
 
   max_limit_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({max_limit: event.target.value})
   }
 
   min_limit_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({min_limit: event.target.value})
   }
 
   create_alarm_form_submit = (event) => {
     event.preventDefault()
+    this.setState({is_submited: true})
     if(this.state.selected_asset_value === undefined){
       this.props.set_create_alarm_error({message: "Please select an Asset"})
       return
@@ -95,17 +99,20 @@ class CreateAlarmModal extends Component {
   }
 
   asset_select_update = (selected_asset_value) => {
+    this.setState({is_submited: false})
     this.setState({selected_asset_value: selected_asset_value})
     let asset = this.state.assets_infos.find((asset) => asset.symbol === selected_asset_value.symbol)
     this.setState({max_limit: asset.usd_price, min_limit: asset.usd_price})
   }
 
   toggle_max_limit = () => {
+    this.setState({is_submited: false})
     let checkbox_checked = this.state.is_max_limit_active
     this.setState({is_max_limit_active: !checkbox_checked})
   }
 
   toggle_min_limit = () => {
+    this.setState({is_submited: false})
     let checkbox_checked = this.state.is_min_limit_active
     this.setState({is_min_limit_active: !checkbox_checked})
   }
@@ -143,7 +150,7 @@ class CreateAlarmModal extends Component {
               </Col>
             </Row>
             <br/>
-             <Button className='btn btn-block btn-success' type="submit" onClick={this.create_alarm_form_submit}>Create</Button>
+             <Button className='btn btn-block btn-success' type="submit" disabled={this.state.is_submited} onClick={this.create_alarm_form_submit}>Create</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>

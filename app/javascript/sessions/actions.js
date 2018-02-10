@@ -58,6 +58,9 @@ export const submit_form_sessions = (sessions) => {
         if(error.response.status === 401){
           dispatch(sessions_error({errors: error.response.data.error}))
           reset_local_storage_session()
+          // setTimeout(() => {
+          //   window.location = '/sign_in'
+          // }, 1500)
         }
         console.log(error)
       })

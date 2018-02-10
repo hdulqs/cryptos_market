@@ -14,7 +14,8 @@ class SignInContainer extends Component {
     this.state = {
       sessions: {
         email: '',
-        password: ''
+        password: '',
+        is_submited: false
       }
     }
   }
@@ -26,15 +27,18 @@ class SignInContainer extends Component {
   }
 
   email_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({sessions: {email: event.target.value, password: this.state.sessions.password}})
   }
 
   password_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({sessions: {password: event.target.value, email: this.state.sessions.email}})
   }
 
   sessions_form_submit = (event) => {
     event.preventDefault()
+    this.setState({is_submited: true})
     this.props.submit_form_sessions(this.state.sessions)
     //console.log(this.state.sessions)
   }
@@ -63,7 +67,7 @@ class SignInContainer extends Component {
 
           <FormGroup controlId="formHorizontalEmail">
             <Col sm={3}> </Col>
-            <Col sm={6}> <FormControl type="email" placeholder="Email" value={this.state.email} onChange={this.email_form_update} /> </Col>
+            <Col sm={6}> <FormControl required type="email" placeholder="Email" value={this.state.email} onChange={this.email_form_update} /> </Col>
             <Col sm={3}> </Col>
             </FormGroup>
 
@@ -75,7 +79,7 @@ class SignInContainer extends Component {
 
           <FormGroup>
             <Col sm={3}> </Col>
-            <Col sm={6}> <Button className='btn btn-block btn-success' type="submit" onClick={this.sessions_form_submit}>Sign in</Button> </Col>
+            <Col sm={6}> <Button className='btn btn-block btn-success' type="submit" onClick={this.sessions_form_submit} disabled={this.state.is_submited}>Sign in</Button> </Col>
             <Col sm={3}> </Col>
           </FormGroup>
 

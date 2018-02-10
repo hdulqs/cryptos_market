@@ -15,7 +15,8 @@ class SignUpContainer extends Component {
       registration: {
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        is_submited: false
       }
     }
   }
@@ -27,19 +28,23 @@ class SignUpContainer extends Component {
   }
 
   email_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({registration: {email: event.target.value, password: this.state.registration.password, password_confirmation: this.state.registration.password_confirmation}})
   }
 
   password_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({registration: {password: event.target.value, email: this.state.registration.email, password_confirmation: this.state.registration.password_confirmation}})
   }
 
   password_confirmation_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({registration: {password_confirmation: event.target.value, email: this.state.registration.email, password: this.state.registration.password}})
   }
 
   registration_form_submit = (event) => {
     event.preventDefault()
+    this.setState({is_submited: true})
     this.props.submit_form_registrations(this.state.registration)
     //console.log(this.state.sessions)
   }
@@ -86,7 +91,7 @@ class SignUpContainer extends Component {
 
           <FormGroup>
           <Col sm={3}> </Col>
-          <Col sm={6}> <Button className='btn btn-block btn-success' type="submit" onClick={this.registration_form_submit}>Sign Up</Button> </Col>
+          <Col sm={6}> <Button className='btn btn-block btn-success' type="submit" onClick={this.registration_form_submit} disabled={this.state.is_submited}>Sign Up</Button> </Col>
           <Col sm={3}> </Col>
           </FormGroup>
 

@@ -25,7 +25,8 @@ class EditAlarmModal extends Component {
       min_limit: 0,
       is_min_limit_active: false,
       is_max_limit_active: false,
-      selected_alarm: undefined
+      selected_alarm: undefined,
+      is_submited: false
     }
   }
 
@@ -77,15 +78,18 @@ class EditAlarmModal extends Component {
   }
 
   max_limit_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({max_limit: event.target.value})
   }
 
   min_limit_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({min_limit: event.target.value})
   }
 
   edit_alarm_form_submit = (event) => {
     event.preventDefault()
+    this.setState({is_submited: true})
     if(this.state.selected_asset_value === undefined){
       let alarm_asset_value = this.state.assets_infos.find(asset => asset.symbol === this.state.selected_alarm.asset_symbol)
       this.setState({selected_asset_value: alarm_asset_value})
@@ -107,22 +111,27 @@ class EditAlarmModal extends Component {
   }
 
   asset_select_update = (selected_asset_value) => {
+    this.setState({is_submited: false})
     this.setState({selected_asset_value: selected_asset_value})
   }
 
   toggle_max_limit = () => {
+    this.setState({is_submited: false})
     this.setState({is_max_limit_active: !this.state.is_max_limit_active})
   }
 
   toggle_min_limit = () => {
+    this.setState({is_submited: false})
     this.setState({is_min_limit_active: !this.state.is_min_limit_active})
   }
 
   set_min_limit_state = (min_limit) => {
+    this.setState({is_submited: false})
     this.setState({min_limit: min_limit})
   }
 
   set_max_limit_state = (max_limit) => {
+    this.setState({is_submited: false})
     this.setState({max_limit: max_limit})
   }
 
@@ -181,7 +190,7 @@ class EditAlarmModal extends Component {
               </Col>
             </Row>
             <br/>
-             <Button className='btn btn-block btn-success' type="submit" onClick={(event) => this.edit_alarm_form_submit(event)}>Update</Button>
+             <Button className='btn btn-block btn-success' disabled={this.state.is_submited} type="submit" onClick={(event) => this.edit_alarm_form_submit(event)}>Update</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>

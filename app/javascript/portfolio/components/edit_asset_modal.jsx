@@ -23,13 +23,18 @@ class EditAssetModal extends Component {
       asset_infos: [],
       selected_value: undefined,
       amount: 0,
-      is_edit_asset_modal_visible: false
+      is_edit_asset_modal_visible: false,
+      is_submited: false
     }
+  }
+
+  componentDidMount(){
   }
 
   componentWillReceiveProps(){
     if(this.props.asset)
       this.setState({amount: this.props.asset.amount})
+      this.setState({is_submited: false})
   }
 
   close_asset_modal = () => {
@@ -37,11 +42,13 @@ class EditAssetModal extends Component {
   }
 
   amount_form_update = (event) => {
+    this.setState({is_submited: false})
     this.setState({amount: event.target.value})
   }
 
   asset_form_submit = (event) => {
     event.preventDefault()
+    this.setState({is_submited: true})
     let payload = {
       symbol: this.props.asset.symbol,
       amount: this.state.amount
@@ -62,7 +69,7 @@ class EditAssetModal extends Component {
             <br/>
             <FormControl type="number" placeholder="Amount" value={this.state.amount} onChange={this.amount_form_update} />
             <br/>
-             <Button className='btn btn-block btn-success' type="submit" onClick={this.asset_form_submit}>Update</Button>
+             <Button className='btn btn-block btn-success' type="submit" disabled={this.state.is_submited} onClick={this.asset_form_submit}>Update</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
