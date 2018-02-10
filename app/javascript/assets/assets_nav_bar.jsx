@@ -65,7 +65,7 @@ class AssetsNavBar extends Component {
     		<Navbar.Collapse>
 
           <Nav>
-            <NavItem eventKey={1} onClick={() => this.navigate_to('')}>
+            <NavItem active={true} eventKey={1} onClick={() => this.navigate_to('')}>
               Assets
             </NavItem>
             <NavItem eventKey={2} onClick={() => this.navigate_to('asset-pairs')}>

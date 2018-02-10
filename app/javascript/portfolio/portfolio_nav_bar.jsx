@@ -49,7 +49,7 @@ class PortfolioNavBar extends Component {
             <NavItem eventKey={3} onClick={() => this.navigate_to('exchanges')}>
               Exchanges
             </NavItem>
-            <NavItem eventKey={4} onClick={() => this.navigate_to('portfolio')}>
+            <NavItem active={true} eventKey={4} onClick={() => this.navigate_to('portfolio')}>
             Portfolio
             </NavItem>
             <NavItem eventKey={5} onClick={() => this.navigate_to('alarms')}>

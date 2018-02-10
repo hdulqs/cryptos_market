@@ -6,7 +6,7 @@ import uuid from 'uuid/v1'
 const ExchangeRow = (props) => {
   return(
     <tr>
-      <td>{props.exchange.id}</td>
+      <td></td>
       <td>{props.exchange.name}</td>
       <td>{props.exchange.base_url}</td>
       <td>{props.exchange.markets_nb}</td>

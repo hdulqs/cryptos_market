@@ -52,7 +52,7 @@ class AlarmsNavBar extends Component {
             <NavItem eventKey={4} onClick={() => this.navigate_to('portfolio')}>
             Portfolio
             </NavItem>
-            <NavItem eventKey={5} onClick={() => this.navigate_to('alarms')}>
+            <NavItem active={true} eventKey={5} onClick={() => this.navigate_to('alarms')}>
               Alarms
             </NavItem>
             <NavItem eventKey={5} onClick={() => this.navigate_to('about')}>

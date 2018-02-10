@@ -21,23 +21,24 @@ class ExchangesContainer extends Component {
   }
 
   render() {
+    let exchanges = this.props.exchanges.sort((a, b) => a.name.localeCompare(b.name)) || []
     return(
       <Grid fluid={true}>
         <br/>
         <Table responsive condensed hover>
       		<thead>
       			<tr>
-      				<th>Id</th>
+      				<th></th>
               <th>Name</th>
               <th>Base Api Url</th>
-              <th>Markets Nb</th>
+              <th>Total Markets Nb</th>
               <th>Watched Markets Nb</th>
       				<th>Last Ticker Update</th>
       			</tr>
       		</thead>
       		<tbody>
           {
-            this.props.exchanges.map((exchange) =>
+            exchanges.map((exchange) =>
               <ExchangeRow key={uuid()} exchange={exchange}></ExchangeRow>
             )
           }

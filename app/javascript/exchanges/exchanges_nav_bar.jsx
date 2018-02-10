@@ -72,7 +72,7 @@ class ExchangesNavBar extends Component {
             <NavItem eventKey={2} onClick={() => this.navigate_to('asset-pairs')}>
               Markets
             </NavItem>
-            <NavItem eventKey={3} onClick={() => this.navigate_to('exchanges')}>
+            <NavItem active={true} eventKey={3} onClick={() => this.navigate_to('exchanges')}>
               Exchanges
             </NavItem>
             <NavItem eventKey={4} onClick={() => this.navigate_to('portfolio')}>

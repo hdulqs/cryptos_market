@@ -89,7 +89,7 @@ class MarketList extends Component {
     }
     return(
       <div style={styles.market_list}>
-        <p className='text-right markets-under-header'>{this.props.markets_stats.watched_markets_count} markets</p>
+        <p className='text-right markets-under-header'>{this.props.markets_stats.watched_markets_count} markets watched</p>
         {/*<FormGroup style={styles.search_bar}>
 			     <FormControl type="text" placeholder="Search Cryptos Market" onChange={this.search_market} style={styles.search_input} />
 		    </FormGroup>*/}
