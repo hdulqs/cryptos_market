@@ -29,14 +29,15 @@ class MarketsNavBar extends Component {
   }
 
   search_market = (event) => {
-    let value = ''
-    if(event.target.value === 'none'){
-      value = event.target.parentElement.getElementsByClassName('form-control')[0].value
-    }else {
-      value = event.target.value
-    }
+    //let value = ''
+    //if(event.target.value === 'none'){
+    //  value = event.target.parentElement.getElementsByClassName('form-control')[0].value
+    //}else {
+    //  value = event.target.value
+    //}
     this.props.set_markets_loading(true)
-    this.props.click_market_search(value, this.props.current_page)
+    this.props.click_market_search(this.state.market_search_input, this.props.current_page)
+    //this.props.click_market_search(value, this.props.current_page)
   }
 
   key_press_search_market = (event) => {
@@ -72,6 +73,7 @@ class MarketsNavBar extends Component {
   }
 
   market_search_input_changed = (event) => {
+    this.props.select_current_page(0)
     this.setState({market_search_input: event.target.value})
   }
 

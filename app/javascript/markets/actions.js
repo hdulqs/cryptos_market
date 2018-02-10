@@ -57,6 +57,13 @@ export const set_tab = (tab) => {
   }
 }
 
+export const set_current_page = (page) => {
+  return {
+    type: 'SET_CURRENT_PAGE',
+    payload: page
+  }
+}
+
 export const markets_infos_fetched = (infos) => {
   return {
     type: 'MARKETS_INFOS_FETCHED',
@@ -155,6 +162,12 @@ export const scroll_market_search = (value, page_nb) => {
 export const select_tab = (tab) => {
   return (dispatch) => {
     dispatch(set_tab(tab))
+  }
+}
+
+export const select_current_page = (page) => {
+  return (dispatch) => {
+    dispatch(set_current_page(page))
   }
 }
 // export const retrieve_ohcl = (market, intent_nb) => {

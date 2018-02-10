@@ -82,6 +82,11 @@ export default function MarketsReducer(state = initialState, action={}) {
           [action.payload.market_id]: action.payload.tab
         }
       }
+    case 'SET_CURRENT_PAGE':
+      return {
+        ...state,
+        current_page: action.payload
+      }
     default:
       return state;
   }
