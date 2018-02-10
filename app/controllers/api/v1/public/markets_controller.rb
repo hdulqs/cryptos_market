@@ -5,6 +5,7 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
       @markets = Market.of_interest.where("base_currency ~* ?", params[:market_search])
                   .or(Market.of_interest.where("quote_currency ~* ?", params[:market_search]))
       @watched_markets_count = @markets.count
+      @markets.page(params[:page]).per(25)
     else
       @markets = Market#.of_interest.find([306, 305, 329, 383, 378, 262]) #Market.of_interest.first(8)
                     .of_interest
