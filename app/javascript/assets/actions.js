@@ -38,6 +38,12 @@ export const time_range_selected = (time_range) => {
   }
 }
 
+export const chart_type_selected = (chart_type) => {
+  return {
+    type: 'CHART_TYPE_SELECTED',
+    payload: chart_type
+  }
+}
 
 
 export const fetch_assets = (page_nb) => {
@@ -55,6 +61,12 @@ export const fetch_assets = (page_nb) => {
 export const set_selected_time_range = (time_range) => {
   return (dispatch) => {
     dispatch(time_range_selected(time_range))
+  }
+}
+
+export const set_selected_chart_type = (chart_type) => {
+  return (dispatch) => {
+    dispatch(chart_type_selected(chart_type))
   }
 }
 
