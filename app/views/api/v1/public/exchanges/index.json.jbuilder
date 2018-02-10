@@ -1,6 +1,6 @@
 json.exchanges @exchanges do |exchange|
   json.id exchange.id
-  json.name exchange.name
+  json.name exchange.name.upcase
   json.base_url exchange.base_url
   json.markets_nb exchange.pairs.count
   json.watched_markets_nb exchange.pairs.watched.count
