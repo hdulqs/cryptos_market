@@ -18,18 +18,17 @@ import {
 } from "react-stockcharts/lib/coordinates";
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
-// import {
-// 	OHLCTooltip,
-// } from "react-stockcharts/lib/tooltip";
-import CustomTooltip from './../../utils/custom_tooltip_line'
+import {
+	OHLCTooltip,
+} from "react-stockcharts/lib/tooltip";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
-class LineChartShow extends React.Component {
+class LineAndScatterChartGrid extends React.Component {
 	render() {
 		const { type, data: initialData, width, ratio, interpolation } = this.props;
 		const { gridProps } = this.props;
-		const margin = { left: 0, right: 0, top: 10, bottom: 10 };
+		const margin = { left: 70, right: 70, top: 20, bottom: 30 };
 
 		const height = 600;
 		const gridHeight = height - margin.top - margin.bottom;
@@ -55,8 +54,8 @@ class LineChartShow extends React.Component {
 		return (
 			<ChartCanvas height={height}
 				ratio={ratio}
-				width={300}
-				margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
+				width={width}
+				margin={{ left: 80, right: 80, top: 10, bottom: 30 }}
 				type={type}
 				seriesName="MSFT"
 				data={data}
@@ -64,25 +63,23 @@ class LineChartShow extends React.Component {
 				xAccessor={xAccessor}
 				displayXAccessor={displayXAccessor}
 				xExtents={xExtents}
-				mouseMoveEvent={true}
-				panEvent={true}
-		    zoomEvent={true}
-		    clamp={false}
 			>
 				<Chart id={1}
 					yExtents={d => [d.high, d.low]}
 				>
-					{/*<XAxis
+					<XAxis
 						axisAt="bottom"
 						orient="bottom"
-
+						{...gridProps}
+						{...xGrid}
 					/>
 					<YAxis
 						axisAt="right"
 						orient="right"
 						ticks={5}
-
-					/>*/}
+						{...gridProps}
+						{...yGrid}
+					/>
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
@@ -97,7 +94,7 @@ class LineChartShow extends React.Component {
 						interpolation={interpolation}
 						stroke="#ff7f0e"
 					/>
-					<CustomTooltip forChart={1} origin={[0, 5]}/>
+					<OHLCTooltip forChart={1} origin={[-40, 0]}/>
 				</Chart>
 
 				<CrossHairCursor />
@@ -107,16 +104,16 @@ class LineChartShow extends React.Component {
 	}
 }
 
-LineChartShow.propTypes = {
+LineAndScatterChartGrid.propTypes = {
 	data: PropTypes.array.isRequired,
 	width: PropTypes.number.isRequired,
 	ratio: PropTypes.number.isRequired,
 	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
 };
 
-LineChartShow.defaultProps = {
+LineAndScatterChartGrid.defaultProps = {
 	type: "svg",
 };
-LineChartShow = fitWidth(LineChartShow);
+LineAndScatterChartGrid = fitWidth(LineAndScatterChartGrid);
 
-export default LineChartShow;
+export default LineAndScatterChartGrid;
