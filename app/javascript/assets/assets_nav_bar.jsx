@@ -95,10 +95,10 @@ class AssetsNavBar extends Component {
 
               :
 
-              <NavDropdown className='navbar-right' eventKey={6} title={this.props.user.email} id="basic-nav-dropdown">
+              <NavDropdown className='navbar-right' eventKey={6} title={'Logout'} id="basic-nav-dropdown">
                 <MenuItem eventKey={6.1}>Edit Account</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={6.2} onClick={this.logout}>Logout</MenuItem>
+                <MenuItem eventKey={6.2} onClick={this.logout}>Logout {this.props.user.email}</MenuItem>
               </NavDropdown>
 
             }
