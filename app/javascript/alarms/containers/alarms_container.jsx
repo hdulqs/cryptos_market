@@ -41,7 +41,7 @@ class AlarmsContainer extends Component {
             :
             <p className='text-center'>You don't have any Alarm yet.</p>
         }
-        <Button className='btn btn-block' type="submit" onClick={this.open_create_alarm_modal}>Create a New Alarm</Button>
+        <Button className='btn btn-block' type="submit" disabled={!this.props.assets_infos.length} onClick={this.open_create_alarm_modal}>Create a New Alarm</Button>
       </Grid>
     )
   }
@@ -55,7 +55,8 @@ const mapStateToProps = (state) => {
     jwt: state.SessionsReducer.jwt,
     is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
     is_edit_alarm_modal_visible: state.AlarmsReducer.is_edit_alarm_modal_visible,
-    alarms: state.AlarmsReducer.alarms
+    alarms: state.AlarmsReducer.alarms,
+    assets_infos: state.AlarmsReducer.assets_infos
   }
 }
 
