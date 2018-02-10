@@ -7,7 +7,8 @@ const initialState = {
   assets_chart_data: {},
   current_page: 0,
   is_assets_loading: true,
-  current_tab: {}
+  current_tab: {},
+  selected_time_range: '7d'
 };
 
 export default function AssetsReducer(state = initialState, action={}) {
@@ -37,6 +38,11 @@ export default function AssetsReducer(state = initialState, action={}) {
           ...state.assets_chart_data,
           [action.payload.market_name]: action.payload.charts_data
         }
+      }
+    case 'TIME_RANGE_SELECTED':
+      return {
+        ...state,
+        selected_time_range: action.payload
       }
     default:
       return state

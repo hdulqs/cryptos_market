@@ -31,6 +31,14 @@ export const assets_ohcl_fetched = (obj) => {
   }
 }
 
+export const time_range_selected = (time_range) => {
+  return {
+    type: 'TIME_RANGE_SELECTED',
+    payload: time_range
+  }
+}
+
+
 
 export const fetch_assets = (page_nb) => {
   return (dispatch) => {
@@ -41,6 +49,12 @@ export const fetch_assets = (page_nb) => {
       .catch((error) => {
         console.log(error)
       })
+  }
+}
+
+export const set_selected_time_range = (time_range) => {
+  return (dispatch) => {
+    dispatch(time_range_selected(time_range))
   }
 }
 
