@@ -108,7 +108,7 @@ class CandleChart extends React.Component {
 
 
 		return (
-			<ChartCanvas height={750}
+			<ChartCanvas height={height}
 				width={width}
 				ratio={ratio}
 				margin={margin}

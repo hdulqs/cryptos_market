@@ -34,7 +34,7 @@ class LineAndScatterChartGrid extends React.Component {
 		const gridHeight = height - margin.top - margin.bottom;
 		const gridWidth = width - margin.left - margin.right;
 
-		const showGrid = true;
+		const showGrid = false;
 		const yGrid = showGrid ? { innerTickSize: -1 * gridWidth } : {};
 		const xGrid = showGrid ? { innerTickSize: -1 * gridHeight } : {};
 
@@ -72,6 +72,7 @@ class LineAndScatterChartGrid extends React.Component {
 						orient="bottom"
 						{...gridProps}
 						{...xGrid}
+						stroke="white" tickStroke="white"
 					/>
 					<YAxis
 						axisAt="right"
@@ -79,6 +80,7 @@ class LineAndScatterChartGrid extends React.Component {
 						ticks={5}
 						{...gridProps}
 						{...yGrid}
+						stroke="white" tickStroke="white"
 					/>
 					<MouseCoordinateX
 						at="bottom"

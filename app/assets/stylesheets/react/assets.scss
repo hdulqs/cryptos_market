@@ -67,9 +67,9 @@
   }
 }
 .line-chart-show{
-  background: #f3f3f3;
-  margin-left: 17px;
-  margin-right: 17px;
+  //background: #f3f3f3;
+  //margin-left: 17px;
+  //margin-right: 17px;
 }
 .asset_show_header_right{
   position: absolute;
@@ -103,7 +103,16 @@
     fill: white;
   }
 }
-
+.area-chart-show{
+  .react-stockcharts-tooltip{
+    fill: white;
+  }
+}
+.line-chart-show{
+  .react-stockcharts-tooltip{
+    fill: white;
+  }
+}
 .loader-row {
   position: relative;
   //top: 6.5em;

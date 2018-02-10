@@ -384,8 +384,8 @@ class AreaChart extends React.Component {
 				<Chart id={1}
 					yExtents={d => [d.high, d.low]}
 				>
-					<XAxis axisAt="bottom" orient="bottom" />
-					<YAxis axisAt="right" orient="right" ticks={5}  />
+					<XAxis axisAt="bottom" orient="bottom" stroke="white" tickStroke="white" />
+					<YAxis axisAt="right" orient="right" ticks={5} stroke="white" tickStroke="white" />
 
 					<MouseCoordinateX
 						at="bottom"
@@ -404,7 +404,7 @@ class AreaChart extends React.Component {
 					yExtents={d => d.volume}
 					height={150} origin={(w, h) => [0, h - 150]}
 				>
-					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")} />
+					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")} stroke="white" tickStroke="white" />
 
 					<MouseCoordinateY
 						at="left"
