@@ -3,7 +3,7 @@ import AlarmRow from './alarm_row'
 import { Row, Table, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as assets_actions from './../actions'
+import * as alarms_actions from './../actions'
 import uuid from 'uuid/v1'
 
 const styles = {
@@ -11,7 +11,7 @@ const styles = {
 }
 
 
-export default class AlarmsList extends Component {
+class AlarmsList extends Component {
 
   constructor(props){
     super(props)
@@ -24,6 +24,8 @@ export default class AlarmsList extends Component {
   render(){
 
     return(
+      <section>
+      <p className='text-center toggle_alarm_error'>{this.props.toggle_alarm_error.code} {this.props.toggle_alarm_error.message}</p>
       <Table responsive condensed hover>
     		<thead>
     			<tr>
@@ -48,6 +50,25 @@ export default class AlarmsList extends Component {
         }
         </tbody>
       </Table>
+      </section>
     )
   }
 }
+
+
+
+const mapStateToProps = (state) => {
+  return {
+    jwt: state.SessionsReducer.jwt,
+    is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
+    is_edit_alarm_modal_visible: state.AlarmsReducer.is_edit_alarm_modal_visible,
+    alarms: state.AlarmsReducer.alarms,
+    toggle_alarm_error: state.AlarmsReducer.toggle_alarm_error
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(alarms_actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlarmsList)

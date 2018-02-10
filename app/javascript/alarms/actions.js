@@ -45,6 +45,14 @@ export const toggled_alarm = (alarm) => {
     payload: alarm
   }
 }
+export const set_toggle_alarm_error = (errors) => {
+  return {
+    type: 'TOGGLE_ALARM_ERROR',
+    payload: errors
+  }
+}
+
+
 
 export const destroyed_alarm = (alarm) => {
   return {
@@ -128,7 +136,7 @@ export const toggle_alarm_activation = (payload) => {
       })
       .catch((error) => {
         if(error.response.status === 422){
-          //dispatch(add_asset_error({errors: error.response.data.error}))
+          dispatch(set_toggle_alarm_error({errors: error.response.data.error}))
           //reset_local_storage_session()
         }
         console.log(error)
