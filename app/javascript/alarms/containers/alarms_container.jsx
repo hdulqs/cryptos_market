@@ -8,6 +8,7 @@ import CreateAlarmModal from './../components/create_alarm_modal'
 import * as alarms_actions from './../actions'
 import AlarmsList from './../components/alarms_list'
 import EditAlarmModal from './../components/edit_alarm_modal'
+import history from './../../main/history'
 
 class AlarmsContainer extends Component {
 
