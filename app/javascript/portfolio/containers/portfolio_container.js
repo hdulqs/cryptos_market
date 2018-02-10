@@ -54,7 +54,7 @@ class PortfolioContainer extends Component {
               assets_chart_data.length === 0 ?
                 <div className="loader-small"></div>
                 :
-                <div className='candle-chart'>
+                <div className='candle-chart-show-portfolio'>
                   <h2 className='text-center'>{this.props.selected_portfolio_asset} - USD</h2>
                   <CandleChart data={assets_chart_data} />
                 </div>

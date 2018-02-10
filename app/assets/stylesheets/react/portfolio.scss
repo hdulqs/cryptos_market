@@ -12,6 +12,12 @@
 }
 
 
+.candle-chart-show-portfolio{
+  .react-stockcharts-tooltip{
+    fill: white;
+  }
+}
+
 .recharts-legend-wrapper{
   ul{
     list-style-type: none;
