@@ -8,7 +8,8 @@ class AlarmsChecker
             trigger_email_alert(alarm)
             alarm.update_column(:is_active, false)
           end
-        elsif alarm.has_max_limit
+        end
+        if alarm.has_max_limit
           if alarm.max_limit <= alarm.asset_info.price_usd
             trigger_email_alert(alarm)
             alarm.update_column(:is_active, false)
