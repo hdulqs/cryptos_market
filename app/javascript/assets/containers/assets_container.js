@@ -54,7 +54,7 @@ class AssetsContainer extends Component {
   }
 
   render() {
-    if (this.props.is_assets_loading) {
+    if (this.props.is_assets_loading && !this.props.assets.length) {
 			return (
         <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
       )

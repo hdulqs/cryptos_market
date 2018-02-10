@@ -139,12 +139,12 @@ class EditAlarmModal extends Component {
     let max_limit = 0
     if(this.state.assets_infos.length){
       let asset = this.state.assets_infos.find((asset) => asset.symbol === this.state.selected_alarm.asset_symbol)
-      if(!this.state.min_limit.length){
-        min_limit = this.state.min_limit.length ? this.state.min_limit : asset.usd_price
+      if(!this.state.min_limit){
+        min_limit = this.state.min_limit ? this.state.min_limit : asset.usd_price
         this.set_min_limit_state(min_limit)
       }
-      if(!this.state.max_limit.length){
-        max_limit = this.state.max_limit.length ? this.state.max_limit : asset.usd_price
+      if(!this.state.max_limit){
+        max_limit = this.state.max_limit ? this.state.max_limit : asset.usd_price
         this.set_max_limit_state(max_limit)
       }
     }
