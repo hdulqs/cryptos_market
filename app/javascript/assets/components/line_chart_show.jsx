@@ -9,6 +9,7 @@ import {
 	ScatterSeries,
 	SquareMarker,
 	LineSeries,
+	BarSeries
 } from "react-stockcharts/lib/series";
 import { XAxis, YAxis } from "react-stockcharts/lib/axes";
 import {
@@ -99,6 +100,22 @@ class LineAndScatterChartGrid extends React.Component {
 						stroke="#ff7f0e"
 					/>
 					<OHLCTooltip forChart={1} origin={[-40, 0]}/>
+				</Chart>
+				<Chart id={2}
+					yExtents={d => d.volume}
+					height={150} origin={(w, h) => [0, h - 150]}
+				>
+					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")} stroke="white" tickStroke="white" />
+
+					<MouseCoordinateY
+						at="left"
+						orient="left"
+						displayFormat={format(".4s")} />
+
+					<BarSeries yAccessor={d => d.volume}
+						stroke fill={(d) => d.close > d.open ? "#6BA583" : "#FF0000"}
+						opacity={0.4}
+						widthRatio={1} />
 				</Chart>
 
 				<CrossHairCursor  stroke="#FFFFFF" />
