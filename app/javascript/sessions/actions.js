@@ -21,6 +21,12 @@ export const sessions_retrieved_from_local_storage = (data) => {
     payload: data
   }
 }
+export const chart_type_selected = (chart_type) => {
+  return {
+    type: 'CHART_TYPE_SELECTED',
+    payload: chart_type
+  }
+}
 
 export const save_session_to_local_storage = (data) => {
   localStorage.setItem('jwt', data.jwt)
@@ -45,6 +51,11 @@ export const do_reset_local_storage_session = () => {
 }
 
 
+export const set_selected_chart_type = (chart_type) => {
+  return (dispatch) => {
+    dispatch(chart_type_selected(chart_type))
+  }
+}
 
 export const submit_form_sessions = (sessions) => {
   return (dispatch) => {

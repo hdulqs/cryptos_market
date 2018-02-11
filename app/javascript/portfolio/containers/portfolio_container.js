@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as portfolio_actions from './../actions'
 import * as assets_actions from './../../assets/actions'
+import * as sessions_actions from './../../sessions/actions'
 import store from './../../main/store'
 import history from './../../main/history'
 import CandleChart from './../components/candle_chart'
@@ -35,29 +36,25 @@ class PortfolioContainer extends Component {
     this.props.set_show_add_asset_modal(true)
   }
 
-  one_month_scale = () => {
-    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '1m')
-    this.props.set_selected_time_range('1m')
-    //this.setState({time_scale: '1m'})
-  }
-
-  seven_days_scale = () => {
-    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '7d')
-    this.props.set_selected_time_range('7d')
-    //this.setState({time_scale: '7d'})
-  }
-
-  one_day_scale = () => {
-    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '1d')
-    this.props.set_selected_time_range('1d')
-    //this.setState({time_scale: '1d'})
-  }
-
-  six_hours_scale = () => {
-    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '6h')
-    this.props.set_selected_time_range('6h')
-    //this.setState({time_scale: '6h'})
-  }
+  // one_month_scale = () => {
+  //   this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '1m')
+  //   this.props.set_selected_time_range('1m')
+  // }
+  //
+  // seven_days_scale = () => {
+  //   this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '7d')
+  //   this.props.set_selected_time_range('7d')
+  // }
+  //
+  // one_day_scale = () => {
+  //   this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '1d')
+  //   this.props.set_selected_time_range('1d')
+  // }
+  //
+  // six_hours_scale = () => {
+  //   this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '6h')
+  //   this.props.set_selected_time_range('6h')
+  // }
 
   set_candle_chart_type = () => {
     this.props.set_selected_chart_type('candle')
@@ -155,13 +152,13 @@ const mapStateToProps = (state) => {
     selected_portfolio_asset: state.PortfolioReducer.selected_portfolio_asset,
     assets_chart_data: state.AssetsReducer.assets_chart_data,
     is_add_asset_modal_visible: state.PortfolioReducer.is_add_asset_modal_visible,
-    selected_chart_type: state.PortfolioReducer.selected_chart_type,
-    selected_time_range: state.PortfolioReducer.selected_time_range
+    //selected_time_range: state.PortfolioReducer.selected_time_range,
+    selected_chart_type: state.SessionsReducer.selected_chart_type
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(Object.assign({}, portfolio_actions, assets_actions), dispatch)
+  return bindActionCreators(Object.assign({}, portfolio_actions, assets_actions, sessions_actions), dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer)

@@ -6,7 +6,8 @@ const initialState = {
   jwt: '',
   email: '',
   user: {},
-  errors: {}
+  errors: {},
+  selected_chart_type: 'candle'
 };
 
 export default function SessionsReducer(state = initialState, action={}) {
@@ -32,6 +33,11 @@ export default function SessionsReducer(state = initialState, action={}) {
         session: action.payload.session,
         email: action.payload.email,
         user: action.payload.user
+      }
+    case 'CHART_TYPE_SELECTED':
+      return {
+        ...state,
+        selected_chart_type: action.payload
       }
     default:
       return state;

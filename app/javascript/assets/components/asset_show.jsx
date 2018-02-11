@@ -8,6 +8,7 @@ import LineChartShow from './line_chart_show'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as assets_actions from './../actions'
+import * as sessions_actions from './../../sessions/actions'
 import { Glyphicon, Button } from 'react-bootstrap'
 import history from './../../main/history'
 
@@ -120,12 +121,12 @@ const mapStateToProps = (state) => {
   return {
     assets_chart_data: state.AssetsReducer.assets_chart_data,
     selected_time_range: state.AssetsReducer.selected_time_range,
-    selected_chart_type: state.AssetsReducer.selected_chart_type
+    selected_chart_type: state.SessionsReducer.selected_chart_type
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(assets_actions, dispatch)
+  return bindActionCreators(Object.assign({}, assets_actions, sessions_actions), dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetShow)

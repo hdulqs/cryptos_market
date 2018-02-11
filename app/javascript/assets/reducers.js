@@ -8,8 +8,7 @@ const initialState = {
   current_page: 0,
   is_assets_loading: true,
   current_tab: {},
-  selected_time_range: '7d',
-  selected_chart_type: 'candle'
+  selected_time_range: '7d'
 };
 
 export default function AssetsReducer(state = initialState, action={}) {
@@ -45,11 +44,7 @@ export default function AssetsReducer(state = initialState, action={}) {
         ...state,
         selected_time_range: action.payload
       }
-    case 'CHART_TYPE_SELECTED':
-      return {
-        ...state,
-        selected_chart_type: action.payload
-      }
+    
     default:
       return state
   }
