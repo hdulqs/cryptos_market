@@ -34,14 +34,14 @@ class AlarmsContainer extends Component {
     return(
       <Grid fluid={true}>
         <br/>
-        { this.props.is_create_alarm_modal_visible && <CreateAlarmModal /> }
+        { this.props.is_create_alarm_modal_visible && <CreateAlarmModal assets_infos={this.props.assets_infos} /> }
         { this.props.is_edit_alarm_modal_visible && <EditAlarmModal /> }
         { this.props.alarms.length ?
             <AlarmsList alarms={this.props.alarms} />
             :
             <p className='text-center'>You don't have any Alarm yet.</p>
         }
-        <Button className='btn btn-block' type="submit" disabled={!this.props.assets_infos.length} onClick={this.open_create_alarm_modal}>Create a New Alarm</Button>
+        <Button className='btn btn-block' type="submit"  onClick={this.open_create_alarm_modal}>Create a New Alarm</Button>
       </Grid>
     )
   }

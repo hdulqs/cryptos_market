@@ -7,7 +7,7 @@ import * as portfolio_actions from './../actions'
 import uuid from 'uuid/v1'
 import NumberFormat from 'react-number-format'
 import history from './../../main/history'
-import LineChart from './line_chart'
+//import LineChart from './line_chart'
 import axios from 'axios'
 
 

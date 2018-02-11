@@ -10,6 +10,8 @@ import * as assets_actions from './../../assets/actions'
 import store from './../../main/store'
 import history from './../../main/history'
 import CandleChart from './../components/candle_chart'
+import AreaChart from './../components/area_chart'
+import LineChartShow from './../components/line_chart_show'
 import AssetOverview from './../components/asset_overview'
 import PortfolioPieChart from './../components/portfolio_pie_chart'
 import AddAssetModal from './../components/add_asset_modal'
@@ -33,6 +35,42 @@ class PortfolioContainer extends Component {
     this.props.set_show_add_asset_modal(true)
   }
 
+  one_month_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '1m')
+    this.props.set_selected_time_range('1m')
+    //this.setState({time_scale: '1m'})
+  }
+
+  seven_days_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '7d')
+    this.props.set_selected_time_range('7d')
+    //this.setState({time_scale: '7d'})
+  }
+
+  one_day_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '1d')
+    this.props.set_selected_time_range('1d')
+    //this.setState({time_scale: '1d'})
+  }
+
+  six_hours_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '6h')
+    this.props.set_selected_time_range('6h')
+    //this.setState({time_scale: '6h'})
+  }
+
+  set_candle_chart_type = () => {
+    this.props.set_selected_chart_type('candle')
+  }
+
+  set_area_chart_type = () => {
+    this.props.set_selected_chart_type('area')
+  }
+
+  set_line_chart_type = () => {
+    this.props.set_selected_chart_type('line')
+  }
+
   render() {
 
     let assets_chart_data = this.props.assets_chart_data[this.props.selected_portfolio_asset] === undefined ?
@@ -50,13 +88,22 @@ class PortfolioContainer extends Component {
             <AssetOverview />
           </Col>
           <Col xs={12} md={10} sm={10}>
+            <header className="asset_show_header_right">
+              <Button type="submit" value="none" className={this.props.selected_chart_type === 'candle' ? 'btn active' : 'btn'} onClick={this.set_candle_chart_type}><Glyphicon glyph="stats" />&nbsp;Candle</Button>&nbsp;
+              <Button type="submit" value="none" className={this.props.selected_chart_type === 'area' ? 'btn active' : 'btn'} onClick={this.set_area_chart_type}><Glyphicon glyph="stats" />&nbsp;Area</Button>&nbsp;
+              <Button type="submit" value="none" className={this.props.selected_chart_type === 'line' ? 'btn active' : 'btn'} onClick={this.set_line_chart_type}><Glyphicon glyph="stats" />&nbsp;Line</Button>&nbsp;
+            </header>
             {
               assets_chart_data.length === 0 ?
                 <div className="loader-small"></div>
                 :
                 <div className='candle-chart-show-portfolio'>
                   <h2 className='text-center'>{this.props.selected_portfolio_asset} - USD</h2>
-                  <CandleChart data={assets_chart_data} />
+
+                  {/*<CandleChart data={assets_chart_data} />*/}
+                  {
+                    chart_switcher(this.props.selected_chart_type, assets_chart_data)
+                  }
                 </div>
             }
           </Col>
@@ -78,13 +125,38 @@ class PortfolioContainer extends Component {
 
 }
 
+const chart_switcher = (chart_type, chart_data) => {
+  switch(chart_type){
+    case 'candle':
+      return (
+        <article className='candle-chart-show'>
+          <CandleChart data={chart_data} />
+        </article>
+      )
+    case 'area':
+      return (
+        <article className='line-chart-show'>
+          <AreaChart data={chart_data} />
+        </article>
+      )
+    case 'line':
+      return (
+        <article className='line-chart-show'>
+          <LineChartShow data={chart_data} />
+        </article>
+      )
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
     jwt: state.SessionsReducer.jwt,
     portfolio_assets: state.PortfolioReducer.portfolio_assets,
     selected_portfolio_asset: state.PortfolioReducer.selected_portfolio_asset,
     assets_chart_data: state.AssetsReducer.assets_chart_data,
-    is_add_asset_modal_visible: state.PortfolioReducer.is_add_asset_modal_visible
+    is_add_asset_modal_visible: state.PortfolioReducer.is_add_asset_modal_visible,
+    selected_chart_type: state.PortfolioReducer.selected_chart_type,
+    selected_time_range: state.PortfolioReducer.selected_time_range
   }
 }
 

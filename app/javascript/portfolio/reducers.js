@@ -5,7 +5,9 @@ const initialState = {
   is_add_asset_modal_visible: false,
   is_edit_asset_modal_visible: false,
   errors: {},
-  edit_errors: {}
+  edit_errors: {},
+  selected_chart_type: 'line',
+  selected_time_range: '7d'
 };
 
 export default function PortfolioReducer(state = initialState, action={}) {
@@ -58,6 +60,16 @@ export default function PortfolioReducer(state = initialState, action={}) {
         ...state,
         portfolio_assets: state.portfolio_assets.filter((asset) => asset.symbol !== action.payload),
         selected_portfolio_asset: state.portfolio_assets.filter((asset) => asset.symbol !== action.payload)[0].symbol
+      }
+    case 'CHART_TYPE_SELECTED':
+      return {
+        ...state,
+        selected_chart_type: action.payload
+      }
+    case 'TIME_RANGE_SELECTED':
+      return {
+        ...state,
+        selected_time_range: action.payload
       }
     default:
       return state

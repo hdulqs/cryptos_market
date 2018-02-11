@@ -9,6 +9,7 @@ import {
 	ScatterSeries,
 	SquareMarker,
 	LineSeries,
+	BarSeries
 } from "react-stockcharts/lib/series";
 import { XAxis, YAxis } from "react-stockcharts/lib/axes";
 import {
@@ -21,21 +22,21 @@ import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 // import {
 // 	OHLCTooltip,
 // } from "react-stockcharts/lib/tooltip";
-import CustomTooltip from './../../utils/custom_tooltip_line'
+import OHLCTooltip from './../../utils/custom_tooltip_candle'
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
-class LineChart extends React.Component {
+class LineAndScatterChartGrid extends React.Component {
 	render() {
 		const { type, data: initialData, width, ratio, interpolation } = this.props;
 		const { gridProps } = this.props;
-		const margin = { left: 0, right: 0, top: 10, bottom: 10 };
+		const margin = { left: 70, right: 70, top: 20, bottom: 30 };
 
-		const height = 80;
+		const height = 360;
 		const gridHeight = height - margin.top - margin.bottom;
 		const gridWidth = width - margin.left - margin.right;
 
-		const showGrid = true;
+		const showGrid = false;
 		const yGrid = showGrid ? { innerTickSize: -1 * gridWidth } : {};
 		const xGrid = showGrid ? { innerTickSize: -1 * gridHeight } : {};
 
@@ -55,8 +56,8 @@ class LineChart extends React.Component {
 		return (
 			<ChartCanvas height={height}
 				ratio={ratio}
-				width={300}
-				margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
+				width={width}
+				margin={{ left: 80, right: 80, top: 10, bottom: 30 }}
 				type={type}
 				seriesName="MSFT"
 				data={data}
@@ -64,29 +65,29 @@ class LineChart extends React.Component {
 				xAccessor={xAccessor}
 				displayXAccessor={displayXAccessor}
 				xExtents={xExtents}
-				mouseMoveEvent={true}
-				panEvent={true}
-		    zoomEvent={true}
-		    clamp={false}
 			>
 				<Chart id={1}
 					yExtents={d => [d.high, d.low]}
 				>
-					{/*<XAxis
+					<XAxis
 						axisAt="bottom"
 						orient="bottom"
-
+						{...gridProps}
+						{...xGrid}
+						stroke="white" tickStroke="white"
 					/>
 					<YAxis
 						axisAt="right"
 						orient="right"
 						ticks={5}
-
-					/>*/}
+						{...gridProps}
+						{...yGrid}
+						stroke="white" tickStroke="white"
+					/>
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
-						displayFormat={timeFormat("%Y-%m-%d")} />
+						displayFormat={timeFormat("%Y-%m-%d-%H:%M")} />
 					<MouseCoordinateY
 						at="right"
 						orient="right"
@@ -97,26 +98,41 @@ class LineChart extends React.Component {
 						interpolation={interpolation}
 						stroke="#ff7f0e"
 					/>
-					<CustomTooltip forChart={1} origin={[0, 5]}/>
+					<OHLCTooltip forChart={1} origin={[-40, 0]}/>
 				</Chart>
+				<Chart id={2}
+					yExtents={d => d.volume}
+					height={150} origin={(w, h) => [0, h - 150]}
+				>
+					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")} stroke="white" tickStroke="white" />
 
-				<CrossHairCursor />
+					<MouseCoordinateY
+						at="left"
+						orient="left"
+						displayFormat={format(".4s")} />
+
+					<BarSeries yAccessor={d => d.volume}
+						stroke fill={(d) => d.close > d.open ? "#6BA583" : "#FF0000"}
+						opacity={0.4}
+						widthRatio={1} />
+				</Chart>
+				<CrossHairCursor stroke="#FFFFFF" />
 			</ChartCanvas>
 
 		);
 	}
 }
 
-LineChart.propTypes = {
+LineAndScatterChartGrid.propTypes = {
 	data: PropTypes.array.isRequired,
 	width: PropTypes.number.isRequired,
 	ratio: PropTypes.number.isRequired,
 	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
 };
 
-LineChart.defaultProps = {
+LineAndScatterChartGrid.defaultProps = {
 	type: "svg",
 };
-LineChart = fitWidth(LineChart);
+LineAndScatterChartGrid = fitWidth(LineAndScatterChartGrid);
 
-export default LineChart;
+export default LineAndScatterChartGrid;

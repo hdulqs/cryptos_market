@@ -18,9 +18,11 @@ import {
 } from "react-stockcharts/lib/coordinates";
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
-import {
-	OHLCTooltip,
-} from "react-stockcharts/lib/tooltip";
+// import {
+// 	OHLCTooltip,
+// } from "react-stockcharts/lib/tooltip";
+import OHLCTooltip from './../../utils/custom_tooltip_candle'
+
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
@@ -85,7 +87,7 @@ class LineAndScatterChartGrid extends React.Component {
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
-						displayFormat={timeFormat("%Y-%m-%d")} />
+						displayFormat={timeFormat("%Y-%m-%d-%H:%M")} />
 					<MouseCoordinateY
 						at="right"
 						orient="right"
@@ -99,7 +101,7 @@ class LineAndScatterChartGrid extends React.Component {
 					<OHLCTooltip forChart={1} origin={[-40, 0]}/>
 				</Chart>
 
-				<CrossHairCursor />
+				<CrossHairCursor  stroke="#FFFFFF" />
 			</ChartCanvas>
 
 		);

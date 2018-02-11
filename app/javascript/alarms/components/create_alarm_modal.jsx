@@ -61,6 +61,18 @@ class CreateAlarmModal extends Component {
     //   })
   }
 
+  componentWillReceiveProps(){
+    let payload = this.props.assets_infos.map((asset) => {
+      return {
+        value: asset.id,
+        symbol: asset.symbol,
+        label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
+        usd_price: asset.price_usd
+      }
+    })
+    this.setState({assets_infos: payload})
+  }
+
   close_asset_modal = () => {
     this.props.set_show_create_alarm_modal(false)
   }
@@ -101,8 +113,9 @@ class CreateAlarmModal extends Component {
   asset_select_update = (selected_asset_value) => {
     this.setState({is_submited: false})
     this.setState({selected_asset_value: selected_asset_value})
-    let asset = this.state.assets_infos.find((asset) => asset.symbol === selected_asset_value.symbol)
-    this.setState({max_limit: asset.usd_price, min_limit: asset.usd_price})
+    //let asset = this.state.assets_infos.find((asset) => asset.symbol === selected_asset_value.symbol)
+    //this.setState({max_limit: asset.usd_price, min_limit: asset.usd_price})
+    this.setState({max_limit: selected_asset_value.usd_price, min_limit: selected_asset_value.usd_price})
   }
 
   toggle_max_limit = () => {
@@ -118,6 +131,14 @@ class CreateAlarmModal extends Component {
   }
 
   render(){
+    let assets_infos = this.props.assets_infos.map((asset) => {
+      return {
+        value: asset.id,
+        symbol: asset.symbol,
+        label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
+        usd_price: asset.price_usd
+      }
+    })
     return(
       <Modal show={this.props.is_create_alarm_modal_visible} onHide={this.close_asset_modal}>
         <Modal.Header closeButton>
@@ -128,7 +149,7 @@ class CreateAlarmModal extends Component {
           <h4>Choose an Asset</h4>
           <Form horizontal>
             <VirtualizedSelect
-              options={this.state.assets_infos}
+              options={assets_infos}
               onChange={(val) => this.asset_select_update(val)}
               value={this.state.selected_asset_value}
             />
