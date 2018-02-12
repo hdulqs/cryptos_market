@@ -81,6 +81,10 @@ class PortfolioContainer extends Component {
         { this.props.is_add_asset_modal_visible && <AddAssetModal /> }
 
         <Row className="portfolio-chart-row">
+          {
+            !this.props.portfolio_assets.length &&
+            <p className='text-center'>You don't have any portfolio asset yet.</p>
+          }
           <Col xs={12} md={2} sm={2}>
             <AssetOverview />
           </Col>

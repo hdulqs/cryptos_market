@@ -24,11 +24,11 @@ class Backend::Users::ConfirmationsController < ::Devise::ConfirmationsControlle
     yield resource if block_given?
 
     if resource.errors.empty?
-      set_flash_message!(:notice, :confirmed)
-      respond_with_navigational(resource){
-        redirect_to "/sign_in"
+      #set_flash_message!(:notice, :confirmed)
+      redirect_to "/sign_in"
+      #respond_with_navigational(resource){
         #render json: {msg: 'confirmation success'}, status: 201
-      }
+      #}
     else
       redirect_to "/sign_in"
       #respond_with_navigational(resource.errors, status: :unprocessable_entity){ render :new }
