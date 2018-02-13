@@ -1,7 +1,7 @@
 
-reports_generator_job:
- class: ReportsGeneratorJob
- interval: ['120s', first_in: '50s']
+# reports_generator_job:
+#  class: ReportsGeneratorJob
+#  interval: ['120s', first_in: '50s']
 assets_info_fetcher_job:
   class: AssetsInfoFetcherJob
   interval: ['120s', first_in: '5s']
@@ -11,41 +11,41 @@ alarm_watcher_job:
 
 bleutrade_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '10s']
+  interval: ['120s', first_in: '10s']
   args: 'bleutrade'
 bittrex_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '20s']
+  interval: ['120s', first_in: '20s']
   args: 'bittrex'
 coinexchange_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '30s']
+  interval: ['120s', first_in: '30s']
   args: 'coinexchange'
 cryptopia_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '40s']
+  interval: ['120s', first_in: '40s']
   args: 'cryptopia'
 etherdelta_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '50s']
+  interval: ['120s', first_in: '50s']
   args: 'etherdelta'
 exmo_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '60s']
+  interval: ['120s', first_in: '60s']
   args: 'exmo'
 gate_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '70s']
+  interval: ['120s', first_in: '70s']
   args: 'gate'
 hibtc_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '80s']
+  interval: ['120s', first_in: '80s']
   args: 'hibtc'
 kucoin_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '90s']
+  interval: ['120s', first_in: '90s']
   args: 'kucoin'
 poloniex_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['100s', first_in: '100s']
+  interval: ['120s', first_in: '100s']
   args: 'poloniex'
