@@ -18,8 +18,9 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
                     # .left_joins(:pairs)
                     # .group(:id)
                     # .order('COUNT(pairs.id) DESC')
+      @watched_markets_count = @markets.count
       @markets = Kaminari.paginate_array(@markets).page(params[:page]).per(15)
-      @watched_markets_count = Market.of_interest.count
+      #@watched_markets_count = Market.of_interest.count
     end
     #@total_markets_count = Market.count
     render 'api/v1/public/markets/index.json'
