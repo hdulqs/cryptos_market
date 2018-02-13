@@ -98,7 +98,7 @@ class MarketItem extends Component {
     let low = this.get_lowest_ask(pairs)
     let high = this.get_highest_bid(pairs)
     //return Math.round( ((high - low) / (high + low)) * 100 )
-    return ( ((high - low) / (high + low)) * 100 ).toFixed(2)
+    return ( ((high - low) / (low)) * 100 ).toFixed(2)
   }
 
   get_percent_change = (pairs) => {
