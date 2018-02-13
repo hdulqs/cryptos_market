@@ -3,8 +3,14 @@ class Ticker < ApplicationRecord
   before_create :get_spread
 
   before_create do
-    if pair.tickers.count > 10
+    if pair.tickers.count >= 10
       pair.tickers.first.destroy
+    end
+  end
+
+  before_destroy do
+    if pair.last_ticker.id === id
+      pair.update_column(:last_ticker_id, nil)
     end
   end
 

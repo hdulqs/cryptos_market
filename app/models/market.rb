@@ -45,6 +45,10 @@ class Market < ApplicationRecord
 
 end
 
+# Pair.with_last_ticker_id.each do |pair|
+#   pair.update_column(:last_ticker_id, nil) unless pair.last_ticker
+# end
+
 # Market.all.each do |market|
 #   if market.pairs.watched.count < 2
 #     market.update_column(:spread, nil)
