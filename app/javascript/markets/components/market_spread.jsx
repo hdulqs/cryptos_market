@@ -34,7 +34,7 @@ export default class MarketSpread extends Component {
     let low = parseFloat(this.get_lowest_ask(pairs).lowest_ask)
     let high = parseFloat(this.get_highest_bid(pairs).highest_bid)
     //return Math.round( ((high - low) / (high + low)) * 100 )
-    return ( ((high - low) / (high + low)) * 100 ).toFixed(2)
+    return ( ((high - low) / (high)) * 100 ).toFixed(2)
   }
 
   render(){
