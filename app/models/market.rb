@@ -27,7 +27,7 @@ class Market < ApplicationRecord
   }
 
   def self.with_active_pairs
-    with_pairs.map{|m| m if m.pairs.with_last_ticker.count > 1 }
+    with_pairs.map{|m| m if m.pairs.with_last_ticker.count > 1 }.compact
   end
 
   def update_spread
