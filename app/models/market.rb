@@ -32,7 +32,7 @@ class Market < ApplicationRecord
 
   def update_spread
     #binding.pry
-    last_tickers = pairs.watched.with_last_ticker#.map{|p| p.last_ticker if p.last_ticker}.compact
+    last_tickers = pairs.watched.with_last_ticker.map{|p| p.last_ticker if p.last_ticker}.compact
     return if last_tickers.length < 2
 
     lowest_ask = last_tickers.first.ask

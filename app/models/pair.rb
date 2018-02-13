@@ -7,11 +7,6 @@ class Pair < ApplicationRecord
 
   scope :active, -> { where(is_active: true) }
   scope :watched, -> { where(is_watched: true) }
-  # scope :with_recent_ticker, -> {
-  #   joins(:tickers).where(
-  #     tickers: { created_at: (Time.now - 10.minutes)..Time.now }
-  #   )
-  # }
 
   def self.with_last_ticker
     with_last_ticker_id.map{|p| p if p.last_ticker}.compact
