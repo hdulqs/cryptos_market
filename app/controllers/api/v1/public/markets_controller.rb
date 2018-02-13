@@ -7,12 +7,16 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
       @watched_markets_count = @markets.count
       @markets = @markets.page(params[:page]).per(15)
     else
+      # binding.pry
       @markets = Market#.of_interest.find([306, 305, 329, 383, 378, 262]) #Market.of_interest.first(8)
-                    .of_interest
-                    .left_joins(:pairs)
-                    .group(:id)
-                    .order('COUNT(pairs.id) DESC')
+                    .of_interest.where.not(spread: nil).order(spread: :desc)
                     .page(params[:page]).per(15)
+                    #.of_interest
+                    #.left_joins(:pairs).group(:id).having("COUNT(pairs.id) > 1")
+                    #.
+                    # .left_joins(:pairs)
+                    # .group(:id)
+                    # .order('COUNT(pairs.id) DESC')
       @watched_markets_count = Market.of_interest.count
     end
     #@total_markets_count = Market.count
@@ -25,3 +29,5 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
   end
 
 end
+
+#Market.left_joins(:pairs).group(:id).having("COUNT(pairs.id) > 1")

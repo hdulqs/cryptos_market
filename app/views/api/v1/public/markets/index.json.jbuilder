@@ -5,6 +5,7 @@ json.markets @markets do |market|
   json.quote_currency market.quote_currency
   json.base_currency_logo market.base_currency_logo.url(:thumb)
   json.quote_currency_logo market.quote_currency_logo.url(:thumb)
+  json.market_spread market.spread
   json.pairs market.pairs.watched.with_last_ticker do |pair| #.with_recent_ticker
     json.id pair.id
     json.exchange_name pair.exchange.name
