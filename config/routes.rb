@@ -8,6 +8,7 @@ end
 Rails.application.routes.draw do
 
   require 'sidekiq/web'
+  require 'sidekiq-scheduler/web'
   mount Sidekiq::Web => '/backend/sidekiq', :constraints => AdminConstraint.new
 
   mount ActionCable.server, at: '/cable'

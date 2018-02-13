@@ -6,13 +6,13 @@
   - assets_info_fetcher_job
   - alarm_watcher_job
   - alarm_mailer_job
-:schedule:
-  # reports_generator_job:
-  #  class: ReportsGeneratorJob
-  #  every: ['120s', first_in: '60s']
-  assets_info_fetcher_job:
-    class: AssetsInfoFetcherJob
-    every: ['120s', first_in: '5s']
-  alarm_watcher_job:
-    class: AlarmWatcherJob
-    every: ['120s', first_in: '30s']
+# :schedule:
+#   # reports_generator_job:
+#   #  class: ReportsGeneratorJob
+#   #  every: ['120s', first_in: '60s']
+#   assets_info_fetcher_job:
+#     class: AssetsInfoFetcherJob
+#     every: ['120s', first_in: '5s']
+#   alarm_watcher_job:
+#     class: AlarmWatcherJob
+#     every: ['120s', first_in: '30s']
