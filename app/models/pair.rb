@@ -13,7 +13,7 @@ class Pair < ApplicationRecord
   #   )
   # }
   scope :with_last_ticker, -> {
-    where.not(last_ticker_id: nil)
+    where.not(last_ticker_id: nil).map{|p| p if p.last_ticker}
   }
 
   # Callback called from ticker after_commit
@@ -37,12 +37,14 @@ class Pair < ApplicationRecord
     end
   end
 
-  def last_ticker
-    Ticker.find(last_ticker_id) rescue nil
-  end
 
   def exists_in_exchange exchange_array
 
+  end
+
+
+  def last_ticker
+    Ticker.find(last_ticker_id) rescue nil
   end
 
 end
