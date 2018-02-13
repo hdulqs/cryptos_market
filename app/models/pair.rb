@@ -16,6 +16,11 @@ class Pair < ApplicationRecord
     where.not(last_ticker_id: nil)
   }
 
+  # Callback called from ticker after_commit
+  def update_market_spread
+    market.update_spread
+  end
+
   def get_order_book
     RestExchange::OrderBook::Fetcher.new(self).call
   end
@@ -33,7 +38,11 @@ class Pair < ApplicationRecord
   end
 
   def last_ticker
-    Ticker.find(last_ticker_id)
+    Ticker.find(last_ticker_id) rescue nil
+  end
+
+  def exists_in_exchange exchange_array
+
   end
 
 end

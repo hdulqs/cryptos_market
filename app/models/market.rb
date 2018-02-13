@@ -18,4 +18,25 @@ class Market < ApplicationRecord
     where(price_difference: 2..90)
   }
 
+  def update_spread
+    #binding.pry
+    last_tickers = pairs.map{|p| p.last_ticker if p.last_ticker}.compact
+    return if last_tickers.length < 2
+
+    lowest_ask = last_tickers.first.ask
+    highest_bid = last_tickers.first.bid
+
+    last_tickers.each do |last_ticker|
+      if last_ticker.ask <= lowest_ask
+        lowest_ask = last_ticker.ask
+      end
+      if last_ticker.bid >= highest_bid
+        highest_bid = last_ticker.bid
+      end
+    end
+
+    exchange_spread = ((highest_bid - lowest_ask) / (highest_bid + lowest_ask)) * 100 rescue 0
+    update_column(:spread, exchange_spread)
+  end
+
 end

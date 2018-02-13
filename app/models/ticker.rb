@@ -13,7 +13,11 @@ class Ticker < ApplicationRecord
       'all',
       ticker: render_ticker(self)
     )
+  end
+
+  after_commit do
     pair.update_column(:last_ticker_id, id)
+    pair.update_market_spread
   end
 
 
