@@ -9,7 +9,7 @@ class Ticker < ApplicationRecord
   end
 
   before_destroy do
-    if pair.last_ticker.id === id
+    if pair.last_ticker && pair.last_ticker.id === id
       pair.update_column(:last_ticker_id, nil)
     end
   end
