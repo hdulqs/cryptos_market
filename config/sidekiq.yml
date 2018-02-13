@@ -1,6 +1,6 @@
 :concurrency: 50
 :queues:
-  # - reports_generator_job
+  - reports_generator_job
   - ticker_fetcher_job
   - tickers_fetcher_job
   - assets_info_fetcher_job

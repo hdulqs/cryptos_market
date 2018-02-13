@@ -1,7 +1,7 @@
 
-# reports_generator_job:
-#  class: ReportsGeneratorJob
-#  every: ['120s', first_in: '60s']
+reports_generator_job:
+ class: ReportsGeneratorJob
+ every: ['100s', first_in: '50s']
 assets_info_fetcher_job:
   class: AssetsInfoFetcherJob
   every: ['120s', first_in: '5s']
