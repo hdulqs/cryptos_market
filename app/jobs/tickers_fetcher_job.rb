@@ -3,6 +3,7 @@ class TickersFetcherJob < ApplicationJob
 
   rescue_from(StandardError) do |exception|
     Rails.logger.error "[#{self.class.name}] Failed : #{exception.to_s}"
+    logger.info "[#{self.class.name}] Failed : #{exception.to_s}"
   end
 
   def perform exchange_name

@@ -3,7 +3,7 @@ class Ticker < ApplicationRecord
   before_create :get_spread
 
   before_create do
-    if pair.tickers.count >= 10
+    if pair.tickers.count >= 100
       pair.tickers.first.destroy
     end
   end

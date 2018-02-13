@@ -14,13 +14,21 @@ class Market < ApplicationRecord
     where(is_watched: true)
   }
 
-  scope :with_active_pairs, -> {
-    joins(:pairs).merge(Pair.with_last_ticker)
+  # scope :with_active_pairs, -> {
+  #   joins(:pairs).merge(Pair.with_last_ticker)
+  # }
+
+  scope :with_pairs, -> {
+    left_joins(:pairs).group(:id).having("COUNT(pairs.id) > 1")
   }
 
   scope :credible, -> {
     where(price_difference: 2..90)
   }
+
+  def self.with_active_pairs
+    with_pairs.map{|m| m if m.pairs.with_last_ticker.count > 1 }
+  end
 
   def update_spread
     #binding.pry
