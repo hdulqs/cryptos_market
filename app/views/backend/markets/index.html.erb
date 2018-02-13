@@ -37,7 +37,7 @@
         <% if m.reports.empty? %>
           <td>No Report Yet</td>
         <% else %>
-          <td><%= m.price_difference.round(2) %></td>
+          <td><%= m.price_difference ? m.price_difference.round(2) : 0 %></td>
         <% end %>
         <td><%= m.spread.round(2) %></td>
         <td><%= m.has_opportunity %></td>
