@@ -47,7 +47,7 @@ class Market < ApplicationRecord
       end
     end
 
-    exchange_spread = ((highest_bid - lowest_ask) / (highest_bid)) * 100 rescue 0
+    exchange_spread = ((highest_bid - lowest_ask) / (lowest_ask)) * 100 rescue 0
     update_column(:spread, exchange_spread)
   end
 

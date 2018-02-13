@@ -130,7 +130,7 @@ class MarketAnalyser
     market_id = min.pair.market.id
     min_time = Time.at(min.timestamp) rescue 0
     max_time = Time.at(max.timestamp) rescue 0
-    arbitrage_spread = ( (max.bid - min.ask) / (max.bid) ) * 100 rescue 0
+    arbitrage_spread = ( (max.bid - min.ask) / (min.ask) ) * 100 rescue 0
     {
       market: market_name,
       market_id: market_id,
