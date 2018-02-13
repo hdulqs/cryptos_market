@@ -9,7 +9,7 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
     else
       # binding.pry
       @markets = Market#.of_interest.find([306, 305, 329, 383, 378, 262]) #Market.of_interest.first(8)
-                    .with_active_pairs.sort_by{|hsh| hsh[:spread]}.reverse
+                    .with_active_pairs.sort_by{|hsh| hsh.spread.to_f}.reverse
                     #.page(params[:page]).per(15)
                     #.of_interest.where.not(spread: nil).order(spread: :desc)
                     #.of_interest
