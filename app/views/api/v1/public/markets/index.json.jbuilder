@@ -11,13 +11,13 @@ json.markets @markets do |market|
     json.exchange_name pair.exchange.name
     json.last_to_be_updated false
     json.last_ticker do
-      json.id pair.last_ticker ? pair.last_ticker.id : nil
+      json.id pair.last_ticker.id
       json.market_name market.name
-      json.ask pair.last_ticker ? pair.last_ticker.ask : nil
-      json.bid pair.last_ticker ? pair.last_ticker.bid : nil
-      json.last pair.last_ticker ? pair.last_ticker.last : nil
-      json.percent_change pair.last_ticker ? pair.last_ticker.percent_change : nil
-      json.volume pair.last_ticker ? pair.last_ticker.volume : (pair.last_ticker ? pair.last_ticker.base_volume : nil)
+      json.ask pair.last_ticker.ask
+      json.bid pair.last_ticker.bid
+      json.last pair.last_ticker.last
+      json.percent_change pair.last_ticker.percent_change
+      json.volume pair.last_ticker.volume
     end
   end
 end
