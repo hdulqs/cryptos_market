@@ -2,7 +2,7 @@ class Backend::MarketsController < Backend::BaseController
 
 
   def index
-    @markets = Market.of_interest.with_active_pairs.order(spread: :desc)#.limit(150)
+    @markets = Market.of_interest.order(spread: :desc)#.limit(150)
       # Market
       #   .left_joins(:pairs)
       #   .group(:id)
