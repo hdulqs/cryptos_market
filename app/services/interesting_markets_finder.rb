@@ -26,8 +26,10 @@ class InterestingMarketsFinder
     Pair.all.each do |pair|
       if pair.last_ticker_id
         market = Market.find_by(base_currency: pair.base_currency, quote_currency: pair.quote_currency)
-        market.update_column(:is_watched, true)
         pair.update_column(:is_watched, true)
+        if market.pairs.watched.count > 1
+          market.update_column(:is_watched, true)
+        end
       end
     end
 
