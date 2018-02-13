@@ -12,8 +12,13 @@ class Pair < ApplicationRecord
   #     tickers: { created_at: (Time.now - 10.minutes)..Time.now }
   #   )
   # }
-  scope :with_last_ticker, -> {
-    where.not(last_ticker_id: nil).map{|p| p if p.last_ticker}.compact
+
+  def self.with_last_ticker
+    with_last_ticker_id.map{|p| p if p.last_ticker}.compact
+  end
+
+  scope :with_last_ticker_id, -> {
+    where.not(last_ticker_id: nil)
   }
 
   # Callback called from ticker after_commit

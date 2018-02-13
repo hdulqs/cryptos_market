@@ -14,6 +14,10 @@ class Market < ApplicationRecord
     where(is_watched: true)
   }
 
+  scope :with_active_pairs, -> {
+    joins(:pairs).merge(Pair.with_last_ticker)
+  }
+
   scope :credible, -> {
     where(price_difference: 2..90)
   }
@@ -40,3 +44,9 @@ class Market < ApplicationRecord
   end
 
 end
+
+# Market.all.each do |market|
+#   if market.pairs.watched.count < 2
+#     market.update_column(:spread, nil)
+#   end
+# end
