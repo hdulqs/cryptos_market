@@ -13,7 +13,7 @@ class Pair < ApplicationRecord
   #   )
   # }
   scope :with_last_ticker, -> {
-    where.not(last_ticker_id: nil).map{|p| p if p.last_ticker}
+    where.not(last_ticker_id: nil).map{|p| p if p.last_ticker}.compact
   }
 
   # Callback called from ticker after_commit
