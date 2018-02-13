@@ -10,7 +10,7 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
       # binding.pry
       @markets = Market#.of_interest.find([306, 305, 329, 383, 378, 262]) #Market.of_interest.first(8)
                     .with_active_pairs.sort_by{|hsh| hsh[:spread]}
-                    .page(params[:page]).per(15)
+                    #.page(params[:page]).per(15)
                     #.of_interest.where.not(spread: nil).order(spread: :desc)
                     #.of_interest
                     #.left_joins(:pairs).group(:id).having("COUNT(pairs.id) > 1")
@@ -18,6 +18,7 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
                     # .left_joins(:pairs)
                     # .group(:id)
                     # .order('COUNT(pairs.id) DESC')
+      @markets = Kaminari.paginate_array(@markets).page(params[:page]).per(15)
       @watched_markets_count = Market.of_interest.count
     end
     #@total_markets_count = Market.count
