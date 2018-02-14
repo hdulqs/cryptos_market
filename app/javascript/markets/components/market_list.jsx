@@ -53,9 +53,10 @@ class MarketList extends Component {
 
 
   componentDidMount () {
-    this.setState({
-      containerWidth: window.innerWidth
-    })
+    this._handleWindowResize()
+    // this.setState({
+    //   containerWidth: window.innerWidth
+    // })
     window.addEventListener('resize', this._handleWindowResize)
   }
 
