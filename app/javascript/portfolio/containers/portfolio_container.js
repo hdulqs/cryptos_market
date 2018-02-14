@@ -78,6 +78,8 @@ class PortfolioContainer extends Component {
     if(!this.props.portfolio_assets.length){
       return(
         <article>
+          <div className="loader-small"></div>
+          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
           <p className='text-center'>You don't have any portfolio asset yet.</p>
           <Button className='btn btn-block' onClick={this.open_asset_modal}>Add Asset</Button>
         </article>

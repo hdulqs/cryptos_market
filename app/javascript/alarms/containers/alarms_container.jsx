@@ -39,7 +39,11 @@ class AlarmsContainer extends Component {
         { this.props.alarms.length ?
             <AlarmsList alarms={this.props.alarms} />
             :
-            <p className='text-center'>You don't have any Alarm yet.</p>
+            <article>
+              <div className="loader-small"></div>
+              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+              <p className='text-center'>You don't have any Alarm yet.</p>
+            </article>
         }
         <Button className='btn btn-block' type="submit"  onClick={this.open_create_alarm_modal}>Create a New Alarm</Button>
       </Grid>
