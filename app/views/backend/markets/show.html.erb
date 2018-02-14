@@ -153,7 +153,7 @@ document.addEventListener("turbolinks:load", function(){
 
 <section class="text-center">
   <%= link_to 'Show Pairs', backend_market_pairs_path(@market), class: 'btn btn-info', data: { turbolinks: false } %>
-  <%= link_to "Market Reports", backend_market_reports_path(@market), class: 'btn btn-success', data: { turbolinks: false } %>
+  <%#= link_to "Market Reports", backend_market_reports_path(@market), class: 'btn btn-success', data: { turbolinks: false } %>
   <% if @market.is_watched %>
     <%= link_to "Unwatch Market", unwatch_backend_market_path(@market), method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure ?' } %>
   <% else %>

@@ -9,6 +9,7 @@ json.markets @markets do |market|
   json.pairs market.pairs.watched.with_last_ticker do |pair| #.with_recent_ticker
     json.id pair.id
     json.exchange_name pair.exchange.name
+    json.exchange_get_user_pair_path pair.get_user_pair_path
     json.last_to_be_updated false
     json.last_ticker do
       json.id pair.last_ticker.id

@@ -42,6 +42,10 @@ class Pair < ApplicationRecord
 
   end
 
+  def get_user_pair_path
+    exchange.get_user_pair_path
+  end
+
 
   def last_ticker
     Ticker.find(last_ticker_id) rescue nil
