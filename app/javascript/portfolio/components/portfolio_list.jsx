@@ -22,11 +22,11 @@ class PortfolioList extends Component {
   }
 
   render(){
-    let portfolio_assets = this.props.portfolio_assets
-    if(portfolio_assets.length > 0){
-      //order by total
-      portfolio_assets = portfolio_assets.sort((a, b) => (parseFloat(a.amount) * parseFloat(a.asset_info.price_usd)) < (parseFloat(b.amount) * parseFloat(b.asset_info.price_usd)) )
-    }
+    //let portfolio_assets = this.props.portfolio_assets
+    // if(portfolio_assets.length > 0){
+    //   //order by total
+    //   portfolio_assets = portfolio_assets.sort((a, b) => (parseFloat(a.amount) * parseFloat(a.asset_info.price_usd)) < (parseFloat(b.amount) * parseFloat(b.asset_info.price_usd)) )
+    // }
     return(
       <Table responsive condensed hover>
     		<thead>
@@ -42,7 +42,7 @@ class PortfolioList extends Component {
     		</thead>
     		<tbody>
         {
-          portfolio_assets.map((asset) =>
+          this.props.portfolio_assets.map((asset) =>
             <PortfolioRow key={uuid()} portfolio_asset={asset}></PortfolioRow>
           )
         }
