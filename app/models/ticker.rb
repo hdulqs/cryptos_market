@@ -3,8 +3,8 @@ class Ticker < ApplicationRecord
   before_create :get_spread
 
   before_create do
-    if pair.tickers.count >= 100
-      pair.tickers.first.destroy
+    if pair.tickers.count >= 10
+      pair.tickers.order(created_at: :desc).first.destroy
     end
   end
 
@@ -21,7 +21,9 @@ class Ticker < ApplicationRecord
     )
   end
 
-  after_commit do
+  after_commit :update_pair_state, on: :create
+
+  def update_pair_state
     pair.update_column(:last_ticker_id, id)
     pair.update_market_spread
   end
