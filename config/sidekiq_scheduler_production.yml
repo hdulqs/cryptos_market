@@ -11,41 +11,41 @@ alarm_watcher_job:
 
 bleutrade_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '10s']
+  interval: ['150s', first_in: '10s']
   args: 'bleutrade'
 bittrex_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '20s']
+  interval: ['150s', first_in: '25s']
   args: 'bittrex'
 coinexchange_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '30s']
+  interval: ['150s', first_in: '40s']
   args: 'coinexchange'
 cryptopia_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '40s']
+  interval: ['150s', first_in: '55s']
   args: 'cryptopia'
 etherdelta_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '50s']
+  interval: ['150s', first_in: '70s']
   args: 'etherdelta'
 exmo_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '60s']
+  interval: ['150s', first_in: '85s']
   args: 'exmo'
 gate_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '70s']
+  interval: ['150s', first_in: '100s']
   args: 'gate'
 hibtc_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '80s']
+  interval: ['150s', first_in: '115s']
   args: 'hibtc'
 kucoin_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '90s']
+  interval: ['150s', first_in: '130s']
   args: 'kucoin'
 poloniex_tickers_fetcher_job:
   class: TickersFetcherJob
-  interval: ['120s', first_in: '100s']
+  interval: ['150s', first_in: '145s']
   args: 'poloniex'
