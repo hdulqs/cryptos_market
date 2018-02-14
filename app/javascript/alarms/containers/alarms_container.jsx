@@ -19,7 +19,9 @@ class AlarmsContainer extends Component {
   componentDidMount(){
     if(localStorage.jwt && localStorage.jwt.length){
       this.props.fetch_user_alarms(localStorage.jwt)
-      this.props.fetch_assets_infos()
+      if(!this.props.assets_infos.length){
+        this.props.fetch_assets_infos()
+      }
     }else{
       history.push('sign_in')
     }

@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import * as portfolio_actions from './../actions'
 import * as assets_actions from './../../assets/actions'
 import * as sessions_actions from './../../sessions/actions'
+import * as alarms_actions from './../../alarms/actions'
 import store from './../../main/store'
 import history from './../../main/history'
 import CandleChart from './../components/candle_chart'
@@ -27,6 +28,9 @@ class PortfolioContainer extends Component {
   componentDidMount(){
     if(localStorage.jwt && localStorage.jwt.length){
       this.props.fetch_portfolio_assets(localStorage.jwt)
+      if(!this.props.assets_infos.length){
+        this.props.fetch_assets_infos()
+      }
     }else{
       history.push('sign_in')
     }
@@ -86,7 +90,7 @@ class PortfolioContainer extends Component {
     if(!this.props.portfolio_assets_loading && !this.props.portfolio_assets.length){
       return(
         <article>
-          { this.props.is_add_asset_modal_visible && <AddAssetModal /> }
+          { this.props.is_add_asset_modal_visible && <AddAssetModal assets_infos={this.props.assets_infos} /> }
           <br/><br/><br/><br/><br/><br/><br/>
           <p className='text-center'>You don't have any portfolio asset yet.</p>
           <br/>
@@ -98,7 +102,7 @@ class PortfolioContainer extends Component {
     return(
       <Grid fluid={true}>
 
-        { this.props.is_add_asset_modal_visible && <AddAssetModal /> }
+        { this.props.is_add_asset_modal_visible && <AddAssetModal assets_infos={this.props.assets_infos} /> }
 
         <Row className="portfolio-chart-row">
           {
@@ -178,12 +182,13 @@ const mapStateToProps = (state) => {
     is_add_asset_modal_visible: state.PortfolioReducer.is_add_asset_modal_visible,
     //selected_time_range: state.PortfolioReducer.selected_time_range,
     selected_chart_type: state.SessionsReducer.selected_chart_type,
-    portfolio_assets_loading: state.PortfolioReducer.portfolio_assets_loading
+    portfolio_assets_loading: state.PortfolioReducer.portfolio_assets_loading,
+    assets_infos: state.AlarmsReducer.assets_infos
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(Object.assign({}, portfolio_actions, assets_actions, sessions_actions), dispatch)
+  return bindActionCreators(Object.assign({}, portfolio_actions, assets_actions, sessions_actions, alarms_actions), dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer)

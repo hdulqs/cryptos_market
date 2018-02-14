@@ -28,20 +28,29 @@ class AddAssetModal extends Component {
   }
 
   componentDidMount(){
-    axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
-      .then((response) => {
-        let payload = response.data.assets_infos.map((asset) => {
-          return {
-            value: asset.id,
-            symbol: asset.symbol,
-            label: asset.name + ' (' + asset.symbol + ')'
-          }
-        })
-        this.setState({assets_infos: payload})
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    let payload = this.props.assets_infos.map((asset) => {
+      return {
+        value: asset.id,
+        symbol: asset.symbol,
+        label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
+        usd_price: asset.price_usd
+      }
+    })
+    this.setState({assets_infos: payload})
+    // axios.get('/api/v1/public/asset_infos/all', {headers: {responseType: 'json'}})
+    //   .then((response) => {
+    //     let payload = response.data.assets_infos.map((asset) => {
+    //       return {
+    //         value: asset.id,
+    //         symbol: asset.symbol,
+    //         label: asset.name + ' (' + asset.symbol + ')'
+    //       }
+    //     })
+    //     this.setState({assets_infos: payload})
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   }
 
   close_asset_modal = () => {
@@ -64,6 +73,14 @@ class AddAssetModal extends Component {
   }
 
   render(){
+    let assets_infos = this.props.assets_infos.map((asset) => {
+      return {
+        value: asset.id,
+        symbol: asset.symbol,
+        label: asset.name + ' (' + asset.symbol + ')' + ' - ' + asset.price_usd + ' USD',
+        usd_price: asset.price_usd
+      }
+    })
     return(
       <Modal show={this.props.is_add_asset_modal_visible} onHide={this.close_asset_modal}>
         <Modal.Header closeButton>
@@ -74,7 +91,7 @@ class AddAssetModal extends Component {
           <h4>Choose an Asset</h4>
           <Form horizontal>
             <VirtualizedSelect
-              options={this.state.assets_infos}
+              options={assets_infos}
               onChange={(selectValue) => this.setState({selected_value: selectValue})}
               value={this.state.selected_value}
             />
