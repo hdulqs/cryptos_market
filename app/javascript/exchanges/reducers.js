@@ -1,6 +1,7 @@
 
 const initialState = {
-  exchanges: []
+  exchanges: [],
+  exchanges_loading: false
 };
 
 export default function ExchangesReducer(state = initialState, action={}) {
@@ -8,7 +9,13 @@ export default function ExchangesReducer(state = initialState, action={}) {
     case 'EXCHANGES_FETCHED':
       return {
         ...state,
-        exchanges: action.payload.exchanges
+        exchanges: action.payload.exchanges,
+        exchanges_loading: false
+      }
+    case 'EXCHANGES_LOADING_SET':
+      return {
+        ...state,
+        exchanges_loading: action.payload
       }
 
     default:

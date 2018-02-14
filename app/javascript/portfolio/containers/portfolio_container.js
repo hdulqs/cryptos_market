@@ -78,7 +78,7 @@ class PortfolioContainer extends Component {
     if(this.props.portfolio_assets_loading){
       return(
         <article>
-          <div className="loader"></div>
+          <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
         </article>
       )
     }

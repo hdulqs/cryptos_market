@@ -21,6 +21,13 @@ class ExchangesContainer extends Component {
   }
 
   render() {
+    if(this.props.exchanges_loading){
+      return(
+        <article>
+          <div className="loader"><Glyphicon glyph="btc" /><Glyphicon glyph="eur" /><Glyphicon glyph="usd" /></div>
+        </article>
+      )
+    }
     let exchanges = this.props.exchanges.sort((a, b) => a.name.localeCompare(b.name)) || []
     return(
       <Grid fluid={true}>
@@ -52,7 +59,8 @@ class ExchangesContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    exchanges: state.ExchangesReducer.exchanges
+    exchanges: state.ExchangesReducer.exchanges,
+    exchanges_loading: state.ExchangesReducer.exchanges_loading
   }
 }
 
