@@ -47,9 +47,18 @@ export default function MarketsReducer(state = initialState, action={}) {
         current_page: action.payload.page_nb
       }
     case 'SCROLL_MARKET_SEARCH_FETCHED':
+      let market_items = state.markets.concat(action.payload.markets)
+      let uniq_market_items = [];
+      market_items.filter((item) => {
+        var i = uniq_market_items.findIndex(x => x.id == item.id)
+        if(i <= -1){
+              uniq_market_items.push(item)
+        }
+        return null
+      })
       return {
         ...state,
-        markets: state.markets.concat(action.payload.markets),
+        markets: uniq_market_items,
         //markets: action.payload.markets,
         is_markets_loading: false,
         markets_stats: action.payload.markets_stats,
