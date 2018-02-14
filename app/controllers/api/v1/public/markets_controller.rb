@@ -2,8 +2,9 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
 
   def index
     if params[:market_search].present?
-      @markets = Market.of_interest.where("base_currency ~* ?", params[:market_search])
-                  .or(Market.of_interest.where("quote_currency ~* ?", params[:market_search]))
+      @markets = Market.where("base_currency ~* ?", params[:market_search])
+                  .or(Market.where("quote_currency ~* ?", params[:market_search]))
+                  .or(Market.where("name ~* ?", params[:market_search]))
       @watched_markets_count = @markets.count
       @markets = @markets.page(params[:page]).per(15)
     else
