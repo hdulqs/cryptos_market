@@ -3,7 +3,7 @@ class Ticker < ApplicationRecord
   before_create :get_spread
 
   before_create do
-    if pair.tickers.count >= 5
+    if pair.tickers.count >= 2
       pair.tickers.order(created_at: :desc).first.destroy
     end
   end
