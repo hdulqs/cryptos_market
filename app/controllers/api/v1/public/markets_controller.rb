@@ -20,7 +20,7 @@ class Api::V1::Public::MarketsController < Api::V1::BaseController
                     # .group(:id)
                     # .order('COUNT(pairs.id) DESC')
       #@watched_markets_count = @markets.count
-      @watched_markets_count = Market.left_joins(:pairs).group(:id).count
+      @watched_markets_count = Market.left_joins(:pairs).group(:id).length
       @markets = Kaminari.paginate_array(@markets).page(params[:page]).per(15)
       #@watched_markets_count = Market.of_interest.count
     end
