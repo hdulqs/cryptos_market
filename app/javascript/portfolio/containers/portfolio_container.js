@@ -75,6 +75,15 @@ class PortfolioContainer extends Component {
       :
       this.props.assets_chart_data[this.props.selected_portfolio_asset]
 
+    if(!this.props.portfolio_assets.length){
+      return(
+        <article>
+          <p className='text-center'>You don't have any portfolio asset yet.</p>
+          <Button className='btn btn-block' onClick={this.open_asset_modal}>Add Asset</Button>
+        </article>
+      )
+    }
+
     return(
       <Grid fluid={true}>
 
@@ -83,7 +92,7 @@ class PortfolioContainer extends Component {
         <Row className="portfolio-chart-row">
           {
             !this.props.portfolio_assets.length &&
-            <p className='text-center'>You don't have any portfolio asset yet.</p>
+              <p className='text-center'>You don't have any portfolio asset yet.</p>
           }
           <Col xs={12} md={2} sm={2}>
             <AssetOverview />

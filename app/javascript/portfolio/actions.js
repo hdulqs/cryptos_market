@@ -65,6 +65,14 @@ export const edited_portfolio_asset = (asset) => {
   }
 }
 
+export const reset_local_storage_session = () => {
+  localStorage.setItem('jwt', '')
+  localStorage.setItem('session', false)
+  localStorage.setItem('email', '')
+  localStorage.setItem('user', {})
+  localStorage.clear()
+}
+
 export const fetch_portfolio_assets = (jwt_token) => {
   return (dispatch) => {
     axios.get('/api/v1/private/portfolio', {headers: {Authorization: jwt_token, responseType: 'json'}})
@@ -76,6 +84,10 @@ export const fetch_portfolio_assets = (jwt_token) => {
         }
       })
       .catch((error) => {
+        if(error.response.status === 401){
+          reset_local_storage_session()
+          window.location.href = 'sign_in'
+        }
         console.log(error)
       })
   }
