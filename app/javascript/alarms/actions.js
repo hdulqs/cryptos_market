@@ -75,6 +75,12 @@ export const assets_infos_fetched = (assets_infos) => {
   }
 }
 
+export const alarms_loading_set = (bool) => {
+  return {
+    type: 'ALARMS_LOADING_SET',
+    payload: bool
+  }
+}
 
 
 
@@ -98,6 +104,7 @@ export const set_show_edit_alarm_modal = (bool) => {
 
 export const fetch_user_alarms = (jwt_token) => {
   return (dispatch) => {
+    dispatch(alarms_loading_set(true))
     axios.get('/api/v1/private/alarms', {headers: {Authorization: jwt_token, responseType: 'json'}})
       .then((response) => {
         dispatch(user_alarms_fetched({alarms: response.data.data.alarms}))

@@ -1,6 +1,7 @@
 
 const initialState = {
   portfolio_assets: [],
+  portfolio_assets_loading: false,
   selected_portfolio_asset: undefined,
   is_add_asset_modal_visible: false,
   is_edit_asset_modal_visible: false,
@@ -14,7 +15,8 @@ export default function PortfolioReducer(state = initialState, action={}) {
     case 'PORTFOLIO_ASSETS_FETCHED':
       return {
         ...state,
-        portfolio_assets: action.payload.portfolio_assets
+        portfolio_assets: action.payload.portfolio_assets,
+        portfolio_assets_loading: false
       }
     case 'SHOW_ADD_ASSET_MODAL':
       return {
@@ -55,10 +57,21 @@ export default function PortfolioReducer(state = initialState, action={}) {
         edit_errors: action.payload.errors
       }
     case 'REMOVED_ASSET_FROM_PORTFOLIO':
+      let portfolio_asset_selected = undefined
+      if(state.portfolio_assets.length < 2){
+        portfolio_asset_selected = undefined
+      }else{
+        portfolio_asset_selected = state.portfolio_assets.filter((asset) => asset.symbol !== action.payload)[0].symbol
+      }
       return {
         ...state,
         portfolio_assets: state.portfolio_assets.filter((asset) => asset.symbol !== action.payload),
-        selected_portfolio_asset: state.portfolio_assets.filter((asset) => asset.symbol !== action.payload)[0].symbol
+        selected_portfolio_asset: portfolio_asset_selected
+      }
+    case 'PORTFOLIO_ASSETS_LOADING_SET':
+      return {
+        ...state,
+        portfolio_assets_loading: action.payload
       }
     // case 'TIME_RANGE_SELECTED':
     //   return {

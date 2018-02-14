@@ -28,6 +28,13 @@ export const set_selected_portfolio_asset = (symbol) => {
   }
 }
 
+export const portfolio_assets_loading_set = (bool) => {
+  return {
+    type: 'PORTFOLIO_ASSETS_LOADING_SET',
+    payload: bool
+  }
+}
+
 export const added_asset_to_portfolio = (payload) => {
   return {
     type: 'ADDED_ASSET_TO_PORTFOLIO',
@@ -75,9 +82,11 @@ export const reset_local_storage_session = () => {
 
 export const fetch_portfolio_assets = (jwt_token) => {
   return (dispatch) => {
+    dispatch(portfolio_assets_loading_set(true))
     axios.get('/api/v1/private/portfolio', {headers: {Authorization: jwt_token, responseType: 'json'}})
       .then((response) => {
         dispatch(portfolio_assets_fetched({portfolio_assets: response.data.data.portfolio_assets}))
+        dispatch(portfolio_assets_loading_set(false))
         if(response.data.data.portfolio_assets.length){
           dispatch(set_selected_portfolio_asset(response.data.data.portfolio_assets[0].symbol))
           dispatch(retrieve_assets_ohcl_candle(response.data.data.portfolio_assets[0].symbol, "7D"))
@@ -169,7 +178,11 @@ export const set_show_edit_asset_modal = (bool) => {
 }
 
 
-
+export const set_portfolio_assets_loading = (bool) => {
+  return (dispatch) => {
+    dispatch(portfolio_assets_loading_set(bool))
+  }
+}
 
 
 

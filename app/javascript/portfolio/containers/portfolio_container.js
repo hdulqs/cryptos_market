@@ -75,13 +75,22 @@ class PortfolioContainer extends Component {
       :
       this.props.assets_chart_data[this.props.selected_portfolio_asset]
 
-    if(!this.props.portfolio_assets.length){
+    if(this.props.portfolio_assets_loading){
       return(
         <article>
-          <div className="loader-small"></div>
-          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+          <div className="loader"></div>
+        </article>
+      )
+    }
+
+    if(!this.props.portfolio_assets_loading && !this.props.portfolio_assets.length){
+      return(
+        <article>
+          { this.props.is_add_asset_modal_visible && <AddAssetModal /> }
+          <br/><br/><br/><br/><br/><br/><br/>
           <p className='text-center'>You don't have any portfolio asset yet.</p>
-          <Button className='btn btn-block' onClick={this.open_asset_modal}>Add Asset</Button>
+          <br/>
+          <Button className='btn btn-block' onClick={this.open_asset_modal}>Add Asset to Portfolio</Button>
         </article>
       )
     }
@@ -168,7 +177,8 @@ const mapStateToProps = (state) => {
     assets_chart_data: state.AssetsReducer.assets_chart_data,
     is_add_asset_modal_visible: state.PortfolioReducer.is_add_asset_modal_visible,
     //selected_time_range: state.PortfolioReducer.selected_time_range,
-    selected_chart_type: state.SessionsReducer.selected_chart_type
+    selected_chart_type: state.SessionsReducer.selected_chart_type,
+    portfolio_assets_loading: state.PortfolioReducer.portfolio_assets_loading
   }
 }
 

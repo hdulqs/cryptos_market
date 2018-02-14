@@ -31,6 +31,15 @@ class AlarmsContainer extends Component {
 
 
   render() {
+
+    if(this.props.alarms_loading){
+      return(
+        <article>
+          <div className="loader"></div>
+        </article>
+      )
+    }
+
     return(
       <Grid fluid={true}>
         <br/>
@@ -40,8 +49,7 @@ class AlarmsContainer extends Component {
             <AlarmsList alarms={this.props.alarms} />
             :
             <article>
-              <div className="loader-small"></div>
-              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+              <br/><br/><br/><br/><br/><br/><br/>
               <p className='text-center'>You don't have any Alarm yet.</p>
             </article>
         }
@@ -60,7 +68,8 @@ const mapStateToProps = (state) => {
     is_create_alarm_modal_visible: state.AlarmsReducer.is_create_alarm_modal_visible,
     is_edit_alarm_modal_visible: state.AlarmsReducer.is_edit_alarm_modal_visible,
     alarms: state.AlarmsReducer.alarms,
-    assets_infos: state.AlarmsReducer.assets_infos
+    assets_infos: state.AlarmsReducer.assets_infos,
+    alarms_loading: state.AlarmsReducer.alarms_loading
   }
 }
 

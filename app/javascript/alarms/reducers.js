@@ -6,7 +6,8 @@ const initialState = {
   errors: {},
   selected_alarm: {},
   assets_infos: [],
-  toggle_alarm_error: {}
+  toggle_alarm_error: {},
+  alarms_loading: false
 };
 
 export default function PortfolioReducer(state = initialState, action={}) {
@@ -53,7 +54,8 @@ export default function PortfolioReducer(state = initialState, action={}) {
     case 'USER_ALARMS_FETCHED':
       return {
         ...state,
-        alarms: action.payload.alarms
+        alarms: action.payload.alarms,
+        alarms_loading: false
       }
     case 'CREATE_ALARM_ERROR':
       return {
@@ -70,6 +72,11 @@ export default function PortfolioReducer(state = initialState, action={}) {
       return {
         ...state,
         toggle_alarm_error: action.payload.errors
+      }
+    case 'ALARMS_LOADING_SET':
+      return {
+        ...state,
+        alarms_loading: action.payload
       }
     // case 'EDITED_PORTFOLIO_ASSET':
     //   return {
