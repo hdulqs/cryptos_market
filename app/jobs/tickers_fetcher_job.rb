@@ -17,9 +17,16 @@ class TickersFetcherJob < ApplicationJob
 
     exchange = Exchange.find_by(name: exchange_name)
     return if exchange.is_fetching_tickers
-    exchange.update_column(:is_fetching_tickers, true)
-    exchange.get_tickers
-    exchange.update_column(:is_fetching_tickers, false)
+    
+    begin
+      exchange.update_column(:is_fetching_tickers, true)
+      exchange.get_tickers
+    rescue => error
+      logger.info error
+      #exchange.update_column(:is_fetching_tickers, false)
+    ensure
+      exchange.update_column(:is_fetching_tickers, false)
+    end
 
     #random_sec = Random.rand(30..80)
     #next_request = DateTime.current + (90 + random_sec).seconds
