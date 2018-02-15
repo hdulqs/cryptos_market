@@ -1,3 +1,5 @@
+#require 'sidekiq/api'
+
 class TickersFetcherJob < ApplicationJob
   queue_as :tickers_fetcher_job
 
@@ -7,8 +9,18 @@ class TickersFetcherJob < ApplicationJob
   end
 
   def perform exchange_name
+    # queue = Sidekiq::Queue.new("tickers_fetcher_job")
+    # if queue.map{|job| job.args[0]["arguments"][0]}.include?(exchange_name)
+    #   # A job that is executing is not enqueued anymore. The Sidekiq process has already popped it off the queue and is executing it. The queue is empty but the job is not finished yet.
+    #   logger.info "Job with argument #{exchange_name} already exists in queue" && return
+    # end
+
     exchange = Exchange.find_by(name: exchange_name)
+    return if exchange.is_fetching_tickers
+    exchange.update_column(:is_fetching_tickers, true)
     exchange.get_tickers
+    exchange.update_column(:is_fetching_tickers, false)
+
     #random_sec = Random.rand(30..80)
     #next_request = DateTime.current + (90 + random_sec).seconds
     #TickersFetcherJob.set(wait_until: next_request).perform_later(exchange_name)

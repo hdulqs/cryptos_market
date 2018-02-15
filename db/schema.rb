@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214121054) do
+ActiveRecord::Schema.define(version: 20180215083108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20180214121054) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "get_user_pair_path"
+    t.boolean "is_fetching_tickers", default: false
     t.index ["asset_data_map"], name: "index_exchanges_on_asset_data_map", using: :gin
     t.index ["endpoint_request_limit"], name: "index_exchanges_on_endpoint_request_limit", using: :gin
     t.index ["order_book_data_map"], name: "index_exchanges_on_order_book_data_map", using: :gin
