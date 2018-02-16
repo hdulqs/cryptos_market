@@ -1,4 +1,4 @@
-:concurrency: 40
+:concurrency: 25
 :queues:
   - reports_generator_job
   - ticker_fetcher_job
