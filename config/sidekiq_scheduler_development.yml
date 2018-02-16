@@ -12,10 +12,12 @@
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '10s']
 #   args: 'bleutrade'
-bittrex_tickers_fetcher_job:
-  class: TickersFetcherJob
-  interval: ['120s', first_in: '1s']
-  args: 'bittrex'
+
+# bittrex_tickers_fetcher_job:
+#   class: TickersFetcherJob
+#   interval: ['20s', first_in: '1s']
+#   args: 'bittrex'
+
 # coinexchange_tickers_fetcher_job:
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '30s']
@@ -24,10 +26,10 @@ bittrex_tickers_fetcher_job:
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '40s']
 #   args: 'cryptopia'
-# etherdelta_tickers_fetcher_job:
-#   class: TickersFetcherJob
-#   interval: ['120s', first_in: '50s']
-#   args: 'etherdelta'
+etherdelta_tickers_fetcher_job:
+  class: TickersFetcherJob
+  interval: ['220s', first_in: '5s']
+  args: 'etherdelta'
 # exmo_tickers_fetcher_job:
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '60s']
@@ -40,11 +42,11 @@ bittrex_tickers_fetcher_job:
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '80s']
 #   args: 'hibtc'
-kucoin_tickers_fetcher_job:
-  class: TickersFetcherJob
-  interval: ['120s', first_in: '10s']
-  args: 'kucoin'
-poloniex_tickers_fetcher_job:
-  class: TickersFetcherJob
-  interval: ['120s', first_in: '20s']
-  args: 'poloniex'
+# kucoin_tickers_fetcher_job:
+#   class: TickersFetcherJob
+#   interval: ['20s', first_in: '10s']
+#   args: 'kucoin'
+# poloniex_tickers_fetcher_job:
+#   class: TickersFetcherJob
+#   interval: ['20s', first_in: '20s']
+#   args: 'poloniex'

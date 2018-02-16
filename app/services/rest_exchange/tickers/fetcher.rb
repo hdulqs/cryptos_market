@@ -1,13 +1,12 @@
 class RestExchange::Tickers::Fetcher < RestExchange::Base
 
-  # Used only by Poloniex which does not provide a Ticker endpoint
-  #
   def initialize exchange
     @exchange = exchange
   end
 
   def call
     tickers_payload = perform_request(@exchange.base_url, @exchange.get_tickers_path)
+    return unless tickers_payload
 
     @exchange.update_column(:last_ticker_request, DateTime.current)
 
