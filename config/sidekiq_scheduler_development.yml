@@ -8,10 +8,10 @@
 #   class: AlarmWatcherJob
 #   interval: ['120s', first_in: '30s']
 
-# bleutrade_tickers_fetcher_job:
-#   class: TickersFetcherJob
-#   interval: ['120s', first_in: '10s']
-#   args: 'bleutrade'
+bleutrade_tickers_fetcher_job:
+  class: TickersFetcherJob
+  interval: ['120s', first_in: '1s']
+  args: 'bleutrade'
 
 # bittrex_tickers_fetcher_job:
 #   class: TickersFetcherJob
@@ -26,10 +26,10 @@
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '40s']
 #   args: 'cryptopia'
-etherdelta_tickers_fetcher_job:
-  class: TickersFetcherJob
-  interval: ['220s', first_in: '5s']
-  args: 'etherdelta'
+# etherdelta_tickers_fetcher_job:
+#   class: TickersFetcherJob
+#   interval: ['220s', first_in: '5s']
+#   args: 'etherdelta'
 # exmo_tickers_fetcher_job:
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '60s']

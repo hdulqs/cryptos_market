@@ -6,7 +6,7 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
 
   def call
     tickers_payload = perform_request(@exchange.base_url, @exchange.get_tickers_path)
-    return unless tickers_payload
+    puts "tickers payload is empty for #{@exchange.name}" and return unless tickers_payload
 
     @exchange.update_column(:last_ticker_request, DateTime.current)
 

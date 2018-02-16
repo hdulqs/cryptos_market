@@ -18,7 +18,7 @@ class TickersFetcherJob
     # end
 
       exchange = Exchange.find_by(name: exchange_name)
-      return if exchange.is_fetching_tickers
+      logger.info "#{exchange.name} is already being fetched for tickers" and return if exchange.is_fetching_tickers
 
       begin
         exchange.update_column(:is_fetching_tickers, true)
