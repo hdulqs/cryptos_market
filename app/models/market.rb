@@ -41,6 +41,7 @@ class Market < ApplicationRecord
     return if(!lowest_ask || !highest_bid) #happens with gate
 
     last_tickers.each do |last_ticker|
+      return if(!last_ticker.ask || !last_ticker.bid)
       if last_ticker.ask < lowest_ask
         lowest_ask = last_ticker.ask
       end
