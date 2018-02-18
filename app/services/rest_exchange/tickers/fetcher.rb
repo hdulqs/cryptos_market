@@ -11,6 +11,8 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
     @exchange.update_column(:last_ticker_request, DateTime.current)
 
     std_tickers = normalized_tickers(tickers_payload)
+
+    tickers_payload = []
     #binding.pry
 
     std_tickers.each do |key, ticker|
@@ -44,6 +46,8 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
         )
       end
     end
+
+    std_tickers = []
 
   end
 
