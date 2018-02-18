@@ -6,6 +6,8 @@ class Exchange < ApplicationRecord
   validates :name, uniqueness: true
   validates :name, presence: true
 
+  scope :with_tickers_endpoint, -> { where(has_tickers_endpoint: true) }
+
   def get_assets
     RestExchange::Assets::Fetcher.new(self).call
   end
@@ -21,9 +23,5 @@ class Exchange < ApplicationRecord
       puts("There is no tickers endpoint for #{name}")
     end
   end
-
-  scope :watched, -> { where(is_watched: true) }
-
-  scope :with_tickers_endpoint, -> { where(has_tickers_endpoint: true) }
 
 end
