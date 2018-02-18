@@ -24,4 +24,6 @@ class Exchange < ApplicationRecord
 
   scope :watched, -> { where(is_watched: true) }
 
+  scope :with_tickers_endpoint, -> { where(has_tickers_endpoint: true) }
+
 end

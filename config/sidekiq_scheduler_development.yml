@@ -8,16 +8,18 @@
 #   class: AlarmWatcherJob
 #   interval: ['120s', first_in: '30s']
 
-bleutrade_tickers_fetcher_job:
-  class: TickersFetcherJob
-  interval: ['120s', first_in: '1s']
-  args: 'bleutrade'
+tickers_launcher_job:
+  class: TickersLauncherJob
+  interval: ['150s', first_in: '10s']
 
+# bleutrade_tickers_fetcher_job:
+#   class: TickersFetcherJob
+#   interval: ['20s', first_in: '1s']
+#   args: 'bleutrade'
 # bittrex_tickers_fetcher_job:
 #   class: TickersFetcherJob
 #   interval: ['20s', first_in: '1s']
 #   args: 'bittrex'
-
 # coinexchange_tickers_fetcher_job:
 #   class: TickersFetcherJob
 #   interval: ['120s', first_in: '30s']

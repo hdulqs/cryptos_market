@@ -12,9 +12,6 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
 
     std_tickers = normalized_tickers(tickers_payload)
 
-    tickers_payload = []
-    #binding.pry
-
     std_tickers.each do |key, ticker|
       # binding.pry
       existing_pair = @exchange.pairs.find_by(name: key)
@@ -46,8 +43,6 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
         )
       end
     end
-
-    std_tickers = []
 
   end
 
