@@ -28,17 +28,17 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
          @exchange.pairs << pair
       else
         ticker = ::Ticker.create!(
-          bid: ticker[mapping[:bid]],
-          ask: ticker[mapping[:ask]],
-          last: ticker[mapping[:last]],
-          high: ticker[mapping[:high]],
-          low: ticker[mapping[:low]],
-          timestamp: ticker[mapping[:timestamp]],
-          market_symbol: ticker[mapping[:market_symbol]],
-          volume: ticker[mapping[:volume]],
-          base_volume: ticker[mapping[:base_volume]],
-          quote_volume: ticker[mapping[:quote_volume]],
-          percent_change: ticker[mapping[:percent_change]],
+          bid: ticker[mapping['bid']],
+          ask: ticker[mapping['ask']],
+          last: ticker[mapping['last']],
+          high: ticker[mapping['high']],
+          low: ticker[mapping['low']],
+          timestamp: ticker[mapping['timestamp']],
+          market_symbol: ticker[mapping['market_symbol']],
+          volume: ticker[mapping['volume']],
+          base_volume: ticker[mapping['base_volume']],
+          quote_volume: ticker[mapping['quote_volume']],
+          percent_change: ticker[mapping['percent_change']],
           original_payload: {key: key, ticker: ticker},
           pair_id: existing_pair.id
         )
@@ -49,7 +49,7 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
 
   private
   def mapping
-    @exchange.tickers_data_map.with_indifferent_access
+    @exchange.tickers_data_map#.with_indifferent_access
   end
 
   def normalized_tickers tickers_payload
