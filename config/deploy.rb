@@ -50,9 +50,15 @@ task :invoke, [:command] => 'deploy:set_rails_env' do |task, args|
   end
 end
 
+# Correct deployment sequence :
+# cap production sidekiq:quiet
+# cap production sidekiq:stop
+# cap production invoke[sidekiq_cleaner:run] # should not reset mailer queue...
+# cap production deploy
+# cap production sidekiq:start
+
 # => cap production invoke[sidekiq_cleaner:run]
 
-# after 'sidekiq:stop', "invoke[sidekiq_cleaner:run]"
 # after 'deploy:starting', 'sidekiq:quiet'
 # after 'deploy:updated', 'sidekiq:stop'
 # after 'deploy:reverted', 'sidekiq:stop'
