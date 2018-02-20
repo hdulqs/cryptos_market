@@ -22,7 +22,7 @@ set :rvm_ruby_version, 'ruby-2.4.1@cryptos_market'
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/secrets.yml"
@@ -38,3 +38,21 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+desc 'Invoke a rake command on the remote server'
+task :invoke, [:command] => 'deploy:set_rails_env' do |task, args|
+  on primary(:app) do
+    within current_path do
+      with :rails_env => fetch(:rails_env) do
+        rake args[:command]
+      end
+    end
+  end
+end
+
+# => cap production deploy:invoke[sidekiq_cleaner:run]
+
+# after 'deploy:starting', 'sidekiq:quiet'
+# after 'deploy:updated', 'sidekiq:stop'
+# after 'deploy:reverted', 'sidekiq:stop'
+# after 'deploy:published', 'sidekiq:start'
