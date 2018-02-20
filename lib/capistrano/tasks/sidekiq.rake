@@ -20,9 +20,10 @@ namespace :sidekiq do
         # /home/deployer/.rvm/gems/ruby-2.2.3/wrappers/bundle exec sidekiqctl stop /home/deployer/apps/gocode/current/tmp/pids/sidekiq.pid
         execute :sudo, "systemctl stop sidekiq"
 
-        #execute "cd /home/deployer/apps/cryptos_market/current && /home/deployer/.rvm/gems/ruby-2.4.1@cryptos_market/wrappers/bundle exec rails sidekiq_cleaner:run"
+        #execute "cd /home/deployer/apps/cryptos_market/current && /home/deployer/.rvm/gems/ruby-2.4.1@cryptos_market/wrappers/bundle exec rake sidekiq_cleaner:run production"
         #execute :rake, "sidekiq_cleaner:run"
         #Cleaner.reset_sidekiq
+        #execute :rake, 'invoke[sidekiq_cleaner:run]'
       end
     end
   end
@@ -36,5 +37,6 @@ namespace :sidekiq do
       end
     end
   end
+
 
 end

@@ -50,8 +50,9 @@ task :invoke, [:command] => 'deploy:set_rails_env' do |task, args|
   end
 end
 
-# => cap production deploy:invoke[sidekiq_cleaner:run]
+# => cap production invoke[sidekiq_cleaner:run]
 
+# after 'sidekiq:stop', "invoke[sidekiq_cleaner:run]"
 # after 'deploy:starting', 'sidekiq:quiet'
 # after 'deploy:updated', 'sidekiq:stop'
 # after 'deploy:reverted', 'sidekiq:stop'
