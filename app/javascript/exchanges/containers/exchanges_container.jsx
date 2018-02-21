@@ -38,6 +38,7 @@ class ExchangesContainer extends Component {
       				<th></th>
               <th>Name</th>
               <th>Base Api Url</th>
+              <th>Country</th>
               <th>Total Markets Nb</th>
               <th>Watched Markets Nb</th>
       				<th>Last Ticker Update</th>

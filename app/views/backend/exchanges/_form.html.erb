@@ -8,6 +8,9 @@
   <%= f.label :get_user_pair_path %>
   <%= f.text_field :get_user_pair_path, style: "", class: 'form-control', placeholder: 'ex : https://bittrex.com/Market/Index?MarketName=BTC-STEEM' %>
   <hr/>
+  <%= f.label :country %>
+  <%= f.text_field :country, style: "", class: 'form-control', placeholder: 'ex : France' %>
+  <hr/>
   <%= f.submit 'submit', class: 'btn btn-success btn-block' %>
   <br/>
   <%= link_to "Exchanges List", backend_exchanges_path, class: 'btn btn-info', data: { turbolinks: false } %>

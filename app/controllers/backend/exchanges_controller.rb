@@ -37,7 +37,7 @@ class Backend::ExchangesController < Backend::BaseController
 
   private
   def exchange_params
-    params.require(:exchange).permit(:id, :get_user_pair_path)
+    params.require(:exchange).permit(:id, :get_user_pair_path, :country)
   end
 
   def find_exchange
