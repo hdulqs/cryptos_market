@@ -1,4 +1,6 @@
 quoine = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'quoine',
   base_url: 'https://api.qryptos.com',
   get_assets_path: '/products',

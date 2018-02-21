@@ -1,5 +1,7 @@
 
 kraken = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'kraken',
   base_url: 'https://api.kraken.com',
   get_assets_path: '/0/public/Assets',

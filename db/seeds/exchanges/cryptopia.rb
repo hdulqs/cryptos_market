@@ -1,5 +1,7 @@
 
 cryptopia = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'cryptopia',
   base_url: 'https://www.cryptopia.co.nz/api',
   get_assets_path: '/GetCurrencies',

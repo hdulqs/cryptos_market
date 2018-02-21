@@ -1,5 +1,7 @@
 
 kucoin = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'kucoin',
   base_url: 'https://api.kucoin.com/v1',
   get_assets_path: '/market/open/symbols',

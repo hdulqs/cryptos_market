@@ -1,5 +1,7 @@
 
 gate = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'gate',
   base_url: 'http://data.gate.io/api2/1',
   get_assets_path: '/pairs',

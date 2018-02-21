@@ -1,5 +1,7 @@
 
 exmo = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'exmo',
   base_url: 'https://api.exmo.com/v1',
   get_assets_path: '/currency/',

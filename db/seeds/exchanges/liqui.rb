@@ -1,5 +1,7 @@
 
 liqui = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'liqui',
   base_url: 'https://api.liqui.io/api/3',
   get_assets_path: '/info',

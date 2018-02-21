@@ -1,5 +1,7 @@
 
 bleutrade = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'bleutrade',
   base_url: 'https://bleutrade.com/api/v2',
   get_assets_path: '/public/getcurrencies',

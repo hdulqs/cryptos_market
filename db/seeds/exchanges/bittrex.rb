@@ -1,5 +1,7 @@
 
 bittrex = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'bittrex',
   base_url: 'https://bittrex.com',
   get_assets_path: '/api/v1.1/public/getcurrencies',

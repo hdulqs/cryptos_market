@@ -1,5 +1,7 @@
 # returns 503 because of cloudfare ddos protection...
 # yobit = Exchange.create!(
+#   country: "Japan",
+#   get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
 #   name: 'yobit',
 #   base_url: 'https://yobit.net/api/3',
 #   get_assets_path: '/info',

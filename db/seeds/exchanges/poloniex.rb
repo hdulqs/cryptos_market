@@ -1,5 +1,7 @@
 
 poloniex = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'poloniex',
   base_url: 'https://poloniex.com',
   get_assets_path: '/public?command=returnCurrencies',

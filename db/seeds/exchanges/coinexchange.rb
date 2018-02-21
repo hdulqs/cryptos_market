@@ -1,4 +1,6 @@
 coinexchange = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'coinexchange',
   base_url: 'https://www.coinexchange.io/api/v1',
   get_assets_path: '/getcurrencies',

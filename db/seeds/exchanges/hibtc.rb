@@ -1,5 +1,7 @@
 
 hibtc = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'hibtc',
   base_url: 'https://api.hitbtc.com/api/2',
   get_assets_path: '/public/currency',

@@ -1,6 +1,8 @@
 
 
 bitstamp = Exchange.create!(
+  country: "Japan",
+  get_user_pair_path: "https://exmo.com/en/trade#?pair=BASE_CURRENCY_PARAM_QUOTE_CURRENCY_PARAM",
   name: 'bitstamp',
   base_url: 'https://bitstamp.net',
   get_assets_path: '/api/v2/trading-pairs-info/',
