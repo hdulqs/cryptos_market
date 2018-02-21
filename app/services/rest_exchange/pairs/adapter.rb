@@ -81,8 +81,9 @@ class RestExchange::Pairs::Adapter
         { name: k, base_currency: k.split('_').first.upcase, quote_currency: k.split('_').last.upcase, original_payload: {key: k, value: v}, min_amount: v["min_amount"] }.with_indifferent_access
       end
     elsif @exchange.name == 'binance'
-      @response_payload.map do |pair|
-        { name: pair['symbol'], base_currency: pair["symbol"][0..2].upcase, quote_currency: pair["symbol"][3..5].upcase, original_payload: pair }.with_indifferent_access
+      @response_payload['symbols'].map do |asset|
+        asset[:original_payload] = asset.with_indifferent_access
+        asset.with_indifferent_access
       end
     elsif @exchange.name == 'kucoin'
       @response_payload['data'].map do |pair|

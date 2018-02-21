@@ -2,8 +2,8 @@
 binance = Exchange.create!(
   name: 'binance',
   base_url: 'https://api.binance.com',
-  get_assets_path: '/api/v1/ticker/allPrices',
-  get_pairs_path: '/api/v1/ticker/allPrices',
+  get_assets_path: '/api/v1/exchangeInfo',
+  get_pairs_path: '/api/v1/exchangeInfo',
   get_order_book_path: '/api/v1/depth?symbol=CURRENCY_PAIR_PARAM',
   get_tickers_path: '/api/v1/ticker/24hr',
   get_trade_history_path: '/api/v1/aggTrades?symbol=CURRENCY_PAIR_PARAM',
@@ -11,8 +11,8 @@ binance = Exchange.create!(
   has_ticker_endpoint: false,
   has_assets_endpoint: false,
   asset_data_map: {
-    name: "name",
-    iso_4217: "iso_4217",
+    name: "symbol",
+    iso_4217: "baseAsset",
     min_confirmation: "",
     tx_fee: "",
     is_active: "",
@@ -22,9 +22,9 @@ binance = Exchange.create!(
     is_disabled: ""
   }.with_indifferent_access,
   pair_data_map: {
-    name: "name",
-    base_currency: "base_currency",
-    quote_currency: "quote_currency",
+    name: "symbol",
+    base_currency: "baseAsset",
+    quote_currency: "quoteAsset",
     min_trade_size: "",
     is_active: "",
     is_frozen: ""
