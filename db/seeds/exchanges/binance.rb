@@ -5,10 +5,10 @@ binance = Exchange.create!(
   get_assets_path: '/api/v1/ticker/allPrices',
   get_pairs_path: '/api/v1/ticker/allPrices',
   get_order_book_path: '/api/v1/depth?symbol=CURRENCY_PAIR_PARAM',
-  get_ticker_path: '/api/v1/ticker/24hr?symbol=CURRENCY_PAIR_PARAM',
+  get_tickers_path: '/api/v1/ticker/24hr',
   get_trade_history_path: '/api/v1/aggTrades?symbol=CURRENCY_PAIR_PARAM',
-  has_tickers_endpoint: false,
-  has_ticker_endpoint: true,
+  has_tickers_endpoint: true,
+  has_ticker_endpoint: false,
   has_assets_endpoint: false,
   asset_data_map: {
     name: "name",
@@ -34,7 +34,7 @@ binance = Exchange.create!(
     bids: "bids",
     is_frozen: ""
   }.with_indifferent_access,
-  ticker_data_map: {
+  tickers_data_map: {
     ask: "askPrice",
     bid: "bidPrice",
     last: "lastPrice",
@@ -44,8 +44,8 @@ binance = Exchange.create!(
     percent_change: "priceChangePercent",
     high: "highPrice",
     low: "lowPrice",
-    timestamp: "",
-    market_symbol: ""
+    timestamp: "closeTime",
+    market_symbol: "symbol"
   }.with_indifferent_access,
   trade_history_data_map: {
     order_type: "",

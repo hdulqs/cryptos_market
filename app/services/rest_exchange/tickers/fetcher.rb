@@ -89,6 +89,10 @@ class RestExchange::Tickers::Fetcher < RestExchange::Base
       tickers_payload['data'].map do |ticker|
         [ticker['symbol'], ticker]
       end
+    elsif @exchange.name == 'binance'
+      tickers_payload.map do |ticker|
+        [ticker['symbol'], ticker]
+      end
     else
       tickers_payload
     end
