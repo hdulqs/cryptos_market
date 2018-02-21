@@ -90,6 +90,10 @@ class RestExchange::Pairs::Adapter
         pair[:original_payload] = pair.with_indifferent_access
         pair.with_indifferent_access
       end
+    elsif @exchange.name == 'southxchange'
+      @response_payload.map do |pair|
+        { name: "#{pair.first.upcase}/#{pair.last.upcase}", base_currency: pair.first.upcase, quote_currency: pair.last.upcase, original_payload: pair }.with_indifferent_access
+      end
     else
       @response_payload.map do |pair|
         pair[:original_payload] = pair.with_indifferent_access

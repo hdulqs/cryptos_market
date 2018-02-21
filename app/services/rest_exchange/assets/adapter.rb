@@ -82,6 +82,10 @@ class RestExchange::Assets::Adapter
         asset[:original_payload] = asset.with_indifferent_access
         asset.with_indifferent_access
       end
+    elsif @exchange.name == 'southxchange'
+      @response_payload.map do |asset|
+        { name: asset.first, iso_4217: asset.first, original_payload: asset }.with_indifferent_access
+      end
     else
       @response_payload.map do |asset|
         asset[:original_payload] = asset.with_indifferent_access
