@@ -135,7 +135,7 @@ class MarketItem extends Component {
       <div>
         {(() => {
           switch (tab) {
-            case "chart":
+            /*case "chart":
               return (
                 <div>
                   <div style={this.state.style.item_header}>
@@ -155,7 +155,7 @@ class MarketItem extends Component {
                   </div>
                   <MarketChartIndex market={this.props.market} charts_data={this.props.charts_data}></MarketChartIndex>
                 </div>
-              )
+              )*/
             case "spread":
               return (
                 <div>
@@ -163,10 +163,6 @@ class MarketItem extends Component {
                   <div style={styles.chart_list_glyph}>
                     <div style={styles.chart_glyph} onClick={this.show_table_tab}>
                       <Glyphicon glyph="list" />
-                    </div>
-                    &nbsp;&nbsp;&nbsp;
-                    <div style={styles.chart_glyph} onClick={this.show_chart_tab}>
-                      <Glyphicon glyph="stats" />
                     </div>
                   </div>
                   <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
@@ -187,8 +183,8 @@ class MarketItem extends Component {
               return (
                 <div>
                   <div style={this.state.style.item_header}>
-                  <div style={styles.chart_glyph} onClick={this.show_chart_tab}>
-                    <Glyphicon glyph="stats" />
+                  <div style={styles.chart_glyph} onClick={this.show_table_tab}>
+                    <Glyphicon glyph="list" />
                   </div>
                   <h4 style={this.state.style.title}><img src={this.props.market.base_currency_logo} />&nbsp;&nbsp;{this.props.market.name}&nbsp;&nbsp;<img src={this.props.market.quote_currency_logo} /></h4>
                   <h4 style={this.state.style.title}>{this.get_percent_change(this.props.market.pairs)}</h4>
