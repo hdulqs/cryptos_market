@@ -106,7 +106,8 @@ class ExchangesNavBar extends Component {
 
           </Nav>
 
-
+          {/*
+            
     			<Navbar.Form pullRight className='search-area'>
     				<FormGroup>
     					<FormControl type="text" placeholder="Search Exchange" onKeyPress={this.key_press_search_asset} />
@@ -114,6 +115,8 @@ class ExchangesNavBar extends Component {
     				<Button type="submit" value="none" className='btn btn-info' onClick={this.search_asset}>Search</Button>&nbsp;
     				<Button type="submit" value="none" className='btn btn-danger' onClick={this.reset_search_asset}>Reset</Button>
     			</Navbar.Form>
+
+          */}
 
 
           <Navbar.Text pullRight className='global-market-infos'>

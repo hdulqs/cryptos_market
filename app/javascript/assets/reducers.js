@@ -4,6 +4,7 @@ export const ASSETS_FETCHED = 'ASSETS_FETCHED'
 
 const initialState = {
   assets: [],
+  assets_stats: {},
   assets_chart_data: {},
   current_page: 0,
   is_assets_loading: true,
@@ -18,7 +19,22 @@ export default function AssetsReducer(state = initialState, action={}) {
         ...state,
         assets: state.assets.concat(action.payload.assets),
         current_page: action.payload.page_nb,
-        is_assets_loading: false
+        is_assets_loading: false,
+        assets_stats: action.payload.assets_stats
+      }
+    case 'ASSETS_ORDERED_FETCHED':
+      let assets = []
+      if(action.payload.page_nb === 0 || action.payload.page_nb === 1){
+        assets = action.payload.assets
+      }else{
+        assets = state.assets.concat(action.payload.assets)
+      }
+      return {
+        ...state,
+        assets: assets,
+        current_page: action.payload.page_nb,
+        is_assets_loading: false,
+        assets_stats: action.payload.assets_stats
       }
     case 'ASSET_SEARCH_FETCHED':
       return {
@@ -44,7 +60,7 @@ export default function AssetsReducer(state = initialState, action={}) {
         ...state,
         selected_time_range: action.payload
       }
-    
+
     default:
       return state
   }

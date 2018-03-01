@@ -20,18 +20,18 @@ class AssetsContainer extends Component {
       this.props.fetch_assets(this.props.current_page + 1)
     }
     //this.createSocket()
-    window.addEventListener('scroll', this.onScroll, false)
+    //window.addEventListener('scroll', this.onScroll, false)
   }
 
-  onScroll = () => {
-    if(window.location.pathname === '/'){
-      if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
-              && this.props.assets.length && !this.props.is_assets_loading ) {
-        this.props.set_assets_loading(true)
-        this.props.fetch_assets(this.props.current_page + 1)
-      }
-    }
-  }
+  // onScroll = () => {
+  //   if(window.location.pathname === '/'){
+  //     if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
+  //             && this.props.assets.length && !this.props.is_assets_loading ) {
+  //       this.props.set_assets_loading(true)
+  //       this.props.fetch_assets(this.props.current_page + 1)
+  //     }
+  //   }
+  // }
 
   // createSocket() {
   //   this.tickers_consumer = Cable.createConsumer()
@@ -48,10 +48,10 @@ class AssetsContainer extends Component {
   //   })
   // }
 
-  componentWillUnmount(){
-    window.removeEventListener('scroll', this.onScroll)
-    //this.tickers_subscription && this.tickers_consumer.subscriptions.remove(this.tickers_subscription)
-  }
+  // componentWillUnmount(){
+  //   window.removeEventListener('scroll', this.onScroll)
+  //   //this.tickers_subscription && this.tickers_consumer.subscriptions.remove(this.tickers_subscription)
+  // }
 
   render() {
     if (this.props.is_assets_loading && !this.props.assets.length) {

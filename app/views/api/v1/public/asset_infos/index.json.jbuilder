@@ -17,3 +17,6 @@ json.assets_infos @assets_infos do |asset|
   json.percent_change_24h asset.percent_change_24h
   json.last_updated asset.last_updated
 end
+json.assets_stats do
+  json.watched_assets_count @watched_assets_count
+end

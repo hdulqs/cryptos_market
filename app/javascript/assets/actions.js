@@ -38,6 +38,12 @@ export const time_range_selected = (time_range) => {
   }
 }
 
+export const assets_ordered_fetched = (assets) => {
+  return {
+    type: 'ASSETS_ORDERED_FETCHED',
+    payload: assets
+  }
+}
 
 
 
@@ -45,7 +51,7 @@ export const fetch_assets = (page_nb) => {
   return (dispatch) => {
     axios.get('/api/v1/public/asset_infos?page=' + page_nb, {responseType: 'json'})
       .then((response) => {
-        dispatch(assets_fetched({page_nb: page_nb, assets: response.data.assets_infos}))
+        dispatch(assets_fetched({page_nb: page_nb, assets: response.data.assets_infos, assets_stats: response.data.assets_stats}))
       })
       .catch((error) => {
         console.log(error)
@@ -72,6 +78,19 @@ export const asset_search = (value) => {
     axios.get('/api/v1/public/asset_infos?asset_search=' + value, {responseType: 'json'})
       .then((response) => {
         dispatch(asset_search_fetched({page_nb: 0, assets: response.data.assets_infos}))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+}
+
+export const order_assets = (order_by, sort_order, current_page) => {
+  // sort_order is 'ASC' or 'DESC'
+  return (dispatch) => {
+    axios.get('/api/v1/public/asset_infos?order_by=' + order_by + '&sort=' + sort_order + '&page=' + current_page, {responseType: 'json'})
+      .then((response) => {
+        dispatch(assets_ordered_fetched({page_nb: current_page, assets: response.data.assets_infos, assets_stats: response.data.assets_stats}))
       })
       .catch((error) => {
         console.log(error)

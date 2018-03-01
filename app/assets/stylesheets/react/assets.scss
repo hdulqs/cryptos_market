@@ -19,7 +19,10 @@
     display: none;
   }
 }
-
+.assets-under-header{
+    margin-bottom: -20px;
+    color: #7ee435;
+}
 .global-market-info-line-1{
   display: block;
 
@@ -54,6 +57,7 @@
   font-weight: 400;
   letter-spacing: 0.6px;
   font-size: 1.1em;
+  //color: #ece12ee3;
 }
 
 .asset_row {
