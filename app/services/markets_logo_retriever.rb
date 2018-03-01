@@ -45,6 +45,22 @@ class MarketsLogoRetriever
       end
     end
 
+    # Market.of_interest.each do |market|
+    #   if market.base_currency == 'ETH'
+    #     market.base_currency_logo = 'https://www.cryptocompare.com/media/20646/eth_logo.png'
+    #     market.save!
+    #   elsif market.quote_currency == 'ETH'
+    #     market.quote_currency_logo = 'https://www.cryptocompare.com/media/20646/eth_logo.png'
+    #     market.save!
+    #   elsif market.base_currency == 'LTC'
+    #     market.base_currency_logo = 'https://www.cryptocompare.com/media/19782/litecoin-logo.png'
+    #     market.save!
+    #   elsif market.quote_currency == 'LTC'
+    #     market.quote_currency_logo = 'https://www.cryptocompare.com/media/19782/litecoin-logo.png'
+    #     market.save!
+    #   end
+    # end
+
   end
 
 end
