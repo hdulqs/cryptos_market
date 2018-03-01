@@ -8,10 +8,15 @@
 .form-control {
   background-color: #ddd;
 }
-
-.markets-under-header{
+.markets-under-header-left{
     margin-bottom: -7px;
     color: #7ee435;
+}
+.markets-under-header-right{
+  margin-bottom: -18px;
+  position: relative;
+  color: #7ee435;
+  top: -12px;
 }
 body {
   background-color: #222;
