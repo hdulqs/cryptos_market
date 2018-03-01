@@ -174,7 +174,7 @@ class AssetList extends Component {
             <th>Name</th>
             <th>Price </th>
     				<th className={this.state.order_attribute === 'volume_usd_24h' ? 'active-sorting' : ''} onClick={this.order_by_last_day_volume}><Glyphicon glyph="sort" />&nbsp;24h Volume</th>
-            <th>Market Cap</th>
+            <th className={this.state.order_attribute === 'rank' ? 'active-sorting' : ''} onClick={this.order_by_rank}><Glyphicon glyph="sort" />&nbsp;Market Cap</th>
             <th className={this.state.order_attribute === 'percent_change_7d' ? 'active-sorting' : ''} onClick={this.order_by_last_week_change}><Glyphicon glyph="sort" />&nbsp;7d Change</th>
             <th className={this.state.order_attribute === 'percent_change_24h' ? 'active-sorting' : ''} onClick={this.order_by_last_day_change}><Glyphicon glyph="sort" />&nbsp;24h Change</th>
             <th>
