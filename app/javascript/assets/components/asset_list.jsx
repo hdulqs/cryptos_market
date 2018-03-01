@@ -6,18 +6,13 @@ import { bindActionCreators } from 'redux'
 import * as assets_actions from './../actions'
 import uuid from 'uuid/v1'
 
-const styles = {
-
-}
-
-
 class AssetList extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      style: styles,
       percent_change_24h_sort_order: 'ASC',
+      percent_change_7d_sort_order: 'ASC',
       volume_usd_24h_sort_order: 'ASC',
       rank_sort_order: 'ASC',
       order_attribute: 'rank'
@@ -112,6 +107,23 @@ class AssetList extends Component {
     this.setState({order_attribute: 'volume_usd_24h'})
   }
 
+  order_by_last_week_change = () => {
+    this.toggle_percent_change_7d_sort_order()
+    this.setState({order_attribute: 'percent_change_7d'})
+  }
+
+  toggle_percent_change_7d_sort_order = () => {
+    let sorting = ''
+    if(this.state.percent_change_7d_sort_order === 'DESC'){
+      this.setState({percent_change_7d_sort_order: 'ASC'})
+      sorting = 'ASC'
+    }else if (this.state.percent_change_7d_sort_order === 'ASC') {
+      this.setState({percent_change_7d_sort_order: 'DESC'})
+      sorting = 'DESC'
+    }
+    this.props.order_assets('percent_change_7d', sorting, 1)
+  }
+
   toggle_percent_change_24h_sort_order = () => {
     let sorting = ''
     if(this.state.percent_change_24h_sort_order === 'DESC'){
@@ -155,13 +167,13 @@ class AssetList extends Component {
       <Table responsive condensed hover>
     		<thead>
     			<tr>
-    				<th onClick={this.order_by_rank}><Glyphicon glyph="sort" />&nbsp;Rank</th>
+    				<th className={this.state.order_attribute === 'rank' ? 'active-sorting' : ''} onClick={this.order_by_rank}><Glyphicon glyph="sort" />&nbsp;Rank</th>
             <th>Name</th>
             <th>Price </th>
-    				<th onClick={this.order_by_last_day_volume}><Glyphicon glyph="sort" />&nbsp;24h Volume</th>
+    				<th className={this.state.order_attribute === 'volume_usd_24h' ? 'active-sorting' : ''} onClick={this.order_by_last_day_volume}><Glyphicon glyph="sort" />&nbsp;24h Volume</th>
             <th>Market Cap</th>
-            <th>Available Supply</th>
-            <th onClick={this.order_by_last_day_change}><Glyphicon glyph="sort" />&nbsp;24h Change</th>
+            <th className={this.state.order_attribute === 'percent_change_7d' ? 'active-sorting' : ''} onClick={this.order_by_last_week_change}><Glyphicon glyph="sort" />&nbsp;7d Change</th>
+            <th className={this.state.order_attribute === 'percent_change_24h' ? 'active-sorting' : ''} onClick={this.order_by_last_day_change}><Glyphicon glyph="sort" />&nbsp;24h Change</th>
             <th>
               <span className={this.props.selected_time_range === '1m' ? 'scale_link active_scale' : 'scale_link'} onClick={this.one_month_scale}>1m</span>&nbsp;&nbsp;&nbsp;
               <span className={this.props.selected_time_range === '7d' ? 'scale_link active_scale' : 'scale_link'} onClick={this.seven_days_scale}>7d</span>&nbsp;&nbsp;&nbsp;

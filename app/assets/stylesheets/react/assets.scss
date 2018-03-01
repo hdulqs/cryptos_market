@@ -27,6 +27,9 @@
   display: block;
 
 }
+.active-sorting{
+  color: #ffa51e;
+}
 .no-result{
   margin-top: 50px;
   color: grey;
@@ -57,7 +60,7 @@
   font-weight: 400;
   letter-spacing: 0.6px;
   font-size: 1.1em;
-  //color: #ece12ee3;
+  color: #e6dc31;
 }
 
 .asset_row {

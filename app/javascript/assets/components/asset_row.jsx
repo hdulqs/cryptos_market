@@ -54,8 +54,8 @@ class AssetsRow extends Component {
         <td className='asset-row-price'><NumberFormat value={this.props.asset.price_usd || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={2} /></td>
 				<td><NumberFormat value={this.props.asset.volume_usd_24h || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} /></td>
         <td><NumberFormat value={this.props.asset.market_cap_usd || 0} displayType={'text'} thousandSeparator={" "} prefix={'$'} decimalScale={1} /></td>
-        <td><NumberFormat value={this.props.asset.available_supply || 0} displayType={'text'} thousandSeparator={" "} decimalScale={1} /> {this.props.asset.symbol}</td>
-        <td>{this.props.asset.percent_change_24h > 0 ? (<Glyphicon style={this.state.style.arrow_up} glyph="arrow-up" />) : (<Glyphicon style={this.state.style.arrow_down} glyph="arrow-down" />)}{this.props.asset.percent_change_24h > 0 ? '+' + this.props.asset.percent_change_24h : this.props.asset.percent_change_24h}</td>
+        <td>{this.props.asset.percent_change_7d > 0 ? (<Glyphicon style={this.state.style.arrow_up} glyph="arrow-up" />) : (<Glyphicon style={this.state.style.arrow_down} glyph="arrow-down" />)}&nbsp;{this.props.asset.percent_change_7d > 0 ? '+' + this.props.asset.percent_change_7d : this.props.asset.percent_change_7d}</td>
+        <td>{this.props.asset.percent_change_24h > 0 ? (<Glyphicon style={this.state.style.arrow_up} glyph="arrow-up" />) : (<Glyphicon style={this.state.style.arrow_down} glyph="arrow-down" />)}&nbsp;{this.props.asset.percent_change_24h > 0 ? '+' + this.props.asset.percent_change_24h : this.props.asset.percent_change_24h}</td>
         <td style={this.state.style.line_chart_width}>
           { assets_chart_data.length > 0 ?
             <LineChart data={assets_chart_data} />
