@@ -36,7 +36,7 @@ class AssetList extends Component {
               && this.props.assets.length && !this.props.is_assets_loading ) {
                 if(this.state.order_attribute === 'rank'){
                   this.props.set_assets_loading(true)
-                  this.props.fetch_assets(this.props.current_page + 1)
+                  this.props.order_assets('rank', this.state.rank_sort_order, this.props.current_page + 1)
                 }else if (this.state.order_attribute === 'percent_change_24h') {
                   this.props.set_assets_loading(true)
                   this.props.order_assets('percent_change_24h', this.state.percent_change_24h_sort_order, this.props.current_page + 1)
