@@ -44,6 +44,9 @@ class AssetList extends Component {
                 else if (this.state.order_attribute === 'volume_usd_24h') {
                   this.props.set_assets_loading(true)
                   this.props.order_assets('volume_usd_24h', this.state.volume_usd_24h_sort_order, this.props.current_page + 1)
+                }else if (this.state.order_attribute === 'percent_change_7d') {
+                  this.props.set_assets_loading(true)
+                  this.props.order_assets('percent_change_7d', this.state.percent_change_7d_sort_order, this.props.current_page + 1)
                 }
       }
     }
