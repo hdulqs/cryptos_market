@@ -6,7 +6,7 @@ class RestExchange::AssetsInfo::Persister
 
   def call
     @assets_array.each do |asset_payload|
-      asset = AssetInfo.find_by(original_id: asset_payload[:id])
+      asset = AssetInfo.find_by(name: asset_payload[:name])
       if asset
         asset_payload[:volume_usd_24h] = asset_payload["24h_volume_usd"]
         asset_payload.except!("id", "24h_volume_usd")
