@@ -29,7 +29,7 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 
 gem 'rest-client'
 
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
