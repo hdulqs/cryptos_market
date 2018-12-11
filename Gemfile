@@ -25,7 +25,7 @@ gem 'jwt'
 
 gem 'kaminari'
 
-gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'bootstrap', ">= 4.1.2"
 
 gem 'rest-client'
 
