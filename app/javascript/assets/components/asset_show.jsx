@@ -29,6 +29,26 @@ class AssetShow extends Component {
     this.props.set_selected_time_range('1m')
   }
 
+  three_month_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '3m')
+    this.props.set_selected_time_range('3m')
+  }
+
+  six_month_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '6m')
+    this.props.set_selected_time_range('6m')
+  }
+
+  one_year_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '1y')
+    this.props.set_selected_time_range('1y')
+  }
+
+  two_year_scale = () => {
+    this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '2y')
+    this.props.set_selected_time_range('2y')
+  }
+
   seven_days_scale = () => {
     this.props.retrieve_assets_ohcl_candle(this.props.match.params.symbol, '7d')
     this.props.set_selected_time_range('7d')
@@ -73,6 +93,10 @@ class AssetShow extends Component {
       <div className='chart-asset-show'>
         <h2 className='text-center'>{this.props.match.params.symbol}-USD</h2>
         <header className="asset_show_header_right">
+          <Button type="submit" value="none" className={this.props.selected_time_range === '2y' ? 'btn active' : 'btn'} onClick={this.two_year_scale}>2 years</Button>&nbsp;
+          <Button type="submit" value="none" className={this.props.selected_time_range === '1y' ? 'btn active' : 'btn'} onClick={this.one_year_scale}>1 year</Button>&nbsp;
+          <Button type="submit" value="none" className={this.props.selected_time_range === '6m' ? 'btn active' : 'btn'} onClick={this.six_month_scale}>6 Month</Button>&nbsp;
+          <Button type="submit" value="none" className={this.props.selected_time_range === '3m' ? 'btn active' : 'btn'} onClick={this.three_month_scale}>3 Month</Button>&nbsp;
           <Button type="submit" value="none" className={this.props.selected_time_range === '1m' ? 'btn active' : 'btn'} onClick={this.one_month_scale}>1 Month</Button>&nbsp;
           <Button type="submit" value="none" className={this.props.selected_time_range === '7d' ? 'btn active' : 'btn'} onClick={this.seven_days_scale}>7 Days</Button>&nbsp;
           <Button type="submit" value="none" className={this.props.selected_time_range === '1d' ? 'btn active' : 'btn'} onClick={this.one_day_scale}>1 Day</Button>&nbsp;

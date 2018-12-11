@@ -23,15 +23,15 @@ export default function AssetsReducer(state = initialState, action={}) {
         assets_stats: action.payload.assets_stats
       }
     case 'ASSETS_ORDERED_FETCHED':
-      let assets = []
-      if(action.payload.page_nb === 0 || action.payload.page_nb === 1){
-        assets = action.payload.assets
-      }else{
-        assets = state.assets.concat(action.payload.assets)
-      }
+      // let assets = []
+      // if(action.payload.page_nb === 0 || action.payload.page_nb === 1){
+      //   assets = action.payload.assets
+      // }else{
+      //   assets = state.assets.concat(action.payload.assets)
+      // }
       return {
         ...state,
-        assets: assets,
+        assets: action.payload.assets,
         current_page: action.payload.page_nb,
         is_assets_loading: false,
         assets_stats: action.payload.assets_stats

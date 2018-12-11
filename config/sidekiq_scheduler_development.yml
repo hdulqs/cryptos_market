@@ -1,16 +1,16 @@
 # reports_generator_job:
 #  class: ReportsGeneratorJob
 #  interval: ['120s', first_in: '50s']
-# assets_info_fetcher_job:
-#   class: AssetsInfoFetcherJob
-#   interval: ['120s', first_in: '5s']
+assets_info_fetcher_job:
+  class: AssetsInfoFetcherJob
+  interval: ['120s', first_in: '5s']
 # alarm_watcher_job:
 #   class: AlarmWatcherJob
 #   interval: ['120s', first_in: '30s']
 
-tickers_launcher_job:
-  class: TickersLauncherJob
-  interval: ['150s', first_in: '10s']
+# tickers_launcher_job:
+#   class: TickersLauncherJob
+#   interval: ['150s', first_in: '10s']
 
 # bleutrade_tickers_fetcher_job:
 #   class: TickersFetcherJob

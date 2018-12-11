@@ -31,7 +31,7 @@ class AssetsRow extends Component {
   }
 
   componentDidMount () {
-    //if(this.props.assets_chart_data[this.props.asset.symbol] === undefined)
+    if(this.props.assets_chart_data[this.props.asset.symbol] === undefined)
       this.props.retrieve_assets_ohcl(this.props.asset.symbol, this.props.time_scale)
   }
 

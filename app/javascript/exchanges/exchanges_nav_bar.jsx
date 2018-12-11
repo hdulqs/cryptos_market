@@ -69,12 +69,12 @@ class ExchangesNavBar extends Component {
             <NavItem eventKey={1} onClick={() => this.navigate_to('')}>
               Assets
             </NavItem>
-            <NavItem eventKey={2} onClick={() => this.navigate_to('asset-pairs')}>
+            {/*<NavItem eventKey={2} onClick={() => this.navigate_to('asset-pairs')}>
               Markets
-            </NavItem>
-            <NavItem active={true} eventKey={3} onClick={() => this.navigate_to('exchanges')}>
+            </NavItem>*/}
+            {/*<NavItem eventKey={3} onClick={() => this.navigate_to('exchanges')}>
               Exchanges
-            </NavItem>
+            </NavItem>*/}
             <NavItem eventKey={4} onClick={() => this.navigate_to('portfolio')}>
             Portfolio
             </NavItem>
@@ -107,7 +107,7 @@ class ExchangesNavBar extends Component {
           </Nav>
 
           {/*
-            
+
     			<Navbar.Form pullRight className='search-area'>
     				<FormGroup>
     					<FormControl type="text" placeholder="Search Exchange" onKeyPress={this.key_press_search_asset} />

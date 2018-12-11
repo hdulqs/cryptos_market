@@ -43,12 +43,12 @@ class AlarmsNavBar extends Component {
             <NavItem eventKey={1} onClick={() => this.navigate_to('')}>
               Assets
             </NavItem>
-            <NavItem eventKey={2} onClick={() => this.navigate_to('asset-pairs')}>
+            {/*<NavItem eventKey={2} onClick={() => this.navigate_to('asset-pairs')}>
               Markets
-            </NavItem>
-            <NavItem eventKey={3} onClick={() => this.navigate_to('exchanges')}>
+            </NavItem>*/}
+            {/*<NavItem eventKey={3} onClick={() => this.navigate_to('exchanges')}>
               Exchanges
-            </NavItem>
+            </NavItem>*/}
             <NavItem eventKey={4} onClick={() => this.navigate_to('portfolio')}>
             Portfolio
             </NavItem>

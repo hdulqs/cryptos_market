@@ -88,6 +88,7 @@ export const asset_search = (value) => {
 export const order_assets = (order_by, sort_order, current_page) => {
   // sort_order is 'ASC' or 'DESC'
   return (dispatch) => {
+    window.scrollTo(0, 0)
     axios.get('/api/v1/public/asset_infos?order_by=' + order_by + '&sort=' + sort_order + '&page=' + current_page, {responseType: 'json'})
       .then((response) => {
         dispatch(assets_ordered_fetched({page_nb: current_page, assets: response.data.assets_infos, assets_stats: response.data.assets_stats}))
@@ -129,6 +130,22 @@ export const retrieve_assets_ohcl = (symbol, time_scale) => {
     }
     else if (time_scale === '1m') {
       limit = 30
+      step = 1
+      request_type = 'histoday'
+    } else if (time_scale === '3m') {
+      limit = 90
+      step = 1
+      request_type = 'histoday'
+    } else if (time_scale === '6m') {
+      limit = 180
+      step = 1
+      request_type = 'histoday'
+    } else if (time_scale === '1y') {
+      limit = 360
+      step = 1
+      request_type = 'histoday'
+    } else if (time_scale === '2y') {
+      limit = 720
       step = 1
       request_type = 'histoday'
     }
@@ -208,6 +225,22 @@ export const retrieve_assets_ohcl_candle = (symbol, time_scale) => {
       limit = 2000
       step = 1
       request_type = 'histohour'
+    } else if (time_scale === '3m') {
+      limit = 90
+      step = 1
+      request_type = 'histoday'
+    } else if (time_scale === '6m') {
+      limit = 180
+      step = 1
+      request_type = 'histoday'
+    } else if (time_scale === '1y') {
+      limit = 360
+      step = 1
+      request_type = 'histoday'
+    } else if (time_scale === '2y') {
+      limit = 720
+      step = 1
+      request_type = 'histoday'
     }
 
     axios.get('https://min-api.cryptocompare.com/data/' + request_type + '?tsym=USD&limit=' + limit + '&fsym=' + symbol + '&aggregate=' + step, {responseType: 'json'})

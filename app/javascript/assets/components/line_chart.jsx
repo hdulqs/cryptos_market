@@ -49,13 +49,13 @@ class LineChart extends React.Component {
 		} = xScaleProvider(initialData);
 
 		const start = xAccessor(last(data));
-		const end = xAccessor(data[Math.max(0, data.length - 150)]);
+		const end = xAccessor(data[Math.max(0, data.length - 720)]);
 		const xExtents = [start, end];
 
 		return (
 			<ChartCanvas height={height}
 				ratio={ratio}
-				width={300}
+				width={400}
 				margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
 				type={type}
 				seriesName="MSFT"
