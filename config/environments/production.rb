@@ -7,9 +7,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'cryptosmarket.io',
-    user_name:            'info.cryptosmarket@gmail.com',
-    password:             '***REMOVED***',
+    domain:               ENV["DOMAIN"],
+    user_name:            ENV["GMAIL_EMAIL"],
+    password:             ENV["GMAIL_PASSWORD"],
     authentication:       'plain',
     enable_starttls_auto: true
   }
@@ -59,8 +59,8 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  config.action_cable.url = 'ws://95.85.52.224/cable'
-  config.action_cable.allowed_request_origins = ['http://95.85.52.224']
+  config.action_cable.url = 'ws://ENV["DOMAIN"]/cable'
+  config.action_cable.allowed_request_origins = ['http://ENV["DOMAIN"]']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

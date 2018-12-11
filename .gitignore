@@ -25,3 +25,4 @@ dump.rdb
 /public/packs-test
 /node_modules
 /public/system
+/config/deploy/
